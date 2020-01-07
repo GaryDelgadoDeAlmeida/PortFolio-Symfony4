@@ -2,19 +2,37 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: null }
+        in_mysql:
+            entity:
+                class: App\Entity\User
+                property: email
+    encoders:
+        App\Entity\User:
+            algorithm: argon2i
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
+            provider: in_mysql
+            form_login:
+                login_path: login
+                check_path: login
+                username_parameter: "login_admin[email]"
+                password_parameter: "login_admin[password]"
+                csrf_parameter: "login_admin[_token]"
+            logout:
+                path: adminLogout
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
-
+    role_hierarchy:
+        # ROLE_ADMIN: ROLES_ADMIN
+        ROLE_SUPER_ADMIN: [ROLES_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:

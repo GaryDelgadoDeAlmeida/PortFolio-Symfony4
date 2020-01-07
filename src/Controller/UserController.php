@@ -2,8 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Form\LoginAdminType;
+use App\Form\RegisterAdminType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
@@ -47,5 +53,48 @@ class UserController extends AbstractController
     public function contact_me()
     {
         return $this->render('User/contact.html.twig');
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(Request $request)
+    {
+        $user = new User();
+        $formLogin = $this->createForm(LoginAdminType::class, $user);
+        $formLogin->handleRequest($request);
+
+        if($formLogin->isSubmitted()) {
+            // do something
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('User/login.html.twig', [
+            "formLogin" => $formLogin->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/register", name="register")
+     */
+    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    {
+        $user = new User();
+        $formRegister = $this->createForm(RegisterAdminType::class, $user);
+        $formRegister->handleRequest($request);
+
+        if($formRegister->isSubmitted() && $formRegister->isValid()) {
+            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+            $user->setRoles(['ROLE_ADMIN']);
+            $user->setCreatedAt(new \Datetime());
+            $manager->persist($user);
+            $manager->flush();
+            
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render('User/register.html.twig', [
+            "formRegister" => $formRegister->createView()
+        ]);
     }
 }

@@ -60,14 +60,6 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/login", name="adminLogin")
-     */
-    public function admin_login()
-    {
-        return $this->render('Admin/login.html.twig');
-    }
-
-    /**
      * @Route("/admin/logout", name="adminLogout")
      * @IsGranted("ROLES_ADMIN")
      * @Security("is_granted('ROLES_ADMIN')")

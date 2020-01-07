@@ -65,19 +65,7 @@ a:hover {
     text-align: center;
 }
 
-#aboutMe,
-#mySkills,
-#service,
-#school,
-#certif,
-#cours,
-#portFolio,
-#articleStage1,
-#articleStage2,
-#veilleJurid,
-#veilleTechno,
-#cv,
-#contact {
+.containerBody {
     padding-top: 2%;
     padding-bottom: 4%;
 }

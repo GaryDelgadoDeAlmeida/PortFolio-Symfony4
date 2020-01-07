@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -18,41 +20,100 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Your lastname must be at least {{ limit }} characters long",
+     *      maxMessage = "Your lastname cannot be higher than {{ limit }} characters"
+     * )
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Your firstname must be at least {{ limit }} characters long",
+     *      maxMessage = "Your firstname cannot be higher than {{ limit }} characters"
+     * )
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 255,
+     *      minMessage = "Your address must be at least {{ limit }} characters long",
+     *      maxMessage = "Your address cannot be higher than {{ limit }} characters"
+     * )
      */
     private $address;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 20,
+     *      minMessage = "Your postal code must be at least {{ limit }} characters long",
+     *      maxMessage = "Your postal code cannot be higher than {{ limit }} characters"
+     * )
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Your city must be at least {{ limit }} characters long",
+     *      maxMessage = "Your city cannot be higher than {{ limit }} characters"
+     * )
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 20,
+     *      minMessage = "Your phone number must be at least {{ limit }} characters long",
+     *      maxMessage = "Your phone number cannot be higher than {{ limit }} characters"
+     * )
      */
     private $phoneNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Your email must be at least {{ limit }} characters long",
+     *      maxMessage = "Your email cannot be higher than {{ limit }} characters"
+     * )
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 255,
+     *      minMessage = "Your password must be at least {{ limit }} characters long",
+     *      maxMessage = "Your password cannot be higher than {{ limit }} characters"
+     * )
      */
     private $password;
 
@@ -189,5 +250,20 @@ class User
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getUsername()
+    {
+        return $this->getEmail();
+    }
+
+    public function eraseCredentials()
+    {
+        return null;
+    }
+
+    public function getSalt()
+    {
+        return null;
     }
 }

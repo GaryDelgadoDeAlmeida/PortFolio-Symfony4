@@ -1,0 +1,28 @@
+{% extends 'baseUser.html.twig' %}
+
+{% block body %}
+<section class="login containerBody">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">Login</div>
+
+            {{ form_start(formLogin, {'action' : path('login'), 'method': 'POST'})}}
+                <div class="card-body row">
+                    <div class="col-12">
+                        {{ form_label(formLogin.email)}}
+                        {{ form_widget(formLogin.email)}}
+                    </div>
+                    <div class="col-12">
+                        {{ form_label(formLogin.password)}}
+                        {{ form_widget(formLogin.password)}}
+                    </div>
+
+                    <div class="col-12">
+                        {{ form_widget(formLogin.submit)}}
+                    </div>
+                </div>
+            {{ form_end(formLogin, {'action' : path('login'), 'method': 'POST'})}}
+        </div>
+    </div>
+</section>
+{% endblock %}
