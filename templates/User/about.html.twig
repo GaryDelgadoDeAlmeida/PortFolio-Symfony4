@@ -1,0 +1,40 @@
+{% extends 'baseUser.html.twig' %}
+
+{% block body %}
+<section class="aboutMe" id="aboutMe">
+    <div class="container">
+        
+        <header class="section-header">
+            <h3>A Mon Propos</h3>
+        </header>
+
+        <div class="aboutMe-info" align="center">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <p class="tex-center">
+                        <b>Bonjour à tous ceux qui prennent le temps de s'intéressé à mon profil.</b>
+                    </p>
+
+                    <p class="text-justify">
+                        Pour commencer, soyez les bienvenues sur mon portefeuille de présentation. Ancien élève de BTS SIO (Services Informatiques aux Organisations) en spécialité SLAM (Solutions Logiciels & Applications Métiers) et désormais étudiant en formation Bac +4 &minus; Développement Full-Stack à la <a class="bold-green" href="https://3wa.fr/" target="_blank">3W Academy</a>. Etant un débutant, je demande votre indulgence à mon égard et à mes fautes de français.
+                    </p>
+
+                    <p class="text-justify">
+                        Ce portFolio est encore très loin d'être parfait, si vous <b>remarquez</b> un bug, des fautes orthographiques, des fautes de français ou une quelconque recommandation à me proposer, n'hésitez pas à me le communiquer par email.
+                    </p>
+
+                    <p class="text-center">
+                        <a href="#" id="cvDownload" {# download #}>
+                            <button class="btn btn-outline-secondary">Télécharger mon CV</button>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <img class="img-fluid" id="imgFace" onContextMenu="return false;" src="{{ asset('content/img/garry-almeida.jpg') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

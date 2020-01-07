@@ -1,0 +1,143 @@
+{% extends 'baseUser.html.twig' %}
+
+{% block body %}
+
+{# Introduction #}
+<section class="aboutMe-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <img class="aboutMe-intro-img img-fluid" id="imgFace" onContextMenu="return false;" src="{{ asset('content/img/garry-almeida.jpg') }}">
+            </div>
+            <div class="aboutMe-intro-intro col-lg-9">
+                <span>Salut, mon nom est</span>
+                <h2>Garry Almeida</h2>
+                <p>
+                    Je suis un jeune developpeur spécialiasé en developpement backend. Je ne spécifie pas web developpeur 
+                    parce que je ne suis pas limité qu'au développement web / application web mais aussi en développement
+                    de logiciel client lourd.
+                </p>
+                <a href="{{ path('contactme') }}"><button class="btn">Contactez-moi !</button></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Skills #}
+<section class="aboutMe-skills">
+    <header class="section-header">
+        <h3>Skills</h3>
+        <p class="text-muted">
+            <small>Mes compétences sont divers et variées dans le domaine de la programmation informatique</small>
+        </p>
+    </header>
+
+    <div class="container">
+        <div class="row">
+
+            {# FrontEnd Skills #}
+            <div class="col-md-4 col-lg-4">
+                <div class="skills-content">
+                    <div>
+                        <i class="logo"></i>
+                    </div>
+
+                    <div>
+                        <h5 class="text-center">FrontEnd</h5>
+                        <ul>
+                            <li>HTML/CSS</li>
+                            <li>JavaScript</li>
+                            <li>C# WinForm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {# BackEnd Skills #}
+            <div class="col-md-4 col-lg-4">
+                <div class="skills-content">
+                    <div>
+                        <i class=""></i>
+                    </div>
+
+                    <div>
+                        <h5 class="text-center">BackEnd</h5>
+                        <ul>
+                            <li>C#</li>
+                            <li>Java</li>
+                            <li>PHP7</li>
+                            <li>SQL / MySQL</li>
+                            <li>Python</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {# Other Skills #}
+            <div class="col-md-4 col-lg-4">
+                <div class="skills-content">
+                    <div>
+                        <i class=""></i>
+                    </div>
+
+                    <div>
+                        <h5 class="text-center">Other</h5>
+                        <ul>
+                            <li>Symfony 3/4</li>
+                            <li>Wordpress</li>
+                            <li>.Net Framework</li>
+                            <li>Entity Framework</li>
+                            <li>Bunifu Framework</li>
+                            <li>MongoDB / Redis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Latest Project #}
+<section class="aboutMe-project">
+    <header class="section-header">
+        <h3>Latest Project</h3>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            {# Project 1 #}
+            <div class="col-md-4 col-lg-4">
+                <div class="card mb-4 shadow-sm wow fadeInUp animated">
+                    <img class="card-img-top" src="{{ asset('content/img/portFolio/portFolio-AutoEcole.jpg') }}" alt="WebSite PortFolio" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <a href="" target="_blank"><h5 class="card-text text-center">Web Development</h5></a>
+                        <span class="card-text text-muted">Symfony4.4/PHP7.3</span>
+                    </div>
+                </div>
+            </div>
+
+            {# Project 2 #}
+            <div class="col-md-4 col-lg-4">
+                <div class="card mb-4 shadow-sm wow fadeInUp animated">                        
+                    <img class="card-img-top" src="{{ asset('content/img/portFolio/portFolio-AutoEcole.jpg') }}" alt="WebSite PortFolio" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <a href="" target="_blank"><h5 class="card-text text-center">Web Development</h5></a>
+                        <span class="card-text text-muted">Symfony4.4/PHP7.3</span>
+                    </div>
+                </div>
+            </div>
+
+            {# Project 3 #}
+            <div class="col-md-4 col-lg-4">
+                <div class="card mb-4 shadow-sm wow fadeInUp animated">
+                    <img class="card-img-top" src="{{ asset('content/img/portFolio/portFolio-AutoEcole.jpg') }}" alt="WebSite PortFolio" style="height: 225px; width: 100%; display: block;" data-holder-rendered="true">
+                    <div class="card-body">
+                        <a href="" target="_blank"><h5 class="card-text text-center">Web Development</h5></a>
+                        <span class="card-text text-muted">Symfony4.4/PHP7.3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

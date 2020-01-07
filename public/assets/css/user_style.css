@@ -1,0 +1,413 @@
+@charset "utf-8";
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Calibri', sans-serif;
+}
+
+img {
+    pointer-events: none;
+}
+
+a,
+a:hover {
+    text-decoration: none !important;
+}
+
+
+/*------------------------------------------------------------------- 
+							Classes Communes
+-------------------------------------------------------------------*/
+
+.section-header {
+    padding-bottom: 3%;
+}
+
+.section-header p {
+    text-align: center;
+}
+
+.section-header h3 {
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-header h3::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: #ddd;
+    bottom: 1px;
+    left: calc(50% - 60px);
+}
+
+.section-header h3::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #18d26e;
+    bottom: 0;
+    left: calc(50% - 20px);
+}
+
+.service-info,
+.portFolio-info {
+    text-align: center;
+}
+
+#aboutMe,
+#mySkills,
+#service,
+#school,
+#certif,
+#cours,
+#portFolio,
+#articleStage1,
+#articleStage2,
+#veilleJurid,
+#veilleTechno,
+#cv,
+#contact {
+    padding-top: 2%;
+    padding-bottom: 4%;
+}
+
+.bg-black {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+.fontOpenSans {
+    font-family: OpenSans;
+}
+
+
+/*------------------------------------------------------------------- 
+								Header
+-------------------------------------------------------------------*/
+
+#navbarNav ul li {
+    padding-left: 10px;
+    letter-spacing: 1px;
+}
+
+#logo {
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#navbarNav ul li a {
+    color: #ffffff;
+    border-bottom: 2px solid #000000;
+}
+
+#navbarNav ul li a:hover {
+    border-bottom: 2px solid #ffffff;
+}
+
+
+/*#navbarNav > ul > li:hover {
+	border-bottom: 1px solid #ffffff
+}*/
+
+
+/*------------------------------------------------------------------- 
+								Home
+-------------------------------------------------------------------*/
+
+.home {
+    width: 100%;
+    height: 100vh;
+    background: url(../../content/img/digital-background-1.jpg) top center;
+    background-size: cover;
+    position: relative;
+}
+
+.home:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.3);
+    /* Modifie l'oppacité de l'arrière plan */
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.home-info {
+    color: #ffffff;
+}
+
+.home .home-info {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.home h1 {
+    margin: 30px 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .home h1 {
+        font-size: 30px;
+        line-height: 38px;
+    }
+}
+
+
+/* ------------------ Button Get Started -------------------- */
+
+#btnGetStarted {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.btnGetStarted {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 25px;
+    width: 150px;
+    height: 40px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .btnGetStarted {
+        width: 110px;
+        height: 35px;
+        font-size: 13px;
+    }
+    #btnGetStarted {
+        text-transform: unset;
+    }
+}
+
+
+/* ------------------ End Button Get Started -------------------- */
+
+
+/*------------------------------------------------------------------- 
+								About Me
+-------------------------------------------------------------------*/
+
+#imgFace {
+    box-shadow: 2px 2px 2px 2px;
+}
+
+#cvDownload {
+    color: #000000;
+}
+
+
+/*------------------------------------------------------------------- 
+								PortFolio
+-------------------------------------------------------------------*/
+
+.portFolio-body a {
+    color: #000000 !important;
+}
+
+#img-center {
+    margin-left: 25%;
+}
+
+
+/*------------------------------------------------------------------- 
+								Veille
+-------------------------------------------------------------------*/
+
+.veilleTechno-body a,
+.veilleJurid-body a {
+    color: #000000;
+}
+
+.veilleTechno-body th,
+.veilleJurid-body th {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 30px 30px 0 0;
+    border-top: none !important;
+}
+
+.box-part {
+    background: #fff;
+    border-radius: 0;
+    padding: 30px 10px;
+    margin: 30px 0px;
+}
+
+.box-part>.fab,
+.box-part>.fas {
+    color: #418307;
+}
+
+@media(max-width: 767px) {
+    #veilleTechnoPubDate {
+        display: none;
+    }
+}
+
+
+/*------------------------------------------------------------------- 
+								Contact
+-------------------------------------------------------------------*/
+
+.contact-info {
+    text-align: center;
+}
+
+.contact-info>div {
+    padding: 0;
+}
+
+.contact-info-email,
+.contact-info-phone,
+.contact-info-addr {
+    font-size: 0.85em;
+}
+
+.contact-info-email,
+.contact-info-phone {
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.contact-info-phone a {
+    color: #000000 !important;
+}
+
+@media(max-width: 767px) {
+    .contact-info-email,
+    .contact-info-phone {
+        border-right: none;
+    }
+}
+
+
+/* Social Links */
+
+.contact-info-social-link {
+    width: 100%;
+    padding-top: 2% !important;
+    padding-bottom: 2% !important;
+    text-align: center;
+}
+
+.social-link {
+    text-align: center;
+}
+
+.social-link>li {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.social-link>li>a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 25px;
+    color: #fff;
+    background: #222222;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* End Social Links*/
+
+#message {
+    height: 180px;
+}
+
+#btnValider {
+    width: 150px;
+    text-align: center;
+}
+
+
+/*------------------------------------------------------------------- 
+								Admin
+-------------------------------------------------------------------*/
+
+.connexion-body {
+    padding: 20%;
+}
+
+#cardConnexion {
+    border-bottom: solid #dfdfdf;
+}
+
+
+/*------------------------------------------------------------------- 
+								Footer
+-------------------------------------------------------------------*/
+
+.footer {
+    color: #ffffff;
+}
+
+.copyright {
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.copyright p {
+    padding-top: 1.5%;
+}
+
+.bold-green {
+    font-weight: bold;
+    color: green;
+}
+
+
+/*------------------------------------------------------------------- 
+							Logo WebHost
+-------------------------------------------------------------------*/
+
+a[href*="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website&utm_content=footer_img"] {
+    display: none;
+}

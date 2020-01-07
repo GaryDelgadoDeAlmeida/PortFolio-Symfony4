@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{# CSS File #}
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/admin_style.css') }}">
+
+{# Bootstrap CSS File #}
+<link rel="stylesheet" type="text/css" href="{{ asset('library/bootstrap/css/bootstrap.min.css') }}">
+
+{# Font-Awesome File #}
+<link rel="stylesheet" type="text/css" href="{{ asset('library/font-awesome/css/all.min.css') }}">
+
+{# Animate File #}
+<link rel="stylesheet" type="text/css" href="{{ asset('library/animate/animate.css') }}">
+{% endblock %}
+
+
+{% block header %}
+<header class="header" id="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+        <a class="navbar-brand" href="{{ path('home') }}" id="logo">Garry ALMEIDA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ path('admin') }}">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('adminAbout') }}">A Propos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('adminPortfolio') }}">PortFolio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('adminContact') }}">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('adminNews') }}">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('adminLogout') }}">Logout</a></li>
+                {# <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Langue</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="">Fr</a>
+                        <a class="dropdown-item" href="">En</a>
+                    </div>
+                </li> #}
+            </ul>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block javascript %}
+{# JavaScript File #}
+<script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
+
+{# Boostrap JS File #}
+<script type="text/javascript" src="{{ asset('library/bootstrap/js/bootstrap.min.js') }}"></script>
+
+{# Wow File #}
+<script type="text/javascript" src="{{ asset('library/wow/wow.min.js') }}"></script>
+
+{# Alertify JS File #}
+<script type="text/javascript" src="{{ asset('library/alertifyjs/alertify.min.js') }}"></script>
+{% endblock %}

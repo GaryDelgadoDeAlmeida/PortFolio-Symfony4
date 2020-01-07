@@ -1,0 +1,27 @@
+.aboutMe-intro {
+    background-color: #567787;
+    color: #ffffff;
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+
+.aboutMe-intro-img {
+    box-shadow: none !important;
+}
+
+.aboutMe-intro-intro {
+    font-size: 20px;
+}
+
+.aboutMe-intro-intro span {
+    font-size: 17px;
+}
+
+.aboutMe-intro-intro h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.aboutMe-intro-intro p {
+    font-size: 15px;
+}

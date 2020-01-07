@@ -1,0 +1,43 @@
+{% extends 'baseUser.html.twig' %}
+
+{% block body %}
+<section class="portFolio" id="portFolio">
+    <div class="container">
+        
+        <header class="section-header">
+            <h3>Mon PortFolio</h3>
+            {# <p class="text-muted">
+                <small>Ne vous fiez pas aux apparences de mes réalisations qui restent fonctionnelles.</small>
+            </p> #}
+        </header>
+
+        <div class="portFolio-body">
+            {% if portfolio != [] %}
+                <div class="row">
+                {% for item in portfolio %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card mb-4 shadow-sm wow fadeInUp animated">
+                            <a {% if item.gitHubLink != null %} href="{{ item.gitHubLink }}" target="_blank" {% else %} href="{{ path('portfolio') }}" {% endif %} >
+                                <img class="card-img-top" alt="" {% if item.width == 50 %} id="img-center" style="height: 225px; width: 50%; display: block;" {% else %} style="height: 225px; width: 100%; display: block;" {% endif %} src="{{ asset(item.imgSource) }}" data-holder-rendered="true">
+                                <div class="card-body">
+                                    <h5 class="card-text">{{ item.name }}</h5>
+                                    <p class="card-text text-muted">{{ item.type }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-secondary text-center">
+                    <span>Je n'ai pas encore ajouté mes projets. Veuillez m'en excuser.</span>
+                </div>
+
+                <div class="alert alert-secondary text-center">
+                    <span>Je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a></span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
