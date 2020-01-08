@@ -56,7 +56,12 @@ class AdminController extends AbstractController
      */
     public function admin_news()
     {
-        return $this->render('Admin/news.html.twig');
+        $rss_link = "https://www.developpez.com/index/rss";
+        $rss_load = simplexml_load_file($rss_link);
+        
+        return $this->render('Admin/news.html.twig', [
+            'rss_load' => $rss_load
+        ]);
     }
 
     /**
