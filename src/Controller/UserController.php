@@ -58,19 +58,10 @@ class UserController extends AbstractController
     /**
      * @Route("/login", name="login")
      */
-    public function login(Request $request)
+    public function login()
     {
-        $user = new User();
-        $formLogin = $this->createForm(LoginAdminType::class, $user);
-        $formLogin->handleRequest($request);
-
-        if($formLogin->isSubmitted()) {
-            // do something
-            return $this->redirectToRoute('admin');
-        }
-
         return $this->render('User/login.html.twig', [
-            "formLogin" => $formLogin->createView()
+            "formLogin" => $this->createForm(LoginAdminType::class)->createView()
         ]);
     }
 

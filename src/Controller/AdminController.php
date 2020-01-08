@@ -11,8 +11,8 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
-     * @IsGranted("ROLES_ADMIN")
-     * @Security("is_granted('ROLES_ADMIN')")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin()
     {
@@ -21,8 +21,8 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/about", name="adminAbout")
-     * @IsGranted("ROLES_ADMIN")
-     * @Security("is_granted('ROLES_ADMIN')")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_about()
     {
@@ -31,8 +31,8 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/portfolio", name="adminPortfolio")
-     * @IsGranted("ROLES_ADMIN")
-     * @Security("is_granted('ROLES_ADMIN')")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_portfolio()
     {
@@ -41,8 +41,8 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/contact", name="adminContact")
-     * @IsGranted("ROLES_ADMIN")
-     * @Security("is_granted('ROLES_ADMIN')")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_contact()
     {
@@ -51,8 +51,8 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/news", name="adminNews")
-     * @IsGranted("ROLES_ADMIN")
-     * @Security("is_granted('ROLES_ADMIN')")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_news()
     {
@@ -61,8 +61,8 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/logout", name="adminLogout")
-     * @IsGranted("ROLES_ADMIN")
-     * @Security("is_granted('ROLES_ADMIN')")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_logout()
     {
