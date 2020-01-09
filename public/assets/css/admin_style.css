@@ -2,3 +2,16 @@
     padding-top: 4%;
     padding-bottom: 4%;
 }
+
+.w-100px {
+    width: 100px;
+}
+
+
+/* *****************************************************
+                        Projects
+***************************************************** */
+
+.adminPortfolio-header {
+    padding-bottom: 3%;
+}

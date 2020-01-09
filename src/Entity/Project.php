@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
@@ -18,6 +19,13 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "The name of the project must be at least {{ limit }} characters long",
+     *      maxMessage = "The name of the project cannot be longer than {{ limit }} character"
+     * )
      */
     private $name;
 
@@ -28,13 +36,28 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Url
      */
     private $githubLink;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotNull
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "The version of the project must be at least {{ limit }} characters long",
+     *      maxMessage = "The version of the project cannot be longer than {{ limit }} character"
+     * )
+     */
+    private $version;
 
     /**
      * @ORM\Column(type="datetime")
@@ -102,6 +125,18 @@ class Project
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getVersion(): ?string
+    {
+        return $this->version;
+    }
+
+    public function setVersion(string $version): self
+    {
+        $this->version = $version;
 
         return $this;
     }

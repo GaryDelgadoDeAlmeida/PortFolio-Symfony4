@@ -1,0 +1,9 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+<section class="adminAddProject containerBody">
+    <div class="container">
+        {{ form(form_add_project, {'action': path('adminAddProject'), 'method': 'POST'}) }}
+    </div>
+</section>
+{% endblock %}
