@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Project;
 use App\Form\LoginAdminType;
 use App\Form\RegisterAdminType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,7 +44,7 @@ class UserController extends AbstractController
     public function portfolio()
     {
         return $this->render('User/portFolio.html.twig', [
-            "portfolio" => []
+            "portfolio" => $this->getDoctrine()->getRepository(Project::class)->findAll()
         ]);
     }
 

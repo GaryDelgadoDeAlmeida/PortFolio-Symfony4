@@ -17,10 +17,10 @@
                 {% for item in portfolio %}
                     <div class="col-lg-4 col-md-6">
                         <div class="card mb-4 shadow-sm wow fadeInUp animated">
-                            <a {% if item.gitHubLink != null %} href="{{ item.gitHubLink }}" target="_blank" {% else %} href="{{ path('portfolio') }}" {% endif %} >
-                                <img class="card-img-top" alt="" {% if item.width == 50 %} id="img-center" style="height: 225px; width: 50%; display: block;" {% else %} style="height: 225px; width: 100%; display: block;" {% endif %} src="{{ asset(item.imgSource) }}" data-holder-rendered="true">
+                            <a {% if item.githubLink != null %} href="{{ item.githubLink }}" target="_blank" {% else %} href="{{ path('portfolio') }}" {% endif %} >
+                                <img class="card-img-top" alt="" style="height: 225px; width: 100%; display: block;" src="{{ asset('content/img/portFolio/' ~ item.imgPath) }}" data-holder-rendered="true">
                                 <div class="card-body">
-                                    <h5 class="card-text">{{ item.name }}</h5>
+                                    <h5 class="card-text">{{ item.name }} [{{ item.version }}]</h5>
                                     <p class="card-text text-muted">{{ item.type }}</p>
                                 </div>
                             </a>
