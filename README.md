@@ -1,6 +1,6 @@
 # PortFolio-Symfony4
 
-Version Symfony 4 de mon portfolio, précédemment développé en architecture MVC. 
+Version Symfony 4 de mon portfolio, développé sous l'architecture MVC. 
 
 Sur cette nouvelle version :
   - un système d'administration a été developpé pour facilité la gestion des contenus (modification, ajout, suppression) du site web
