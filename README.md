@@ -11,6 +11,14 @@ Sur cette nouvelle version :
   
 Ce site est en encore en phase de développement
 
+# Commande Création Base de données
+
+<code>symfony console doctrine:database:create</code> ou <code>php bin/console doctrine:database:create</code>
+
+<code>symfony console make:migration</code>
+
+<code>symfony console doctrine:migraions:migrate</code>
+
 # Configuration Apache Serveur Web
 
 composer require symfony/apache-pack
