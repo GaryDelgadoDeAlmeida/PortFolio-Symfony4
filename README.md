@@ -15,10 +15,10 @@ Ce site est en encore en phase de développement
 
 <code>symfony console doctrine:database:create</code> ou <code>php bin/console doctrine:database:create</code>
 
-<code>symfony console make:migration</code>
+<code>symfony console make:migration</code> ou <code>php bin/console make:migration</code>
 
-<code>symfony console doctrine:migraions:migrate</code>
+<code>symfony console doctrine:migrations:migrate</code> ou <code>php bin/console doctrine:migrations:migrate</code>
 
 # Configuration Apache Serveur Web
 
-composer require symfony/apache-pack
+<code>composer require symfony/apache-pack</code>
