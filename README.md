@@ -22,3 +22,5 @@ Ce site est en encore en phase de développement
 # Configuration Apache Serveur Web
 
 <code>composer require symfony/apache-pack</code>
+
+Les configurations restantes seront à faire à travers ce lien https://symfony.com/doc/current/setup/web_server_configuration.html
