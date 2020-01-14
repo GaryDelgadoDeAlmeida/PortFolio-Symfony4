@@ -11,7 +11,7 @@ Sur cette nouvelle version :
   
 Ce site est en encore en phase de développement
 
-# Commande Création Base de données
+# Création de la la base de données (terminal)
 
 <code>symfony console doctrine:database:create</code> ou <code>php bin/console doctrine:database:create</code>
 
