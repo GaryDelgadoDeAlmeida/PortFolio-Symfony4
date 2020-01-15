@@ -2,7 +2,7 @@
 
 Version Symfony 4 de mon portfolio, développé sous l'architecture MVC.
 
-Ce projet est en encore en phase de développement.
+<b>Ce projet est, pour le moment, en phase de développement.</b>
 
 # Création de la la base de données (terminal)
 
