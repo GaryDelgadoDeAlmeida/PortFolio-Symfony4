@@ -16,31 +16,19 @@
 
 
 {% block header %}
-<header class="header" id="header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="{{ path('home') }}" id="logo">Garry ALMEIDA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ path('admin') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('adminNews') }}">News</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('adminAbout') }}">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('adminProject') }}">Work</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('adminContact') }}">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('adminLogout') }}">Logout</a></li>
-                {# <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Langue</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="">Fr</a>
-                        <a class="dropdown-item" href="">En</a>
-                    </div>
-                </li> #}
-            </ul>
-        </div>
+<div class="header">
+    <a href="#" class="nav-trigger"><span></span></a>
+</div>
+
+<div class="side-nav">
+    <nav>
+        <ul>
+            <li><a href="{{ path('admin') }}"><span><i class="fas fa-home"></i></span><span>Home</span></li>
+            <li><a href="{{ path('adminAbout') }}"><span><i class="fa fa-user"></i></span><span>User</span></a></li>
+            <li><a href="{{ path('adminProject') }}"><span><i class="fas fa-code"></i></span><span>Work</span></a></li>
+        </ul>
     </nav>
-</header>
+</div>
 {% endblock %}
 
 
