@@ -16,23 +16,35 @@
 
 
 {% block header %}
-<div class="header">
-    <a href="#" class="nav-trigger"><span></span></a>
-</div>
-
-<div class="side-nav">
-    <nav>
+<section class="wrapper">
+    <div class="side-nav">
+        <h2>Dashboard</h2>
         <ul>
-            <li><a href="{{ path('admin') }}"><span><i class="fas fa-home"></i></span><span>Home</span></li>
-            <li><a href="{{ path('adminAbout') }}"><span><i class="fa fa-user"></i></span><span>User</span></a></li>
-            <li><a href="{{ path('adminProject') }}"><span><i class="fas fa-code"></i></span><span>Work</span></a></li>
+            <li><a href="{{ path('admin') }}"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="{{ path('adminAbout') }}"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="{{ path('adminProject') }}"><i class="fas fa-project-diagram"></i>Work</a></li>
+            <li><a href="{{ path('adminNews') }}"><i class="far fa-newspaper"></i>News</a></li>
+            <li><a href="#"><i class="fas fa-blog"></i>Blog</a></li>
+            <li><a href="{{ path('adminLogout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
         </ul>
-    </nav>
-</div>
+
+        <div class="social_media">
+            <a href="https://www.linkedin.com/in/garry-almeida-7538b3175/" target="__blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/GaryDelgadoDeAlmeida" target="__blank"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">Welcome, Garry Almeida !!</div>
+        <div class="info">
+    </div>
+</section>
 {% endblock %}
 
 
-{% block footer %}{% endblock %}
+{% block footer %}
+</div>
+{% endblock %}
 
 
 {% block javascript %}
