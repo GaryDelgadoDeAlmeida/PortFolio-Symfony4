@@ -74,7 +74,7 @@ class AdminController extends AbstractController
             if($imageFile) {
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
-                $newFilename = 'portFolio-'.str_replace(" ", "_", $project->getName()).'.'.$imageFile->guessExtension();
+                $newFilename = 'portFolio-'.str_replace(" ", "_", $project->getName()) . "-" . $project->getVersion() .'.'.$imageFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
