@@ -33,16 +33,19 @@
 }
 
 .aboutMe-intro-intro span {
-    font-size: 17px;
+    font-size: 1.25rem;
+    font-weight: 300;
 }
 
 .aboutMe-intro-intro h2 {
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 3.5rem;
 }
 
 .aboutMe-intro-intro p {
     font-size: 15px;
+    font-weight: 350;
 }
 
 .aboutMe-skills, .aboutMe-project {
