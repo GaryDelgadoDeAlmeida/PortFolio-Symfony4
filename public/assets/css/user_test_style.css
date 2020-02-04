@@ -1,3 +1,22 @@
+.btn-outline-white {
+    background-color: transparent;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+}
+
+.btn-outline-white:hover {
+    background-color: #ffffff;
+    color: #000000 !important;
+}
+
+.btn-rounded {
+    border-radius: 25px !important;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
 .aboutMe-intro {
     background-color: #567787;
     color: #ffffff;
@@ -24,4 +43,40 @@
 
 .aboutMe-intro-intro p {
     font-size: 15px;
+}
+
+.aboutMe-skills, .aboutMe-project {
+    background-color: #F7F8FA;
+    padding: 3%;
+}
+
+.aboutMe-skills .skills-content {
+    height: 300px;
+}
+
+.aboutMe-skills .skills-content .skills {
+    padding: 4%;
+}
+
+.aboutMe-skills .skills-content .skills .title {
+    font-size: 24px;
+}
+
+.aboutMe-skills .skills-content .skills ul {
+    list-style: none;
+    letter-spacing: 1.5px;
+    padding-top: 15px;
+}
+
+.aboutMe-skills .skills-content .skills ul li {
+    margin-bottom: .5rem;
+}
+
+.aboutMe-skills .skills-content .skills ul li i {
+    color: #567787;
+    line-height: 1.5;
+}
+
+.aboutMe-skills .skills-content .skills ul li span {
+    padding-left: 5px;
 }

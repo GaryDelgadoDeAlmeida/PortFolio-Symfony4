@@ -107,7 +107,7 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_delete_project(int $id)
+    public function admin_delete_project(Project $project)
     {
         return $this->render('Admin/home.html.twig');
     }
