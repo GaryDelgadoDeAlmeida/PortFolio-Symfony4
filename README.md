@@ -4,7 +4,7 @@ Version Symfony 4 de mon portfolio, développé sous l'architecture MVC.
 
 <b>Ce projet est, pour le moment, en phase de développement.</b>
 
-# Création de la la base de données (terminal)
+# Création de la base de données (terminal)
 
 <code>symfony console doctrine:database:create</code> ou <code>php bin/console doctrine:database:create</code>
 
