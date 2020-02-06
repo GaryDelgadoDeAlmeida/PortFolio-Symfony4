@@ -26,6 +26,7 @@
 
 .aboutMe-intro-img {
     box-shadow: none !important;
+    max-width: 240px;
 }
 
 .aboutMe-intro-intro {
