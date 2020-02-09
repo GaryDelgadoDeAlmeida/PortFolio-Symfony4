@@ -8,17 +8,17 @@
 
             {{ form_start(formLogin, {'action' : path('login'), 'method': 'POST'})}}
                 <div class="card-body row">
-                    <div class="col-12">
-                        {{ form_label(formLogin.email)}}
-                        {{ form_widget(formLogin.email)}}
+                    <div class="form-group col-lg-12 col-md-12 wow fadeInUp animated">
+                        {{ form_label(formLogin.email) }}
+                        {{ form_widget(formLogin.email) }}
                     </div>
-                    <div class="col-12">
-                        {{ form_label(formLogin.password)}}
-                        {{ form_widget(formLogin.password)}}
+                    <div class="form-group col-lg-12 col-md-12 wow fadeInUp animated">
+                        {{ form_label(formLogin.password) }}
+                        {{ form_widget(formLogin.password) }}
                     </div>
 
-                    <div class="col-12">
-                        {{ form_widget(formLogin.submit)}}
+                    <div class="form-group col-lg-12 col-md-12 wow fadeInUp animated">
+                        {{ form_widget(formLogin.submit, {'attr': {'class': 'btn btn-outline-success'}}) }}
                     </div>
                 </div>
             {{ form_end(formLogin, {'action' : path('login'), 'method': 'POST'})}}

@@ -3,42 +3,42 @@
 {% block body %}
 <section class="register containerBody">
     <div class="container">
-        {{ form_start(formRegister, {'action' : path('register'), 'method': 'POST'})}}
+        {{ form_start(formRegister, {'action' : path('register'), 'method': 'POST'}) }}
             <div class="row">
-                <div class="col-md-6 col-lg-6">
-                    {{ form_label(formRegister.firstName)}}
-                    {{ form_widget(formRegister.firstName)}}
+                <div class="form-group col-md-6 col-lg-6 wow fadeInUp animated">
+                    {{ form_label(formRegister.firstName) }}
+                    {{ form_widget(formRegister.firstName) }}
                 </div>
-                <div class="col-md-6 col-lg-6">
-                    {{ form_label(formRegister.lastName)}}
-                    {{ form_widget(formRegister.lastName)}}
+                <div class="form-group col-md-6 col-lg-6 wow fadeInUp animated">
+                    {{ form_label(formRegister.lastName) }}
+                    {{ form_widget(formRegister.lastName) }}
                 </div>
-                <div class="col-md-4 col-lg-4">
-                    {{ form_label(formRegister.address)}}
-                    {{ form_widget(formRegister.address)}}
+                <div class="form-group wow fadeInUp animated col-md-4 col-lg-4">
+                    {{ form_label(formRegister.address) }}
+                    {{ form_widget(formRegister.address) }}
                 </div>
-                <div class="col-md-4 col-lg-4">
-                    {{ form_label(formRegister.postalCode)}}
-                    {{ form_widget(formRegister.postalCode)}}
+                <div class="form-group wow fadeInUp animated col-md-4 col-lg-4">
+                    {{ form_label(formRegister.postalCode) }}
+                    {{ form_widget(formRegister.postalCode) }}
                 </div>
-                <div class="col-md-4 col-lg-4">
-                    {{ form_label(formRegister.city)}}
-                    {{ form_widget(formRegister.city)}}
+                <div class="form-group wow fadeInUp animated col-md-4 col-lg-4">
+                    {{ form_label(formRegister.city) }}
+                    {{ form_widget(formRegister.city) }}
                 </div>
-                <div class="col-md-12 col-lg-12">
-                    {{ form_label(formRegister.phoneNumber)}}
-                    {{ form_widget(formRegister.phoneNumber)}}
+                <div class="form-group wow fadeInUp animated col-md-12 col-lg-12">
+                    {{ form_label(formRegister.phoneNumber) }}
+                    {{ form_widget(formRegister.phoneNumber) }}
                 </div>
-                <div class="col-md-12 col-lg-12">
-                    {{ form_label(formRegister.email)}}
-                    {{ form_widget(formRegister.email)}}
+                <div class="form-group wow fadeInUp animated col-md-12 col-lg-12">
+                    {{ form_label(formRegister.email) }}
+                    {{ form_widget(formRegister.email) }}
                 </div>
-                <div class="col-md-12 col-lg-12">
-                    {{ form_label(formRegister.password)}}
-                    {{ form_widget(formRegister.password)}}
+                <div class="form-group wow fadeInUp animated col-md-12 col-lg-12">
+                    {{ form_label(formRegister.password) }}
+                    {{ form_widget(formRegister.password) }}
                 </div>
             </div>
-        {{ form_end(formRegister, {'action' : path('register'), 'method': 'POST'})}}
+        {{ form_end(formRegister, {'action' : path('register'), 'method': 'POST'}) }}
     </div>
 </section>
 {% endblock %}
