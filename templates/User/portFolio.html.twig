@@ -16,12 +16,14 @@
                 <div class="row">
                 {% for item in portfolio %}
                     <div class="col-lg-4 col-md-6">
-                        <div class="card mb-4 shadow-sm wow fadeInUp animated">
+                        <div class="overlay-image _bp wow fadeInUp animated">
                             <a {% if item.githubLink != null %} href="{{ item.githubLink }}" target="_blank" {% else %} href="{{ path('portfolio') }}" {% endif %} >
-                                <img class="card-img-top" alt="" style="height: 225px; width: 100%; display: block;" src="{{ asset('content/img/portFolio/' ~ item.imgPath) }}" data-holder-rendered="true">
-                                <div class="card-body">
-                                    <h5 class="card-text">{{ item.name }} [{{ item.version }}]</h5>
-                                    <p class="card-text text-muted">{{ item.type }}</p>
+                                <img class="image" style="height: 225px; width: 100%; display: block;" src="{{ asset('content/img/portFolio/' ~ item.imgPath) }}" alt="{{ item.name }} [{{ item.version }}]"/>
+                                <div class="hover">
+                                    <div class="text">
+                                        <h3 class="project-title">{{ item.name }} [{{ item.version }}]</h3>
+                                        <span class="project-small-text">{{ item.type }}</span>
+                                    </div>
                                 </div>
                             </a>
                         </div>

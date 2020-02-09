@@ -27,15 +27,9 @@ class UserController extends AbstractController
      */
     public function about_me()
     {
-        return $this->render('User/about.html.twig');
-    }
-
-    /**
-     * @Route("/about/2", name="aboutme_2")
-     */
-    public function about_me_2()
-    {
-        return $this->render('User/about_2.html.twig');
+        return $this->render('User/about.html.twig', [
+            'lastestProject' => $this->getDoctrine()->getRepository(Project::class)->getLastestProject()
+        ]);
     }
 
     /**

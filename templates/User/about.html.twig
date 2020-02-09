@@ -1,39 +1,134 @@
 {% extends 'baseUser.html.twig' %}
 
 {% block body %}
-<section class="aboutMe containerBody">
+
+{# Introduction #}
+<section class="aboutMe-intro containerBody">
     <div class="container">
-        
-        <header class="section-header">
-            <h3>A Mon Propos</h3>
-        </header>
+        <div class="row">
+            <div class="col-lg-3">
+                <img class="aboutMe-intro-img" id="imgFace" onContextMenu="return false;" src="{{ asset('content/img/Me/photo_garry_almeida.jpg') }}">
+            </div>
+            <div class="aboutMe-intro-intro col-lg-9">
+                <span>Salut, mon nom est</span>
+                <h2>Garry Almeida</h2>
+                <p>
+                    Je suis un jeune developpeur spécialiasé en developpement applicatif. Je ne spécifie pas web developpeur 
+                    parce que je ne suis pas limité qu'au développement web / application web mais aussi en développement
+                    de logiciel client lourd.
+                </p>
+                <a href="{{ path('contactme') }}"><button class="btn btn-outline-white btn-rounded">Contactez-moi !</button></a>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <div class="aboutMe-info" align="center">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <p class="tex-center">
-                        <b>Bonjour à tous ceux qui prennent le temps de s'intéressé à mon profil.</b>
-                    </p>
+{# Skills #}
+<section class="aboutMe-skills">
+    <header class="section-header">
+        <h3>Skills</h3>
+        <p class="text-muted">
+            <small>Mes compétences sont divers et variées dans le domaine de la programmation informatique</small>
+        </p>
+    </header>
 
-                    <p class="text-justify">
-                        Pour commencer, soyez les bienvenues sur mon portefeuille de présentation. Ancien élève de BTS SIO (Services Informatiques aux Organisations) en spécialité SLAM (Solutions Logiciels & Applications Métiers) et désormais étudiant en formation Bac +4 &minus; Développement Full-Stack à la <a class="bold-green" href="https://3wa.fr/" target="_blank">3W Academy</a>. Etant un débutant, je demande votre indulgence à mon égard et à mes fautes de français.
-                    </p>
+    <div class="container">
+        <div class="row">
 
-                    <p class="text-justify">
-                        Ce portFolio est encore très loin d'être parfait, si vous <b>remarquez</b> un bug, des fautes orthographiques, des fautes de français ou une quelconque recommandation à me proposer, n'hésitez pas à me le communiquer par email.
-                    </p>
+            {# FrontEnd Skills #}
+            <div class="col-md-12 col-lg-4">
+                <div class="skills-content bg-white">
+                    <div class="logo">
+                        <i class=""></i>
+                    </div>
 
-                    <p class="text-center">
-                        <a href="#" id="cvDownload" {# download #}>
-                            <button class="btn btn-outline-secondary">Télécharger mon CV</button>
-                        </a>
-                    </p>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <img class="img-fluid" id="imgFace" onContextMenu="return false;" src="{{ asset('content/img/Me/garry-almeida.jpg') }}">
+                    <div class="skills">
+                        <h5 class="title text-center">FrontEnd</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i><span>HTML / CSS</span></li>
+                            <li><i class="fas fa-check"></i><span>JavaScript</span></li>
+                            <li><i class="fas fa-check"></i><span>C# WinForm</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
+            {# BackEnd Skills #}
+            <div class="col-md-12 col-lg-4">
+                <div class="skills-content bg-white">
+                    <div class="logo">
+                        <i class=""></i>
+                    </div>
+
+                    <div class="skills">
+                        <h5 class="title text-center">BackEnd</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i><span>C#</span></li>
+                            <li><i class="fas fa-check"></i><span>Java</span></li>
+                            <li><i class="fas fa-check"></i><span>PHP7</span></li>
+                            <li><i class="fas fa-check"></i><span>SQL / MySQL</span></li>
+                            <li><i class="fas fa-check"></i><span>Python</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {# Other Skills #}
+            <div class="col-md-12 col-lg-4">
+                <div class="skills-content bg-white">
+                    <div class="logo">
+                        <i class=""></i>
+                    </div>
+
+                    <div class="skills">
+                        <h5 class="title text-center">Other</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i><span>Symfony 3/4</span></li>
+                            <li><i class="fas fa-check"></i><span>Wordpress</span></li>
+                            <li><i class="fas fa-check"></i><span>.Net Framework</span></li>
+                            <li><i class="fas fa-check"></i><span>Entity Framework</span></li>
+                            <li><i class="fas fa-check"></i><span>Bunifu Framework</span></li>
+                            <li><i class="fas fa-check"></i><span>MongoDB / Redis</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Latest Project #}
+<section class="aboutMe-project">
+    <header class="section-header">
+        <h3>Latest Project</h3>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            {# Project 1 #}
+            {% if lastestProject != [] %}
+                {% for item in lastestProject %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="overlay-image _bp wow fadeInUp animated">
+                            <a {% if item.githubLink != null %} href="{{ item.githubLink }}" target="_blank" {% else %} href="{{ path('portfolio') }}" {% endif %} >
+                                <img class="image" style="height: 225px; width: 100%; display: block;" src="{{ asset('content/img/portFolio/' ~ item.imgPath) }}" alt="{{ item.name }} [{{ item.version }}]"/>
+                                <div class="hover">
+                                    <div class="text">
+                                        <h3 class="project-title">{{ item.name }} [{{ item.version }}]</h3>
+                                        <span class="project-small-text">{{ item.type }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-secondary text-center">
+                        <span>Je n'ai pas encore ajouté mes projets, je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a> où vous trouverez plus de choses.</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 </section>

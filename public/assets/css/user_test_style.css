@@ -17,6 +17,10 @@
     background-color: #ffffff;
 }
 
+
+/* ----------------------------------------------- *\
+                    Introduction
+\* ----------------------------------------------- */
 .aboutMe-intro {
     background-color: #567787;
     color: #ffffff;
@@ -49,6 +53,10 @@
     font-weight: 350;
 }
 
+
+/* ----------------------------------------------- *\
+                        Skills
+\* ----------------------------------------------- */
 .aboutMe-skills, .aboutMe-project {
     background-color: #F7F8FA;
     padding: 3%;
@@ -85,19 +93,28 @@
     padding-left: 5px;
 }
 
-/* ----------------------- *\
-            Overlay
-\* ----------------------- */
+@media screen and (max-width: 991px) {
+    .aboutMe-skills .skills-content {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* ----------------------------------------------- *\
+                        Overlay
+\* ----------------------------------------------- */
 .overlay-image {
     position: relative;
-    margin-bottom: 2%;
+    margin-bottom: 20px;
 }
+
 /* Image originale */
 .overlay-image .image {
     display: block;
     width: 100%;
     height: auto;
 }
+
 /* Texte original */
 .overlay-image .text {
     color: #fff;
@@ -112,6 +129,15 @@
     width: 100%;
 }
 
+.overlay-image .text .project-title {
+    color: #ffffff;
+}
+
+.overlay-image .text .project-small-text {
+    font-size: 20px;
+    color: #808080;
+}
+
 /* Overlay */
 .overlay-image .hover {
     position: absolute;
@@ -121,17 +147,12 @@
     opacity: 0;
     transition: .5s ease;
 }
+
 /* Apparition overlay sur passage souris */
 .overlay-image:hover .hover {
     opacity: 1;
 }
 
-.overlay-image .normal {
-    transition: .5s ease;
-}
-.overlay-image:hover .normal {
-    opacity: 0;
-}
 .overlay-image .hover {
     background-color: rgba(0,0,0,0.8);
 }
