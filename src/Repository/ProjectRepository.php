@@ -31,6 +31,17 @@ class ProjectRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Get all project added
+     */
+    public function getProject()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

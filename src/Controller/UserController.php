@@ -38,7 +38,7 @@ class UserController extends AbstractController
     public function portfolio()
     {
         return $this->render('User/portFolio.html.twig', [
-            "portfolio" => $this->getDoctrine()->getRepository(Project::class)->findAll()
+            "portfolio" => $this->getDoctrine()->getRepository(Project::class)->getProject()
         ]);
     }
 
