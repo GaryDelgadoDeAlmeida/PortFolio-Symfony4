@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-{# CSS File #}
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/admin_style.css') }}">
-
 {# Bootstrap CSS File #}
 <link rel="stylesheet" type="text/css" href="{{ asset('library/bootstrap/css/bootstrap.min.css') }}">
 
@@ -12,45 +9,75 @@
 
 {# Animate File #}
 <link rel="stylesheet" type="text/css" href="{{ asset('library/animate/animate.css') }}">
+
+{# CSS File #}
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/admin_style.css') }}">
 {% endblock %}
 
 
 {% block header %}
-<section class="wrapper">
-    <div class="side-nav">
-        <h2>Dashboard</h2>
-        <ul>
-            <li><a href="{{ path('admin') }}"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="{{ path('adminAbout') }}"><i class="fas fa-user"></i>Profile</a></li>
-            <li><a href="{{ path('adminProject') }}"><i class="fas fa-project-diagram"></i>Work</a></li>
-            <li><a href="{{ path('adminNews') }}"><i class="far fa-newspaper"></i>News</a></li>
-            <li><a href="#"><i class="fas fa-blog"></i>Blog</a></li>
-            <li><a href="{{ path('adminLogout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-        </ul>
-
-        <div class="social_media">
-            <a href="https://www.linkedin.com/in/garry-almeida-7538b3175/" target="__blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/GaryDelgadoDeAlmeida" target="__blank"><i class="fab fa-github"></i></a>
-        </div>
+<section class="sidebar">
+    <div class="top-row pl-4 navbar navbar-dark">
+        <a class="navbar-brand" href="">Dashboard</a>
+        <button class="navbar-toggler" id="btnToggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 
-    <div class="main-content">
-        <div class="header">Welcome, Garry Almeida !!</div>
-        <div class="info">
+    <div class="navToggler" id="navToggler" {# collapse #}>
+        <ul class="nav flex-column">
+            <li class="nav-item px-3">
+                <a class="nav-link" href="{{ path('admin') }}">
+                    <span class="oi oi-home" aria-hidden="true"></span> Home
+                </a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">
+                    <span class="oi oi-plus" aria-hidden="true"></span> Profile
+                </a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Work
+                </a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> News
+                </a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Blog
+                </a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Logout
+                </a>
+            </li>
+        </ul>
     </div>
 </section>
-{% endblock %}
 
+<div class="main">
+    <div class="top-row px-4">
+        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+    </div>
+
+    <div class="content px-4">
+{% endblock %}
 
 {% block footer %}
+    </div>
 </div>
 {% endblock %}
-
 
 {% block javascript %}
 {# JavaScript File #}
 <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
 
 {# Boostrap JS File #}
 <script type="text/javascript" src="{{ asset('library/bootstrap/js/bootstrap.min.js') }}"></script>
