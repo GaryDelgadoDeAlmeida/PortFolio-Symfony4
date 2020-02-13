@@ -22,7 +22,7 @@ security:
                 username_parameter: "login_admin[email]"
                 password_parameter: "login_admin[password]"
                 csrf_parameter: "login_admin[_token]"
-                default_target_path: admin
+                default_target_path: adminHome
             logout:
                 path: adminLogout
 
