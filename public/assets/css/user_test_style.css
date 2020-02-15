@@ -57,21 +57,48 @@
 /* ----------------------------------------------- *\
                         Skills
 \* ----------------------------------------------- */
+.aboutMe-skills .section-header {
+    margin-bottom: 1.5em;
+}
 .aboutMe-skills, .aboutMe-project {
     background-color: #F7F8FA;
     padding: 3%;
 }
 
 .aboutMe-skills .skills-content {
-    height: 300px;
+    height: 370px;
 }
 
-.aboutMe-skills .skills-content .skills {
-    padding: 4%;
+.aboutMe-skills .skills-content .logo {
+    background-color: #567787;
+    color: #ffffff;
+    width: 80px;
+    height: 80px;
+    border-radius: 50% 50%;
+    padding-top: 1.25em;
+    top: -40px;
+    left: 50%;
+    margin-left: -40px;
+    position: relative;
 }
+
+.aboutMe-skills .skills-content .logo .fa-database,
+.aboutMe-skills .skills-content .logo .fa-tools {
+    padding-left: 25px;
+    padding-top: 5px;
+}
+
+.aboutMe-skills .skills-content .logo .fa-code {
+    padding-left: 20px;
+    padding-top: 4.7px;
+}
+
+/* .aboutMe-skills .skills-content .skills {
+    padding: 2%;
+} */
 
 .aboutMe-skills .skills-content .skills .title {
-    font-size: 24px;
+    font-size: 1.25em;
 }
 
 .aboutMe-skills .skills-content .skills ul {
