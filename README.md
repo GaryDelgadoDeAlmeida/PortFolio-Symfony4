@@ -10,13 +10,16 @@ Créer la database :
 
 <code>symfony console doctrine:database:create</code> ou <code>php bin/console doctrine:database:create</code>
 
+
 Générer les tables (pour la database) :
 
 <code>symfony console make:migration</code> ou <code>php bin/console make:migration</code>
 
+
 Sauvegarder les modifications dans la database :
 
 <code>symfony console doctrine:migrations:migrate</code> ou <code>php bin/console doctrine:migrations:migrate</code>
+
 
 # Configuration Apache Serveur Web
 
