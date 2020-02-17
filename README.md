@@ -1,6 +1,6 @@
 # PortFolio-V3
 
-Version Symfony 4 de mon portfolio, développé sous l'architecture MVC.
+Version Symfony 4.4 de mon portfolio.
 
 <b>Ce projet est, pour le moment, en phase de développement.</b>
 
