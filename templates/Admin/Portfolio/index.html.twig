@@ -1,43 +1,43 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-<section class="adminPortfolio containerBody">
-        <div class="adminPortfolio-header">
-            <a href="{{ path('adminAddProject') }}"><button class="btn btn-success w-100px rounded-pill">Add</button></a>
-        </div>
+{# <div class="adminPortfolio containerBody"> #}
+    <div class="adminPortfolio-header">
+        <a href="{{ path('adminAddProject') }}"><button class="btn btn-success w-100px rounded-pill">Add</button></a>
+    </div>
 
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>GitHub Link</th>
-                    <th>Type</th>
-                    <th>Version</th>
-                    <th colspan="2">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if projects != [] %}
-                    {% for project in projects %}
-                        <tr class="text-center text-wrap">
-                            <td><img width="115" heigth="115" class="img-fluid" src="/content/img/portFolio/{{ project.imgPath }}" alt="{{ project.name }}"></td>
-                            <td>{{ project.name }}</td>
-                            <td><a href="{{ project.githubLink }}" target="__blank">{{ project.githubLink }}</a></td>
-                            <td>{{ project.type }}</td>
-                            <td>{{ project.version }}</td>
-                            <td><a href="{{ path('admin_one_project', {'id': project.id}) }}" class="btn btn-primary w-100px">Edit</a></td>
-                            <td><a href="{{ path('adminDeleteProject', {'id': project.id}) }}" class="btn btn-danger w-100px">Delete</a></td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
-                    <tr class="text-center">
-                        <td colspan="7">
-                            <span>Il n'y a aucun projet enregistré dans la database.</span>
-                        </td>
+    <table class="table">
+        <thead>
+            <tr class="text-center">
+                <th>Image</th>
+                <th>Name</th>
+                <th>GitHub Link</th>
+                <th>Type</th>
+                <th>Version</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if projects != [] %}
+                {% for project in projects %}
+                    <tr class="text-center text-wrap">
+                        <td><img width="115" heigth="115" class="img-fluid" src="/content/img/portFolio/{{ project.imgPath }}" alt="{{ project.name }}"></td>
+                        <td>{{ project.name }}</td>
+                        <td><a href="{{ project.githubLink }}" target="__blank">{{ project.githubLink }}</a></td>
+                        <td>{{ project.type }}</td>
+                        <td>{{ project.version }}</td>
+                        <td><a href="{{ path('admin_one_project', {'id': project.id}) }}" class="btn btn-primary w-100px">Edit</a></td>
+                        <td><a href="{{ path('adminDeleteProject', {'id': project.id}) }}" class="btn btn-danger w-100px">Delete</a></td>
                     </tr>
-                {% endif %}
-            </tbody>
-        </table>
-</section>
+                {% endfor %}
+            {% else %}
+                <tr class="text-center">
+                    <td colspan="7">
+                        <span>Il n'y a aucun projet enregistré dans la database.</span>
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{# </div> #}
 {% endblock %}

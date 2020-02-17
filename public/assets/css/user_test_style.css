@@ -126,6 +126,17 @@
     }
 }
 
+@media (min-width: 992px) {
+    .col-lg-9 {
+        padding-left: 3% !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-9 {
+        padding-left: 0 !important;
+    }
+}
 
 /* ----------------------------------------------- *\
                         Overlay

@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Project;
 use App\Form\ProjectType;
+use App\Form\AdminAboutType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security as Secu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,9 +31,21 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_about()
+    public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager)
     {
-        return $this->render('Admin/about.html.twig');
+        $user = new User();
+        $user = $security->getUser();
+        $form = $this->createForm(AdminAboutType::class, $user);
+        $form->handleRequest($request);
+
+        // echo '<pre>';
+        // var_dump($user);
+        // echo '</pre>';
+
+        return $this->render('Admin/about.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
     }
 
     /**

@@ -16,61 +16,63 @@
 
 
 {% block header %}
-<section class="sidebar">
-    <div class="top-row pl-4 navbar navbar-dark">
-        <a class="navbar-brand" href="">Dashboard</a>
-        <button class="navbar-toggler" id="btnToggler">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
+<app>
+    <section class="sidebar">
+        <div class="top-row pl-4 navbar navbar-dark">
+            <a class="navbar-brand" href="">Dashboard</a>
+            <button class="navbar-toggler" id="btnToggler">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
-    <div class="navToggler" id="navToggler" {# collapse #}>
-        <ul class="nav flex-column">
-            <li class="nav-item px-3">
-                <a class="nav-link" href="{{ path('adminHome') }}">
-                    <span class="oi oi-home" aria-hidden="true"></span> Home
-                </a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="{{ path('adminAbout') }}">
-                    <span class="oi oi-plus" aria-hidden="true"></span> Profile
-                </a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="{{ path('adminProject') }}">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Work
-                </a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="{{ path('adminNews') }}">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> News
-                </a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="#">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Blog
-                </a>
-            </li>
-            <li class="nav-item px-3">
-                <a class="nav-link" href="{{ path('adminLogout') }}">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Logout
-                </a>
-            </li>
-        </ul>
-    </div>
-</section>
+        <div class="navToggler" id="navToggler" {# collapse #}>
+            <ul class="nav flex-column">
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="{{ path('adminHome') }}">
+                        <span class="oi" aria-hidden="true"><i class="fas fa-home"></i></span> Home
+                    </a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="{{ path('adminAbout') }}">
+                        <span class="oi" aria-hidden="true"><i class="fas fa-user"></i></span> Profile
+                    </a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="{{ path('adminProject') }}">
+                        <span class="oi" aria-hidden="true"><i class="fas fa-tools"></i></span> Work
+                    </a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="{{ path('adminNews') }}">
+                        <span class="oi" aria-hidden="true"><i class="fas fa-newspaper"></i></span> News
+                    </a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="#">
+                        <span class="oi" aria-hidden="true"><i class="fas fa-blog"></i></span> Blog
+                    </a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link" href="{{ path('adminLogout') }}">
+                        <span class="oi" aria-hidden="true"><i class="fas fa-sign-out-alt"></i></span> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
 
-<div class="main">
-    <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-    </div>
+    <div class="main">
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
 
-    <div class="content px-4">
+        <div class="content px-4">
 {% endblock %}
 
 {% block footer %}
+        </div>
     </div>
-</div>
+</app>
 {% endblock %}
 
 {% block javascript %}
