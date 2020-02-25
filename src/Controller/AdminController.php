@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Security as Secu;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
@@ -31,24 +32,36 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager)
+    public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = $security->getUser();
         $form = $this->createForm(AdminAboutType::class, $user);
         $form->handleRequest($request);
 
-        var_dump($form->isSubmitted());
-
         if($form->isSubmitted() && $form->isValid()) {
-            echo '<pre>';
-            var_dump($user);
-            echo '</pre>';
-            exit;
+            if(
+                preg_match('/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $user->getPassword()) && 
+                preg_match('/[0-9]/i', $user->getPassword())
+            ) {
+                $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+                $manager->persist($user);
+                $manager->flush();
+                $message = [
+                    "class" => 'alert alert-success',
+                    "message" => 'La mise à jour s\'est correctement éffectuée.'
+                ];
+            } else {
+                $message = [
+                    "class" => 'alert alert-warning',
+                    "message" => 'Le mot de passe doit contenir des caractères spéciaux et des nombres en plus de sa longue minimale'
+                ];
+            }
         }
 
         return $this->render('Admin/about.html.twig', [
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'message' => isset($message) ? $message : ""
         ]);
     }
 
