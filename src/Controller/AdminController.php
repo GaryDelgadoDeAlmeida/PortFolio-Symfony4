@@ -24,7 +24,9 @@ class AdminController extends AbstractController
      */
     public function admin()
     {
-        return $this->render('Admin/home.html.twig');
+        return $this->render('Admin/home.html.twig', [
+            "title" => "Home"
+        ]);
     }
 
     /**
@@ -61,7 +63,8 @@ class AdminController extends AbstractController
         return $this->render('Admin/about.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'message' => isset($message) ? $message : ""
+            'message' => isset($message) ? $message : "",
+            "title" => "Profile"
         ]);
     }
 
@@ -73,19 +76,53 @@ class AdminController extends AbstractController
     public function admin_project()
     {
         return $this->render('Admin/Portfolio/index.html.twig', [
-            "projects" => $this->getDoctrine()->getRepository(Project::class)->findAll()
+            "projects" => $this->getDoctrine()->getRepository(Project::class)->getProject(),
+            "title" => "Work"
         ]);
     }
 
     /**
-     * @Route("/admin/work/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="admin_one_project")
+     * @Route("/admin/work/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditProject")
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_print_project(Project $project)
+    public function admin_edit_project(Project $project, Request $request, EntityManagerInterface $manager)
     {
+        $form = $this->createForm(ProjectType::class, $project);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form['imgPath']->getData();
+            
+            if($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $newFilename = 'portFolio-'.str_replace(" ", "_", $project->getName()) . "-" . $project->getVersion() .'.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    if(!array_search('./content/img/portfolio/'.$newFilename, glob("./content/img/portfolio/*.".$imageFile->guessExtension()))) {
+                        $imageFile->move(
+                            $this->getParameter('project_img_dir'),
+                            $newFilename
+                        );
+                    }
+                } catch (FileException $e) {
+                    dd($e->getMessage());
+                }
+
+                $project->setImgPath($newFilename);
+                $manager->persist($project);
+                $manager->flush();
+
+                return $this->redirectToRoute('adminProject');
+            }
+        }
+
         return $this->render('Admin/Portfolio/edit.html.twig', [
-            "project" => $project
+            "form_edit_project" => $form->createView(),
+            "projectId" => $project->getId(),
+            "title" => "Edit Work"
         ]);
     }
 
@@ -130,7 +167,8 @@ class AdminController extends AbstractController
         }
 
         return $this->render('Admin/Portfolio/add.html.twig', [
-            "form_add_project" => $form->createView()
+            "form_add_project" => $form->createView(),
+            "title" => "Add Work"
         ]);
     }
 
@@ -141,7 +179,9 @@ class AdminController extends AbstractController
      */
     public function admin_delete_project(Project $project)
     {
-        return $this->render('Admin/home.html.twig');
+        return $this->render('Admin/home.html.twig', [
+            "title" => "Work"
+        ]);
     }
 
     /**
@@ -151,7 +191,9 @@ class AdminController extends AbstractController
      */
     public function admin_contact()
     {
-        return $this->render('Admin/contact.html.twig');
+        return $this->render('Admin/contact.html.twig', [
+            "title" => "Contact"
+        ]);
     }
 
     /**
@@ -165,7 +207,8 @@ class AdminController extends AbstractController
         $rss_load = simplexml_load_file($rss_link);
         
         return $this->render('Admin/news.html.twig', [
-            'rss_load' => $rss_load
+            'rss_load' => $rss_load,
+            "title" => "News"
         ]);
     }
 
