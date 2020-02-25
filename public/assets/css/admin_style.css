@@ -153,10 +153,6 @@ app {
     .main .top-row a, .main .top-row .btn-link {
         margin-left: 0;
     }
-
-    .navToggler {
-        display: none;
-    }
 }
 
 @media (min-width: 768px) {
