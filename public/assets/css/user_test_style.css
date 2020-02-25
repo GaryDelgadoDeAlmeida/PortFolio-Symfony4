@@ -124,6 +124,10 @@
     .aboutMe-skills .skills-content {
         margin-bottom: 20px;
     }
+
+    .aboutMe-intro-intro {
+        margin-top: 20px;
+    }
 }
 
 @media (min-width: 992px) {

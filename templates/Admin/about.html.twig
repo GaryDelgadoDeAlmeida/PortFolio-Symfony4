@@ -2,8 +2,8 @@
 
 {% block body %}
     <h3>Profile</h3>
-
-    <form class="form" action="{{ path('adminAbout') }}">
-        {{ form() }}
+    
+    {{ form(form, {'action': path('adminAbout'), 'method': 'POST'}) }}
+    {{ form_end(form, {'action': path('adminAbout'), 'method': 'POST'}) }}
     </form>
 {% endblock %}

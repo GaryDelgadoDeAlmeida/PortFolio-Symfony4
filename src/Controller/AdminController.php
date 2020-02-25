@@ -33,14 +33,18 @@ class AdminController extends AbstractController
      */
     public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager)
     {
-        $user = new User();
         $user = $security->getUser();
         $form = $this->createForm(AdminAboutType::class, $user);
         $form->handleRequest($request);
 
-        // echo '<pre>';
-        // var_dump($user);
-        // echo '</pre>';
+        var_dump($form->isSubmitted());
+
+        if($form->isSubmitted() && $form->isValid()) {
+            echo '<pre>';
+            var_dump($user);
+            echo '</pre>';
+            exit;
+        }
 
         return $this->render('Admin/about.html.twig', [
             'user' => $user,

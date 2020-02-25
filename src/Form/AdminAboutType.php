@@ -21,7 +21,7 @@ class AdminAboutType extends AbstractType
             ->add('address', null, ['label' => 'Address'])
             ->add('postalCode', NumberType::class, ['label' => 'Postal Code (Zip Code)'])
             ->add('city', null, ['label' => 'City'])
-            ->add('phoneNumber', NumberType::class, ['label' => 'Mobile Phone'])
+            ->add('phoneNumber', null, ['label' => 'Mobile Phone'])
             ->add('email', EmailType::class, ['label' => 'Email'])
             ->add('password', PasswordType::class, ['label' => 'Password'])
             ->add('submit', SubmitType::class)
