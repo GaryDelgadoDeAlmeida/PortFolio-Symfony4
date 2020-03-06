@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ProjectType extends AbstractType
+class ProjectAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

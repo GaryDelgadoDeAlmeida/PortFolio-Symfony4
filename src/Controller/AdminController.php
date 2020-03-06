@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Project;
-use App\Form\ProjectType;
-use App\Form\AdminAboutType;
+use App\Form\ProjectAdminType;
+use App\Form\AboutAdminType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,7 +37,7 @@ class AdminController extends AbstractController
     public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = $security->getUser();
-        $form = $this->createForm(AdminAboutType::class, $user);
+        $form = $this->createForm(AboutAdminType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -88,7 +88,7 @@ class AdminController extends AbstractController
      */
     public function admin_edit_project(Project $project, Request $request, EntityManagerInterface $manager)
     {
-        $form = $this->createForm(ProjectType::class, $project);
+        $form = $this->createForm(ProjectAdminType::class, $project);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -134,7 +134,7 @@ class AdminController extends AbstractController
     public function admin_add_project(Request $request, EntityManagerInterface $manager)
     {
         $project = new Project();
-        $form = $this->createForm(ProjectType::class, $project);
+        $form = $this->createForm(ProjectAdminType::class, $project);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
