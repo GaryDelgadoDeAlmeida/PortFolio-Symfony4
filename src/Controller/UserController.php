@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use ContactManager;
 use App\Entity\User;
 use App\Entity\Project;
 use App\Form\LoginAdminType;
+use App\Form\ContactUserType;
 use App\Form\RegisterAdminType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,8 +47,17 @@ class UserController extends AbstractController
     /**
      * @Route("/contact", name="contactme")
      */
-    public function contact_me()
+    public function contact_me(Request $request)
     {
+        if(!empty($request->request)) {
+            $fullName = trim(strip_tags(htmlspecialchars($request->get('yrName'))));
+            $email = trim(strip_tags(htmlspecialchars($request->get('yrEmail'))));
+            $subject = trim(strip_tags(htmlspecialchars($request->get('subject'))));
+            $message = trim(strip_tags(htmlspecialchars($request->get('message'))));
+
+            dd(ContactManager::sendMail($fullName, $email, $subject, $message));
+        }
+
         return $this->render('User/contact.html.twig');
     }
 
