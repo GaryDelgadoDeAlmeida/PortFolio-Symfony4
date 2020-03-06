@@ -50,12 +50,19 @@ class UserController extends AbstractController
     public function contact_me(Request $request)
     {
         if(!empty($request->request)) {
-            $fullName = trim(strip_tags(htmlspecialchars($request->get('yrName'))));
-            $email = trim(strip_tags(htmlspecialchars($request->get('yrEmail'))));
-            $subject = trim(strip_tags(htmlspecialchars($request->get('subject'))));
-            $message = trim(strip_tags(htmlspecialchars($request->get('message'))));
+            $fullName = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('yrName')))) : null;
+            $email = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('yrEmail')))) : null;
+            $subject = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('subject')))) : null;
+            $message = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('message')))) : null;
 
-            dd(ContactManager::sendMail($fullName, $email, $subject, $message));
+            if(
+                !is_null($fullName) &&
+                !is_null($email) &&
+                !is_null($subject) &&
+                !is_null($message)
+            ) {
+                dd(ContactManager::sendMail($fullName, $email, $subject, $message));
+            }
         }
 
         return $this->render('User/contact.html.twig');
