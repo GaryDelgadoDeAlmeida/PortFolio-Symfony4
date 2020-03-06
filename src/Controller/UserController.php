@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use ContactManager;
+use App\Manager\ContactManager;
 use App\Entity\User;
 use App\Entity\Project;
 use App\Form\LoginAdminType;

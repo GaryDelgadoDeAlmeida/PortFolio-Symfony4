@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Manager;
+
 class ContactManager {
     
     function sendMail($senderFullName, $senderEmail, $senderSubject, $senderMessage)
