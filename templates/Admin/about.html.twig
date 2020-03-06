@@ -2,6 +2,7 @@
 
 {% block body %}
 
+<section class="container">
     {% if message != '' %}
         <div class="{{ message.class }}">
             <span>{{message.message}}</span>
@@ -44,5 +45,6 @@
             </div>
         </div>
     {{ form_end(form, {'action': path('adminAbout'), 'method': 'POST'}) }}
+</section>
     
 {% endblock %}
