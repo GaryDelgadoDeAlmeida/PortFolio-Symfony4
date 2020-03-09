@@ -37,4 +37,4 @@ Les configurations restantes (pour la mise en production) seront à faire à tra
 Symfony 4.4, étant une LTS (Long Terms Version), à régulièrement besoin de m'être à jour ses packages. Par conséquent, dans le répertoire du projet, en ligne de commande :
 <code>composer update</code>
 
-Il mettra automatiquement à le package.json qu'il faudra commit et push.
+Il mettra automatiquement à le fichier composer.lock et composer.json qu'il faudra commit et push.
