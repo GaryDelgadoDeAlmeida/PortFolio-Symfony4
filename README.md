@@ -31,3 +31,10 @@ Dans le répertoire du project :
 <code>composer require symfony/apache-pack</code>
 
 Les configurations restantes (pour la mise en production) seront à faire à travers ce lien https://symfony.com/doc/current/setup/web_server_configuration.html
+
+# Mise à jour
+
+Symfony 4.4, étant une LTS (Long Terms Version), à régulièrement besoin de m'être à jour ses packages. Par conséquent, dans le répertoire du projet, en ligne de commande :
+<code>composer update</code>
+
+Il mettra automatiquement à le package.json qu'il faudra commit et push.
