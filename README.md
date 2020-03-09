@@ -8,7 +8,7 @@ Version Symfony 4.4 de mon portfolio.
 
 PHP 7.3 minimum
 
-Dans le répertoire du projet
+Dans le répertoire du projet : 
 <code>composer install</code>
 
 # Création de la base de données (terminal)
