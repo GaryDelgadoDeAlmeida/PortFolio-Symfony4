@@ -4,6 +4,13 @@ Version Symfony 4.4 de mon portfolio.
 
 <b>Ce projet est, pour le moment, en phase de développement.</b>
 
+# Installation
+
+PHP 7.3 minimum
+
+Dans le répertoire du projet
+<code>composer install</code>
+
 # Création de la base de données (terminal)
 
 Créer la database :
