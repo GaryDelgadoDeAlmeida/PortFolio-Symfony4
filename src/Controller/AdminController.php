@@ -185,7 +185,7 @@ class AdminController extends AbstractController
             $manager->flush();
         }
 
-        return $this->redictToRoute("adminProject");
+        return $this->redirectToRoute("adminProject");
     }
 
     /**
