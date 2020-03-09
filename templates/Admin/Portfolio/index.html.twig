@@ -26,8 +26,8 @@
                         <td>{% if project.gitHubLink != null %}<a href="{{ project.githubLink }}" target="__blank">{{ project.githubLink }}</a>{% else %}No GitHub Link{% endif %}</td>
                         <td>{{ project.type }}</td>
                         <td>{{ project.version }}</td>
-                        <td><a href="{{ path('adminEditProject', {'id': project.id}) }}" class="btn btn-primary w-100px">Edit</a></td>
-                        <td><a href="{{ path('adminDeleteProject', {'id': project.id}) }}" class="btn btn-danger w-100px">Delete</a></td>
+                        <td><a href="{{ path('adminEditProject', {'id': project.id}) }}" class="btn btn-primary w-100px"><i class="far fa-edit"></i></a></td>
+                        <td><a href="{{ path('adminDeleteProject', {'id': project.id}) }}" class="btn btn-danger w-100px"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
                 {% endfor %}
             {% else %}

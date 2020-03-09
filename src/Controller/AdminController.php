@@ -177,11 +177,15 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_delete_project(Project $project)
+    public function admin_delete_project(Project $project, EntityManagerInterface $manager)
     {
-        return $this->render('Admin/home.html.twig', [
-            "title" => "Work"
-        ]);
+        if(in_array("./content/img/portfolio/".$project->getImgPath(), glob("./content/img/portfolio/*.*"))) {
+            unlink("./content/img/portfolio/".$project->getImgPath());
+            $manager->remove($project);
+            $manager->flush();
+        }
+
+        return $this->redictToRoute("adminProject");
     }
 
     /**
