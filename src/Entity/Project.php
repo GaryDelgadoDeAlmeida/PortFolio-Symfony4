@@ -36,7 +36,6 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull
      * @Assert\Url
      */
     private $githubLink;
