@@ -60,7 +60,7 @@ class AdminController extends AbstractController
             }
         }
 
-        return $this->render('Admin/about.html.twig', [
+        return $this->render('Admin/About/index.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
             'message' => isset($message) ? $message : "",
@@ -189,18 +189,6 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/contact", name="adminContact")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
-    public function admin_contact()
-    {
-        return $this->render('Admin/contact.html.twig', [
-            "title" => "Contact"
-        ]);
-    }
-
-    /**
      * @Route("/admin/news", name="adminNews")
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
@@ -209,6 +197,10 @@ class AdminController extends AbstractController
     {
         $rss_link = "https://www.developpez.com/index/rss";
         $rss_load = simplexml_load_file($rss_link);
+        
+        if($rss_load == false) {
+            $rss_load = [];
+        }
         
         return $this->render('Admin/news.html.twig', [
             'rss_load' => $rss_load,

@@ -25,15 +25,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('adminHome') }}">Dashboard</a></li>
+                {% endif %}
                 <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ path('aboutme') }}">A Propos</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ path('portfolio') }}">PortFolio</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ path('contactme') }}">Contact</a></li>
                 {# <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Langue</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="">Fr</a>
-                        <a class="dropdown-item" href="">En</a>
+                    <div class="dropdown-menu navbar-dark bg-black" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Fr</a>
+                        <a class="dropdown-item" href="#">En</a>
                     </div>
                 </li> #}
             </ul>
