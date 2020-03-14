@@ -121,6 +121,12 @@ class AdminController extends AbstractController
                             $this->getParameter('project_img_dir'),
                             $newFilename
                         );
+                    } else {
+                        unlink('./content/img/portfolio/'.$newFilename);
+                        $imageFile->move(
+                            $this->getParameter('project_img_dir'),
+                            $newFilename
+                        );
                     }
                 } catch (FileException $e) {
                     dd($e->getMessage());
