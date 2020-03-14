@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use App\Manager\ContactManager;
 use App\Entity\User;
+use App\Entity\Contact;
 use App\Entity\Project;
 use App\Form\LoginAdminType;
 use App\Form\ContactUserType;
 use App\Form\RegisterAdminType;
+use App\Manager\ContactManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,25 +48,35 @@ class UserController extends AbstractController
     /**
      * @Route("/contact", name="contactme")
      */
-    public function contact_me(Request $request)
+    public function contact_me(Request $request, EntityManagerInterface $manager)
     {
-        if(!empty($request->request)) {
-            $fullName = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('yrName')))) : null;
-            $email = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('yrEmail')))) : null;
-            $subject = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('subject')))) : null;
-            $message = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('message')))) : null;
+        $newSend = new Contact();
+        $formContact = $this->createForm(ContactUserType::class, $newSend);
+        $formContact->handleRequest($request);
 
-            if(
-                !is_null($fullName) &&
-                !is_null($email) &&
-                !is_null($subject) &&
-                !is_null($message)
-            ) {
-                dd(ContactManager::sendMail($fullName, $email, $subject, $message));
-            }
+        // if(!empty($request->request)) {
+        //     $fullName = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('yrName')))) : null;
+        //     $email = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('yrEmail')))) : null;
+        //     $subject = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('subject')))) : null;
+        //     $message = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('message')))) : null;
+
+        //     if(
+        //         !is_null($fullName) &&
+        //         !is_null($email) &&
+        //         !is_null($subject) &&
+        //         !is_null($message)
+        //     ) {
+        //         dd(ContactManager::sendMail($fullName, $email, $subject, $message));
+        //     }
+        // }
+
+        if($formContact->isSubmitted()) {
+            dd($newSend);
         }
 
-        return $this->render('User/contact.html.twig');
+        return $this->render('User/contact.html.twig', [
+            "contactForm" => $formContact->createView()
+        ]);
     }
 
     /**
