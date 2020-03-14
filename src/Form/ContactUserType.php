@@ -39,7 +39,9 @@ class ContactUserType extends AbstractType
                     'placeholder' => "Message"
                 ]
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                "label" => "Envoyer"
+            ])
         ;
     }
 

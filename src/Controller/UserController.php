@@ -54,24 +54,10 @@ class UserController extends AbstractController
         $formContact = $this->createForm(ContactUserType::class, $newSend);
         $formContact->handleRequest($request);
 
-        // if(!empty($request->request)) {
-        //     $fullName = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('yrName')))) : null;
-        //     $email = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('yrEmail')))) : null;
-        //     $subject = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('subject')))) : null;
-        //     $message = !empty($request->get('yrName')) ? trim(strip_tags(htmlspecialchars($request->get('message')))) : null;
-
-        //     if(
-        //         !is_null($fullName) &&
-        //         !is_null($email) &&
-        //         !is_null($subject) &&
-        //         !is_null($message)
-        //     ) {
-        //         dd(ContactManager::sendMail($fullName, $email, $subject, $message));
-        //     }
-        // }
-
-        if($formContact->isSubmitted()) {
-            dd($newSend);
+        if($formContact->isSubmitted() && $formContact->isValid()) {
+            $response = ContactManager::sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
+            $manager->persist($user);
+            $manager->flush();
         }
 
         return $this->render('User/contact.html.twig', [

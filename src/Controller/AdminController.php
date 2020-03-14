@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Contact;
 use App\Entity\Project;
 use App\Form\SearchType;
 use App\Form\AboutAdminType;
@@ -26,7 +27,9 @@ class AdminController extends AbstractController
     public function admin()
     {
         return $this->render('Admin/home.html.twig', [
-            "title" => "Home"
+            "title" => "Home",
+            "nbrProjects" => $this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1],
+            "nbrNewMail" => $this->getDoctrine()->getRepository(Contact::class)->getNbrContact()[1]
         ]);
     }
 
