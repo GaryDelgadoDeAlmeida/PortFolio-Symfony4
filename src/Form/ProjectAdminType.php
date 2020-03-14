@@ -41,7 +41,10 @@ class ProjectAdminType extends AbstractType
                     ])
                 ]
             ])
-            ->add('githubLink', UrlType::class, ['label' => "Link GitHub"])
+            ->add('githubLink', UrlType::class, [
+                'label' => "Link GitHub",
+                "required" => false
+            ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'Make your choice, please' => null,

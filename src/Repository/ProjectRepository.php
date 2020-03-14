@@ -42,6 +42,19 @@ class ProjectRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Get projects using name
+     */
+    public function getProjectByName($projectName)
+    {
+        return $this->createQueryBuilder('p')
+            ->where("p.name LIKE :projectName")
+            ->orderBy('p.createdAt', 'DESC')
+            ->setParameter(':projectName', '%'.$projectName.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

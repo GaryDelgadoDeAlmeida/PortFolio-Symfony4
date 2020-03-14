@@ -4,6 +4,11 @@
 {# <div class="adminPortfolio containerBody"> #}
     <div class="adminPortfolio-header">
         <a href="{{ path('adminAddProject') }}"><button class="btn btn-success w-100px rounded-pill">Add</button></a>
+        
+        {{ form_start(search, {'action': path('adminProject'), 'method': 'POST', "attr" : {"style": "margin-left: 10px; display: inline-flex; float: right;"}}) }}
+            {{ form_widget(search.search_input, {"attr": {"class" : "w-250px"}}) }}
+            {{ form_widget(search.submit, {'attr': {'class': 'btn btn-primary w-100px rounded-pill', "style": "margin-left: 10px;"}}) }}
+        {{ form_end(search, {'action': path('adminProject'), 'method': 'POST'}) }}
     </div>
 
     <table class="table">

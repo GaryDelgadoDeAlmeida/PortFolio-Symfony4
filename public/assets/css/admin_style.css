@@ -22,6 +22,11 @@ app {
     margin-bottom: 10px;
 }
 
+.w-250px {
+    width: 250px;
+    margin-bottom: 10px;
+}
+
 
 /* ---------------------------------------- *\
                     Button

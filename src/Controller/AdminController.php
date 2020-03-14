@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Project;
-use App\Form\ProjectAdminType;
+use App\Form\SearchType;
 use App\Form\AboutAdminType;
+use App\Form\ProjectAdminType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -73,10 +74,21 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_project()
+    public function admin_project(Request $request)
     {
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            $searchItem = trim(strip_tags($request->get('search')["search_input"]));
+            $projects = $this->getDoctrine()->getRepository(Project::class)->getProjectByName($searchItem);
+        } else {
+            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject();
+        }
+
         return $this->render('Admin/Portfolio/index.html.twig', [
-            "projects" => $this->getDoctrine()->getRepository(Project::class)->getProject(),
+            "projects" => $projects,
+            "search" => $form->createView(),
             "title" => "Work"
         ]);
     }
@@ -170,6 +182,16 @@ class AdminController extends AbstractController
             "form_add_project" => $form->createView(),
             "title" => "Add Work"
         ]);
+    }
+
+    /**
+     * @Route("/admin/work/search", name="adminSearchProject", methods="POST")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function admin_search_project(Request $request)
+    {
+        return $this->render("Admin/Portfolio/index.html.twig");
     }
 
     /**
