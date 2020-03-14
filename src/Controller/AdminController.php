@@ -231,6 +231,18 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin/contact", name="adminContact")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function admin_contact()
+    {
+        return $this->render("Admin/Contact/index.html.twig", [
+            "title" => "Contact"
+        ]);
+    }
+
+    /**
      * @Route("/admin/logout", name="adminLogout")
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
