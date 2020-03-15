@@ -31,7 +31,8 @@ class UserController extends AbstractController
     public function about_me()
     {
         return $this->render('User/about.html.twig', [
-            'lastestProject' => $this->getDoctrine()->getRepository(Project::class)->getLastestProject()
+            'lastestProject' => $this->getDoctrine()->getRepository(Project::class)->getLastestProject(),
+            'userFullName' => $this->getDoctrine()->getRepository(User::class)->getFullName()
         ]);
     }
 
