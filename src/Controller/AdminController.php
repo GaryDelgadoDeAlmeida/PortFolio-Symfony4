@@ -248,7 +248,7 @@ class AdminController extends AbstractController
     {
         return $this->render("Admin/Contact/index.html.twig", [
             "title" => "Contact",
-            "listMail" => $this->getDoctrine()->getRepository(Contact::class)->findAll()
+            "listMail" => $this->getDoctrine()->getRepository(Contact::class)->findBy([], ['id' => 'DESC'])
         ]);
     }
 

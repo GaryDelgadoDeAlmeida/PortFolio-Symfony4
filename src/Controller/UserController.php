@@ -57,12 +57,15 @@ class UserController extends AbstractController
 
         if($formContact->isSubmitted() && $formContact->isValid()) {
             $response = ContactManager::sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
-            $manager->persist($user);
-            $manager->flush();
+            if(isset($response["answer"]) && $response["answer"] == true) {
+                $manager->persist($user);
+                $manager->flush();
+            }
         }
 
         return $this->render('User/contact.html.twig', [
-            "contactForm" => $formContact->createView()
+            "contactForm" => $formContact->createView(),
+            "response" => isset($response) ? $response : ""
         ]);
     }
 
