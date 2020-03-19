@@ -1,0 +1,13 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <p><label class="font-weight-bold">{{ mail.senderFullName }}</label> ({{ mail.senderEmail }})</p>
+    
+    <p><label class="font-weight-bold">Object :</label> {{ mail.emailSubject}}</p>
+    
+    <p>{{ mail.emailContent }}</p>
+
+
+    <br>
+    <li><a href="{{ path('adminContact') }}">Retour à la liste des mails</a></li>
+{% endblock %}

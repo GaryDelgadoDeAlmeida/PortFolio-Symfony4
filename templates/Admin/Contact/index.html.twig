@@ -2,21 +2,13 @@
 
 {% block body %}
     <table class="table">
-        <thead>
-            <tr>
-                <th>Nom & Prénom</th>
-                <th>Email</th>
-                <th>Sujet</th>
-                <th>Message</th>
-            </tr>
-        </thead>
         <tbody>
-            <tr>
-                <td>Nom & Prénom</td>
-                <td>Email</td>
-                <td>Sujet</td>
-                <td>Message</td>
-            </tr>
+            {% for mail in listMail %}
+                <tr>
+                    <td>{{ mail.senderFullName }}</td>
+                    <td><a href="{{ path('adminReadMail', {'id': mail.id}) }}"><i class="fas fa-arrow-circle-right"></i></a></td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}

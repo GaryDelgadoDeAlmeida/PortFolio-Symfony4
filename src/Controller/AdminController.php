@@ -247,7 +247,21 @@ class AdminController extends AbstractController
     public function admin_contact()
     {
         return $this->render("Admin/Contact/index.html.twig", [
-            "title" => "Contact"
+            "title" => "Contact",
+            "listMail" => $this->getDoctrine()->getRepository(Contact::class)->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/contact/{id}", name="adminReadMail")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function admin_read_mail(Contact $contact)
+    {
+        return $this->render("Admin/Contact/read.html.twig", [
+            "title" => "Contact",
+            "mail" => $contact
         ]);
     }
 
