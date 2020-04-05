@@ -4,7 +4,7 @@
     <h3>Welcome Admin</h3>
 
     <div class="row text-center">
-        <div class="col-4">
+        <div class="col-md-4">
             <div style="height: 200px; background-color: #ffffff; box-shadow: 5px 3px #000; border-radius: 25px;">
                 <div style="font-size: 40px; font-weight: bold; padding-top: 50px;">
                     {% if nbrProjects > 0 %}
@@ -16,7 +16,7 @@
                 <span>projets</span>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-md-4">
             <div style="height: 200px; background-color: #ffffff; box-shadow: 5px 3px #000; border-radius: 25px;">
                 <div style="font-size: 40px; font-weight: bold; padding-top: 50px;">
                     {% if nbrProjects > 0 %}
@@ -25,19 +25,19 @@
                         <span style="color: red;">{{nbrProjects}}</span>
                     {% endif %}
                 </div>
-                <span>projets</span>
+                <span>visiteur au cours du mois</span>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-md-4">
             <div style="height: 200px; background-color: #ffffff; box-shadow: 5px 3px #000; border-radius: 25px;">
                 <div style="font-size: 40px; font-weight: bold; padding-top: 50px;">
                     {% if nbrNewMail > 0 %}
-                        <span style="color: green;">{{nbrNewMail}}</span>
-                    {% else %}
                         <span style="color: red;">{{nbrNewMail}}</span>
+                    {% else %}
+                        <span style="color: green;">{{nbrNewMail}}</span>
                     {% endif %}
                 </div>
-                <span>contacts</span>
+                <span>mails non lus</span>
             </div>
         </div>
     </div>

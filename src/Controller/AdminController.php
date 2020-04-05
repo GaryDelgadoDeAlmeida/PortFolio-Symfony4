@@ -248,7 +248,7 @@ class AdminController extends AbstractController
     {
         return $this->render("Admin/Contact/index.html.twig", [
             "title" => "Contact",
-            "listMail" => $this->getDoctrine()->getRepository(Contact::class)->findBy([], ['id' => 'DESC'])
+            "listMail" => $this->getDoctrine()->getRepository(Contact::class)->findBy(["isRead" => false], ['id' => 'DESC'])
         ]);
     }
 
@@ -257,8 +257,16 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_read_mail(Contact $contact)
+    public function admin_read_mail(Contact $contact, EntityManagerInterface $manager)
     {
+        if(!$contact->getIsRead()) {
+            $contact->setIsRead(true);
+            $manager->persist($contact);
+            $manager->flush();
+        }
+
+        $contact->setEmailContent(json_decode($contact->getEmailContent()));
+
         return $this->render("Admin/Contact/read.html.twig", [
             "title" => "Contact",
             "mail" => $contact

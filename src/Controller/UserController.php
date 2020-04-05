@@ -58,7 +58,9 @@ class UserController extends AbstractController
         if($formContact->isSubmitted() && $formContact->isValid()) {
             $response = ContactManager::sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
             if(isset($response["answer"]) && $response["answer"] == true) {
-                $manager->persist($user);
+                $newSend->setEmailContent(json_encode($newSend->getEmailContent()));
+                $newSend->setIsRead(false);
+                $manager->persist($newSend);
                 $manager->flush();
             }
         }
