@@ -86,7 +86,7 @@ class AdminController extends AbstractController
             $searchItem = trim(strip_tags($request->get('search')["search_input"]));
             $projects = $this->getDoctrine()->getRepository(Project::class)->getProjectByName($searchItem);
         } else {
-            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject();
+            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject(0, 20);
         }
 
         return $this->render('Admin/Portfolio/index.html.twig', [
