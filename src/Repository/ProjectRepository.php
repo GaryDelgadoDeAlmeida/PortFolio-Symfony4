@@ -34,10 +34,12 @@ class ProjectRepository extends ServiceEntityRepository
     /**
      * Get all project added
      */
-    public function getProject()
+    public function getProject($offset, $limit)
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC')
+            ->setFirstResult($offset * $limit)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }
