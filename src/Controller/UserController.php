@@ -38,18 +38,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/portfolio", name="portfolio")
-     */
-    public function portfolio()
-    {
-        return $this->render('User/portFolio.html.twig', [
-            "portfolio" => $this->getDoctrine()->getRepository(Project::class)->getProject(0, 15)
-        ]);
-    }
-
-    /**
      * @Route("/portfolio/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="portfolioPage")
      */
-    public function portfolio_page($page)
+    public function portfolio($page = 0)
     {
         return $this->render('User/portFolio.html.twig', [
             "portfolio" => $this->getDoctrine()->getRepository(Project::class)->getProject($page, 15)
