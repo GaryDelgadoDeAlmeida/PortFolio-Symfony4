@@ -1,0 +1,44 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+<div class="container">
+    
+    {% if message != null %}
+        <div class="{{ message.class }}">
+            <span>{{ message.content }}</span>
+        </div>
+    {% endif %}
+    
+    {{ form_start(form, {"method":"POST"}) }}
+        <div class="row">
+            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="form-group col-md-6 col-lg-6 wow fadeInUp animated">
+                {{ form_label(form.startDate) }}
+                {{ form_widget(form.startDate) }}
+            </div>
+            <div class="form-group col-md-6 col-lg-6 wow fadeInUp animated">
+                {{ form_label(form.endDate) }}
+                {{ form_widget(form.endDate) }}
+            </div>
+            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
+                {{ form_widget(form.inProgress) }}
+            </div>
+            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
+                {{ form_label(form.corporationName) }}
+                {{ form_widget(form.corporationName) }}
+            </div>
+            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description) }}
+            </div>
+            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
+                {{ form_label(form.category) }}
+                {{ form_widget(form.category) }}
+            </div>
+        </div>
+    {{ form_end(form, {"method":"POST"}) }}
+</div>
+{% endblock %}

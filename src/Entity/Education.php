@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EducationRepository")
@@ -18,16 +19,26 @@ class Education
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "The job name must be at least {{ limit }} characters long",
+     *      maxMessage = "The job name cannot be longer than {{ limit }} character"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotNull
+     * @Assert\Date
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\Date
      */
     private $endDate;
 
@@ -38,6 +49,13 @@ class Education
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "The corporation name must be at least {{ limit }} characters long",
+     *      maxMessage = "The corporation name cannot be longer than {{ limit }} character"
+     * )
      */
     private $corporationName;
 
@@ -48,6 +66,11 @@ class Education
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Choice(
+     *     choices = { "education", "formation" },
+     *     message = "Please, choose a valid category type."
+     * )
      */
     private $category;
 

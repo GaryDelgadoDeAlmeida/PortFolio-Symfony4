@@ -19,6 +19,15 @@ class EducationRepository extends ServiceEntityRepository
         parent::__construct($registry, Education::class);
     }
 
+    public function getEducationFromCategory($category)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.category = :cat')
+            ->setParameter('cat', $category)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Education[] Returns an array of Education objects
     //  */

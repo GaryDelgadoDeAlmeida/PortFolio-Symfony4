@@ -6,8 +6,10 @@ use App\Entity\User;
 use App\Entity\Contact;
 use App\Entity\Project;
 use App\Form\SearchType;
+use App\Entity\Education;
 use App\Form\AboutAdminType;
 use App\Form\ProjectAdminType;
+use App\Form\EducationAdminType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -54,12 +56,12 @@ class AdminController extends AbstractController
                 $manager->flush();
                 $message = [
                     "class" => 'alert alert-success',
-                    "message" => 'La mise à jour s\'est correctement éffectuée.'
+                    "content" => 'La mise à jour s\'est correctement éffectuée.'
                 ];
             } else {
                 $message = [
                     "class" => 'alert alert-warning',
-                    "message" => 'Le mot de passe doit contenir des caractères spéciaux et des nombres en plus de sa longue minimale'
+                    "content" => 'Le mot de passe doit contenir des caractères spéciaux et des nombres en plus de sa longue minimale'
                 ];
             }
         }
@@ -67,17 +69,67 @@ class AdminController extends AbstractController
         return $this->render('Admin/About/index.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'message' => isset($message) ? $message : "",
+            'message' => isset($message) ? $message : null,
             "title" => "Profile"
         ]);
     }
 
     /**
-     * @Route("/admin/work", name="adminProject")
+     * @Route("/admin/education", name="adminEducation")
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_project(Request $request)
+    public function admin_education()
+    {
+        return $this->render('Admin/Education/index.html.twig', [
+            "title" => "Education",
+            "educations" => $this->getDoctrine()->getRepository(Education::class)->getEducationFromCategory("education"),
+            "formations" => $this->getDoctrine()->getRepository(Education::class)->getEducationFromCategory("formation")
+        ]);
+    }
+
+    /**
+     * @Route("/admin/education/add", name="adminEducationAdd")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function admin_education_add(Request $request, EntityManagerInterface $manager)
+    {
+        $education = new Education();
+        $form = $this->createForm(EducationAdminType::class, $education);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            if(!is_null($education->getEndDate()) && $education->getInProgress()) {
+                $education->setEndDate(null);
+            } elseif(is_null($education->getEndDate()) && !$education->getInProgress()) {
+                $education->setInProgress(true);
+            }
+            
+            $manager->persist($education);
+            $manager->flush();
+
+            $message = [
+                "class" => "alert-success text-center",
+                "content" => "L'ajout a été faite."
+            ];
+        }
+
+        return $this->render('Admin/Education/add.html.twig', [
+            "title" => "Education",
+            'form' => $form->createView(),
+            'message' => isset($message) ? $message : null
+        ]);
+    }
+
+    /**
+     * @Route("/admin/work", name="adminProject")
+     * @Route("/admin/work/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminProjectPage")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function admin_project(Request $request, $page = 0)
     {
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
@@ -86,7 +138,7 @@ class AdminController extends AbstractController
             $searchItem = trim(strip_tags($request->get('search')["search_input"]));
             $projects = $this->getDoctrine()->getRepository(Project::class)->getProjectByName($searchItem);
         } else {
-            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject(0, 20);
+            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject($page, 20);
         }
 
         return $this->render('Admin/Portfolio/index.html.twig', [

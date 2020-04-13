@@ -6,9 +6,9 @@ use App\Entity\Education;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EducationAdminType extends AbstractType
@@ -20,16 +20,18 @@ class EducationAdminType extends AbstractType
                 'label' => 'Job Name',
                 "required" => true
             ])
-            ->add('startDate', DateTimeType::class, [
+            ->add('startDate', DateType::class, [
                 'label' => 'Start Date',
-                "required" => true
+                'widget' => 'single_text',
+                'required' => true
             ])
-            ->add('endDate', DateTimeType::class, [
+            ->add('endDate', DateType::class, [
                 'label' => 'End Date',
+                'widget' => 'single_text',
                 "required" => false
             ])
             ->add('inProgress', null, [
-                'label' => 'Status',
+                'label' => 'In Progress',
                 "required" => false
             ])
             ->add('corporationName', null, [
@@ -37,16 +39,16 @@ class EducationAdminType extends AbstractType
                 "required" => true
             ])
             ->add('description', TextareaType::class, [
-                "required" => true,
+                "required" => false,
                 'label' => "Description"
             ])
             ->add('category', ChoiceType::class, [
+                "label" => "Category",
                 "choices" => [
                     'Make your choice, please' => null,
                     "Formation" => "formation",
                     "Education" => "education"
                 ],
-                "label" => "Category",
                 "required" => true
             ])
             ->add('submit', SubmitType::class)
