@@ -13,7 +13,7 @@
         <img class="img-fluid" style="max-width:240px;" src="{{ asset('content/img/Me/photo_garry_almeida.jpg') }}" alt="">
     </div>
     
-    {{ form_start(form, {'action': path('adminAbout'), 'method': 'POST'}) }}
+    {{ form_start(form, {'action': path('adminProfile'), 'method': 'POST'}) }}
         <div class="row">
             <div class="form-group col-md-6 col-lg-6 wow fadeInUp animated">
                 {{ form_label(form.firstName) }}
@@ -48,7 +48,7 @@
                 {{ form_widget(form.password) }}
             </div>
         </div>
-    {{ form_end(form, {'action': path('adminAbout'), 'method': 'POST'}) }}
+    {{ form_end(form, {'action': path('adminProfile'), 'method': 'POST'}) }}
 </section>
     
 {% endblock %}

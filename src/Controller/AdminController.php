@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\About;
 use App\Entity\Contact;
 use App\Entity\Project;
 use App\Form\SearchType;
 use App\Entity\Education;
+use App\Form\AboutAdminType;
 use App\Form\ProfileAdminType;
 use App\Form\ProjectAdminType;
 use App\Form\EducationAdminType;
@@ -36,11 +38,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/about", name="adminAbout")
+     * @Route("/admin/profile", name="adminProfile")
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    public function admin_profile(Secu $security, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = $security->getUser();
         $formProfile = $this->createForm(ProfileAdminType::class, $user);
@@ -66,11 +68,66 @@ class AdminController extends AbstractController
             }
         }
 
-        return $this->render('Admin/About/index.html.twig', [
+        return $this->render('Admin/Profile/index.html.twig', [
             'user' => $user,
             'form' => $formProfile->createView(),
             'message' => isset($message) ? $message : null,
             "title" => "Profile"
+        ]);
+    }
+
+    /**
+     * @Route("/admin/profile/about", name="adminAbout")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    {
+        $user = $security->getUser();
+        $about = $user->getAbout() != null ? $user->getAbout() : new About();
+        $formAbout = $this->createForm(AboutAdminType::class, $about);
+        $formAbout->handleRequest($request);
+
+        if($formAbout->isSubmitted() && $formAbout->isValid()) {
+            $imageFile = $formAbout['img']->getData();
+            
+            if($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $newFilename = 'photo_garry_almeida.'.$imageFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    if(array_search('./content/img/Photo/'.$newFilename, glob("./content/img/Photo/*.".$imageFile->guessExtension()))) {
+                        unlink('./content/img/Photo/'.$newFilename);
+                    }
+                    
+                    $imageFile->move(
+                        $this->getParameter('photo_img_dir'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    dd($e->getMessage());
+                }
+
+                $about->setImgPath($newFilename);
+            }
+            $about->setIdUSer($user);
+            // $user->setAbout($about);
+            // $manager->persist($about, $user);
+            $manager->persist($about);
+            $manager->flush();
+            $message = [
+                "class" => 'alert alert-success',
+                "content" => 'La mise à jour s\'est correctement éffectuée.'
+            ];
+        }
+
+        return $this->render('Admin/Profile/about.html.twig', [
+            'user' => $user,
+            'form' => $formAbout->createView(),
+            'message' => isset($message) ? $message : null,
+            "title" => "Profile - about"
         ]);
     }
 

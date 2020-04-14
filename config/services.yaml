@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     project_img_dir: '%kernel.project_dir%/public/content/img/portfolio/'
+    photo_img_dir: '%kernel.project_dir%/public/content/img/Photo/'
 
 services:
     # default configuration for services in *this* file
