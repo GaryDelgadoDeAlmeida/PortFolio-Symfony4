@@ -7,7 +7,7 @@ use App\Entity\Contact;
 use App\Entity\Project;
 use App\Form\SearchType;
 use App\Entity\Education;
-use App\Form\AboutAdminType;
+use App\Form\ProfileAdminType;
 use App\Form\ProjectAdminType;
 use App\Form\EducationAdminType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,10 +43,10 @@ class AdminController extends AbstractController
     public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = $security->getUser();
-        $form = $this->createForm(AboutAdminType::class, $user);
-        $form->handleRequest($request);
+        $formProfile = $this->createForm(ProfileAdminType::class, $user);
+        $formProfile->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if($formProfile->isSubmitted() && $formProfile->isValid()) {
             if(
                 preg_match('/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $user->getPassword()) && 
                 preg_match('/[0-9]/i', $user->getPassword())
@@ -68,7 +68,7 @@ class AdminController extends AbstractController
 
         return $this->render('Admin/About/index.html.twig', [
             'user' => $user,
-            'form' => $form->createView(),
+            'form' => $formProfile->createView(),
             'message' => isset($message) ? $message : null,
             "title" => "Profile"
         ]);
