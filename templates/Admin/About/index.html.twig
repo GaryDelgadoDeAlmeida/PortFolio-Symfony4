@@ -8,6 +8,10 @@
             <span>{{message.content}}</span>
         </div>
     {% endif %}
+
+    <div class="text-center" style="margin-bottom: 2%;">
+        <img class="img-fluid" style="max-width:240px;" src="{{ asset('content/img/Me/photo_garry_almeida.jpg') }}" alt="">
+    </div>
     
     {{ form_start(form, {'action': path('adminAbout'), 'method': 'POST'}) }}
         <div class="row">

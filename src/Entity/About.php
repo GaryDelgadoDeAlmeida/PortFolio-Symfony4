@@ -26,6 +26,12 @@ class About
      */
     private $intro;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="about", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idUSer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +57,18 @@ class About
     public function setIntro(string $intro): self
     {
         $this->intro = $intro;
+
+        return $this;
+    }
+
+    public function getIdUSer(): ?User
+    {
+        return $this->idUSer;
+    }
+
+    public function setIdUSer(User $idUSer): self
+    {
+        $this->idUSer = $idUSer;
 
         return $this;
     }

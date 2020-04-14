@@ -127,6 +127,11 @@ class User implements UserInterface
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\About", mappedBy="idUSer", cascade={"persist", "remove"})
+     */
+    private $about;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -265,5 +270,22 @@ class User implements UserInterface
     public function getSalt()
     {
         return null;
+    }
+
+    public function getAbout(): ?About
+    {
+        return $this->about;
+    }
+
+    public function setAbout(About $about): self
+    {
+        $this->about = $about;
+
+        // set the owning side of the relation if necessary
+        if ($about->getIdUSer() !== $this) {
+            $about->setIdUSer($this);
+        }
+
+        return $this;
     }
 }
