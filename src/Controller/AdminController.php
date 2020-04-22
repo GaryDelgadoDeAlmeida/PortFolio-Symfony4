@@ -70,6 +70,7 @@ class AdminController extends AbstractController
 
         return $this->render('Admin/Profile/index.html.twig', [
             'user' => $user,
+            'userAboutImg' => $user->getAbout()->getImgPath(),
             'form' => $formProfile->createView(),
             'message' => isset($message) ? $message : null,
             "title" => "Profile"
@@ -113,8 +114,6 @@ class AdminController extends AbstractController
                 $about->setImgPath($newFilename);
             }
             $about->setIdUSer($user);
-            // $user->setAbout($about);
-            // $manager->persist($about, $user);
             $manager->persist($about);
             $manager->flush();
             $message = [
@@ -188,6 +187,7 @@ class AdminController extends AbstractController
      */
     public function admin_project(Request $request, $page = 0)
     {
+        $limit = 20;
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
@@ -195,13 +195,17 @@ class AdminController extends AbstractController
             $searchItem = trim(strip_tags($request->get('search')["search_input"]));
             $projects = $this->getDoctrine()->getRepository(Project::class)->getProjectByName($searchItem);
         } else {
-            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject($page, 20);
+            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject($page, $limit);
         }
+
+        // dd($page, intval($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit));
 
         return $this->render('Admin/Portfolio/index.html.twig', [
             "projects" => $projects,
             "search" => $form->createView(),
-            "title" => "Work"
+            "title" => "Work",
+            "page" => $page,
+            "total_page" => intval($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit)
         ]);
     }
 

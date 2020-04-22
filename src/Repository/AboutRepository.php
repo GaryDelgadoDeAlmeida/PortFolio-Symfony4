@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\About;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method About|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,19 @@ class AboutRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, About::class);
+    }
+
+    public function getIntroByName($firstname, $lastname)
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a.imgPath, a.intro')
+            ->innerJoin('App\Entity\User', 'u', Join::WITH, 'a.idUser = u.id')
+            ->where('u.firstName = :firstname')
+            ->andWhere('u.lastName = :lastname')
+            ->setParameter('firstname', $firstname)
+            ->setParameter('lastname', $lastname)
+            ->getQuery()
+            ->getSingleResult();
     }
 
     // /**

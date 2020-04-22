@@ -36,10 +36,16 @@ class AboutAdminType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Please upload a valid image document',
                     ])
+                ],
+                'attr' => [
+                    'placeholder' => 'Choose a file'
                 ]
             ])
             ->add('intro', TextareaType::class, [
                 'label' => "Description",
+                'attr' => [
+                    'class' => 'h-150px'
+                ],
                 'required' => true
             ])
             ->add('submit', SubmitType::class)

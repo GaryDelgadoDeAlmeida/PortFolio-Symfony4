@@ -46,6 +46,29 @@
     </table>
 {# </div> #}
 
-{% include 'Pagination/index.html.twig' %}
+{% if page >= 0 and page <= total_page %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item  {% if page == 0 %} disabled {% endif %}">
+                <a class="page-link" href="{{ path('adminProject') }}" tabindex="-1" {% if page == 0 %} aria-disabled="true" {% endif %}>First</a>
+            </li>
+
+            {% if page > 0 %}
+                <li class="page-item"><a class="page-link" href="{{ path('adminProjectPage', {'page': (page - 1)}) }}">{{ page - 1}}</a></li>
+            {% endif %}
+
+            <li class="page-item"><a class="page-link" href="{{ path('adminProjectPage', {'page': page}) }}">{{ page }}</a></li>
+
+            {% if page < total_page %}
+                <li class="page-item"><a class="page-link" href="{{ path('adminProjectPage', {'page': (page + 1)}) }}">{{ page + 1}}</a></li>
+            {% endif %}
+
+            <li class="page-item {% if page == total_page %} disabled {% endif %}">
+                <a class="page-link" href="{{ path('adminProjectPage', {'page': total_page}) }}" {% if page == total_page %} aria-disabled="true" {% endif %}>Last</a>
+            </li>
+        </ul>
+    </nav>
+{% endif %}
 
 {% endblock %}

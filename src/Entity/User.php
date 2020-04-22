@@ -128,7 +128,7 @@ class User implements UserInterface
     private $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\About", mappedBy="idUSer", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\About", mappedBy="idUser", cascade={"persist", "remove"})
      */
     private $about;
 

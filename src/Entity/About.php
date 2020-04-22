@@ -30,7 +30,7 @@ class About
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="about", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $idUSer;
+    private $idUser;
 
     public function getId(): ?int
     {
@@ -61,14 +61,14 @@ class About
         return $this;
     }
 
-    public function getIdUSer(): ?User
+    public function getIdUser(): ?User
     {
-        return $this->idUSer;
+        return $this->idUser;
     }
 
-    public function setIdUSer(User $idUSer): self
+    public function setIdUser(User $idUser): self
     {
-        $this->idUSer = $idUSer;
+        $this->idUser = $idUser;
 
         return $this;
     }

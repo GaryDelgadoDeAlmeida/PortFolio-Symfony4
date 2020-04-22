@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\About;
 use App\Entity\Contact;
 use App\Entity\Project;
 use App\Form\LoginAdminType;
@@ -30,9 +31,11 @@ class UserController extends AbstractController
      */
     public function about_me()
     {
+        $userFullName = $this->getDoctrine()->getRepository(User::class)->getFullName();
         return $this->render('User/about.html.twig', [
-            'lastestProject' => $this->getDoctrine()->getRepository(Project::class)->getLastestProject(),
-            'userFullName' => $this->getDoctrine()->getRepository(User::class)->getFullName()
+            'userFullName' => $userFullName,
+            'userIntro' => $this->getDoctrine()->getRepository(About::class)->getIntroByName($userFullName["firstName"], $userFullName["lastName"]),
+            'lastestProject' => $this->getDoctrine()->getRepository(Project::class)->getLastestProject()
         ]);
     }
 

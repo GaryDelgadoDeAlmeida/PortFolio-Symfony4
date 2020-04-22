@@ -10,7 +10,7 @@
     {% endif %}
 
     <div class="text-center" style="margin-bottom: 2%;">
-        <img class="img-fluid" style="max-width:240px;" src="{{ asset('content/img/Me/photo_garry_almeida.jpg') }}" alt="">
+        <img class="img-fluid" style="max-width:240px;" src="{{ asset('content/img/Photo/' ~ userAboutImg) }}" alt="">
     </div>
     
     {{ form_start(form, {'action': path('adminProfile'), 'method': 'POST'}) }}

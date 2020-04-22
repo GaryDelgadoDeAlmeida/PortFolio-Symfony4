@@ -7,16 +7,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 text-center">
-                <img class="aboutMe-intro-img" id="imgFace" onContextMenu="return false;" src="{{ asset('content/img/Me/photo_garry_almeida.jpg') }}">
+                <img class="aboutMe-intro-img" id="imgFace" onContextMenu="return false;" src="{{ asset('content/img/Photo/' ~ userIntro.imgPath) }}">
             </div>
             <div class="aboutMe-intro-intro col-lg-9">
                 <span>Salut, mon nom est</span>
                 <h2>{{ userFullName.firstName }} {{ userFullName.lastName }}</h2>
-                <p>
-                    Je suis un jeune developpeur spécialisé en developpement applicatifs. Je ne spécifie pas web developpeur 
-                    parce que je ne suis pas limité qu'au développement web / application web mais aussi en développement
-                    de logiciel client lourd.
-                </p>
+                <p>{{ userIntro.intro }}</p>
                 <div class="aboutMe-intro-intro-button">
                     <a href="{{ path('contactme') }}"><button class="btn btn-outline-white btn-rounded">Contactez-moi !</button></a>
                     {# <a href="#"><button class="btn btn-outline-white btn-rounded">Télécharger mon CV</button></a> #}
