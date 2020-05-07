@@ -18,31 +18,17 @@ composer install
 
 Créer la database :
 ```bash
-symfony console doctrine:database:create
-```
-ou 
-
-```bash
 php bin/console doctrine:database:create
 ```
 
 
 Générer les tables (pour la database) :
 ```bash
-symfony console make:migration
-```
-ou 
-```bash
 php bin/console make:migration
 ```
 
 
 Sauvegarder les modifications dans la database :
-```bash
-symfony console doctrine:migrations:migrate
-```
-ou 
-
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
@@ -59,9 +45,7 @@ Les configurations restantes (pour la mise en production) seront à faire à tra
 
 # Mise à jour
 
-Symfony 4.4, étant une LTS (Long Terms Version), à régulièrement besoin de m'être à jour ses packages. Par conséquent, dans le répertoire du projet, en ligne de commande :
+Symfony 4.4, étant une LTS (Long Terms Version), à régulièrement besoin d'être mmis à jour.
 ```bash
 composer update
 ```
-
-Il mettra automatiquement à le fichier composer.lock et composer.json qu'il faudra commit et push.

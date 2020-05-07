@@ -185,7 +185,7 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_project(Request $request, $page = 0)
+    public function admin_project(Request $request, $page = 1)
     {
         $limit = 20;
         $form = $this->createForm(SearchType::class);
@@ -195,7 +195,7 @@ class AdminController extends AbstractController
             $searchItem = trim(strip_tags($request->get('search')["search_input"]));
             $projects = $this->getDoctrine()->getRepository(Project::class)->getProjectByName($searchItem);
         } else {
-            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject($page, $limit);
+            $projects = $this->getDoctrine()->getRepository(Project::class)->getProject($page - 1, $limit);
         }
 
         // dd($page, intval($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit));
@@ -205,7 +205,7 @@ class AdminController extends AbstractController
             "search" => $form->createView(),
             "title" => "Work",
             "page" => $page,
-            "total_page" => intval($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit)
+            "total_page" => intval($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit) + 1
         ]);
     }
 
