@@ -32,7 +32,7 @@ class ProjectRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get all project added
+     * Get all project added to the database
      */
     public function getProject($offset, $limit)
     {
@@ -58,7 +58,7 @@ class ProjectRepository extends ServiceEntityRepository
     }
 
     /**
-     * Count total project
+     * Count all existing project
      */
     public function getNbrProject()
     {

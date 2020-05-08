@@ -198,14 +198,12 @@ class AdminController extends AbstractController
             $projects = $this->getDoctrine()->getRepository(Project::class)->getProject($page - 1, $limit);
         }
 
-        // dd($page, intval($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit));
-
         return $this->render('Admin/Portfolio/index.html.twig', [
             "projects" => $projects,
             "search" => $form->createView(),
             "title" => "Work",
             "page" => $page,
-            "total_page" => intval($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit) + 1
+            "total_page" => ceil($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit)
         ]);
     }
 

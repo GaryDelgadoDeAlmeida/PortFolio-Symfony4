@@ -43,10 +43,15 @@ class UserController extends AbstractController
      * @Route("/portfolio", name="portfolio")
      * @Route("/portfolio/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="portfolioPage")
      */
-    public function portfolio($page = 0)
+    public function portfolio($page = 1)
     {
+        $page = $page < 1 ? 1 : $page;
+        $limit = 15;
+
         return $this->render('User/portFolio.html.twig', [
-            "portfolio" => $this->getDoctrine()->getRepository(Project::class)->getProject($page, 15)
+            "portfolio" => $this->getDoctrine()->getRepository(Project::class)->getProject($page - 1, $limit),
+            "offset" => $page,
+            "total_page" => ceil($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit)
         ]);
     }
 
