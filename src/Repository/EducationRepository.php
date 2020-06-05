@@ -19,6 +19,14 @@ class EducationRepository extends ServiceEntityRepository
         parent::__construct($registry, Education::class);
     }
 
+    public function getEducations()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getEducationFromCategory($category)
     {
         return $this->createQueryBuilder('e')

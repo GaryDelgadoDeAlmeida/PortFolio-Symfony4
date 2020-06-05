@@ -68,7 +68,7 @@ class Education
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull
      * @Assert\Choice(
-     *     choices = { "education", "formation" },
+     *     choices = { "experience", "formation" },
      *     message = "Please, choose a valid category type."
      * )
      */

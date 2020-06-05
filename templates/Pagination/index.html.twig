@@ -1,7 +1,7 @@
 {% block pagination %}
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
+            <li class="page-item {% if offset == 1 %} disabled {% endif %}">
                 <a class="page-link" href="{{ path("portfolio") }}" tabindex="-1" aria-disabled="true">First</a>
             </li>
             
@@ -15,7 +15,7 @@
                 <li class="page-item"><a class="page-link" href="{{ path("portfolioPage", {'page': (offset + 1)}) }}">{{ offset + 1 }}</a></li>
             {% endif %}
 
-            <li class="page-item">
+            <li class="page-item {% if offset == total_page %} disabled {% endif %}">
                 <a class="page-link" href="{{ path("portfolioPage", {'page': (total_page)}) }}">Last</a>
             </li>
         </ul>

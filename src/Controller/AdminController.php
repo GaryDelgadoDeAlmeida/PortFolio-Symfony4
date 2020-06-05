@@ -139,8 +139,7 @@ class AdminController extends AbstractController
     {
         return $this->render('Admin/Education/index.html.twig', [
             "title" => "Education",
-            "educations" => $this->getDoctrine()->getRepository(Education::class)->getEducationFromCategory("education"),
-            "formations" => $this->getDoctrine()->getRepository(Education::class)->getEducationFromCategory("formation")
+            "educations" => $this->getDoctrine()->getRepository(Education::class)->getEducations()
         ]);
     }
 
@@ -177,6 +176,47 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
             'message' => isset($message) ? $message : null
         ]);
+    }
+
+    /**
+     * @Route("/admin/education/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditEducation")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function admin_edit_education(Education $education, Request $request, EntityManagerInterface $manager)
+    {
+        $form = $this->createForm(EducationAdminType::class, $education);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($education);
+            $manager->flush();
+
+            $message = [
+                "class" => "alert-success text-center w-20px",
+                "content" => "La mise à jout s'est correctement effectuée"
+            ];
+        }
+
+        return $this->render('Admin/Education/edit.html.twig', [
+            "form_edit_education" => $form->createView(),
+            "education_id" => $education->getId(),
+            "title" => "Edit Education",
+            "message" => isset($message) ? $message : null
+        ]);
+    }
+
+    /**
+     * @Route("/admin/education/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteEducation")
+     * @IsGranted("ROLE_ADMIN")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function admin_delete_education(Education $education, EntityManagerInterface $manager)
+    {
+        $manager->remove($education);
+        $manager->flush();
+
+        return $this->redirectToRoute("adminProject");
     }
 
     /**
@@ -352,19 +392,24 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/contact", name="adminContact")
+     * @Route("/admin/contact/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminContactByPage")
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function admin_contact()
+    public function admin_contact($offset = 1)
     {
+        $limit = 10;
+
         return $this->render("Admin/Contact/index.html.twig", [
             "title" => "Contact",
-            "listMail" => $this->getDoctrine()->getRepository(Contact::class)->findBy(["isRead" => false], ['id' => 'DESC'])
+            "list_mail" => $this->getDoctrine()->getRepository(Contact::class)->getMail($offset, $limit),
+            "offset" => $offset,
+            "total_page" => ceil($this->getDoctrine()->getRepository(Contact::class)->getNbrContact()[1] / $limit)
         ]);
     }
 
     /**
-     * @Route("/admin/contact/{id}", name="adminReadMail")
+     * @Route("/admin/contact/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminReadMail")
      * @IsGranted("ROLE_ADMIN")
      * @Security("is_granted('ROLE_ADMIN')")
      */

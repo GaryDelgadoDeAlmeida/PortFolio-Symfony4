@@ -47,7 +47,7 @@ class EducationAdminType extends AbstractType
                 "choices" => [
                     'Make your choice, please' => null,
                     "Formation" => "formation",
-                    "Education" => "education"
+                    "Experience" => "experience"
                 ],
                 "required" => true
             ])

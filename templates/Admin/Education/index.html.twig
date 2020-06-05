@@ -6,9 +6,10 @@
 <table class="table table-education">
     <thead>
         <tr class="text-center">
-            <th>Corporation Name</th>
-            <th>Job Name</th>
+            <th>Organization Name</th>
+            <th>Title</th>
             <th class="displayNoneColumn-lvl-1">Date / Status</th>
+            <th colspan="2">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -19,41 +20,14 @@
                     <td>{{ education.corporationName }}</td>
                     <td>{{ education.name }}</td>
                     <td class="displayNoneColumn-lvl-1">{{ education.startDate|date("Y/m") }} - {{ status }}</td>
+                    <td><a href="{{ path('adminEditEducation', {'id': education.id}) }}"><i class="far fa-edit"></i></a></td>
+                    <td><a href="{{ path('adminDeleteEducation', {'id': education.id}) }}"><i class="far fa-trash-alt"></i></a></td>
                 </tr>
             {% endfor %}
         {% else %}
             <tr class="text-center">
                 <td colspan="3">
-                    <span>Il n'y a aucunes expériences professionnelles enregistré dans la database.</span>
-                </td>
-            </tr>
-        {% endif %}
-    </tbody>
-</table>
-
-{# Formation #}
-<table class="table table-formation">
-    <thead>
-        <tr class="text-center">
-            <th>School Name</th>
-            <th>Formation Name</th>
-            <th class="displayNoneColumn-lvl-1">Date / Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if formations != [] %}
-            {% for formation in formations %}
-                {% set status = (formation.inProgress == true) ? "En Cours" : formation.endDate|date("Y") %}
-                <tr class="text-center">
-                    <td>{{ formation.corporationName }}</td>
-                    <td>{{ formation.name }}</td>
-                    <td class="displayNoneColumn-lvl-1">{{ formation.startDate|date("Y") }} - {{ status }}</td>
-                </tr>
-            {% endfor %}
-        {% else %}
-            <tr class="text-center">
-                <td colspan="3">
-                    <span>Il n'y a aucunes formations enregistré dans la database.</span>
+                    <span>Il n'y a aucunes formations ou expériences professionnelles enregistré dans la database.</span>
                 </td>
             </tr>
         {% endif %}

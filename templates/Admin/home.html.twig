@@ -19,10 +19,11 @@
         <div class="col-md-4">
             <div style="height: 200px; background-color: #ffffff; box-shadow: 5px 3px #000; border-radius: 25px;">
                 <div style="font-size: 40px; font-weight: bold; padding-top: 50px;">
-                    {% if nbrProjects > 0 %}
-                        <span style="color: green;">{{nbrProjects}}</span>
+                    {% set nbrVisiteur = 0 %}
+                    {% if nbrVisiteur > 0 %}
+                        <span style="color: green;">{{ nbrVisiteur }}</span>
                     {% else %}
-                        <span style="color: red;">{{nbrProjects}}</span>
+                        <span style="color: red;">{{ nbrVisiteur }}</span>
                     {% endif %}
                 </div>
                 <span>visiteur au cours du mois</span>

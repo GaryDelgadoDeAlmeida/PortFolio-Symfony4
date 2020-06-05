@@ -20,6 +20,18 @@ class ContactRepository extends ServiceEntityRepository
     }
 
     /**
+     * Return a limited number of mails of the database
+     */
+    public function getMail($offset, $limit)
+    {
+        return $this->createQueryBuilder('c')
+            ->setFirstResult(($offset - 1) * $limit)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Count all mail sended and stored into my database
      */
     public function getNbrContact()
