@@ -2,9 +2,7 @@
 
 Version Symfony 4.4 de mon portfolio.
 
-<b>Ce projet est, pour le moment, en phase de développement.</b>
-
-# Installation
+## Installation
 
 PHP 7.3 minimum
 
@@ -14,7 +12,7 @@ Dans le répertoire du projet :
 composer install
 ```
 
-# Création de la base de données (terminal)
+## Création de la base de données (terminal)
 
 Créer la database :
 ```bash
@@ -34,7 +32,7 @@ php bin/console doctrine:migrations:migrate
 ```
 
 
-# Configuration Apache Serveur Web
+## Configuration Apache Serveur Web
 
 Dans le répertoire du project :
 ```bash
@@ -43,7 +41,7 @@ composer require symfony/apache-pack
 
 Les configurations restantes (pour la mise en production) seront à faire à travers ce lien https://symfony.com/doc/current/setup/web_server_configuration.html
 
-# Mise à jour
+## Mise à jour
 
 Symfony 4.4, étant une LTS (Long Terms Version), à régulièrement besoin d'être mmis à jour.
 ```bash
