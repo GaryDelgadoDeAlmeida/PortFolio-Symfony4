@@ -1,10 +1,10 @@
 {% extends 'baseUser.html.twig' %}
 
 {% block body %}
-<section class="home" id="home">
-    <div class="home-info wow fadeInUp animated" id="home-info">
+<section class="home">
+    <div class="home-info wow fadeInUp animated">
         <h1>Garry Almeida &minus; Développeur Web FullStack</h1>
-        <a class="btn-outline-secondary btnGetStarted" href="{{ path('aboutme') }}" id="btnGetStarted">Commencer</a>
+        <a href="{{ path('aboutme') }}"><button class="btn btn-outline-white btn-rounded">Commencer</button></a>
     </div>
 </section>
 {% endblock %}

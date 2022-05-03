@@ -1,0 +1,50 @@
+/* ----------------------------------------------- *\
+                    Introduction
+\* ----------------------------------------------- */
+.aboutMe-intro {
+    background-color: #567787;
+    color: #ffffff;
+    padding-top: 4%;
+    padding-bottom: 4%;
+
+    .intro {
+        display: grid;
+        grid-gap: 15px;
+        grid-auto-rows: minmax(100px, auto);
+        grid-template-columns: repeat(3, 1fr);
+
+        .aboutMe-intro-img {
+            box-shadow: none !important;
+            grid-row: 1;
+            grid-column: 1;
+            
+            img {
+                max-width: 240px;
+                box-shadow: 2px 2px 2px 2px;
+                border-radius: 50%;
+            }
+        }
+    
+        .aboutMe-intro-intro {
+            font-size: 20px;
+            grid-row: 1;
+            grid-column: 2 / 4;
+            
+            h2 {
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 2rem;
+            }
+        
+            p {
+                font-size: 15px;
+                font-weight: 350;
+            }
+        
+            span {
+                font-size: 1.25rem;
+                font-weight: 300;
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+/* ----------------------------------------------- *\
+                        About
+\* ----------------------------------------------- */
+@media screen and (max-width: 991px) {
+    .aboutMe-intro {
+        .intro {
+            display: block;
+        }
+    }
+
+    .aboutMe-skills {
+        .skills-content {
+            margin-bottom: 20px;
+            grid-template-columns: repeat(2, 1fr);
+
+            .skills-card {
+                grid-row: auto;
+            }
+        }
+    }
+
+    .aboutMe-intro-intro {
+        margin-top: 20px;
+    }
+}

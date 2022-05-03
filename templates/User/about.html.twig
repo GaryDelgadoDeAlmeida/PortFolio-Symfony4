@@ -2,47 +2,47 @@
 
 {% block body %}
 
-{# Introduction #}
-<section class="aboutMe-intro containerBody">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 text-center">
-                <img class="aboutMe-intro-img" id="imgFace" onContextMenu="return false;" src="{{ asset('content/img/Photo/' ~ userIntro.imgPath) }}">
-            </div>
-            <div class="aboutMe-intro-intro col-lg-9">
-                <span>Salut, mon nom est</span>
-                <h2>{{ userFullName.firstName }} {{ userFullName.lastName }}</h2>
-                <p>{{ userIntro.intro }}</p>
-                <div class="aboutMe-intro-intro-button">
-                    <a href="{{ path('contactme') }}"><button class="btn btn-outline-white btn-rounded">Contactez-moi !</button></a>
-                    {# <a href="#"><button class="btn btn-outline-white btn-rounded">Télécharger mon CV</button></a> #}
+<section class="about">
+
+    {# Profile #}
+    <section class="aboutMe-intro">
+        <div class="wrapper">
+            <div class="intro">
+                <div class="aboutMe-intro-img txt-center">
+                    <img onContextMenu="return false;" src="{{ asset("/content/images/me.jpg") }}" alt="" />
+                </div>
+                <div class="aboutMe-intro-intro">
+                    <span>Salut, mon nom est</span>
+                    <h2>Garry ALMEIDA</h2>
+                    <p>Je suis un jeune développeur très friand de savoir et de connaissance, de nouvelle technique de developpement et de l'apprentissage des nouvelles technologies.</p>
+                    <div class="aboutMe-intro-intro-button">
+                        <a href="/contact"><button class="btn btn-outline-white btn-rounded">Contactez-moi !</button></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-{# Skills #}
-<section class="aboutMe-skills">
-    <header class="section-header">
-        <h3>Skills</h3>
-        <p class="text-muted">
-            <small>Mes compétences sont divers et variées dans le domaine de la programmation informatique</small>
-        </p>
-    </header>
+    {# Skills #}
+    <section class="aboutMe-skills">
+        <div class="wrapper">
+            <header class="section-header">
+                <h3>Skills</h3>
+                <p class="text-muted">
+                    <small>Mes compétences sont divers et variées dans le domaine de la programmation informatique</small>
+                </p>
+            </header>
 
-    <div class="container">
-        <div class="row">
+            <div class="skills-content">
 
-            {# FrontEnd Skills #}
-            <div class="col-md-12 col-lg-4">
-                <div class="skills-content bg-white wow fadeInUp animated">
+                {# FrontEnd Skills #}
+                <div class="skills-card bg-white">
                     <div class="logo">
-                        <i class="fas fa-code fa-2x"></i>
+                        <img src="{{ asset("/content/images/svg/code.svg") }}" alt="" />
                     </div>
 
                     <div class="skills">
-                        <h5 class="title text-center">Frontend</h5>
+                        <h5 class="title txt-center">Frontend</h5>
                         <ul>
                             <li><i class="fas fa-check"></i><span>HTML / CSS</span></li>
                             <li><i class="fas fa-check"></i><span>JavaScript</span></li>
@@ -50,17 +50,15 @@
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            {# BackEnd Skills #}
-            <div class="col-md-12 col-lg-4">
-                <div class="skills-content bg-white wow fadeInUp animated">
+                {# BackEnd Skills #}
+                <div class="skills-card bg-white">
                     <div class="logo">
-                        <i class="fas fa-database fa-2x"></i>
+                        <img src="{{ asset("/content/images/svg/database.svg") }}" alt="" />
                     </div>
 
                     <div class="skills">
-                        <h5 class="title text-center">Backend</h5>
+                        <h5 class="title txt-center">Backend</h5>
                         <ul>
                             <li><i class="fas fa-check"></i><span>C#</span></li>
                             <li><i class="fas fa-check"></i><span>Java</span></li>
@@ -70,20 +68,18 @@
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            {# Other Skills #}
-            <div class="col-md-12 col-lg-4">
-                <div class="skills-content bg-white wow fadeInUp animated">
+                {# Other Skills #}
+                <div class="skills-card bg-white">
                     <div class="logo">
-                        <i class="fas fa-tools fa-2x"></i>
+                        <img src="{{ asset("/content/images/svg/tools.svg") }}" alt="" />
                     </div>
 
                     <div class="skills">
-                        <h5 class="title text-center">Other</h5>
+                        <h5 class="title txt-center">Other</h5>
                         <ul>
                             <li><i class="fas fa-check"></i><span>Symfony 3/4</span></li>
-                            <li><i class="fas fa-check"></i><span>Bootstrap</span></li>
+                            <li><i class="fas fa-check"></i><span>React / React Native</span></li>
                             <li><i class="fas fa-check"></i><span>Wordpress</span></li>
                             <li><i class="fas fa-check"></i><span>.Net Framework</span></li>
                             <li><i class="fas fa-check"></i><span>Entity Framework</span></li>
@@ -94,108 +90,39 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-{# Work Experience #}
-{# <section class="aboutMe-experiences">
-    <header class="section-header">
-        <h3>Work Experience</h3>
-    </header>
+    {# Latest Project #}
+    <section class="aboutMe-project">
+        <div class="wrapper">
+            <header class="section-header">
+                <h3>Latest Project</h3>
+            </header>
 
-    <div class="container wow fadeInUp animated">
-        <div class="aboutMe-experiences-body">
-            <article class="experience-1">
-                <div class="experience-timeline">
-                    <h5>Back-end Developper (Créano)</h5>
-                    <p class="text-muted">09/2019 - Present</p>
-                </div>
-
-                <div class="experience-content">
-                    <p>
-                        I'm actually working in this startup and I'm enjoying being in this startup. I learn a lot !
-                    </p>
-                    <p>
-                        <label>Technologies used :</label>
-                        <ul>
-                            <li>Wordpress</li>
-                            <li>PHP7</li>
-                            <li>MySQL</li>
-                        </ul>
-                    </p>
-                </div>
-            </article>
-
-            <article class="experience-1">
-                <h5>Back-end Developper (FFGOLF)</h5>
-                <p class="text-muted">01/2019 - 03/2019</p>
-                <p>
-                    Stage de 2ème de 8 semaines (2 mois) dans le cadre de ma formation de BTS SIO
-                </p>
-                <p>
-                    <label>Technologies used :</label>
-                    <ul>
-                        <li>Symfony 3.4</li>
-                        <li>PHP7</li>
-                        <li>MySQL</li>
-                        <li>API Rest</li>
-                    </ul>
-                </p>
-            </article>
-
-            <article class="experience-1">
-                <h5>Back-end Developper (FFGOLF)</h5>
-                <p class="text-muted">06/2019 - 06/2019</p>
-                <p>
-                    Stage de 1ème de 4 semaines (1 mois) dans le cadre de ma formation de BTS SIO
-                </p>
-                <p>
-                    <label>Technologies used :</label>
-                    <ul>
-                        <li>Symfony 3.4</li>
-                        <li>PHP7</li>
-                        <li>JavaScript</li>
-                        <li>JQuery</li>
-                    </ul>
-                </p>
-            </article>
-        </div>
-    </div>
-</section> #}
-
-{# Latest Project #}
-<section class="aboutMe-project">
-    <header class="section-header">
-        <h3>Latest Project</h3>
-    </header>
-
-    <div class="container">
-        <div class="row">
-            {# Project 1 #}
             {% if lastestProject != [] %}
-                {% for item in lastestProject %}
-                    <div class="col-md-6 col-lg-4">
-                        <div class="overlay-image _bp wow fadeInUp animated">
-                            <a {% if item.githubLink != null %} href="{{ item.githubLink }}" target="_blank" {% else %} href="{{ path('portfolio') }}" {% endif %} >
-                                <img class="image" style="height: 225px; width: 100%; display: block;" src="{{ asset('content/img/portFolio/' ~ item.imgPath) }}" alt="{{ item.name }} [{{ item.version }}]"/>
-                                <div class="hover">
-                                    <div class="text">
-                                        <h3 class="project-title">{{ item.name }} [{{ item.version }}]</h3>
-                                        <span class="project-small-text">{{ item.type }}</span>
+                <div class="overlay-row">
+                    {% for item in lastestProject %}
+                        <div class="overlay-card">
+                            <div class="overlay-image">
+                                <a href="{{ item.link }}" target="_blank" rel="noreferrer">
+                                    <img class="image" src="{{ asset(item.image) }}" alt="{{ item.title }}"/>
+                                    <div class="hover">
+                                        <div class="text">
+                                            <h3 class="project-title">{{ item.title }}</h3>
+                                            <span class="project-small-text">{{ item.type }}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             {% else %}
-                <div class="col-12">
-                    <div class="alert alert-secondary text-center">
-                        <span>Je n'ai pas encore ajouté mes projets, je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a> où vous trouverez plus de choses.</span>
-                    </div>
+                <div class="alert alert-information">
+                    <span>Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace GitHub</span>
                 </div>
             {% endif %}
         </div>
-    </div>
+    </section>
 </section>
 {% endblock %}

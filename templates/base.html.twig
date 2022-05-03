@@ -3,10 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, maximum-scale=1">
-        <link href="{{ asset('content/img/Logo/Logo_G-Black.png') }}" rel="icon">
-        <link href="{{ asset('content/img/Logo/Logo_G-Black.png') }}" rel="apple-touch-icon">
+        <link href="{{ asset('content/images/logo.png') }}" rel="icon">
+        <link href="{{ asset('content/images/logo.png') }}" rel="apple-touch-icon">
         <title>Garry Almeida &minus; Développeur Web FullStack</title>
-        {% block stylesheets %}{% endblock %}
+        
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
     </head>
     <body>
         {% block header %}{% endblock %}

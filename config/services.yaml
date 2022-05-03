@@ -4,8 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    project_img_dir: '%kernel.project_dir%/public/content/img/portfolio/'
-    photo_img_dir: '%kernel.project_dir%/public/content/img/Photo/'
+    project_img_dir: '%kernel.project_dir%/public/content/portfolio/'
+    photo_img_dir: '%kernel.project_dir%/public/content/images/'
 
 services:
     # default configuration for services in *this* file
@@ -16,13 +16,16 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
-        resource: '../src/Controller'
+        resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed

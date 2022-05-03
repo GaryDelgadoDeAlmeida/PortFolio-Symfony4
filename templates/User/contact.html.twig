@@ -1,112 +1,90 @@
 {% extends 'baseUser.html.twig' %}
 
 {% block body %}
-<section class="contact containerBody">
-    <div class="container">
-        
+<section class="contact">
+    <div class="wrapper">
         <header class="section-header">
             <h3>Contactez-moi !</h3>
-            <!-- <p class="text-muted">
-                <small>Contactez-moi pour des informations complémentaires, je serai alors à votre disposition.</small>
-            </p> -->
         </header>
 
-        <div class="row contact-info">
-
-            <div class="col-md-4">
-                <div class="contact-info-email wow fadeInUp animated">
-                    <i class="fas fa-envelope fa-2x"></i>
+        <div class="contact-info">
+            <div class="contact-card">
+                <div class="contact-info-email">
+                    <img src="{{ asset("/content/images/svg/enveloppe.svg") }}" alt="" />
                     <h3>Email</h3>
                     <p>gary.almeida.work@gmail.com</p>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="contact-info-phone wow fadeInUp animated">
-                    <i class="fas fa-phone fa-2x"></i>
+            <div class="contact-card">
+                <div class="contact-info-phone">
+                    <img src="{{ asset("/content/images/svg/phone.svg") }}" alt="" />
                     <h3>Télephone</h3>
                     <p>+33 6 52 07 39 97</p>
-                    {# <p>+33 6 78 89 50 32</p> #}
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="contact-info-addr wow fadeInUp animated">
-                    <i class="fas fa-map-marker-alt fa-2x"></i>
+            <div class="contact-card">
+                <div class="contact-info-addr">
+                    <img src="{{ asset("/content/images/svg/map-marker.svg") }}" alt="" />
                     <h3>Adresse</h3>
                     <address>189 rue vercingétorix, Paris 75014</address>
                 </div>
             </div>
-
-            <div class="contact-info-social-link">
-                <ul class="social-link fa-4x wow fadeInUp animated">
-                    <li class="linkedIn">
-                        <a href="https://www.linkedin.com/in/garry-almeida-7538b3175/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    </li>
-                    <li class="whatsApp">
-                        <a href="whatsapp://+33678895032"><i class="fab fa-whatsapp"></i></a>
-                    </li>
-                    <li class="gmail">
-                        <a href="mailto:gary.almeida.work@gmail.com"><i class="fab fa-google-plus-g"></i></a>
-                    </li>
-                    <li class="skype">
-                        <a href="skype://gary.almeida.sio@gmail.com"><i class="fab fa-skype"></i></a>
-                    </li>
-                    <li class="github">
-                        <a href="https://github.com/GaryDelgadoDeAlmeida" target="_blank"><i class="fab fa-github"></i></a>
-                    </li>
-                </ul>	
-            </div>
         </div>
 
-        <div class="form">
-            <!-- Message d'après l'envoi -->
+        <div class="contact-info-social-link">
+            <div class="social-link">
+                <li class="linkedIn">
+                    <a href="https://www.linkedin.com/in/garry-almeida-7538b3175/" target="_blank" rel="noreferrer">
+                        <img src="{{ asset("/content/images/svg/linkedin.svg") }}" alt="" />
+                    </a>
+                </li>
+                <li class="whatsApp">
+                    <a href="whatsapp://+33678895032">
+                        <img src="{{ asset("/content/images/svg/whatsapp.svg") }}" alt="" />
+                    </a>
+                </li>
+                <li class="gmail">
+                    <a href="mailto:gary.almeida.work@gmail.com">
+                        <img src="{{ asset("/content/images/svg/google-plus.svg") }}" alt="" />
+                    </a>
+                </li>
+                <li class="skype">
+                    <a href="skype://gary.almeida.sio@gmail.com">
+                        <img src="{{ asset("/content/images/svg/skype.svg") }}" alt="" />
+                    </a>
+                </li>
+                <li class="github">
+                    <a href="https://github.com/GaryDelgadoDeAlmeida" target="_blank" rel="noreferrer">
+                        <img src="{{ asset("/content/images/svg/github.svg") }}" alt="" />
+                    </a>
+                </li>
+            </div>	
+        </div>
+
+        <div class="form"}>
+            {# Message d'après l'envoi #}
             <span id="answer" hidden></span>
-
-            <!-- Formulaire de contact par email -->
-            {# <form method="POST" role="form" class="form-group form-row contactForm" id="contactForm">
-                <div class="form-group col-lg-6 col-md-6 yrName wow fadeInUp animated">
-                    <input class="form-control input-text" type="text" name="yrName" id="yrName" placeholder="Votre Nom" required>
+            
+            {# Formulaire de contact par email #}
+            <form class="contact-form" autoComplete="off">
+                <div class="form-text">
+                    <input type="text" name="yrName" placeholder="Votre Nom" required />
                 </div>
-
-                <div class="form-group col-lg-6 col-md-6 yrEmail wow fadeInUp animated">
-                    <input class="form-control input-text" type="email" name="yrEmail" id="yrEmail" placeholder="Votre Email" required>
+                <div class="form-text">
+                    <input type="email" name="yrEmail" placeholder="Votre Email" required />
                 </div>					
-
-                <div class="form-group col-lg-12 col-md-12 wow fadeInUp animated">
-                    <input class="form-control input-text" type="text" name="subject" id="subject" placeholder="Sujet" required>
+                <div class="form-text">
+                    <input type="text" name="yrSubject" placeholder="Sujet" required />
                 </div>
-
-                <div class="form-group col-lg-12 col-md-12 wow fadeInUp animated">
-                    <textarea class="form-control input-text" name="message" id="message" placeholder="Message" required></textarea>
+                <div class="form-text">
+                    <textarea class="h-180px" name="yrMessage" placeholder="Message" required></textarea>
                 </div>
-
-                <div class="col-lg-12 col-md-12 wow fadeInUp animated text-center">
-                    <button id="btnValider" class="btn btn-outline-secondary">Valider</button>
+                <div class="form-button txt-center">
+                    <button type="submit" class="btn btn-green w-150px">Valider</button>
                 </div>
-            </form> #}
-
-            {{ form_start(contactForm, {"action": path("contactme"), "method": "POST", "attr": {"class": "form-group form-row contactForm", "id": "contactForm"}}) }}
-                <div class="form-group col-lg-6 col-md-6 yrName wow fadeInUp animated">
-                    {{ form_widget(contactForm.senderFullName, {"attr": {"class": "form-control input-text"}}) }}
-                </div>
-
-                <div class="form-group col-lg-6 col-md-6 yrEmail wow fadeInUp animated">
-                    {{ form_widget(contactForm.senderEmail, {"attr": {"class": "form-control input-text"}}) }}
-                </div>					
-
-                <div class="form-group col-lg-12 col-md-12 wow fadeInUp animated">
-                    {{ form_widget(contactForm.emailSubject, {"attr": {"class": "form-control input-text"}}) }}
-                </div>
-
-                <div class="form-group col-lg-12 col-md-12 wow fadeInUp animated">
-                    {{ form_widget(contactForm.emailContent, {"attr": {"class": "form-control input-text"}, "id": "message"}) }}
-                </div>
-
-                <div class="col-lg-12 col-md-12 wow fadeInUp animated text-center">
-                    {{ form_widget(contactForm.submit, {"attr": {"class": "btn btn-outline-secondary"}, "id": "btnValider"}) }}
-                </div>
-            {{ form_end(contactForm, {"action": path("contactme"), "method": "POST", "value": "Valider"}) }}
+            </form>
         </div>
     </div>
 </section>

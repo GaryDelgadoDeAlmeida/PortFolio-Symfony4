@@ -4,8 +4,8 @@ namespace App\Repository;
 
 use App\Entity\About;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 
 /**
  * @method About|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,7 +15,7 @@ use Doctrine\ORM\Query\Expr\Join;
  */
 class AboutRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(PersistenceManagerRegistry $registry)
     {
         parent::__construct($registry, About::class);
     }

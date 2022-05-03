@@ -47,3 +47,8 @@ Symfony 4.4, étant une LTS (Long Terms Version), à régulièrement besoin d'ê
 ```bash
 composer update
 ```
+
+## Compression du style SASS en CSS
+```bash
+sass --style compressed index.scss:index.css
+```

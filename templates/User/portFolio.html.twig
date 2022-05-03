@@ -1,27 +1,22 @@
 {% extends 'baseUser.html.twig' %}
 
 {% block body %}
-<section class="portFolio containerBody">
-    <div class="container">
-        
-        <header class="section-header">
+<section class="portfolio">
+    <div class="wrapper">
+        <div class="section-header">
             <h3>Mon PortFolio</h3>
-            {# <p class="text-muted">
-                <small>Ne vous fiez pas aux apparences de mes réalisations qui restent fonctionnelles.</small>
-            </p> #}
-        </header>
+        </div>
 
-        <div class="portFolio-body">
-            {% if portfolio != [] %}
-                <div class="row">
+        {% if portfolio != [] %}
+            <div class="overlay-row">
                 {% for item in portfolio %}
-                    <div class="col-lg-4 col-md-6">
-                        <div class="overlay-image _bp wow fadeInUp animated">
-                            <a {% if item.githubLink != null %} href="{{ item.githubLink }}" target="_blank" {% else %} href="{{ path('portfolio') }}" {% endif %} >
-                                <img class="image" style="height: 225px; width: 100%; display: block;" src="{{ asset('content/img/portFolio/' ~ item.imgPath) }}" alt="{{ item.name }} [{{ item.version }}]"/>
+                    <div class="overlay-card" >
+                        <div class="overlay-image">
+                            <a href="{{ item.link }}" target="_blank" rel="noreferrer">
+                                <img class="image"} src="{{ asset(item.image) }}" alt="{{ item.title }}"/>
                                 <div class="hover">
                                     <div class="text">
-                                        <h3 class="project-title">{{ item.name }} [{{ item.version }}]</h3>
+                                        <h3 class="project-title">{{ item.title }}</h3>
                                         <span class="project-small-text">{{ item.type }}</span>
                                     </div>
                                 </div>
@@ -29,13 +24,12 @@
                         </div>
                     </div>
                 {% endfor %}
-                </div>
-            {% else %}
-                <div class="alert alert-secondary text-center">
-                    <span>Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a></span>
-                </div>
-            {% endif %}
-        </div>
+            </div>
+        {% else %}
+            <div class="alert alert-information">
+                <span>Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a></span>
+            </div>
+        {% endif %}
     </div>
 </section>
 

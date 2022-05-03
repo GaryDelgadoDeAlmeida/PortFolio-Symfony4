@@ -99,8 +99,8 @@ class AdminController extends AbstractController
 
                 // Move the file to the directory where brochures are stored
                 try {
-                    if(array_search('./content/img/Photo/'.$newFilename, glob("./content/img/Photo/*.".$imageFile->guessExtension()))) {
-                        unlink('./content/img/Photo/'.$newFilename);
+                    if(array_search('./content/images/'.$newFilename, glob("./content/images/*.".$imageFile->guessExtension()))) {
+                        unlink('./content/images/'.$newFilename);
                     }
                     
                     $imageFile->move(
@@ -267,13 +267,13 @@ class AdminController extends AbstractController
 
                 // Move the file to the directory where brochures are stored
                 try {
-                    if(!array_search('./content/img/portfolio/'.$newFilename, glob("./content/img/portfolio/*.".$imageFile->guessExtension()))) {
+                    if(!array_search('./content/portfolio/'.$newFilename, glob("./content/portfolio/*.".$imageFile->guessExtension()))) {
                         $imageFile->move(
                             $this->getParameter('project_img_dir'),
                             $newFilename
                         );
                     } else {
-                        unlink('./content/img/portfolio/'.$newFilename);
+                        unlink('./content/portfolio/'.$newFilename);
                         $imageFile->move(
                             $this->getParameter('project_img_dir'),
                             $newFilename
@@ -319,7 +319,7 @@ class AdminController extends AbstractController
 
                 // Move the file to the directory where brochures are stored
                 try {
-                    if(!array_search('./content/img/portfolio/'.$newFilename, glob("./content/img/portfolio/*.".$imageFile->guessExtension()))) {
+                    if(!array_search('./content/portfolio/'.$newFilename, glob("./content/portfolio/*.".$imageFile->guessExtension()))) {
                         $imageFile->move(
                             $this->getParameter('project_img_dir'),
                             $newFilename
@@ -361,8 +361,8 @@ class AdminController extends AbstractController
      */
     public function admin_delete_project(Project $project, EntityManagerInterface $manager)
     {
-        if(in_array("./content/img/portfolio/".$project->getImgPath(), glob("./content/img/portfolio/*.*"))) {
-            unlink("./content/img/portfolio/".$project->getImgPath());
+        if(in_array("./content/portfolio/".$project->getImgPath(), glob("./content/portfolio/*.*"))) {
+            unlink("./content/portfolio/".$project->getImgPath());
             $manager->remove($project);
             $manager->flush();
         }

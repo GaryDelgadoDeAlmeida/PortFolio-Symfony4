@@ -2,11 +2,7 @@
 
 {% block stylesheets %}
 {# CSS File #}
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user_style.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user_test_style.css') }}">
-
-{# Bootstrap CSS File #}
-<link rel="stylesheet" type="text/css" href="{{ asset('library/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/build/css/index.css') }}">
 
 {# Font-Awesome File #}
 <link rel="stylesheet" type="text/css" href="{{ asset('library/font-awesome/css/all.min.css') }}">
@@ -17,29 +13,38 @@
 
 
 {% block header %}
-<header class="header" id="header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
-        <a class="navbar-brand" href="{{ path('home') }}" id="logo">Garry ALMEIDA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+<header class="header-navigation bg-black">
+    <nav class="header-menu">
+        <div class="header-menu-brand">
+            <a href="{{ path('home') }}">Garry ALMEIDA</a>
+        </div>
+        <div class="header-menu-links">
+            <ul>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('adminHome') }}">Dashboard</a></li>
+                    <a href="{{ path('adminHome') }}">Dashboard</a>
                 {% endif %}
-                <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('aboutme') }}">A Propos</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('portfolio') }}">PortFolio</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('contactme') }}">Contact</a></li>
-                {# <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Langue</a>
-                    <div class="dropdown-menu navbar-dark bg-black" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Fr</a>
-                        <a class="dropdown-item" href="#">En</a>
-                    </div>
-                </li> #}
+                <a href="{{ path('home') }}">Accueil</a>
+                <a href="{{ path('aboutme') }}">A Propos</a>
+                <a href="{{ path('portfolio') }}">PortFolio</a>
+                <a href="{{ path('contactme') }}">Contact</a>
             </ul>
+        </div>
+
+        <div class="header-menu-mobile">
+            <label for="burger-menu" class="show-menu-btn">
+                <img src="{{ asset("content/images/svg/bars.svg") }}" alt="" />
+            </label>
+
+            <input type="checkbox" name="burger-menu" class="burger-menu" id="burger-menu" />
+
+            <div class="header-menu-links-mobile">
+                <div class="links-mobile-items">
+                    <li><a href="{{ path('home') }}">Accueil</a></li>
+                    <li><a href="{{ path('aboutme') }}">A Propos</a></li>
+                    <li><a href="{{ path('portfolio') }}">PortFolio</a></li>
+                    <li><a href="{{ path('contactme') }}">Contact</a></li>
+                </div>
+            </div>
         </div>
     </nav>
 </header>
@@ -47,14 +52,12 @@
 
 
 {% block footer %}
-<footer class="footer bg-black" id="footer">
-    <div class="container">
-        <div class="copyright">
-            <p>
-                Copyright &copy; 2019-{{ "now"|date("Y") }} &minus; <a href="{{ path('home') }}" class="bold-green">Garry ALMEIDA</a><br>
-                All Rights Reserved / Tous Droits Réservés
-            </p>
-        </div>
+<footer class="footer bg-black">
+    <div class="copyright">
+        <p>
+            Copyright &copy; 2019-{{ "now"|date("Y") }} &minus; <a class="bold-green" href="{{ path('home') }}">Garry ALMEIDA</a><br>
+            All Rights Reserved / Tous Droits Réservés
+        </p>
     </div>
 </footer>
 {% endblock %}
@@ -66,9 +69,6 @@
 <script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/img.js') }}"></script>
 {# <script type="text/javascript" src="{{ asset('assets/js/contactform.js') }}"></script> #}
-
-{# Boostrap JS File #}
-<script type="text/javascript" src="{{ asset('library/bootstrap/js/bootstrap.min.js') }}"></script>
 
 {# Wow File #}
 <script type="text/javascript" src="{{ asset('library/wow/wow.min.js') }}"></script>
