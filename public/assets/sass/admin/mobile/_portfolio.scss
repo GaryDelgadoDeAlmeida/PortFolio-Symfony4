@@ -1,0 +1,9 @@
+@media screen and (max-width: 767px) {
+    .admin-portfolio .portfolio-wrapper {
+        flex-direction: column;
+
+        .portfolio-card {
+            width: 100%;
+        }
+    }
+}

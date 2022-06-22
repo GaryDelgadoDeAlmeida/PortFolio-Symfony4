@@ -1,44 +1,141 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <h3>Welcome Admin</h3>
+    <div class="admin-home">
+        <h1>Dashboard</h1>
 
-    <div class="row text-center">
-        <div class="col-md-4">
-            <div style="height: 200px; background-color: #ffffff; box-shadow: 5px 3px #000; border-radius: 25px;">
-                <div style="font-size: 40px; font-weight: bold; padding-top: 50px;">
-                    {% if nbrProjects > 0 %}
-                        <span style="color: green;">{{nbrProjects}}</span>
-                    {% else %}
-                        <span style="color: red;">{{nbrProjects}}</span>
-                    {% endif %}
-                </div>
-                <span>projets</span>
+        <div class="admin-cards">
+            <div class="admin-card">
+                <h4 class="admin-card-suptitle">Visitors</h4>
+                <span>1</span>
+            </div>
+
+            <div class="admin-card">
+                <h4 class="admin-card-suptitle">Works realised</h4>
+                <span>49</span>
+            </div>
+
+            <div class="admin-card">
+                <h4 class="admin-card-suptitle">Professional experience</h4>
+                <span>3 years</span>
             </div>
         </div>
-        <div class="col-md-4">
-            <div style="height: 200px; background-color: #ffffff; box-shadow: 5px 3px #000; border-radius: 25px;">
-                <div style="font-size: 40px; font-weight: bold; padding-top: 50px;">
-                    {% set nbrVisiteur = 0 %}
-                    {% if nbrVisiteur > 0 %}
-                        <span style="color: green;">{{ nbrVisiteur }}</span>
-                    {% else %}
-                        <span style="color: red;">{{ nbrVisiteur }}</span>
-                    {% endif %}
+
+        <div class="admin-lasted">
+            <h2 class="admin-lasted-title">Lasted activity</h2>
+
+            <div class="admin-tables">
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Work</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="f-left">
+                                        Portfolio (v4)
+                                    </div>
+                                    <div class="f-right">
+                                        04/05/2022
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="f-left">
+                                        WikiEarth API
+                                    </div>
+                                    <div class="f-right">
+                                        28/03/2022
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="f-left">
+                                        WikiEarth
+                                    </div>
+                                    <div class="f-right">
+                                        18/01/2022
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <span>visiteur au cours du mois</span>
+
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="f-left">
+                                        Garry DE ALMEIDA
+                                    </div>
+                                    <div class="f-right">
+                                        04/05/2022
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div style="height: 200px; background-color: #ffffff; box-shadow: 5px 3px #000; border-radius: 25px;">
-                <div style="font-size: 40px; font-weight: bold; padding-top: 50px;">
-                    {% if nbrNewMail > 0 %}
-                        <span style="color: red;">{{nbrNewMail}}</span>
-                    {% else %}
-                        <span style="color: green;">{{nbrNewMail}}</span>
-                    {% endif %}
+
+        <div class="admin-lasted">
+            <h2 class="admin-lasted-title">Lasted work experience</h2>
+
+            <div class="admin-tables">
+                <div class="admin-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Experience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="f-left">
+                                        Creano
+                                    </div>
+                                    <div class="f-right">
+                                        today
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="f-left">
+                                        FFGolf
+                                    </div>
+                                    <div class="f-right">
+                                        March 2019
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="f-left">
+                                        FFGolf
+                                    </div>
+                                    <div class="f-right">
+                                        June 2018
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <span>mails non lus</span>
             </div>
         </div>
     </div>

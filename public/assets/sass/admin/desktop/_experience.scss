@@ -1,0 +1,74 @@
+.admin-experience {
+    width: 100%;
+    margin: 25px 0;
+
+    .experiences {
+        border-left: 2px solid var(--c-black);
+
+        .experience-card {
+            padding: 25px 0 25px 25px;
+            position: relative;
+
+            &::before {
+                content: "";
+                top: 45%;
+                left: 0px;
+                width: 10px;
+                height: 10px;
+                position: absolute;
+                border-radius: 50%;
+                transform: translate(-55%, -25%);
+                background-color: var(--c-black);
+            }
+
+            .job, 
+            .degree {
+                font-weight: 600;
+                font-size: 1.1rem;
+
+                .organisation, 
+                .school {
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    color: var(--c-black);
+                }
+            }
+
+            .description {
+                margin: 0;
+                padding: 10px 0 0 0;
+                
+                p {
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+
+            .tools, .projects {
+                margin: 0;
+                padding: 10px 0 0 0;
+
+                h3 {
+                    margin: 0;
+                    padding: 5px 0 0 0;
+                    font-size: 1rem;
+                }
+
+                div {
+                    overflow-wrap: break-word;
+
+                    a {
+                        text-decoration: none;
+                        text-transform: none;
+                        color: var(--c-black);
+        
+                        &:hover {
+                            border-bottom: 1px solid var(--c-black);
+                            transition: margin-left 0.3s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

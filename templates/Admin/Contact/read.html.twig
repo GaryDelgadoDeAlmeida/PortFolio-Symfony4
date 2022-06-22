@@ -1,13 +1,30 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <p><label class="font-weight-bold">{{ mail.senderFullName }}</label> ({{ mail.senderEmail }})</p>
-    
-    <p><label class="font-weight-bold">Object :</label> {{ mail.emailSubject}}</p>
-    
-    <p>{{ mail.emailContent }}</p>
-
-
-    <br>
-    <li><a href="{{ path('adminContact') }}">Retour à la liste des mails</a></li>
+    <div class="admin-email-single">
+        <a href="{{ path('adminContact') }}">
+            <button class="btn btn-primary">
+                <span>Return</span>
+            </button>
+        </a>
+        
+        <div class="email-single">
+            <div class="sender">
+                <div class="avatar">
+                    <img src="{{ asset("/content/images/me.jpg") }}" alt="" />
+                </div>
+                
+                <div class="info">
+                    <span><b>{{ mail.senderFullName }}</b> ({{ mail.senderEmail }})</span>
+                    <span>{{ mail.createdAt }}</span>
+                </div>
+            </div>
+            <div class="object">
+                <h3>Object : {{ mail.emailSubject}}</h3>
+            </div>
+            <div class="content">
+                <p>{{ mail.emailContent }}</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -18,6 +18,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
+    private $contactManager;
+
+    function __construct() {
+        $this->contactManager = new ContactManager();
+    }
+
     /**
      * @Route("/", name="home")
      */
@@ -63,9 +69,11 @@ class UserController extends AbstractController
         $newSend = new Contact();
         $formContact = $this->createForm(ContactUserType::class, $newSend);
         $formContact->handleRequest($request);
+        $response = [];
 
         if($formContact->isSubmitted() && $formContact->isValid()) {
-            $response = ContactManager::sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
+            $response = $this->contactManager->sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
+            
             if(isset($response["answer"]) && $response["answer"] == true) {
                 $newSend->setEmailContent(json_encode($newSend->getEmailContent()));
                 $newSend->setIsRead(false);
@@ -76,7 +84,7 @@ class UserController extends AbstractController
 
         return $this->render('User/contact.html.twig', [
             "contactForm" => $formContact->createView(),
-            "response" => isset($response) ? $response : ""
+            "response" => !empty($response) ? $response : []
         ]);
     }
 

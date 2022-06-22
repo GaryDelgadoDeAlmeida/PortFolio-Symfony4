@@ -1,0 +1,48 @@
+.login {
+    padding: 10vh 0;
+
+    .card {
+        margin: auto;
+        max-width: 500px;
+        // border: 1px solid var(--c-black);
+        box-shadow: 1px 1px 3px var(--c-black);
+
+        .card-header {
+            border-bottom: 1px solid var(--c-black);
+            padding: 10px 25px;
+
+            .card-title {
+                font-size: 1rem;
+                margin: 0;
+            }
+        }
+
+        .card-content {
+            padding: 25px;
+
+            .login-form {
+                // 
+
+                .form-field {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+
+                    &:not(:first-child) {
+                        margin-top: 15px;
+                    }
+
+                    label {
+                        margin-bottom: 5px;
+                        font-weight: 500;
+                    }
+
+                    input {
+                        height: 25px;
+                        padding: 0 10px;
+                    }
+                }
+            }
+        }
+    }
+}

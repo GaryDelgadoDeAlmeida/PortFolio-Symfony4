@@ -1,45 +1,60 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <table class="table table-striped table-condensed">
-        <tbody>
+    <div class="admin-email">
+        <h1>Inbox</h1>
+
+        <div class="emails">
             {% if list_mail != null %}
                 {% for mail in list_mail %}
-                    <tr {% if mail.isRead == false %} style="background-color: cyan;" {% endif %}> {# Temporary Style for better front #}
-                        <td>{{ mail.senderFullName }}</td>
-                        <td class="text-right"><a href="{{ path('adminReadMail', {'id': mail.id}) }}"><i class="fas fa-arrow-circle-right"></i></a></td>
-                    </tr>
+                    <div class="email-card {{ mail.isRead == false ? "unread" : "" }}">
+                        <a href="{{ path('adminReadMail', {'id': mail.id}) }}">
+                            <div class="email-object">
+                                <span>Job offer</span>
+                                <span>{{ mail.senderFullName }}</span>
+                            </div>
+                            <div class="email-content">
+                                <span>Avec le générateur de texte online vous pouvez composer votre Lorem Ipsum personnel, en l’enrichissant...</span>
+                            </div>
+                            <div class="email-date">
+                                <span>14:20</span>
+                            </div>
+                        </a>
+                    </div>
                 {% endfor %}
             {% else %}
-                <tr>
-                    <td class="text-center">Il n'y a aucun mail envoyé depuis le portfolio</td>
-                </tr>
+                <div>
+                    <span class="text-center">Il n'y a aucun mail envoyé depuis le portfolio</span>
+                </div>
             {% endif %}
-        </tbody>
-    </table>
+        </div>
 
-    {# {% include 'Pagination/index.html.twig' %} #}
-    {% if offset < total_page %}
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item {% if offset == 1 %} disabled {% endif %}">
-                    <a class="page-link" href="{{ path("adminContact") }}" tabindex="-1" aria-disabled="true">First</a>
-                </li>
+        {% if offset < total_page  %}
+            <div class="pagination">
+                <div class="first-page">
+                    <a href="{{ path("adminContact") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt={"double-angle-left"} /></a>
+                </div>
                 
                 {% if offset - 1 >= 1  %}
-                    <li class="page-item"><a class="page-link" href="{{ path("adminContactByPage", {'page': (offset - 1)}) }}">{{ offset - 1 }}</a></li>
+                    <div class="previous-page">
+                        <a href="{{ path("adminContactByPage", {'page': (offset - 1)}) }}">{{ offset - 1 }}</a>
+                    </div>
                 {% endif %}
 
-                <li class="page-item"><a class="page-link" >{{ offset }}</a></li>
-
+                <div class="current-page">
+                    <span>{{ offset }}</span>
+                </div>
+                
                 {% if offset + 1 <= total_page  %}
-                    <li class="page-item"><a class="page-link" href="{{ path("adminContactByPage", {'page': (offset + 1)}) }}">{{ offset + 1 }}</a></li>
+                    <div class="next-page">
+                        <a href="{{ path("adminContactByPage", {'page': (offset + 1)}) }}">{{ offset + 1 }}</a>
+                    </div>
                 {% endif %}
-
-                <li class="page-item {% if offset == total_page %} disabled {% endif %}">
-                    <a class="page-link" href="{{ path("adminContactByPage", {'page': (total_page)}) }}">Last</a>
-                </li>
-            </ul>
-        </nav>
-    {% endif %}
+                
+                <div class="last-page">
+                    <a href="{{ path("adminContactByPage", {'page': (total_page)}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt={"double-angle-right"} /></a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

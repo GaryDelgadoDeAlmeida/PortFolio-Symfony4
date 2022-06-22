@@ -1,0 +1,32 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    margin-top: 25px;
+    padding: 10px 0;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    border: 1px solid var(--c-silver);
+    background-color: var(--c-white);
+
+    div {
+        width: 20px;
+        height: 100%;
+        text-align: center;
+
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+
+        &.current-page {
+            border-bottom: 1px solid var(--c-dimmGray);
+            color: var(--c-dimmGray);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--c-black);
+        }
+    }
+}

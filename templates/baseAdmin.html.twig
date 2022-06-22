@@ -1,114 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-{# Bootstrap CSS File #}
-<link rel="stylesheet" type="text/css" href="{{ asset('library/bootstrap/css/bootstrap.min.css') }}">
-
-{# Font-Awesome File #}
-<link rel="stylesheet" type="text/css" href="{{ asset('library/font-awesome/css/all.min.css') }}">
-
-{# Animate File #}
-<link rel="stylesheet" type="text/css" href="{{ asset('library/animate/animate.css') }}">
-
 {# CSS File #}
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/admin_style.css') }}">
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/build/css/index.css') }}">
 {% endblock %}
 
 
 {% block header %}
-<app>
-    <section class="sidebar">
-        <div class="top-row pl-4 navbar navbar-dark">
-            <a class="navbar-brand" href="">Dashboard</a>
-            <button class="navbar-toggler" id="btnToggler">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <section class="admin-section">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-header-logo">
+                    <img src="{{ asset("/content/images/logo-blue.png") }}" alt="" />
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="sidebar-menu-wrapper">
+                    <li class="sidebar-menu-link">
+                        <span><a href="{{ path("adminHome") }}">Home</a></span>
+                    </li>
+                    <li class="sidebar-menu-link">
+                        <span><a href="{{ path("adminProfile") }}">Profile</a></span>
+                    </li>
+                    <li class="sidebar-menu-link">
+                        <span><a href="/admin/skills">Skills</a></span>
+                    </li>
+                    <li class="sidebar-menu-link">
+                        <span><a href="{{ path("adminProject") }}">Portfolio</a></span>
+                    </li>
+                    <li class="sidebar-menu-link">
+                        <span><a href="/admin/experiences">Experiences</a></span>
+                    </li>
+                    <li class="sidebar-menu-link">
+                        <span><a href="{{ path("adminContact") }}">Inbox</a></span>
+                    </li>
+                    <li class="sidebar-menu-link">
+                        <span><a href="{{ path("adminLogout") }}">Logout</a></span>
+                    </li>
+                </div>
+            </div>
         </div>
 
-        <div class="navToggler collapse animated wow fadeIn" id="navToggler">
-            <ul class="nav flex-column">
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="{{ path('adminHome') }}">
-                        <span class="oi" aria-hidden="true"><i class="fas fa-home"></i></span> Home
-                    </a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="{{ path('adminProfile') }}">
-                        <span class="oi" aria-hidden="true"><i class="fas fa-user"></i></span> Profile
-                    </a>
-                    <ul>
-                        <li>
-                            <a class="nav-link" href="{{ path('adminAbout') }}">
-                                <span class="oi" aria-hidden="true"><i class="fas fa-user"></i></span> About
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="{{ path('adminEducation') }}">
-                                <span class="oi" aria-hidden="true"><i class="fas fa-user"></i></span> Education
-                            </a>
-                        </li>
-                        {# <li>
-                            <a class="nav-link" href="{{ path('adminSocialLink') }}">
-                                <span class="oi" aria-hidden="true"><i class="fas fa-user"></i></span>Social
-                            </a>
-                        </li> #}
-                    </ul>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="{{ path('adminProject') }}">
-                        <span class="oi" aria-hidden="true"><i class="fas fa-tools"></i></span> Work
-                    </a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="{{ path('adminContact') }}">
-                        <span class="oi" aria-hidden="true"><i class="fas fa-envelope"></i></span> Mail
-                    </a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="{{ path('adminNews') }}">
-                        <span class="oi" aria-hidden="true"><i class="fas fa-newspaper"></i></span> News
-                    </a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="{{ path('home') }}">
-                        <span class="oi" aria-hidden="true"><i class="fas fa-blog"></i></span> Blog
-                    </a>
-                </li>
-                <li class="nav-item px-3">
-                    <a class="nav-link" href="{{ path('adminLogout') }}">
-                        <span class="oi" aria-hidden="true"><i class="fas fa-sign-out-alt"></i></span> Logout
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <div class="main">
-        <div class="top-row px-4">
-            <span>{{ title }}</span>
-        </div>
-
-        <div class="content px-4">
+        <div class="admin-content">
+            <div class="admin-header"></div>
+            
+            <div class="admin-wrapper">
+                <div class="admin-body">
 {% endblock %}
 
 {% block footer %}
+            </div>
+        </div>
+        
+        <div class="admin-footer">
+            <div class="footer-copyright">
+                <p>
+                    Copyright &copy; 2019-{{ "now"|date("Y") }} &minus; <a class="bold-green" href="{{ path("home") }}">Garry ALMEIDA</a><br/>
+                    All Rights Reserved / Tous Droits Réservés
+                </p>
+            </div>
         </div>
     </div>
-</app>
-{% endblock %}
-
-{% block javascript %}
-{# JavaScript File #}
-<script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
-
-{# Boostrap JS File #}
-<script type="text/javascript" src="{{ asset('library/bootstrap/js/bootstrap.min.js') }}"></script>
-
-{# Wow File #}
-<script type="text/javascript" src="{{ asset('library/wow/wow.min.js') }}"></script>
-
-{# Alertify JS File #}
-<script type="text/javascript" src="{{ asset('library/alertifyjs/alertify.min.js') }}"></script>
+</section>
 {% endblock %}

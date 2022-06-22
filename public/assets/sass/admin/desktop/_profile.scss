@@ -1,0 +1,37 @@
+.admin-profile .profile {
+    display: flex;
+    width: 100%;
+
+    .profile-image, .profile-infos {
+        border-radius: 10px;
+        background-color: var(--c-white);
+        border: 1px solid var(--c-lightWhite);
+        box-shadow: 1px 1px 3px var(--c-gray);
+        padding: 20px 0;
+        height: 100%;
+    }
+    
+    .profile-image {
+        text-align: center;
+        margin-right: 20px;
+        width: 300px;
+
+        img {
+            width: 200px;
+            border-radius: 50%;
+        }
+
+        p {
+            font-size: 1.1rem;
+
+            .lastname {
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .profile-infos {
+        width: calc(100% - 300px);
+    }
+}

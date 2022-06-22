@@ -20,6 +20,8 @@
         .skills-card {
             height: auto;
             grid-row: 1;
+            border-radius: 10px;
+            box-shadow: 3px 3px 4px var(--c-lightGray);
     
             .logo {
                 top: -40px;
@@ -31,7 +33,7 @@
                 display: flex;
                 position: relative;
                 justify-content: center;
-                color: #ffffff;
+                color: var(--c-white);
                 background-color: #567787;
     
                 img {
@@ -51,7 +53,7 @@
                 ul {
                     list-style: none;
                     letter-spacing: 1.5px;
-                    padding-top: 15px;
+                    padding: 15px 40px;
     
                     li {
                         margin-bottom: .5rem;

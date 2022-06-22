@@ -1,0 +1,49 @@
+@media screen and (max-width: 991px) {
+    .admin-section .admin-content .admin-wrapper .admin-body {
+        padding: 0;
+
+        .admin-cards {
+            flex-direction: column;
+
+            .admin-card {
+                padding: 25px;
+
+                &:not(:first-child) {
+                    margin-left: 0;
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .admin-lasted .admin-tables {
+            flex-direction: column;
+
+            .admin-table {
+                // 
+
+                &:not(:first-child) {
+                    margin-left: 0;
+                }
+                
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+
+                table tbody tr td div {
+                    width: 50%;
+
+                    &.f-left {
+                        text-align: start;
+                    }
+
+                    &.f-right {
+                        text-align: end;
+                    }
+                }
+            }
+        }
+    }
+}

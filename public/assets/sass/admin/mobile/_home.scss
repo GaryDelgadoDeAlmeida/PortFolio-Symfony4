@@ -1,0 +1,13 @@
+@media screen and (max-width: 767px) {
+    .admin-section {
+        // 
+
+        .sidebar {
+            display: none;
+        }
+
+        .admin-content {
+            width: 100vw;
+        }   
+    }
+}

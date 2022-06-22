@@ -21,12 +21,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * 
+ * @IsGranted("ROLE_ADMIN")
+ * @Security("is_granted('ROLE_ADMIN')")
+ */
 class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="adminHome")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin()
     {
@@ -39,8 +42,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/profile", name="adminProfile")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_profile(Secu $security, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
@@ -79,8 +80,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/profile/about", name="adminAbout")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_about(Secu $security, Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
@@ -132,8 +131,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/education", name="adminEducation")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_education()
     {
@@ -145,8 +142,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/education/add", name="adminEducationAdd")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_education_add(Request $request, EntityManagerInterface $manager)
     {
@@ -180,8 +175,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/education/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditEducation")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_edit_education(Education $education, Request $request, EntityManagerInterface $manager)
     {
@@ -208,8 +201,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/education/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteEducation")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_delete_education(Education $education, EntityManagerInterface $manager)
     {
@@ -220,10 +211,8 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/work", name="adminProject")
-     * @Route("/admin/work/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminProjectPage")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/admin/portfolio", name="adminProject")
+     * @Route("/admin/portfolio/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminProjectPage")
      */
     public function admin_project(Request $request, $page = 1)
     {
@@ -248,9 +237,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/work/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditProject")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/admin/portfolio/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditProject")
      */
     public function admin_edit_project(Project $project, Request $request, EntityManagerInterface $manager)
     {
@@ -299,9 +286,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/work/add", name="adminAddProject")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/admin/portfolio/add", name="adminAddProject")
      */
     public function admin_add_project(Request $request, EntityManagerInterface $manager)
     {
@@ -345,9 +330,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/work/search", name="adminSearchProject", methods="POST")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/admin/portfolio/search", name="adminSearchProject", methods="POST")
      */
     public function admin_search_project(Request $request)
     {
@@ -355,9 +338,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/work/delete/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteProject")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/admin/portfolio/delete/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteProject")
      */
     public function admin_delete_project(Project $project, EntityManagerInterface $manager)
     {
@@ -372,8 +353,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/news", name="adminNews")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_news()
     {
@@ -393,8 +372,6 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/contact", name="adminContact")
      * @Route("/admin/contact/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminContactByPage")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_contact($offset = 1)
     {
@@ -410,8 +387,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/contact/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminReadMail")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_read_mail(Contact $contact, EntityManagerInterface $manager)
     {
@@ -431,8 +406,6 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/logout", name="adminLogout")
-     * @IsGranted("ROLE_ADMIN")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function admin_logout()
     {

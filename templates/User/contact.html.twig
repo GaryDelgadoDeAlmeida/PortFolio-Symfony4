@@ -65,26 +65,31 @@
 
         <div class="form"}>
             {# Message d'après l'envoi #}
-            <span id="answer" hidden></span>
+            {% if response != [] %}
+                <div class="alert {{ response.answer == true ? "alert-success" : "alert-danger" }}">
+                    <span>{{ response.content }}</span>
+                </div>
+                <div>&nbsp;</div>
+            {% endif %}
             
             {# Formulaire de contact par email #}
-            <form class="contact-form" autoComplete="off">
+            {{ form_start(contactForm, {"attr": {"class": "contact-form", "autoComplete": "off"}}) }}
                 <div class="form-text">
-                    <input type="text" name="yrName" placeholder="Votre Nom" required />
+                    {{ form_widget(contactForm.senderFullName) }}
                 </div>
                 <div class="form-text">
-                    <input type="email" name="yrEmail" placeholder="Votre Email" required />
+                    {{ form_widget(contactForm.senderEmail) }}
                 </div>					
                 <div class="form-text">
-                    <input type="text" name="yrSubject" placeholder="Sujet" required />
+                    {{ form_widget(contactForm.emailSubject) }}
                 </div>
                 <div class="form-text">
-                    <textarea class="h-180px" name="yrMessage" placeholder="Message" required></textarea>
+                    {{ form_widget(contactForm.emailContent) }}
                 </div>
                 <div class="form-button txt-center">
-                    <button type="submit" class="btn btn-green w-150px">Valider</button>
+                    {{ form_widget(contactForm.submit, {"attr": {"class": "btn btn-green w-150px"}}) }}
                 </div>
-            </form>
+            {{ form_end(contactForm, {"attr": {"class": "contact-form", "autoComplete": "off"}}) }}
         </div>
     </div>
 </section>

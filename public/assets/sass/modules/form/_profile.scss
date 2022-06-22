@@ -1,0 +1,36 @@
+.profile-form {
+    
+    .info-field {
+        margin: 0 20px;
+        line-height: 30px;
+        display: grid;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: 600;
+            padding-bottom: 5px;
+        }
+
+        input {
+            padding: 0 10px;
+            height: 25px;
+        }
+
+        textarea {
+            height: 80px;
+            padding: 10px;
+        }
+    }
+
+    .info-edit {
+        margin: 20px;
+        text-align: right;
+
+        .btn:not(:first-child) {
+            margin-left: 10px;
+        }
+    }
+}

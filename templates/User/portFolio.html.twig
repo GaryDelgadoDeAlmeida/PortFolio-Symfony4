@@ -25,6 +25,30 @@
                     </div>
                 {% endfor %}
             </div>
+
+            <div class="pagination">
+                <div>
+                    <a href=""><<</a>
+                </div>
+                <div>
+                    <a href=""><</a>
+                </div>
+                <div>
+                    <a href="">1</a>
+                </div>
+                <div class="current-page">
+                    <a href="">2</a>
+                </div>
+                <div>
+                    <a href="">3</a>
+                </div>
+                <div>
+                    <a href="">></a>
+                </div>
+                <div>
+                    <a href="">>></a>
+                </div>
+            </div>
         {% else %}
             <div class="alert alert-information">
                 <span>Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a></span>
@@ -32,7 +56,5 @@
         {% endif %}
     </div>
 </section>
-
-{% include 'Pagination/index.html.twig' %}
 
 {% endblock %}
