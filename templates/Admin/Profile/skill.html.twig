@@ -1,0 +1,105 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="admin-skills">
+        <h1>Skill</h1>
+
+        {% if response != [] %}
+            <div class="alert alert-warning">
+                <span>{{ response.message }}</span>
+            </div>
+            <div>&nbsp;</div>
+        {% endif %}
+
+        <div class="skills">
+            <div class="skills-onglet">
+                <ul>
+                    <a href="{{ path("adminSkills", {"print": "frontend"}) }}"><li class="{{ print == "frontend" ? "active" : "" }}">Frontend</li></a>
+                    <a href="{{ path("adminSkills", {"print": "backend"}) }}"><li class="{{ print == "backend" ? "active" : "" }}">Backend</li></a>
+                    <a href="{{ path("adminSkills", {"print": "tools"}) }}"><li class="{{ print == "tools" ? "active" : "" }}">Tools</li></a>
+                </ul>
+            </div>
+            
+            <div class="skills-box">
+
+                {# Frontend #}
+                {% if print == "frontend" %}
+                    <div class="skill-wrapper">
+                        <div class="skill-card">
+                            {% for item in skills %}
+                                <div class="skill-item">
+                                    <div class="item">
+                                        <span>{{ item.skill }}</span>
+                                    </div>
+                                    <a class="item-action" href="{{ path("adminRemoveSkill", {"id": item.id}) }}">
+                                        <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form">
+                            {{ form_start(formSkills) }}
+                                {{ form_widget(formSkills.type) }}
+                                {{ form_widget(formSkills.skill) }}
+                                {{ form_widget(formSkills.submit) }}
+                            {{ form_end(formSkills) }}
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {# Backend #}
+                {% if print == "backend" %}
+                    <div class="skill-wrapper">
+                        <div class="skill-card">
+                            {% for item in skills %}
+                                <div class="skill-item">
+                                    <div class="item">
+                                        <span>{{ item.skill }}</span>
+                                    </div>
+                                    <a class="item-action" href="{{ path("adminRemoveSkill", {"id": item.id}) }}">
+                                        <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form">
+                            {{ form_start(formSkills) }}
+                                {{ form_widget(formSkills.type) }}
+                                {{ form_widget(formSkills.skill) }}
+                                {{ form_widget(formSkills.submit) }}
+                            {{ form_end(formSkills) }}
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {# Tools #}
+                {% if print == "tools" %}
+                    <div class="skill-wrapper">
+                        <div class="skill-card">
+                            {% for item in skills %}
+                                <div class="skill-item">
+                                    <div class="item">
+                                        <span>{{ item.skill }}</span>
+                                    </div>
+                                    <a class="item-action" href="{{ path("adminRemoveSkill", {"id": item.id}) }}">
+                                        <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form">
+                            {{ form_start(formSkills) }}
+                                {{ form_widget(formSkills.type) }}
+                                {{ form_widget(formSkills.skill) }}
+                                {{ form_widget(formSkills.submit) }}
+                            {{ form_end(formSkills) }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

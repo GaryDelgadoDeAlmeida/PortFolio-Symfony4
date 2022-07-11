@@ -7,17 +7,17 @@
         <div class="admin-cards">
             <div class="admin-card">
                 <h4 class="admin-card-suptitle">Visitors</h4>
-                <span>1</span>
+                <span>{{ nbrVisitors }}</span>
             </div>
 
             <div class="admin-card">
                 <h4 class="admin-card-suptitle">Works realised</h4>
-                <span>49</span>
+                <span>{{ nbrProjects }}</span>
             </div>
 
             <div class="admin-card">
                 <h4 class="admin-card-suptitle">Professional experience</h4>
-                <span>3 years</span>
+                <span>{{ workExp }} years</span>
             </div>
         </div>
 
@@ -25,6 +25,8 @@
             <h2 class="admin-lasted-title">Lasted activity</h2>
 
             <div class="admin-tables">
+
+                {# Latest Works #}
                 <div class="admin-table">
                     <table>
                         <thead>
@@ -33,40 +35,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="f-left">
-                                        Portfolio (v4)
-                                    </div>
-                                    <div class="f-right">
-                                        04/05/2022
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="f-left">
-                                        WikiEarth API
-                                    </div>
-                                    <div class="f-right">
-                                        28/03/2022
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="f-left">
-                                        WikiEarth
-                                    </div>
-                                    <div class="f-right">
-                                        18/01/2022
-                                    </div>
-                                </td>
-                            </tr>
+                            {% for item in latestWork %}
+                                <tr>
+                                    <td>
+                                        <div class="f-left">{{ item.name }}</div>
+                                        <div class="f-right">{{ item.createdAt|date("d/m/Y") }}</div>
+                                    </td>
+                                </tr>
+                            {% else %} 
+                                <tr>
+                                    <td class="txt-center">There is no realised work</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
 
+                {# Latest Emails #}
                 <div class="admin-table">
                     <table>
                         <thead>
@@ -75,16 +60,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="f-left">
-                                        Garry DE ALMEIDA
-                                    </div>
-                                    <div class="f-right">
-                                        04/05/2022
-                                    </div>
-                                </td>
-                            </tr>
+                            {% for item in latestEmail %}
+                                <tr>
+                                    <td>
+                                        <div class="f-left">Garry DE ALMEIDA</div>
+                                        <div class="f-right">04/05/2022</div>
+                                    </td>
+                                </tr>
+                            {% else %} 
+                                <tr>
+                                    <td class="txt-center">There is no emails</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -95,6 +82,8 @@
             <h2 class="admin-lasted-title">Lasted work experience</h2>
 
             <div class="admin-tables">
+
+                {# Latest Experience #}
                 <div class="admin-table">
                     <table>
                         <thead>
@@ -103,36 +92,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="f-left">
-                                        Creano
-                                    </div>
-                                    <div class="f-right">
-                                        today
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="f-left">
-                                        FFGolf
-                                    </div>
-                                    <div class="f-right">
-                                        March 2019
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="f-left">
-                                        FFGolf
-                                    </div>
-                                    <div class="f-right">
-                                        June 2018
-                                    </div>
-                                </td>
-                            </tr>
+                            {% for item in latestExp %}
+                                <tr>
+                                    <td>
+                                        <div class="f-left">Creano</div>
+                                        <div class="f-right">today</div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td class="txt-center">There is no professional experiences</td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

@@ -19,49 +19,58 @@ class EducationRepository extends ServiceEntityRepository
         parent::__construct($registry, Education::class);
     }
 
+    /**
+     * @return Education[]
+     */
     public function getEducations()
     {
         return $this->createQueryBuilder('e')
             ->orderBy('e.id', 'DESC')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
-    public function getEducationFromCategory($category)
+    /**
+     * @param string category
+     * @param int maxResults
+     * @return Education[]
+     */
+    public function getLatestEducationFromCategory(string $category, int $maxResult = 3)
+    {
+        return [];
+    }
+
+    /**
+     * @param string category (experience or formation)
+     * @param int offset
+     * @param int limit
+     * @return Education[]
+     */
+    public function getEducationFromCategory(string $category, int $offset, int $limit)
     {
         return $this->createQueryBuilder('e')
             ->where('e.category = :cat')
+            ->setFirstResult($offset - 1)
+            ->setMaxResults(($offset - 1) * $limit)
             ->setParameter('cat', $category)
-            ->getQuery()
-            ->getResult();
-    }
-
-    // /**
-    //  * @return Education[] Returns an array of Education objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Education
+    /**
+     * @param string category (experience or formation)
+     * @return Education[]
+     */
+    public function getIntervalEducationFromCategory(string $category)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder("e")
+            ->select("e.startDate, e.endDate")
+            ->where("e.category = :cat")
+            ->setParameter('cat', $category)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }

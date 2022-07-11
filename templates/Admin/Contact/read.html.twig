@@ -16,7 +16,7 @@
                 
                 <div class="info">
                     <span><b>{{ mail.senderFullName }}</b> ({{ mail.senderEmail }})</span>
-                    <span>{{ mail.createdAt }}</span>
+                    <span>{{ mail.createdAt|date("d/m/Y") }}</span>
                 </div>
             </div>
             <div class="object">

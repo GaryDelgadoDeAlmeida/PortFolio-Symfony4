@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Project;
+use App\Entity\Skills;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
@@ -10,16 +12,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProjectAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, ['label' => 'Project Name'])
+            ->add('name', null, [
+                'label' => 'Title',
+                "required" => true,
+                "attr" => [
+                    "minLenght" => 4,
+                    "maxLenght" => 255,
+                ]
+            ])
+            ->add("description", TextareaType::class, [
+                "label" => "Description"
+            ])
             ->add('imgPath', FileType::class, [
-                'label' => 'Image (Image file)',
+                'label' => 'Image',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -32,7 +46,7 @@ class ProjectAdminType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '5120k',
+                        'maxSize' => '5M',
                         'mimeTypes' => [
                             'image/jpg',
                             'image/jpeg',
@@ -45,6 +59,18 @@ class ProjectAdminType extends AbstractType
                 'label' => "Link GitHub",
                 "required" => false
             ])
+            ->add("siteLink", UrlType::class, [
+                "label" => "Production Link",
+                "required" => false
+            ])
+            ->add("clientName", null, [
+                "label" => "Client name",
+                "required" => true,
+                "attr" => [
+                    "minLength" => 4,
+                    "maxLenght" => 255,
+                ],
+            ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'Make your choice, please' => null,
@@ -56,7 +82,21 @@ class ProjectAdminType extends AbstractType
                 ],
                 'label' => 'Type'
             ])
-            ->add('version', null, ['label' => 'Version'])
+            ->add("skills", EntityType::class, [
+                "class" => Skills::class,
+                "choice_label" => "skill",
+                "multiple" => true,
+                "required" => true,
+            ])
+            ->add("version", NumberType::class, [
+                "label" => "Version",
+                "required" => true,
+                "html5" => true,
+                "attr" => [
+                    "min" => 1,
+                    "value" => 1
+                ]
+            ])
             ->add('submit', SubmitType::class)
         ;
     }

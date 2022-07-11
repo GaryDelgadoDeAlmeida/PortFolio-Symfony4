@@ -19,56 +19,39 @@ class ContactRepository extends ServiceEntityRepository
         parent::__construct($registry, Contact::class);
     }
 
+    public function getLatestMails(int $maxResults = 3)
+    {
+        return $this->createQueryBuilder('c')
+            ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /**
      * Return a limited number of mails of the database
      */
-    public function getMail($offset, $limit)
+    public function getMails(int $offset, int $limit)
     {
         return $this->createQueryBuilder('c')
             ->setFirstResult(($offset - 1) * $limit)
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     /**
      * Count all mail sended and stored into my database
      */
-    public function getNbrContact()
+    public function countContact()
     {
         return $this->createQueryBuilder('c')
-            ->select('COUNT(c.id)')
+            ->select('COUNT(c.id) as nbrContact')
             ->where('c.isRead = 0')
             ->getQuery()
-            ->getSingleResult();
-    }
-
-    // /**
-    //  * @return Contact[] Returns an array of Contact objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+            ->getSingleResult()["nbrContact"]
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Contact
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+    
 }

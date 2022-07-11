@@ -46,10 +46,13 @@ a, a:hover {
 // Modules styles
 @import "./modules/common";
 
-// Desktop styles
+/* ------------------------------------------------------ *\
+                  User styles
+\* ------------------------------------------------------ */
 @import "./user/desktop/home";
 @import "./user/desktop/about";
 @import "./user/desktop/about_skills";
+@import "./user/desktop/about_service";
 @import "./user/desktop/portfolio";
 @import "./user/desktop/news";
 @import "./user/desktop/contact";
@@ -65,7 +68,9 @@ a, a:hover {
 @import "./user/mobile/contact";
 @import "./user/mobile/header";
 
-// Admin Desktop styles
+/* ------------------------------------------------------ *\
+                  Admin styles
+\* ------------------------------------------------------ */
 @import "./admin/desktop/experience";
 @import "./admin/desktop/home";
 @import "./admin/desktop/profile";
@@ -73,11 +78,11 @@ a, a:hover {
 @import "./admin/desktop/email";
 @import "./admin/desktop/skill";
 
-// Admin Tablet styles
+// Tablet styles
 @import "./admin/tablet/home";
 @import "./admin/tablet/profile";
 @import "./admin/tablet/portfolio";
 
-// Admin Mobile styles
+// Mobile styles
 @import "./admin/mobile/home";
 @import "./admin/mobile/portfolio";

@@ -1,78 +1,67 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-<div class="adminPortfolio-header">
-    <a href="{{ path('adminAddProject') }}"><button class="btn btn-success w-100px rounded-pill">Add</button></a>
-    
-    {{ form_start(search, {'action': path('adminProject'), 'method': 'POST', "attr" : {"style": "margin-left: 10px; display: inline-flex; float: right;"}}) }}
-        {{ form_widget(search.search_input, {"attr": {"class" : "w-250px"}}) }}
-        {{ form_widget(search.submit, {'attr': {'class': 'btn btn-primary w-100px rounded-pill', "style": "margin-left: 10px;"}}) }}
-    {{ form_end(search, {'action': path('adminProject'), 'method': 'POST'}) }}
-</div>
+    <div class="admin-portfolio">
+        <a href="{{ path("adminAddProject") }}">
+            <button class="btn btn-green">Add a work</button>
+        </a>
 
-<table class="table">
-    <thead>
-        <tr class="text-center">
-            <th>Image</th>
-            <th>Name</th>
-            <th class="displayNoneColumn-lvl-1">GitHub Link</th>
-            <th class="displayNoneColumn-lvl-3">Type</th>
-            <th class="displayNoneColumn-lvl-2">Version</th>
-            <th colspan="2">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if projects != [] %}
-            {% for project in projects %}
-                <tr class="text-center text-wrap work-tr">
-                    <td><img width="115" heigth="115" class="img-fluid" src="/content/portFolio/{{ project.imgPath }}" alt="{{ project.name }}"></td>
-                    <td>{{ project.name }}</td>
-                    <td class="displayNoneColumn-lvl-1">{% if project.gitHubLink != null %}<a href="{{ project.githubLink }}" target="__blank">{{ project.githubLink }}</a>{% else %}No GitHub Link{% endif %}</td>
-                    <td class="displayNoneColumn-lvl-3">{{ project.type }}</td>
-                    <td class="displayNoneColumn-lvl-2">{{ project.version }}</td>
-                    <td><a href="{{ path('adminEditProject', {'id': project.id}) }}"><i class="far fa-edit"></i></a></td>
-                    <td><a href="{{ path('adminDeleteProject', {'id': project.id}) }}"><i class="far fa-trash-alt"></i></a></td>
-                </tr>
-            {% endfor %}
-        {% else %}
-            <tr class="text-center">
-                <td colspan="7">
+        <h1>Portfolio</h1>
+        
+        <div class="portfolio-wrapper">
+            {% if projects != [] %}
+                {% for project in projects %}
+                    <a class="portfolio-card" href="{{ path("adminSingleProject", {"id": project.id}) }}">
+                        <div class="portfolio-image">
+                            <img src="{{ asset(project.imgPath) }}" alt="{{ project.name }}" />
+                        </div>
+                        <div class="portfolio-text">
+                            <div class="portfolio-content">
+                                <div class="title">
+                                    <h2>{{ project.name }}</h2>
+                                </div>
+                                <div class="tools">
+                                    {% for tech in project.skills %}
+                                        <span>{{ tech.skill }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-warning">
                     <span>Il n'y a aucun projet enregistré dans la database.</span>
-                </td>
-            </tr>
-        {% endif %}
-    </tbody>
-</table>
-
-{% if page >= 1 and page <= total_page %}
-    {% if page <= 1 %}
-        {% set pageLink = path('adminProject') %}
-    {% else %}
-        {% set pageLink = path('adminProjectPage', {'page': page}) %}
-    {% endif %}
-
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-
-            <li class="page-item  {% if page == 1 %} disabled {% endif %}">
-                <a class="page-link" href="{{ path('adminProject') }}" {% if page == 1 %} aria-disabled="true" {% endif %}>First</a>
-            </li>
-
-            {% if page > 1 %}
-                <li class="page-item"><a class="page-link" href="{{ path('adminProjectPage', {'page': (page - 1)}) }}">{{ page - 1}}</a></li>
+                </div>
             {% endif %}
 
-            <li class="page-item"><a class="page-link" href="{{ pageLink }}">{{ page }}</a></li>
+            {% if page >= 1 and page <= total_page %}
+                <div class="pagination">
+                    <div class="first-page">
+                        <a href="{{ path("adminProject") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt={"double-angle-left"} /></a>
+                    </div>
+                    
+                    {% if page - 1 >= 1  %}
+                        <div class="previous-page">
+                            <a href="{{ path("adminProjectPage", {'page': (page - 1)}) }}">{{ page - 1 }}</a>
+                        </div>
+                    {% endif %}
 
-            {% if page < total_page %}
-                <li class="page-item"><a class="page-link" href="{{ path('adminProjectPage', {'page': (page + 1)}) }}">{{ page + 1}}</a></li>
+                    <div class="current-page">
+                        <span>{{ page }}</span>
+                    </div>
+                    
+                    {% if page + 1 <= total_page  %}
+                        <div class="next-page">
+                            <a href="{{ path("adminProjectPage", {'page': (page + 1)}) }}">{{ page + 1 }}</a>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="last-page">
+                        <a href="{{ path("adminProjectPage", {'page': (total_page)}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt={"double-angle-right"} /></a>
+                    </div>
+                </div>
             {% endif %}
-
-            <li class="page-item {% if page == total_page %} disabled {% endif %}">
-                <a class="page-link" href="{{ path('adminProjectPage', {'page': total_page}) }}" {% if page == total_page %} aria-disabled="true" {% endif %}>Last</a>
-            </li>
-        </ul>
-    </nav>
-{% endif %}
-
+        </div>
+    </div>
 {% endblock %}

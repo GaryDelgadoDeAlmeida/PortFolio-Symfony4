@@ -91,6 +91,17 @@ class User implements UserInterface
     private $phoneNumber;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imgPath;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotNull
+     */
+    private $description;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull
      * @Assert\Length(
@@ -126,11 +137,6 @@ class User implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\About", mappedBy="idUser", cascade={"persist", "remove"})
-     */
-    private $about;
 
     public function getId(): ?int
     {
@@ -209,6 +215,30 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getImgPath(): ?string
+    {
+        return $this->imgPath;
+    }
+
+    public function setImgPath(?string $imgPath): self
+    {
+        $this->imgPath = $imgPath;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -270,22 +300,5 @@ class User implements UserInterface
     public function getSalt()
     {
         return null;
-    }
-
-    public function getAbout(): ?About
-    {
-        return $this->about;
-    }
-
-    public function setAbout(About $about): self
-    {
-        $this->about = $about;
-
-        // set the owning side of the relation if necessary
-        if ($about->getIdUSer() !== $this) {
-            $about->setIdUSer($this);
-        }
-
-        return $this;
     }
 }

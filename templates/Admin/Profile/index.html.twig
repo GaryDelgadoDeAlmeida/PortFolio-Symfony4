@@ -6,10 +6,10 @@
 
     <div class="profile">
         <div class="profile-image">
-            <img src="{{ asset('content/images/me.jpg') }}" alt="" />
+            <label for="profile_admin_imgPath"><img src="{{ asset(file_exist(user.imgPath, "/content/profile/avatar.png")) }}" alt="" /></label>
             <p>
-                <span class="firstname">Garry</span>
-                <span class="lastname">DE ALMEIDA</span>
+                <span class="firstname">{{ user.firstname }}</span>
+                <span class="lastname">{{ user.lastname }}</span>
             </p>
         </div>
 
@@ -59,13 +59,8 @@
                     </div>
                     
                     <div class="info-field">
-                        {{ form_label(form.password) }}
-                        {{ form_widget(form.password) }}
-                    </div>
-                    
-                    <div class="info-field">
-                        <label html="description">Description</label>
-                        <textarea name="description"></textarea>
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description) }}
                     </div>
 
                     <div class="info-edit">

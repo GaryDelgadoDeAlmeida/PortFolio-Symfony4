@@ -5,33 +5,106 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProfileAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastName', null, ['label' => 'LastName'])
-            ->add('firstName', null, ['label' => 'FirstName'])
-            ->add('address', null, ['label' => 'Address'])
-            ->add('postalCode', NumberType::class, ['label' => 'Postal Code (Zip Code)'])
-            ->add('city', null, ['label' => 'City'])
-            ->add('phoneNumber', null, ['label' => 'Mobile Phone'])
-            ->add('email', EmailType::class, ['label' => 'Email'])
-            ->add('password', PasswordType::class, ['label' => 'Password'])
-            ->add('submit', SubmitType::class)
+            ->add("imgPath", FileType::class, [
+                "label" => false,
+                'multiple' => false,
+                'attr' => [
+                    'accept' => 'image/*',
+                    "hidden" => true,
+                ],
+                'constraints' => [
+                    new Count(['max' => 5]),
+                    new All([
+                        new File([
+                            'maxSize' => '5Mi',
+                            'mimeTypes' => [
+                                'image/jpg',
+                                'image/jpeg',
+                                'image/png',
+                            ],
+                        ])
+                    ])
+                ],
+                'mapped' => false,
+                'required' => false,
+            ])
+            ->add("lastName", null, [
+                "label" => "LastName",
+                "attr" => [
+                    "maxLength" => 100
+                ],
+                "required" => true,
+            ])
+            ->add("firstName", null, [
+                "label" => "FirstName",
+                "attr" => [
+                    "maxLength" => 100
+                ],
+                "required" => true
+            ])
+            ->add("address", null, [
+                "label" => "Address",
+                "attr" => [
+                    "maxLength" => 255
+                ],
+                "required" => true
+            ])
+            ->add("postalCode", NumberType::class, [
+                "label" => "Zip Code",
+                "attr" => [
+                    "maxLength" => 5
+                ],
+                "required" => true
+            ])
+            ->add("city", null, [
+                "label" => "City",
+                "attr" => [
+                    "maxLength" => 255
+                ],
+                "required" => true
+            ])
+            ->add("phoneNumber", TelType::class, [
+                "label" => "Mobile Phone",
+                "attr" => [
+                    "maxLength" => 10,
+                ],
+                "required" => true
+            ])
+            ->add("email", EmailType::class, [
+                "label" => "Email",
+                "attr" => [
+                    "maxLength" => 255,
+                ]
+            ])
+            ->add("description", TextareaType::class, [
+                "label" => "Presentation",
+                "required" => true
+            ])
+            ->add("submit", SubmitType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            "data_class" => User::class,
         ]);
     }
 }

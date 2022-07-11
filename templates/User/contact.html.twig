@@ -73,7 +73,7 @@
             {% endif %}
             
             {# Formulaire de contact par email #}
-            {{ form_start(contactForm, {"attr": {"class": "contact-form", "autoComplete": "off"}}) }}
+            {{ form_start(contactForm, {"attr": {"class": "contact-form", "autoComplete": "off"}, 'action': path('contactme'), 'method': 'POST'}) }}
                 <div class="form-text">
                     {{ form_widget(contactForm.senderFullName) }}
                 </div>
@@ -89,7 +89,7 @@
                 <div class="form-button txt-center">
                     {{ form_widget(contactForm.submit, {"attr": {"class": "btn btn-green w-150px"}}) }}
                 </div>
-            {{ form_end(contactForm, {"attr": {"class": "contact-form", "autoComplete": "off"}}) }}
+            {{ form_end(contactForm, {"attr": {"class": "contact-form", "autoComplete": "off"}, 'action': path('contactme'), 'method': 'POST'}) }}
         </div>
     </div>
 </section>

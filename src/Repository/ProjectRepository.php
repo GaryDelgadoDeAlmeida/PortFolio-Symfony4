@@ -22,7 +22,7 @@ class ProjectRepository extends ServiceEntityRepository
     /**
      * Get the lastest project added
      */
-    public function getLastestProject($maxResults = 3)
+    public function getLastestProject(int $maxResults = 3)
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC')
@@ -34,7 +34,7 @@ class ProjectRepository extends ServiceEntityRepository
     /**
      * Get all project added to the database
      */
-    public function getProject($offset, $limit)
+    public function getProject(int $offset, int $limit)
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC')
@@ -47,7 +47,7 @@ class ProjectRepository extends ServiceEntityRepository
     /**
      * Get projects using name
      */
-    public function getProjectByName($projectName)
+    public function getProjectByName(string $projectName)
     {
         return $this->createQueryBuilder('p')
             ->where("p.name LIKE :projectName")
@@ -58,42 +58,34 @@ class ProjectRepository extends ServiceEntityRepository
     }
 
     /**
-     * Count all existing project
+     * Get a project by the name and the version
+     * 
+     * @param string name
+     * @param int version
+     * @return Project
      */
-    public function getNbrProject()
+    public function getProjectByNameAndVersion(string $name, int $version)
     {
         return $this->createQueryBuilder('p')
-            ->select('COUNT(p.id)')
-            ->getQuery()
-            ->getSingleResult();
-    }
-
-    // /**
-    //  * @return Project[] Returns an array of Project objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Project
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->where("p.name LIKE :projectName")
+            ->andWhere("p.version = :version")
+            ->setParameters([
+                "projectName" => $name,
+                "version" => $version,
+            ])
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
+    /**
+     * Count all existing project
+     */
+    public function countProject()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p.id) as nbrProject')
+            ->getQuery()
+            ->getSingleResult()["nbrProject"];
+    }
 }

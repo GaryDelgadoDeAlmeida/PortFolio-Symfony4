@@ -9,14 +9,14 @@
         <div class="wrapper">
             <div class="intro">
                 <div class="aboutMe-intro-img txt-center">
-                    <img onContextMenu="return false;" src="{{ asset("/content/images/me.jpg") }}" alt="" />
+                    <img onContextMenu="return false;" src="{{ asset(file_exist(user.imgPath, "/content/profile/avatar.png")) }}" alt="{{ user.firstname }} {{ user.lastname }}" />
                 </div>
                 <div class="aboutMe-intro-intro">
                     <span>Salut, mon nom est</span>
-                    <h2>Garry ALMEIDA</h2>
-                    <p>Je suis un jeune développeur très friand de savoir et de connaissance, de nouvelle technique de developpement et de l'apprentissage des nouvelles technologies.</p>
+                    <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+                    <p>{{ user.description }}</p>
                     <div class="aboutMe-intro-intro-button">
-                        <a href="/contact"><button class="btn btn-outline-white btn-rounded">Contactez-moi !</button></a>
+                        <a href="{{ path("contactme") }}"><button class="btn btn-outline-white btn-rounded">Contactez-moi !</button></a>
                     </div>
                 </div>
             </div>
@@ -27,76 +27,80 @@
     <section class="aboutMe-skills">
         <div class="wrapper">
             <header class="section-header">
-                <h3>Skills</h3>
-                <p class="text-muted">
+                <h3>Compétences</h3>
+                {# <p class="text-muted">
                     <small>Mes compétences sont divers et variées dans le domaine de la programmation informatique</small>
-                </p>
+                </p> #}
             </header>
 
             <div class="skills-content">
 
                 {# FrontEnd Skills #}
-                <div class="skills-card bg-white">
-                    <div class="logo">
-                        <img src="{{ asset("/content/images/svg/code.svg") }}" alt="" />
-                    </div>
+                {% if frontend != [] %}
+                    <div class="skills-card bg-white">
+                        <div class="logo">
+                            <img src="{{ asset("/content/images/svg/code.svg") }}" alt="" />
+                        </div>
 
-                    <div class="skills">
-                        <h5 class="title txt-center">Frontend</h5>
-                        <ul>
-                            <li><i class="fas fa-check"></i><span>HTML / CSS</span></li>
-                            <li><i class="fas fa-check"></i><span>JavaScript</span></li>
-                            <li><i class="fas fa-check"></i><span>C# WinForm</span></li>
-                        </ul>
+                        <div class="skills">
+                            <h5 class="title txt-center">Frontend</h5>
+
+                            <ul>
+                                {% for itemF in frontend %}
+                                    <li><i class="fas fa-check"></i><span>{{ itemF.skill }}</span></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
 
                 {# BackEnd Skills #}
-                <div class="skills-card bg-white">
-                    <div class="logo">
-                        <img src="{{ asset("/content/images/svg/database.svg") }}" alt="" />
-                    </div>
+                {% if backend != [] %}
+                    <div class="skills-card bg-white">
+                        <div class="logo">
+                            <img src="{{ asset("/content/images/svg/database.svg") }}" alt="" />
+                        </div>
 
-                    <div class="skills">
-                        <h5 class="title txt-center">Backend</h5>
-                        <ul>
-                            <li><i class="fas fa-check"></i><span>C#</span></li>
-                            <li><i class="fas fa-check"></i><span>Java</span></li>
-                            <li><i class="fas fa-check"></i><span>PHP7</span></li>
-                            <li><i class="fas fa-check"></i><span>SQL / MySQL</span></li>
-                            <li><i class="fas fa-check"></i><span>Python</span></li>
-                        </ul>
+                        <div class="skills">
+                            <h5 class="title txt-center">Backend</h5>
+                            <ul>
+                                {% for itemB in backend %}
+                                    <li><i class="fas fa-check"></i><span>{{ itemB.skill }}</span></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
 
                 {# Other Skills #}
-                <div class="skills-card bg-white">
-                    <div class="logo">
-                        <img src="{{ asset("/content/images/svg/tools.svg") }}" alt="" />
-                    </div>
+                {% if tools != [] %}
+                    <div class="skills-card bg-white">
+                        <div class="logo">
+                            <img src="{{ asset("/content/images/svg/tools.svg") }}" alt="" />
+                        </div>
 
-                    <div class="skills">
-                        <h5 class="title txt-center">Other</h5>
-                        <ul>
-                            <li><i class="fas fa-check"></i><span>Symfony 3/4</span></li>
-                            <li><i class="fas fa-check"></i><span>React / React Native</span></li>
-                            <li><i class="fas fa-check"></i><span>Wordpress</span></li>
-                            <li><i class="fas fa-check"></i><span>.Net Framework</span></li>
-                            <li><i class="fas fa-check"></i><span>Entity Framework</span></li>
-                            <li><i class="fas fa-check"></i><span>Bunifu Framework</span></li>
-                            <li><i class="fas fa-check"></i><span>MongoDB / Redis</span></li>
-                        </ul>
+                        <div class="skills">
+                            <h5 class="title txt-center">Tools</h5>
+                            <ul>
+                                {% for itemT in tools %}
+                                    <li><i class="fas fa-check"></i><span>{{ itemT.skill }}</span></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </section>
+
+    {# Service #}
+    <section class="aboutMe-services"></section>
 
     {# Latest Project #}
     <section class="aboutMe-project">
         <div class="wrapper">
             <header class="section-header">
-                <h3>Latest Project</h3>
+                <h3>Derniers projets</h3>
             </header>
 
             {% if lastestProject != [] %}
@@ -104,11 +108,11 @@
                     {% for item in lastestProject %}
                         <div class="overlay-card">
                             <div class="overlay-image">
-                                <a href="{{ item.link }}" target="_blank" rel="noreferrer">
-                                    <img class="image" src="{{ asset(item.image) }}" alt="{{ item.title }}"/>
+                                <a href="{{ item.githubLink }}" target="_blank" rel="noreferrer">
+                                    <img class="image" src="{{ asset(item.imgPath) }}" alt="{{ item.name }}"/>
                                     <div class="hover">
                                         <div class="text">
-                                            <h3 class="project-title">{{ item.title }}</h3>
+                                            <h3 class="project-title">{{ item.name }}</h3>
                                             <span class="project-small-text">{{ item.type }}</span>
                                         </div>
                                     </div>
@@ -124,5 +128,8 @@
             {% endif %}
         </div>
     </section>
+
+    {# Client comment #}
+    <section class="aboutMe-witness"></section>
 </section>
 {% endblock %}

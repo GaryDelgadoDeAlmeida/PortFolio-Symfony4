@@ -2,25 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\About;
-use App\Entity\Contact;
-use App\Entity\Project;
-use App\Form\LoginAdminType;
-use App\Form\ContactUserType;
-use App\Form\RegisterAdminType;
+use App\Entity\{Contact, Project, Skills, User};
+use App\Form\{ContactUserType, LoginAdminType};
 use App\Manager\ContactManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
+    private $em;
     private $contactManager;
 
-    function __construct() {
+    function __construct(EntityManagerInterface $manager) {
+        $this->em = $manager;
         $this->contactManager = new ContactManager();
     }
 
@@ -29,7 +25,7 @@ class UserController extends AbstractController
      */
     public function home()
     {
-        return $this->render('User/home.html.twig');
+        return $this->render("User/home.html.twig");
     }
 
     /**
@@ -37,11 +33,14 @@ class UserController extends AbstractController
      */
     public function about_me()
     {
-        $userFullName = $this->getDoctrine()->getRepository(User::class)->getFullName();
-        return $this->render('User/about.html.twig', [
-            'userFullName' => $userFullName,
-            'userIntro' => $this->getDoctrine()->getRepository(About::class)->getIntroByName($userFullName["firstName"], $userFullName["lastName"]),
-            'lastestProject' => $this->getDoctrine()->getRepository(Project::class)->getLastestProject()
+        $skillRepo = $this->em->getRepository(Skills::class);
+
+        return $this->render("User/about.html.twig", [
+            "user" => $this->em->getRepository(User::class)->getUserByID(),
+            "frontend" => $skillRepo->getSkillsByCategory("frontend"),
+            "backend" => $skillRepo->getSkillsByCategory("backend"),
+            "tools" => $skillRepo->getSkillsByCategory("tools"),
+            "lastestProject" => $this->em->getRepository(Project::class)->getLastestProject()
         ]);
     }
 
@@ -51,20 +50,21 @@ class UserController extends AbstractController
      */
     public function portfolio($page = 1)
     {
-        $page = $page < 1 ? 1 : $page;
         $limit = 15;
+        $page = ($page >= 1 ? $page : 1);
+        $projectRepo = $this->em->getRepository(Project::class);
 
-        return $this->render('User/portFolio.html.twig', [
-            "portfolio" => $this->getDoctrine()->getRepository(Project::class)->getProject($page - 1, $limit),
+        return $this->render("User/portFolio.html.twig", [
             "offset" => $page,
-            "total_page" => ceil($this->getDoctrine()->getRepository(Project::class)->getNbrProject()[1] / $limit)
+            "portfolio" => $projectRepo->getProject($page - 1, $limit),
+            "total_page" => ceil($projectRepo->countProject() / $limit)
         ]);
     }
 
     /**
      * @Route("/contact", name="contactme")
      */
-    public function contact_me(Request $request, EntityManagerInterface $manager)
+    public function contact_me(Request $request)
     {
         $newSend = new Contact();
         $formContact = $this->createForm(ContactUserType::class, $newSend);
@@ -77,12 +77,13 @@ class UserController extends AbstractController
             if(isset($response["answer"]) && $response["answer"] == true) {
                 $newSend->setEmailContent(json_encode($newSend->getEmailContent()));
                 $newSend->setIsRead(false);
-                $manager->persist($newSend);
-                $manager->flush();
+                $newSend->setCreatedAt(new \DateTimeImmutable());
+                $this->em->persist($newSend);
+                $this->em->flush();
             }
         }
 
-        return $this->render('User/contact.html.twig', [
+        return $this->render("User/contact.html.twig", [
             "contactForm" => $formContact->createView(),
             "response" => !empty($response) ? $response : []
         ]);
@@ -93,32 +94,8 @@ class UserController extends AbstractController
      */
     public function login()
     {
-        return $this->render('User/login.html.twig', [
+        return $this->render("User/login.html.twig", [
             "formLogin" => $this->createForm(LoginAdminType::class)->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/register", name="register")
-     */
-    public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
-    {
-        $user = new User();
-        $formRegister = $this->createForm(RegisterAdminType::class, $user);
-        $formRegister->handleRequest($request);
-
-        if($formRegister->isSubmitted() && $formRegister->isValid()) {
-            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
-            $user->setRoles(['ROLE_ADMIN']);
-            $user->setCreatedAt(new \Datetime());
-            $manager->persist($user);
-            $manager->flush();
-            
-            return $this->redirectToRoute('login');
-        }
-
-        return $this->render('User/register.html.twig', [
-            "formRegister" => $formRegister->createView()
         ]);
     }
 }

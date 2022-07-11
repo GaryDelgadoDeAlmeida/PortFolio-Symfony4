@@ -10,14 +10,14 @@
                     <div class="email-card {{ mail.isRead == false ? "unread" : "" }}">
                         <a href="{{ path('adminReadMail', {'id': mail.id}) }}">
                             <div class="email-object">
-                                <span>Job offer</span>
+                                <span>{{ mail.emailSubject }}</span>
                                 <span>{{ mail.senderFullName }}</span>
                             </div>
                             <div class="email-content">
-                                <span>Avec le générateur de texte online vous pouvez composer votre Lorem Ipsum personnel, en l’enrichissant...</span>
+                                <span>{{ mail.emailContent|slice(0, 100) }}</span>
                             </div>
                             <div class="email-date">
-                                <span>14:20</span>
+                                <span>{{ mail.createdAt|date("d/m/Y") }}</span>
                             </div>
                         </a>
                     </div>

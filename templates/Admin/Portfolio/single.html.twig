@@ -1,0 +1,43 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="admin-portfolio">
+        <div class="portfolio-single">
+            <a href="{{ path("adminProject") }}">
+                <button class="btn btn-primary">
+                    <span>Return</span>
+                </button>
+            </a>
+
+            <h1>{{ project.name }}</h1>
+
+            <div class="single-folio">
+                <div class="introduction">
+                    <div class="hero">
+                        <img src="{{ asset(project.imgPath) }}" alt="{{ project.name }}" />
+                    </div>
+                    <div class="banner">
+                        <div class="project-infos">
+                            <h2 class="title">{{ project.name }}</h2>
+
+                            <div class="infos">
+                                <ul>
+                                    <li><span>Type :</span> {{ project.type }}</li>
+                                    <li><span>Outils :</span> HTML, CSS/SASS, JS, JSX, ReactJS, Redux</li>
+                                    <li><span>Client :</span> {{ project.clientName }}</li>
+                                    <li><span>Project date :</span> 10 September 2021</li>
+                                    <li><span>Project url :</span> <a href="#">Portfolio</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="details">
+                    <h2>Details</h2>
+                    <p>{{ project.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

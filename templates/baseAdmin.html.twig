@@ -2,7 +2,7 @@
 
 {# CSS File #}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/build/css/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/build/css/index.css') }}">
 {% endblock %}
 
 
@@ -24,13 +24,13 @@
                         <span><a href="{{ path("adminProfile") }}">Profile</a></span>
                     </li>
                     <li class="sidebar-menu-link">
-                        <span><a href="/admin/skills">Skills</a></span>
+                        <span><a href="{{ path("adminSkills") }}">Skills</a></span>
                     </li>
                     <li class="sidebar-menu-link">
                         <span><a href="{{ path("adminProject") }}">Portfolio</a></span>
                     </li>
                     <li class="sidebar-menu-link">
-                        <span><a href="/admin/experiences">Experiences</a></span>
+                        <span><a href="{{ path("adminEducation") }}">Experiences</a></span>
                     </li>
                     <li class="sidebar-menu-link">
                         <span><a href="{{ path("adminContact") }}">Inbox</a></span>

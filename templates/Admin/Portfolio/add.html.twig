@@ -1,9 +1,89 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-<section class="adminAddProject containerBody">
-    <div class="container">
-        {{ form(form_add_project, {'action': path('adminAddProject'), 'method': 'POST'}) }}
+<section class="admin-portfolio">
+    <a href="{{ path("adminProject") }}">
+        <button class="btn btn-primary">Return</button>
+    </a>
+
+    <h1>Add a folio</h1>
+    
+    <div class="portfolio-add">
+        {# Notification #}
+        {% if response != [] %}
+            <div class="notification {{ response.classname }}">
+                <div class="icon">
+                    <img src="{{ asset(response.icon) }}" alt="icon" />
+                </div>
+                
+                <div class="message">
+                    <span>{{ response.message }}</span>
+                </div>
+            </div>
+        {% endif %}
+
+        {# Add Folio Form #}
+        {{ form_start(form_add_project, {'action': path('adminAddProject'), 'method': 'POST', "attr": {"class": "portfolio-form"}}) }}
+
+            {# Title #}
+            <div class="form-field">
+                {{ form_label(form_add_project.name) }}
+                {{ form_widget(form_add_project.name) }}
+            </div>
+            
+            {# Description #}
+            <div class="form-field">
+                {{ form_label(form_add_project.description) }}
+                {{ form_widget(form_add_project.description) }}
+            </div>
+
+            {# Img #}
+            <div class="form-field">
+                {{ form_label(form_add_project.imgPath) }}
+                {{ form_widget(form_add_project.imgPath) }}
+            </div>
+
+            {# Github URL #}
+            <div class="form-field">
+                {{ form_label(form_add_project.githubLink) }}
+                {{ form_widget(form_add_project.githubLink) }}
+            </div>
+
+            {# Prod URL #}
+            <div class="form-field">
+                {{ form_label(form_add_project.siteLink) }}
+                {{ form_widget(form_add_project.siteLink) }}
+            </div>
+
+            {# Client name #}
+            <div class="form-field">
+                {{ form_label(form_add_project.clientName) }}
+                {{ form_widget(form_add_project.clientName) }}
+            </div>
+
+            {# Type #}
+            <div class="form-field">
+                {{ form_label(form_add_project.type) }}
+                {{ form_widget(form_add_project.type) }}
+            </div>
+
+            {# Tools #}
+            <div class="form-field">
+                {{ form_label(form_add_project.skills) }}
+                {{ form_widget(form_add_project.skills) }}
+            </div>
+            
+            {# Version #}
+            <div class="form-field">
+                {{ form_label(form_add_project.version) }}
+                {{ form_widget(form_add_project.version) }}
+            </div>
+
+            {# Submit button #}
+            <div class="form-button">
+                {{ form_widget(form_add_project.submit, {"attr": {"class": "btn btn-primary"}}) }}
+            </div>
+        {{ form_end(form_add_project, {'action': path('adminAddProject'), 'method': 'POST', "attr": {"class": "portfolio-form"}}) }}
     </div>
 </section>
 {% endblock %}

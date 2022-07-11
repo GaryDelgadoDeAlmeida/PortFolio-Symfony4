@@ -43,35 +43,30 @@
                 display: none;
             }
 
-            .skill-card {
+            .skill-wrapper {
                 // 
 
-                .header {
-                    // 
-                }
+                .skill-card {
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0 0 calc(-1 * 10px) calc(-1 * 10px);
 
-                .content {
-                    // 
+                    .skill-item {
+                        padding: 10px;
+                        display: flex;
+                        flex-direction: row;
+                        margin: 0 0 10px 10px;
+                        border: 1px solid var(--c-lightGray);
+                        box-shadow: 3px 3px 3px var(--c-lightGray);
 
-                    ul {
-                        margin: 0;
-                        padding: 0;
-                        list-style: none;
+                        .item {
+                            margin-right: 5px;
+                        }
 
-                        li {
-                            padding: 10px 0;
-
-                            &:not(:last-child) {
-                                margin-bottom: 10px;
-                            }
-
-                            span {
-                                padding: 10px;
-                                margin-right: 10px;
-                                border: 1px solid var(--c-lightGray);
-                                // background-color: var(--c-lightGray);
-                                box-shadow: 3px 3px 3px var(--c-lightGray);
-                            }
+                        .item-action {
+                            cursor: pointer;
 
                             img {
                                 width: 20px;
