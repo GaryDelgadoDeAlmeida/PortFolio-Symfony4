@@ -63,8 +63,8 @@
                             {% for item in latestEmail %}
                                 <tr>
                                     <td>
-                                        <div class="f-left">Garry DE ALMEIDA</div>
-                                        <div class="f-right">04/05/2022</div>
+                                        <div class="f-left">{{ item.senderFullName }}</div>
+                                        <div class="f-right">{{ item.createdAt|date("d/m/Y") }}</div>
                                     </td>
                                 </tr>
                             {% else %} 

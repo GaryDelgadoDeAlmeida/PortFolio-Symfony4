@@ -478,6 +478,14 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin/contact/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminRemoveMail")
+     */
+    public function admin_remove_mail(int $id)
+    {
+        dd($id);
+    }
+
+    /**
      * @Route("/admin/logout", name="adminLogout")
      */
     public function admin_logout()
