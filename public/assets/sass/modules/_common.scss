@@ -1,20 +1,22 @@
 /*------------------------------------------------------------------- 
 								Import parts
 -------------------------------------------------------------------*/
-@import "./part/background";
+@import "./part/alert";
 @import "./part/button";
 @import "./part/wrapper";
-@import "./part/heigth";
-@import "./part/texte";
-@import "./part/width";
+@import "./part/helper";
 @import "./part/overlay";
-@import "./part/alert";
 @import "./part/pagination";
+@import "./part/notification";
+@import "./part/message";
+@import "./part/form";
+@import "./part/table";
 
 /*------------------------------------------------------------------- 
 								Import forms
 -------------------------------------------------------------------*/
 @import "./form/contact";
 @import "./form/login";
-@import "./form/portfolio";
 @import "./form/profile";
+@import "./form/portfolio";
+@import "./form/password";

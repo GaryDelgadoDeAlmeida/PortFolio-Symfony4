@@ -46,8 +46,14 @@
                 </div>
             {% endif %}
         {% else %}
-            <div class="alert alert-information">
-                <span>Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a></span>
+            <div class="notification information">
+                <div class="icon">
+                    <img src="{{ asset("/content/images/svg/informationmark-gray.svg") }}" alt="icon" />
+                </div>
+                
+                <div class="message">
+                    <span>Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a></span>
+                </div>
             </div>
         {% endif %}
     </div>

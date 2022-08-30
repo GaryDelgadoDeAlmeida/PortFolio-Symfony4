@@ -63,11 +63,17 @@
             </div>	
         </div>
 
-        <div class="form"}>
+        <div class="form">
             {# Message d'après l'envoi #}
             {% if response != [] %}
-                <div class="alert {{ response.answer == true ? "alert-success" : "alert-danger" }}">
-                    <span>{{ response.content }}</span>
+                <div class="notification {{ response.class }}">
+                    <div class="icon">
+                        <img src="{{ asset(response.icon) }}" alt="icon" />
+                    </div>
+                    
+                    <div class="message">
+                        <span>{{ response.content }}</span>
+                    </div>
                 </div>
                 <div>&nbsp;</div>
             {% endif %}

@@ -36,6 +36,7 @@ class ContactRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->setFirstResult(($offset - 1) * $limit)
             ->setMaxResults($limit)
+            ->orderBy("c.createdAt", "DESC")
             ->getQuery()
             ->getResult()
         ;

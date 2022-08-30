@@ -8,7 +8,7 @@
     grid-template-columns: repeat(3, 1fr);
 
     .overlay-card {
-        width: 400px;
+        max-width: 400px;
         height: 250px;
 
         .overlay-image {
@@ -79,5 +79,9 @@
 @media screen and (max-width: 767px) {
     .overlay-row {
         grid-template-columns: repeat(1, 1fr);
+
+        .overlay-card {
+            max-width: 100%;
+        }
     }
 }

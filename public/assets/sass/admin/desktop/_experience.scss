@@ -2,71 +2,104 @@
     width: 100%;
     margin: 25px 0;
 
-    .experiences {
-        border-left: 2px solid var(--c-black);
+    // .experiences {
+    //     border-left: 2px solid var(--c-black);
 
-        .experience-card {
-            padding: 25px 0 25px 25px;
-            position: relative;
+    //     .experience-card {
+    //         padding: 25px 0 25px 25px;
+    //         position: relative;
 
-            &::before {
-                content: "";
-                top: 45%;
-                left: 0px;
-                width: 10px;
-                height: 10px;
-                position: absolute;
-                border-radius: 50%;
-                transform: translate(-55%, -25%);
-                background-color: var(--c-black);
-            }
+    //         &::before {
+    //             content: "";
+    //             top: 45%;
+    //             left: 0px;
+    //             width: 10px;
+    //             height: 10px;
+    //             position: absolute;
+    //             border-radius: 50%;
+    //             transform: translate(-55%, -25%);
+    //             background-color: var(--c-black);
+    //         }
 
-            .job, 
-            .degree {
-                font-weight: 600;
-                font-size: 1.1rem;
+    //         .job, 
+    //         .degree {
+    //             font-weight: 600;
+    //             font-size: 1.1rem;
 
-                .organisation, 
-                .school {
-                    text-decoration: none;
-                    text-transform: uppercase;
-                    color: var(--c-black);
-                }
-            }
+    //             .organisation, 
+    //             .school {
+    //                 text-decoration: none;
+    //                 text-transform: uppercase;
+    //                 color: var(--c-black);
+    //             }
+    //         }
 
-            .description {
-                margin: 0;
-                padding: 10px 0 0 0;
+    //         .description {
+    //             margin: 0;
+    //             padding: 10px 0 0 0;
                 
-                p {
-                    margin: 0;
-                    padding: 0;
-                }
-            }
+    //             p {
+    //                 margin: 0;
+    //                 padding: 0;
+    //             }
+    //         }
 
-            .tools, .projects {
-                margin: 0;
-                padding: 10px 0 0 0;
+    //         .tools, .projects {
+    //             margin: 0;
+    //             padding: 10px 0 0 0;
 
-                h3 {
-                    margin: 0;
-                    padding: 5px 0 0 0;
-                    font-size: 1rem;
-                }
+    //             h3 {
+    //                 margin: 0;
+    //                 padding: 5px 0 0 0;
+    //                 font-size: 1rem;
+    //             }
 
-                div {
-                    overflow-wrap: break-word;
+    //             div {
+    //                 overflow-wrap: break-word;
 
-                    a {
-                        text-decoration: none;
-                        text-transform: none;
-                        color: var(--c-black);
+    //                 a {
+    //                     text-decoration: none;
+    //                     text-transform: none;
+    //                     color: var(--c-black);
         
-                        &:hover {
-                            border-bottom: 1px solid var(--c-black);
-                            transition: margin-left 0.3s;
-                        }
-                    }
+    //                     &:hover {
+    //                         border-bottom: 1px solid var(--c-black);
+    //                         transition: margin-left 0.3s;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    .experience-add {
+        margin-top: 15px;
+    }
+
+    .experience-table {
+        margin-top: 15px;
+
+        tbody tr td {
+            text-align: center;
+        }
+        
+        @media (max-width: 766px) {
+            tbody tr td {
+                
+                &:nth-child(1):before {
+                    content: "Date";
+                }
+                
+                &:nth-child(2):before {
+                    content: "Type";
+                }
+                
+                &:nth-child(3):before {
+                    content: "Structure";
+                }
+                
+                &:nth-child(4):before {
+                    content: "Action";
                 }
             }
         }

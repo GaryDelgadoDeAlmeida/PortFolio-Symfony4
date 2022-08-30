@@ -5,28 +5,36 @@
         <h1>Inbox</h1>
 
         <div class="emails">
-            {% if list_mail != null %}
-                {% for mail in list_mail %}
-                    <div class="email-card {{ mail.isRead == false ? "unread" : "" }}">
-                        <a href="{{ path('adminReadMail', {'id': mail.id}) }}">
-                            <div class="email-object">
-                                <span>{{ mail.emailSubject }}</span>
-                                <span>{{ mail.senderFullName }}</span>
-                            </div>
-                            <div class="email-content">
-                                <span>{{ mail.emailContent|slice(0, 100) }}</span>
-                            </div>
-                            <div class="email-date">
-                                <span>{{ mail.createdAt|date("d/m/Y") }}</span>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div>
-                    <span class="text-center">Il n'y a aucun mail envoyé depuis le portfolio</span>
-                </div>
-            {% endif %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Object</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if list_mail != null %}
+                        {% for mail in list_mail %}
+                            <tr class="email-card {{ mail.isRead == false ? "unread" : "" }}">
+                                <td>{{ mail.emailSubject }}</td>
+                                <td>{{ mail.emailContent|slice(0, 100) }}</td>
+                                <td>{{ mail.createdAt|date("d/m/Y") }}</td>
+                                <td>
+                                    <a href="{{ path('adminReadMail', {'id': mail.id}) }}">
+                                        <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="See more" />
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center">Il n'y a aucun mail envoyé depuis le portfolio</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
         </div>
 
         {% if offset < total_page  %}

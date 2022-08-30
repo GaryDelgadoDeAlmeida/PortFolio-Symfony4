@@ -1,0 +1,68 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="admin-witnesses">
+        <a href="{{ path("adminAddWitness") }}">
+            <button class="btn btn-green">Add a witness</button>
+        </a>
+
+        <table class="witnesses-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Email</th>
+                    <th>Witness</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for witness in witnesses %}
+                    <tr class="witness-item">
+                        <td>06/08/2022</td>
+                        <td>Jacob</td>
+                        <td>jacob@yahoo.com</td>
+                        <td>Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum</td>
+                        <td>
+                            <button onClick={(e) => this.handleRemove(e)}>
+                                <img src="{{ asset("/content/images/svg/close-red.svg") }}" alt="close-icon" />
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if nbrOffsets > 1 %}
+            <div class="pagination">
+                <div class="first-page">
+                    <a href="{{ path("ad<inWitnesses") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt="double-angle-left" /></a>
+                </div>
+                
+                <div class="previous-page">
+                    <a href="{{ path("adminWitnessesByPage") }}"><img src="{{ asset("/content/images/svg/angle-left.svg") }}" alt="angle-left" /></a>
+                </div>
+                
+                <div class="previous-page">
+                    <a href="{{ path("adminWitnessesByPage") }}">1</a>
+                </div>
+
+                <div class="current-page">
+                    <span>2</span>
+                </div>
+                
+                <div class="next-page">
+                    <a href="{{ path("adminWitnessesByPage") }}">3</a>
+                </div>
+                
+                <div class="next-page">
+                    <a href="{{ path("adminWitnessesByPage") }}"><img src="{{ asset("/content/images/svg/angle-right.svg") }}" alt="angle-right" /></a>
+                </div>
+                
+                <div class="last-page">
+                    <a href="{{ path("adminWitnessesByPage") }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt="double-angle-right" /></a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

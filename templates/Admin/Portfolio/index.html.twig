@@ -30,18 +30,25 @@
                     </a>
                 {% endfor %}
             {% else %}
-                <div class="alert alert-warning">
-                    <span>Il n'y a aucun projet enregistré dans la database.</span>
+                <div class="notification information">
+                    <div class="icon">
+                        <img src="{{ asset("/content/images/svg/informationmark-gray.svg") }}" alt="icon" />
+                    </div>
+                    
+                    <div class="message">
+                        <span>Il n'y a aucun projet enregistré dans la database.</span>
+                    </div>
                 </div>
             {% endif %}
 
+            {# Pagination #}
             {% if page >= 1 and page <= total_page %}
                 <div class="pagination">
-                    <div class="first-page">
-                        <a href="{{ path("adminProject") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt={"double-angle-left"} /></a>
-                    </div>
-                    
                     {% if page - 1 >= 1  %}
+                        <div class="first-page">
+                            <a href="{{ path("adminProject") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt={"double-angle-left"} /></a>
+                        </div>
+
                         <div class="previous-page">
                             <a href="{{ path("adminProjectPage", {'page': (page - 1)}) }}">{{ page - 1 }}</a>
                         </div>
@@ -55,11 +62,11 @@
                         <div class="next-page">
                             <a href="{{ path("adminProjectPage", {'page': (page + 1)}) }}">{{ page + 1 }}</a>
                         </div>
+
+                        <div class="last-page">
+                            <a href="{{ path("adminProjectPage", {'page': (total_page)}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt={"double-angle-right"} /></a>
+                        </div>
                     {% endif %}
-                    
-                    <div class="last-page">
-                        <a href="{{ path("adminProjectPage", {'page': (total_page)}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt={"double-angle-right"} /></a>
-                    </div>
                 </div>
             {% endif %}
         </div>

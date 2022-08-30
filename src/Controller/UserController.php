@@ -40,7 +40,8 @@ class UserController extends AbstractController
             "frontend" => $skillRepo->getSkillsByCategory("frontend"),
             "backend" => $skillRepo->getSkillsByCategory("backend"),
             "tools" => $skillRepo->getSkillsByCategory("tools"),
-            "lastestProject" => $this->em->getRepository(Project::class)->getLastestProject()
+            "lastestProject" => $this->em->getRepository(Project::class)->getLastestProject(),
+            "latestExperience" => []
         ]);
     }
 
@@ -72,9 +73,9 @@ class UserController extends AbstractController
         $response = [];
 
         if($formContact->isSubmitted() && $formContact->isValid()) {
-            $response = $this->contactManager->sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
+            ["answer" => $answer, "response" => $response] = $this->contactManager->sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
             
-            if(isset($response["answer"]) && $response["answer"] == true) {
+            if($answer) {
                 $newSend->setEmailContent(json_encode($newSend->getEmailContent()));
                 $newSend->setIsRead(false);
                 $newSend->setCreatedAt(new \DateTimeImmutable());

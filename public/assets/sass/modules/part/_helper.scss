@@ -1,0 +1,73 @@
+/* ---------------------------------------- *\
+                    Width
+\* ---------------------------------------- */
+.w-100px {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.w-150px {
+    width: 150px;
+}
+
+.w-250px {
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+.w-33 {
+    width: calc(100% / 3);
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+
+/* ---------------------------------------- *\
+                    Height
+\* ---------------------------------------- */
+.h-150px {
+    height: 150px !important;
+    margin-bottom: 10px;
+}
+
+.h-180px {
+    height: 180px;
+}
+
+
+/* ----------------------------------------------- *\
+                    Background
+\* ----------------------------------------------- */
+.bg-white {
+    background-color: var(--c-white);
+}
+
+.bg-black {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+
+/* ---------------------------------------- *\
+                    Texte
+\* ---------------------------------------- */
+.txt-center {
+    text-align: center;
+}
+
+.txt-right {
+    text-align: right;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}

@@ -1,20 +1,31 @@
-.profile-form {
+form {
     // 
     
-    .info-field {
+    .form-field {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
         line-height: 30px;
-        display: grid;
 
         &:not(:last-child) {
             margin-bottom: 10px;
         }
 
         label {
-            font-weight: 600;
+            gap: 5px;
+            display: flex;
             padding-bottom: 5px;
+
+            &[for] {
+                font-weight: 700;
+            }
+
+            span {
+                margin: auto 0;
+            }
         }
 
-        input {
+        input:not([type="file"]) {
             height: 35px;
             padding: 0 20px;
             border-radius: 25px;
@@ -29,7 +40,15 @@
         }
     }
 
-    .info-edit {
+    .form-radio {
+        // 
+    }
+
+    .form-select {
+        // 
+    }
+
+    .form-button {
         margin: 20px 0;
         text-align: right;
 

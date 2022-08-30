@@ -2,9 +2,6 @@
     // 
 
     .email-card {
-        padding: 15px 0;
-        background-color: var(--c-white);
-        border: 1px solid var(--c-silver);
         
         &:hover {
             box-shadow: 1px 1px 3px var(--c-black);
@@ -14,31 +11,23 @@
             background-color: #E2FCFE;
         }
 
-        a {
-            gap: 10px;
-            flex: 1;
-            display: flex;
-            padding: 0 15px;
-            flex-direction: row;
-            color: var(--c-black);
-            text-decoration: none;
-
-            .email-object, .email-date {
-                width: 15%;
-                margin: auto;
-            }
-
-            .email-object {
-                text-align: left;
-            }
-
-            .email-date {
-                text-align: right;
-            }
-
-            .email-content {
-                width: 70%;
-                margin: auto;
+        td {
+            @media (max-width: 766px) {
+                &:nth-child(1)::before {
+                    content: "Object";
+                }
+                
+                &:nth-child(2)::before {
+                    content: "Content";
+                }
+                
+                &:nth-child(3)::before {
+                    content: "Date";
+                }
+                
+                &:nth-child(4)::before {
+                    content: "Action";
+                }
             }
         }
     }
@@ -60,15 +49,30 @@
             display: flex;
 
             .avatar {
-                // 
+                width: 50px;
 
                 img {
-                    width: 50px;
+                    width: 100%;
                 }
             }
 
             .info {
                 display: grid;
+                width: 100%;
+            }
+
+            .actions {
+                justify-content: end;
+                
+                button {
+                    width: 40px;
+                    border: none;
+                    background: none;
+
+                    img {
+                        height: 100%;
+                    }
+                }
             }
         }
     }

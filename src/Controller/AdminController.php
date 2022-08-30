@@ -2,19 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\{About, Contact, Education, Project, Skills};
-use App\Form\{AboutAdminType, ProfileAdminType, ProjectAdminType, EducationAdminType, SkillsType};
-use App\Manager\ExperienceManager;
 use App\Service\RegexService;
+use App\Manager\ExperienceManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security as Secu;
+use App\Entity\{About, Contact, Education, Project, Skills};
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Form\{ProfileAdminType, ProjectAdminType, EducationAdminType, SkillsType, UpdatePasswordType};
 
 /**
  * 
@@ -56,83 +56,87 @@ class AdminController extends AbstractController
      */
     public function admin_profile(Request $request)
     {
+        // ProfileAdminType
         $formProfile = $this->createForm(ProfileAdminType::class, $this->user);
         $formProfile->handleRequest($request);
 
+        // UpdatePasswordType
+        $formUpdatePwd = $this->createForm(UpdatePasswordType::class);
+        $formUpdatePwd->handleRequest($request);
+
+        // ProfileAdminType
         if($formProfile->isSubmitted() && $formProfile->isValid()) {
-            if(
-                preg_match(RegexService::SECURE_PASSWORD, $this->user->getPassword()) && 
-                preg_match(RegexService::ONLY_NUMERIC, $this->user->getPassword())
-            ) {
+            try {
+                // Persist & save all changes
                 $this->em->persist($this->user);
                 $this->em->flush();
-                $message = [
-                    "class" => 'alert alert-success',
-                    "content" => 'La mise à jour s\'est correctement éffectuée.'
+
+                // Return a message to the user
+                $updatePwdMessage = [
+                    "class" => "success",
+                    "icon" => "/content/images/svg/checkmark-green.svg",
+                    "content" => "La mise à jour s'est correctement éffectuée."
                 ];
-            } else {
-                $message = [
-                    "class" => 'alert alert-warning',
-                    "content" => 'Le mot de passe doit contenir des caractères spéciaux et des nombres en plus de sa longue minimale'
+            } catch(\Exeception $e) {
+                $updatePwdMessage = [
+                    "class" => "danger",
+                    "icon" => "/content/images/svg/closemark-red.svg",
+                    "content" => $e->getMessage()
                 ];
+            } finally {}
+        }
+
+        // UpdatePasswordType
+        if($formUpdatePwd->isSubmitted() && $formUpdatePwd->isValid()) {
+            $formUpdatePwdData = $formUpdatePwd-getData();
+
+            // Check if the password is the same of the old one
+            if($this->user->getPassword() == $formUpdatePwdData["oldPassword"]) {
+
+                // Check if the old password and the new one have diffirent value
+                if($this->user->getPassword() != $formUpdatePwdData["newPassword"]) {
+                    
+                    // Check if the new password and the confirmation field have the exact same value
+                    if($formUpdatePwdData["newPassword"] === $formUpdatePwdData["confirmNewPassword"]) {
+
+                        // Check if the new password have the minimum requierement
+                        if(
+                            preg_match(RegexService::SECURE_PASSWORD, $formUpdatePwdData["newPassword"]) && 
+                            preg_match(RegexService::ONLY_NUMERIC, $formUpdatePwdData["newPassword"])
+                        ) {
+                            try {
+                                $this->em->persist($this->user);
+                                $this->em->flush();
+                                $message = [
+                                    "class" => "success",
+                                    "icon" => "/content/images/svg/checkmark-green.svg",
+                                    "content" => "La mise à jour s'est correctement éffectuée."
+                                ];
+                            } catch(\Exeception $e) {
+                                $message = [
+                                    "class" => "danger",
+                                    "icon" => "/content/images/svg/closemark-red.svg",
+                                    "content" => $e->getMessage()
+                                ];
+                            } finally {}
+                        } else {
+                            $message = [
+                                "class" => "danger",
+                                "icon" => "/content/images/svg/closemark-red.svg",
+                                "content" => "Le mot de passe doit contenir des caractères spéciaux et des nombres en plus de sa longue minimale"
+                            ];
+                        }
+                    }
+                }
             }
         }
 
         return $this->render('Admin/Profile/index.html.twig', [
-            'user' => $this->user,
-            'form' => $formProfile->createView(),
-            'message' => isset($message) ? $message : null,
-            "title" => "Profile"
-        ]);
-    }
-
-    /**
-     * @Route("/admin/profile/about", name="adminAbout")
-     */
-    public function admin_about(Request $request)
-    {
-        $about = $this->user->getAbout() != null ? $this->user->getAbout() : new About();
-        $formAbout = $this->createForm(AboutAdminType::class, $about);
-        $formAbout->handleRequest($request);
-
-        if($formAbout->isSubmitted() && $formAbout->isValid()) {
-            $imageFile = $formAbout['img']->getData();
-            
-            if($imageFile) {
-                // this is needed to safely include the file name as part of the URL
-                $newFilename = 'photo_garry_almeida.'.$imageFile->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    if(array_search('./content/images/'.$newFilename, glob("./content/images/*.".$imageFile->guessExtension()))) {
-                        unlink('./content/images/'.$newFilename);
-                    }
-                    
-                    $imageFile->move(
-                        $this->getParameter('photo_img_dir'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    dd($e->getMessage());
-                }
-
-                $about->setImgPath($newFilename);
-            }
-
-            $about->setIdUSer($this->user);
-            $this->em->persist($about);
-            $this->em->flush();
-            $message = [
-                "class" => 'alert alert-success',
-                "content" => 'La mise à jour s\'est correctement éffectuée.'
-            ];
-        }
-
-        return $this->render('Admin/Profile/about.html.twig', [
-            'user' => $this->user,
-            'form' => $formAbout->createView(),
-            'message' => isset($message) ? $message : null,
-            "title" => "Profile - about"
+            "user" => $this->user,
+            "form" => $formProfile->createView(),
+            "pwdForm" => $formUpdatePwd->createView(),
+            "message" => isset($message) ? $message : null,
+            "updatePwdMessage" => isset($updatePwdMessage) ? $updatePwdMessage : null,
         ]);
     }
 
@@ -146,7 +150,7 @@ class AdminController extends AbstractController
         $skill->setType($print);
         $formSkills = $this->createForm(SkillsType::class, $skill);
         $formSkills->handleRequest($request);
-        $response = [];
+        $response = !empty($request->get("response")) ? json_decode(urldecode($request->get("response")), true) : [];
 
         if($formSkills->isSubmitted() && $formSkills->isValid()) {
 
@@ -189,7 +193,43 @@ class AdminController extends AbstractController
      */
     public function admin_delete_skill(int $id)
     {
-        return $this->redirectToRoute("adminSkills");
+        $skill = $this->em->getRepository(Skills::class)->find($id);
+        
+        if(!empty($skill)) {
+            try {
+
+                // Remove all associations with any projects
+                foreach($skill->getProjects() as $project) {
+                    $skill->removeProject($project);
+                }
+                
+                // Remove the skill from the database
+                $this->em->remove($skill);
+                $this->em->flush();
+    
+                // Return a message to the user
+                return $this->redirectToRoute("adminSkills", [
+                    "response" => urlencode(json_encode([
+                        "class" => "success",
+                        "message" => "The skill {$skill->getSkill()} has been successfully deleted."
+                    ], JSON_UNESCAPED_UNICODE))
+                ]);
+            } catch(Exception $e) {
+                return $this->redirectToRoute("adminSkills", [
+                    "response" => urlencode(json_encode([
+                        "class" => "success",
+                        "message" => "An error has been encountered : {$e->getMessage()}"
+                    ], JSON_UNESCAPED_UNICODE))
+                ]);
+            }
+        }
+
+        return $this->redirectToRoute("adminSkills", [
+            "response" => urlencode(json_encode([
+                "class" => "success",
+                "message" => "The skill hasn't been found."
+            ], JSON_UNESCAPED_UNICODE))
+        ]);
     }
 
     /**
@@ -269,8 +309,12 @@ class AdminController extends AbstractController
      */
     public function admin_delete_education(Education $education)
     {
-        $this->em->remove($education);
-        $this->em->flush();
+        try {
+            $this->em->remove($education);
+            $this->em->flush();
+        } catch(Exception $e) {
+            die($e->getMessage());
+        }
 
         return $this->redirectToRoute("adminProject");
     }
@@ -429,7 +473,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/portfolio/delete/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteProject")
+     * @Route("/admin/portfolio/{id}/delete", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteProject")
      */
     public function admin_delete_project(Project $project)
     {
@@ -482,7 +526,75 @@ class AdminController extends AbstractController
      */
     public function admin_remove_mail(int $id)
     {
-        dd($id);
+        // Check the email id is a positive integer
+        if($id < 1) {
+            return $this->redirectToRoute("adminContact", [
+                "response" => [
+                    "class" => "danger",
+                    "message" => "An error has been found with the email id. The removal process has been cancelled."
+                ]
+            ]);
+        }
+
+        // Get the mail in the database
+        $email = $this->em->getRepository(Contact::class)->find($id);
+
+        // Check if an sended email has been found
+        if(!empty($email)) {
+            try {
+                // Remove the email and save the changes in the database
+                $this->em->remove($email);
+                $this->em->flush();
+
+                // Return a response to the user
+                return $this->redirectToRoute("adminContact", [
+                    "response" => [
+                        "class" => "success",
+                        "message" => "The email sended by {$email->getSenderEmail()} has been successfully removed."
+                    ]
+                ]);
+            } catch(Exception $e) {
+                return $this->redirectToRoute("adminContact", [
+                    "response" => [
+                        "class" => "danger",
+                        "message" => "An error has been found with the email id. The removal process has been cancelled."
+                    ]
+                ]);
+            }
+        }
+
+        return $this->redirectToRoute("adminContact", [
+            "response" => [
+                "class" => "danger",
+                "message" => "An error has been found with the email id. The removal process has been cancelled."
+            ]
+        ]);
+    }
+
+    /**
+     * @Route("/admin/witnesses", name="adminWitnesses")
+     * @Route("/admin/witnesses/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminWitnessesByPage")
+     */
+    public function admin_witnesses(int $page)
+    {
+        $limit = 10;
+        $page = $page < 1 ? 1 : $page;
+
+        return $this->render("Admin/Witness/list.html.twig", [
+            "offset" => $page,
+            "nbrOffsets" => ceil( 0 / $limit),
+            "witnesses" => [],
+        ]);
+    }
+
+    /**
+     * @Route("/admin/witnesses/add", name="adminAddWitness")
+     */
+    public function admin_add_witness(Request $request)
+    {
+        return $this->render("Admin/Witness/form.html.twig", [
+            "addWitnessForm" => []
+        ]);
     }
 
     /**

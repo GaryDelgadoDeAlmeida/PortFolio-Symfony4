@@ -1,0 +1,49 @@
+.notification {
+    padding: 15px;
+    display: flex;
+    text-align: left;
+
+    &.success {
+        background-color: var(--c-lightGreen);
+        border-left: 5px solid var(--c-greenLime);
+        color: var(--c-green);
+    }
+
+    &.warning {
+        background-color: var(--c-lightOrange);
+        border-left: 5px solid var(--c-orange);
+        color: var(--c-orange);
+    }
+
+    &.danger {
+        background-color: var(--c-lightRed);
+        border-left: 5px solid var(--c-darkRed);
+        color: var(--c-darkRed);
+    }
+
+    &.information {
+        background-color: var(--c-lightGray);
+        border-left: 5px solid var(--c-dimmGray);
+        color: var(--c-dimmGray);
+    }
+
+    .icon {
+        margin: auto 0;
+
+        img {
+            height: 35px;
+            vertical-align: middle;
+            background-size: cover;
+        }
+    }
+
+    .message {
+        margin: auto 0;
+        padding-left: 5px;
+
+        span {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+    }
+}

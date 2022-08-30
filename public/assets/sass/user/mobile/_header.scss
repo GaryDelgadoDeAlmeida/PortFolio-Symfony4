@@ -23,25 +23,23 @@
                 }
 
                 .header-menu-links-mobile {
-                    top: 0;
-                    right: -100%;
+                    margin-top: 0;
+                    position: fixed;
                     width: 100%;
                     height: 100vh;
-                    z-index: 9999;
-                    display: flex;
-                    margin-top: 0;
-                    padding: 10px 0;
-                    position: fixed;
-                    transition: 0.7s;
-                    text-align: left;
-                    line-height: normal;
-                    scroll-behavior: none;
-                    flex-direction: row-reverse;
+                    overflow-y: hidden;
                     background-color: var(--c-approxNero);
+                    right: -100%;
+                    top: 0;
+                    text-align: left;
+                    margin: 100px 0%;
+                    line-height: normal;
+                    transition: 0.7s;
+                    z-index: 9999;
+                    scroll-behavior: none;
 
                     .hide-menu-btn {
                         cursor: pointer;
-                        padding: 25px;
 
                         img {
                             height: 35px;
@@ -49,8 +47,6 @@
                     }
 
                     .links-mobile-items {
-                        width: 100%;
-                        text-align: left;
 
                         ul {
                             padding-left: 10px;

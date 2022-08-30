@@ -1,24 +1,36 @@
 .admin-profile .profile {
+    gap: 20px;
     width: 100%;
     display: flex;
 
     .profile-image, .profile-infos {
+        height: 100%;
+    }
+
+    .profile-item {
         border-radius: 10px;
         background-color: var(--c-white);
         border: 1px solid var(--c-lightWhite);
         box-shadow: 1px 1px 3px var(--c-gray);
-        padding: 20px 0;
-        height: 100%;
+        padding: 20px;
+
+        &:not(:first-child) {
+            margin-top: 20px;
+        }
     }
     
     .profile-image {
         text-align: center;
-        margin-right: 20px;
         width: 300px;
 
-        img {
-            width: 200px;
-            border-radius: 50%;
+        label {
+            cursor: pointer;
+            display: inline-block;
+
+            img {
+                width: 200px;
+                border-radius: 50%;
+            }
         }
 
         p {

@@ -26,10 +26,16 @@ a, a:hover {
   --c-lightWhite: #f7f8fa;
   --c-lightGray: #e8e8e8;
   --c-gray: #a9a9a9;
+  --c-metalGray: #999999;
   --c-dimmGray: #696969;
   --c-silver: #c8c8c8;
+  --c-lightRed: #ffe0e3;
   --c-red: #c00000;
+  --c-darkRed: #8B0000;
+  --c-lightGreen: #a8f1c6;
+  --c-greenLime: #198344;
   --c-green: #188038;
+  --c-lightOrange: #fff9f0;
   --c-orange: #ffa500;
   --c-skyBlue: #60d9fa;
   --c-skyBlueReact: #61dafb;
@@ -53,6 +59,7 @@ a, a:hover {
 @import "./user/desktop/about";
 @import "./user/desktop/about_skills";
 @import "./user/desktop/about_service";
+@import "./user/desktop/about_experience";
 @import "./user/desktop/portfolio";
 @import "./user/desktop/news";
 @import "./user/desktop/contact";
@@ -62,9 +69,11 @@ a, a:hover {
 
 // Tablet styles
 @import "./user/tablet/about";
+@import "./user/tablet/about_service";
 
 // Mobile styles
 @import "./user/mobile/about";
+@import "./user/mobile/about_service";
 @import "./user/mobile/contact";
 @import "./user/mobile/header";
 
@@ -77,6 +86,7 @@ a, a:hover {
 @import "./admin/desktop/portfolio";
 @import "./admin/desktop/email";
 @import "./admin/desktop/skill";
+@import "./admin/desktop/witnesses";
 
 // Tablet styles
 @import "./admin/tablet/home";
