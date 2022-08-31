@@ -234,12 +234,18 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/admin/education", name="adminEducation")
+     * @Route("/admin/education/page/{offset}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEducationByPage")
      */
-    public function admin_education()
+    public function admin_education(int $offset = 1)
     {
+        $limit = 10;
+        $offset = $offset > 0 ? (int)$offset : 1;
+        $educationRepo = $this->getDoctrine()->getRepository(Education::class);
+
         return $this->render('Admin/Education/index.html.twig', [
-            "title" => "Education",
-            "educations" => $this->getDoctrine()->getRepository(Education::class)->getEducations()
+            "offset" => $offset,
+            "educations" => $educationRepo->getEducations($offset, $limit),
+            "nbrOffsets" => ceil($educationRepo->countEducations() / $limit)
         ]);
     }
 
@@ -253,21 +259,37 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         $message = [];
 
-        if($form->isSubmitted() && $form->isValid()) {
-
-            if(!is_null($education->getEndDate()) && $education->getInProgress()) {
-                $education->setEndDate(null);
-            } elseif(is_null($education->getEndDate()) && !$education->getInProgress()) {
-                $education->setInProgress(true);
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                try {
+                    if(!is_null($education->getEndDate()) && $education->getInProgress()) {
+                        $education->setEndDate(null);
+                    } elseif(is_null($education->getEndDate()) && !$education->getInProgress()) {
+                        $education->setInProgress(true);
+                    }
+                    
+                    $this->em->persist($education);
+                    $this->em->flush();
+        
+                    $message = [
+                        "class" => "success",
+                        "icon" => "/content/images/svg/checkmark-green.svg",
+                        "content" => "L'ajout a été faite."
+                    ];
+                } catch(\Exception $e) {
+                    $message = [
+                        "class" => "danger",
+                        "icon" => "/content/images/svg/closemark-red.svg",
+                        "content" => "Une erreur a été rencontrée : {$e->getMessage()}"
+                    ];
+                } finally {}
+            } else {
+                $message = [
+                    "class" => "warning",
+                    "icon" => "/content/images/svg/questionmark-yellow.svg",
+                    "content" => "Une erreur a été rencontrée avec un ou plusieurs renseignés."
+                ];
             }
-            
-            $this->em->persist($education);
-            $this->em->flush();
-
-            $message = [
-                "class" => "alert-success text-center",
-                "content" => "L'ajout a été faite."
-            ];
         }
 
         return $this->render('Admin/Education/add.html.twig', [
@@ -305,7 +327,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/education/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteEducation")
+     * @Route("/admin/education/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteEducation")
      */
     public function admin_delete_education(Education $education)
     {
@@ -326,6 +348,7 @@ class AdminController extends AbstractController
     public function admin_project(int $page = 1)
     {
         $limit = 20;
+        $page = $page > 0 ? $page : 1;
 
         return $this->render('Admin/Portfolio/index.html.twig', [
             "page" => $page,
@@ -391,10 +414,10 @@ class AdminController extends AbstractController
             }
         }
 
-        return $this->render('Admin/Portfolio/edit.html.twig', [
-            "form_edit_project" => $form->createView(),
+        return $this->render('Admin/Portfolio/form.html.twig', [
             "projectId" => $project->getId(),
-            "title" => "Edit Work"
+            "projectForm" => $form->createView(),
+            "response" => []
         ]);
     }
 
@@ -428,31 +451,35 @@ class AdminController extends AbstractController
                         }
 
                         $project->setImgPath("/content/portfolio/{$newFilename}");
-                    } catch (FileException $e) {
-                        dd($e->getMessage());
-                    }
 
-                    $project->setCreatedAt(new \Datetime());
-                    $this->em->persist($project);
-                    $this->em->flush();
-                    
-                    $response = [
-                        "classname" => "success",
-                        "icon" => "",
-                        "message" => "The project {$project->getName()} has been added to the realization."
-                    ];
+                        $project->setCreatedAt(new \Datetime());
+                        $this->em->persist($project);
+                        $this->em->flush();
+                        
+                        $response = [
+                            "class" => "success",
+                            "icon" => "/content/images/svg/checkmark-green.svg",
+                            "message" => "The project {$project->getName()} has been added to the realization."
+                        ];
+                    } catch (\Exception $e) {
+                        $response = [
+                            "class" => "danger",
+                            "icon" => "/content/images/svg/closemark-red.svg",
+                            "message" => "Une erreur a été rencontrée : {$e->getMessage()}"
+                        ];
+                    } finally {}
                 }
             } else {
                 $response = [
                     "classname" => "warning",
-                    "icon" => "",
+                    "icon" => "/content/images/svg/questionmark-yellow.svg",
                     "message" => "A project with the same name and version already exist."
                 ];
             }
         }
 
-        return $this->render('Admin/Portfolio/add.html.twig', [
-            "form_add_project" => $form->createView(),
+        return $this->render('Admin/Portfolio/form.html.twig', [
+            "projectForm" => $form->createView(),
             "response" => $response
         ]);
     }

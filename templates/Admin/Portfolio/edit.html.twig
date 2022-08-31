@@ -1,9 +1,0 @@
-{% extends 'baseAdmin.html.twig' %}
-
-{% block body %}
-<section class="adminAddProject containerBody">
-    <div class="container">
-        {{ form(form_edit_project, {'action': path('adminEditProject', {id: projectId}), 'method': 'POST'}) }}
-    </div>
-</section>
-{% endblock %}

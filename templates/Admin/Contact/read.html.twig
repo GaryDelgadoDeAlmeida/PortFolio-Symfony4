@@ -20,7 +20,9 @@
                 </div>
 
                 <div class="actions">
-                    <a href="{{ path("adminRemoveMail", {"id": mail.id}) }}"><img src="{{ asset("/content/images/svg/trash.svg") }}" alt="trash" /></a>
+                    <a href="{{ path("adminRemoveMail", {"id": mail.id}) }}">
+                        <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="trash" />
+                    </a>
                 </div>
             </div>
 

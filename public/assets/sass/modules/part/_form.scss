@@ -4,8 +4,8 @@ form {
     .form-field {
         flex: 1;
         display: flex;
-        flex-direction: column;
         line-height: 30px;
+        flex-direction: column;
 
         &:not(:last-child) {
             margin-bottom: 10px;
@@ -38,13 +38,16 @@ form {
             border-radius: 25px;
             border: 1px solid var(--c-silver);
         }
+
+        select {
+            height: 35px;
+            padding: 0 15px;
+            border-radius: 25px;
+            border: 1px solid var(--c-silver);
+        }
     }
 
     .form-radio {
-        // 
-    }
-
-    .form-select {
         // 
     }
 

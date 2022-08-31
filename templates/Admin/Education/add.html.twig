@@ -1,44 +1,61 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-<div class="container">
-    
-    {% if message != null %}
-        <div class="{{ message.class }}">
-            <span>{{ message.content }}</span>
+    <div class="admin-experience">
+        <div class="experience-wrapper">
+            <a href="{{ path("adminEducation") }}">
+                <button class="btn btn-primary">Return</button>
+            </a>
+
+            <div class="experience-add">
+                {% if message != null %}
+                    <div class="notification {{ message.class }}">
+                        <div class="icon">
+                            <img src="{{ asset(message.icon) }}" alt="icon" />
+                        </div>
+                        
+                        <div class="message">
+                            <span>{{ message.content }}</span>
+                        </div>
+                    </div>
+                    <div>&nbsp;</div>
+                {% endif %}
+
+                {{ form_start(form, {"method":"POST", "attr": {"class": "experience-form"}}) }}
+                    <div class="form-field">
+                        {{ form_label(form.category) }}
+                        {{ form_widget(form.category) }}
+                    </div>
+                    <div class="form-field">
+                        {{ form_label(form.corporationName) }}
+                        {{ form_widget(form.corporationName) }}
+                    </div>
+                    <div class="form-field">
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div class="form-field">
+                        {{ form_label(form.startDate) }}
+                        {{ form_widget(form.startDate) }}
+                    </div>
+                    <div class="form-field">
+                        {{ form_label(form.endDate) }}
+                        {{ form_widget(form.endDate) }}
+                    </div>
+                    <div class="form-radio">
+                        {{ form_widget(form.inProgress) }}
+                        {{ form_label(form.inProgress) }}
+                    </div>
+                    <div class="form-field">
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description) }}
+                    </div>
+
+                    <div class="form-button">
+                        {{ form_widget(form.submit, {"attr": {"class": "btn btn-primary"}}) }}
+                    </div>
+                {{ form_end(form, {"method":"POST"}) }}
+            </div>
         </div>
-    {% endif %}
-    
-    {{ form_start(form, {"method":"POST"}) }}
-        <div class="row">
-            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
-                {{ form_label(form.name) }}
-                {{ form_widget(form.name) }}
-            </div>
-            <div class="form-group col-md-6 col-lg-6 wow fadeInUp animated">
-                {{ form_label(form.startDate) }}
-                {{ form_widget(form.startDate) }}
-            </div>
-            <div class="form-group col-md-6 col-lg-6 wow fadeInUp animated">
-                {{ form_label(form.endDate) }}
-                {{ form_widget(form.endDate) }}
-            </div>
-            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
-                {{ form_widget(form.inProgress) }}
-            </div>
-            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
-                {{ form_label(form.corporationName) }}
-                {{ form_widget(form.corporationName) }}
-            </div>
-            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
-                {{ form_label(form.description) }}
-                {{ form_widget(form.description) }}
-            </div>
-            <div class="form-group col-md-12 col-lg-12 wow fadeInUp animated">
-                {{ form_label(form.category) }}
-                {{ form_widget(form.category) }}
-            </div>
-        </div>
-    {{ form_end(form, {"method":"POST"}) }}
-</div>
+    </div>
 {% endblock %}

@@ -65,13 +65,14 @@ class ProjectAdminType extends AbstractType
             ])
             ->add("clientName", null, [
                 "label" => "Client name",
-                "required" => true,
+                "required" => false,
                 "attr" => [
                     "minLength" => 4,
                     "maxLenght" => 255,
                 ],
             ])
             ->add('type', ChoiceType::class, [
+                'label' => 'Type',
                 'choices' => [
                     'Make your choice, please' => null,
                     'Website' => 'Website',
@@ -80,7 +81,7 @@ class ProjectAdminType extends AbstractType
                     'App' => 'App',
                     'Mobile App' => 'Mobile App',
                 ],
-                'label' => 'Type'
+                "required" => true
             ])
             ->add("skills", EntityType::class, [
                 "class" => Skills::class,

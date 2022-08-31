@@ -7,58 +7,58 @@
 
 
 {% block header %}
-<header class="header-navigation bg-black">
-    <nav class="header-menu">
-        <div class="header-menu-brand">
-            <a href="{{ path('home') }}">Garry ALMEIDA</a>
-        </div>
-        <div class="header-menu-links">
-            <ul>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('adminHome') }}">Dashboard</a>
-                {% endif %}
-                <a href="{{ path('home') }}">Accueil</a>
-                <a href="{{ path('aboutme') }}">A Propos</a>
-                <a href="{{ path('portfolio') }}">PortFolio</a>
-                <a href="{{ path('contactme') }}">Contact</a>
-            </ul>
-        </div>
+    <header class="header-navigation bg-black">
+        <nav class="header-menu">
+            <div class="header-menu-brand">
+                <a href="{{ path('home') }}">Garry ALMEIDA</a>
+            </div>
+            <div class="header-menu-links">
+                <ul>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('adminHome') }}">Dashboard</a>
+                    {% endif %}
+                    <a href="{{ path('home') }}">Accueil</a>
+                    <a href="{{ path('aboutme') }}">A Propos</a>
+                    <a href="{{ path('portfolio') }}">PortFolio</a>
+                    <a href="{{ path('contactme') }}">Contact</a>
+                </ul>
+            </div>
 
-        <div class="header-menu-mobile">
-            <label for="burger-menu" class="show-menu-btn">
-                <img src="{{ asset("/content/images/svg/bars.svg") }}" alt="" />
-            </label>
-            
-            <input type="checkbox" name="burger-menu" class="burger-menu" id="burger-menu" />
-            
-            <div class="header-menu-links-mobile">
-
-                <label for="burger-menu" class="hide-menu-btn">
-                    <img src="{{ asset("/content/images/svg/close.svg") }}" alt="" />
+            <div class="header-menu-mobile">
+                <label for="burger-menu" class="show-menu-btn">
+                    <img src="{{ asset("/content/images/svg/bars.svg") }}" alt="" />
                 </label>
+                
+                <input type="checkbox" name="burger-menu" class="burger-menu" id="burger-menu" />
+                
+                <div class="header-menu-links-mobile">
 
-                <div class="links-mobile-items">
-                    <ul>
-                        <li><a href="{{ path('home') }}">Accueil</a></li>
-                        <li><a href="{{ path('aboutme') }}">A Propos</a></li>
-                        <li><a href="{{ path('portfolio') }}">PortFolio</a></li>
-                        <li><a href="{{ path('contactme') }}">Contact</a></li>
-                    </ul>
+                    <label for="burger-menu" class="hide-menu-btn">
+                        <img src="{{ asset("/content/images/svg/close.svg") }}" alt="" />
+                    </label>
+
+                    <div class="links-mobile-items">
+                        <ul>
+                            <li><a href="{{ path('home') }}">Accueil</a></li>
+                            <li><a href="{{ path('aboutme') }}">A Propos</a></li>
+                            <li><a href="{{ path('portfolio') }}">PortFolio</a></li>
+                            <li><a href="{{ path('contactme') }}">Contact</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 {% endblock %}
 
 
 {% block footer %}
-<footer class="footer bg-black">
-    <div class="copyright">
-        <p>
-            Copyright &copy; 2019-{{ "now"|date("Y") }} &minus; <a class="bold-green" href="{{ path('home') }}">Garry ALMEIDA</a><br>
-            All Rights Reserved / Tous Droits Réservés
-        </p>
-    </div>
-</footer>
+    <footer class="footer bg-black">
+        <div class="copyright">
+            <p>
+                Copyright &copy; 2019-{{ "now"|date("Y") }} &minus; <a class="bold-green" href="{{ path('home') }}">Garry ALMEIDA</a><br>
+                All Rights Reserved / Tous Droits Réservés
+            </p>
+        </div>
+    </footer>
 {% endblock %}

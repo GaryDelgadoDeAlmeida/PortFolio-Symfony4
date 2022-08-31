@@ -63,12 +63,19 @@
 
             .actions {
                 justify-content: end;
-                
+
+                a {
+                    width: 30px;
+                    display: block;
+                }
+
                 button {
                     width: 40px;
                     border: none;
                     background: none;
-
+                }
+                
+                a, button {
                     img {
                         height: 100%;
                     }

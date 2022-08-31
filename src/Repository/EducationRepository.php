@@ -20,12 +20,16 @@ class EducationRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int offset
+     * @param int limit
      * @return Education[]
      */
-    public function getEducations()
+    public function getEducations(int $offset, int $limit = 10)
     {
         return $this->createQueryBuilder('e')
             ->orderBy('e.id', 'DESC')
+            ->setFirstResult(($offset - 1) * $limit)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;
@@ -38,7 +42,14 @@ class EducationRepository extends ServiceEntityRepository
      */
     public function getLatestEducationFromCategory(string $category, int $maxResult = 3)
     {
-        return [];
+        return $this->createQueryBuilder('e')
+            ->where('e.category = :cat')
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults($maxResult)
+            ->setParameter('cat', $category)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
@@ -51,8 +62,8 @@ class EducationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('e')
             ->where('e.category = :cat')
-            ->setFirstResult($offset - 1)
-            ->setMaxResults(($offset - 1) * $limit)
+            ->setFirstResult(($offset - 1) * $limit)
+            ->setMaxResults($limit)
             ->setParameter('cat', $category)
             ->getQuery()
             ->getResult()
@@ -71,6 +82,33 @@ class EducationRepository extends ServiceEntityRepository
             ->setParameter('cat', $category)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * @return int Return the number of educations
+     */
+    public function countEducations()
+    {
+        return $this->createQueryBuilder("e")
+            ->select("COUNT(e.id) as nbrEducations")
+            ->getQuery()
+            ->getSingleResult()["nbrEducations"]
+        ;
+    }
+
+    /**
+     * @param string category
+     * @return int Return the number of educations by the specific category
+     */
+    public function countEducationsByCategory(string $category)
+    {
+        return $this->createQueryBuilder("e")
+            ->select("COUNT(e.id) as nbrEducations")
+            ->where("e.category = :cat")
+            ->setParameter('cat', $category)
+            ->getQuery()
+            ->getSingleResult()["nbrEducations"]
         ;
     }
 }

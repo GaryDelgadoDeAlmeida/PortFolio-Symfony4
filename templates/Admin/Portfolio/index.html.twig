@@ -10,25 +10,28 @@
         
         <div class="portfolio-wrapper">
             {% if projects != [] %}
-                {% for project in projects %}
-                    <a class="portfolio-card" href="{{ path("adminSingleProject", {"id": project.id}) }}">
-                        <div class="portfolio-image">
-                            <img src="{{ asset(project.imgPath) }}" alt="{{ project.name }}" />
-                        </div>
-                        <div class="portfolio-text">
-                            <div class="portfolio-content">
-                                <div class="title">
-                                    <h2>{{ project.name }}</h2>
-                                </div>
-                                <div class="tools">
-                                    {% for tech in project.skills %}
-                                        <span>{{ tech.skill }}</span>
-                                    {% endfor %}
-                                </div>
+                <div class="overlay-row">
+                    {% for project in projects %}
+                        <div class="overlay-card">
+                            <div class="overlay-image">
+                                <a href="{{ path("adminSingleProject", {"id": project.id}) }}">
+                                    <img class="image" src="{{ asset(project.imgPath) }}" alt="{{ project.name }}"/>
+                                    <div class="hover">
+                                        <div class="text">
+                                            <h3 class="project-title">{{ project.name }}</h3>
+                                            <span class="project-small-text">{{ project.type }}</span>
+                                        </div>
+                                        {# <div class="tools">
+                                            {% for tech in project.skills %}
+                                                <span>{{ tech.skill }}</span>
+                                            {% endfor %}
+                                        </div> #}
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    </a>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             {% else %}
                 <div class="notification information">
                     <div class="icon">
@@ -39,10 +42,11 @@
                         <span>Il n'y a aucun projet enregistré dans la database.</span>
                     </div>
                 </div>
+                <div>&nbsp;</div>
             {% endif %}
 
             {# Pagination #}
-            {% if page >= 1 and page <= total_page %}
+            {% if total_page > 1 %}
                 <div class="pagination">
                     {% if page - 1 >= 1  %}
                         <div class="first-page">
