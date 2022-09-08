@@ -44,6 +44,15 @@ form {
             padding: 0 15px;
             border-radius: 25px;
             border: 1px solid var(--c-silver);
+
+            &[multiple] {
+                height: 150px;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
         }
     }
 

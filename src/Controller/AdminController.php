@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Service\RegexService;
-use App\Manager\ExperienceManager;
+use App\Manager\{ExperienceManager, FileManager, NotificationManager};
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,11 +25,15 @@ class AdminController extends AbstractController
 {
     private $em;
     private $user;
+    private $notificationManager;
+    private $fileManager;
 
     function __construct(Secu $security, EntityManagerInterface $manager) 
     {
         $this->em = $manager;
         $this->user = $security->getUser();
+        $this->fileManager = new FileManager();
+        $this->notificationManager = new NotificationManager();
     }
     /**
      * @Route("/admin", name="adminHome")
@@ -65,25 +69,31 @@ class AdminController extends AbstractController
         $formUpdatePwd->handleRequest($request);
 
         // ProfileAdminType
-        if($formProfile->isSubmitted() && $formProfile->isValid()) {
-            try {
-                // Persist & save all changes
-                $this->em->persist($this->user);
-                $this->em->flush();
-
-                // Return a message to the user
-                $updatePwdMessage = [
-                    "class" => "success",
-                    "icon" => "/content/images/svg/checkmark-green.svg",
-                    "content" => "La mise à jour s'est correctement éffectuée."
-                ];
-            } catch(\Exeception $e) {
-                $updatePwdMessage = [
-                    "class" => "danger",
-                    "icon" => "/content/images/svg/closemark-red.svg",
-                    "content" => $e->getMessage()
-                ];
-            } finally {}
+        if($formProfile->isSubmitted()) {
+            if($formProfile->isValid()) {
+                try {
+                    // Check if a file image need to be treated
+                    $fileImage = $formProfile["imgPath"]->getData();
+                    if(!empty($fileImage)) {
+                        $responseTreatImg = $this->fileManager->moveFileToDestinationRepository($fileImage, "me.{$fileImage->guessExtension()}", "{$this->getParameter("public_dir")}content/profile/", "./content/profile/");
+                        if($responseTreatImg["response"]) {
+                            $this->user->setImgPath($responseTreatImg["path"]);
+                        }
+                    }
+                    
+                    // Persist & save all changes
+                    $this->em->persist($this->user);
+                    $this->em->flush();
+    
+                    // Return a message to the user
+                    $message = $this->notificationManager->returnNotification("success", "La mise à jour s'est correctement éffectuée.");
+                } catch(\Exeception $e) {
+                    $message = $this->notificationManager->returnNotification("danger", $e->getMessage());
+                } finally {}
+            } else {
+                $message = $this->notificationManager->returnNotification("warning", "Une erreur a été rencontrée avec un ou plusieurs champs.");
+                // dd($formProfile->getData(), $message);
+            }
         }
 
         // UpdatePasswordType
@@ -107,24 +117,13 @@ class AdminController extends AbstractController
                             try {
                                 $this->em->persist($this->user);
                                 $this->em->flush();
-                                $message = [
-                                    "class" => "success",
-                                    "icon" => "/content/images/svg/checkmark-green.svg",
-                                    "content" => "La mise à jour s'est correctement éffectuée."
-                                ];
+                                
+                                $updatePwdMessage = $this->notificationManager->returnNotification("success", "La mise à jour s'est correctement éffectuée.");
                             } catch(\Exeception $e) {
-                                $message = [
-                                    "class" => "danger",
-                                    "icon" => "/content/images/svg/closemark-red.svg",
-                                    "content" => $e->getMessage()
-                                ];
+                                $updatePwdMessage = $this->notificationManager->returnNotification("danger", $e->getMessage());
                             } finally {}
                         } else {
-                            $message = [
-                                "class" => "danger",
-                                "icon" => "/content/images/svg/closemark-red.svg",
-                                "content" => "Le mot de passe doit contenir des caractères spéciaux et des nombres en plus de sa longue minimale"
-                            ];
+                            $updatePwdMessage = $this->notificationManager->returnNotification("danger", "Le mot de passe doit contenir des caractères spéciaux et des nombres en plus de sa longue minimale");
                         }
                     }
                 }
@@ -160,18 +159,12 @@ class AdminController extends AbstractController
                     $skill->setCreatedAt(new \DateTimeImmutable());
                     $this->em->getRepository(Skills::class)->add($skill, true);
 
-                    $response = [
-                        "message" => "The skill '{$skill->getSkill()}' has been successfully added to the '{$skill->getType()}' category"
-                    ];
+                    $response = $this->notificationManager->returnNotification("success", "The skill '{$skill->getSkill()}' has been successfully added to the '{$skill->getType()}' category");
                 } catch(\Exception $e) {
-                    $response = [
-                        "message" => "An error has been encountered : {$e->getMessage()}"
-                    ];
+                    $response = $this->notificationManager->returnNotification("danger", "An error has been encountered : {$e->getMessage()}");
                 } finally {}
             } else {
-                $response = [
-                    "message" => "The skill '{$skill->getSkill()}' already exist in the '{$skill->getType()}' category."
-                ];
+                $response = $this->notificationManager->returnNotification("warning", "The skill '{$skill->getSkill()}' already exist in the '{$skill->getType()}' category.");
             }
 
             // Re-instenciate the form to clear all fields
@@ -209,26 +202,38 @@ class AdminController extends AbstractController
     
                 // Return a message to the user
                 return $this->redirectToRoute("adminSkills", [
-                    "response" => urlencode(json_encode([
-                        "class" => "success",
-                        "message" => "The skill {$skill->getSkill()} has been successfully deleted."
-                    ], JSON_UNESCAPED_UNICODE))
+                    "response" => urlencode(
+                        json_encode(
+                            $this->notificationManager->returnNotification(
+                                "success", 
+                                "The skill {$skill->getSkill()} has been successfully deleted."
+                            ), 
+                        JSON_UNESCAPED_UNICODE)
+                    )
                 ]);
             } catch(Exception $e) {
                 return $this->redirectToRoute("adminSkills", [
-                    "response" => urlencode(json_encode([
-                        "class" => "success",
-                        "message" => "An error has been encountered : {$e->getMessage()}"
-                    ], JSON_UNESCAPED_UNICODE))
+                    "response" => urlencode(
+                        json_encode(
+                            $this->notificationManager->returnNotification(
+                                "danger", 
+                                "An error has been encountered : {$e->getMessage()}"
+                            ), 
+                        JSON_UNESCAPED_UNICODE)
+                    )
                 ]);
             }
         }
 
         return $this->redirectToRoute("adminSkills", [
-            "response" => urlencode(json_encode([
-                "class" => "success",
-                "message" => "The skill hasn't been found."
-            ], JSON_UNESCAPED_UNICODE))
+            "response" => urlencode(
+                json_encode(
+                    $this->notificationManager->returnNotification(
+                        "warning", 
+                        "The skill hasn't been found."
+                    ), 
+                JSON_UNESCAPED_UNICODE)
+            )
         ]);
     }
 
@@ -292,8 +297,7 @@ class AdminController extends AbstractController
             }
         }
 
-        return $this->render('Admin/Education/add.html.twig', [
-            "title" => "Education",
+        return $this->render('Admin/Education/form.html.twig', [
             'form' => $form->createView(),
             'message' => !empty($message) ? $message : null
         ]);
@@ -308,20 +312,28 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         $message = [];
 
-        if($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($education);
-            $this->em->flush();
-
-            $message = [
-                "class" => "alert-success text-center w-20px",
-                "content" => "La mise à jout s'est correctement effectuée"
-            ];
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                try {
+                    foreach($form["skills"]->getData() as $skill) {
+                        $skill->addEducation($education);
+                        $this->em->persist($skill);
+                    }
+                    $this->em->persist($education);
+                    $this->em->flush();
+                    
+                    $message = $this->notificationManager->returnNotification("success", "La mise à jout s'est correctement effectuée");
+                } catch(\Exception $e) {
+                    $message = $this->notificationManager->returnNotification("danger", $e->getMessage());
+                } finally {}
+            } else {
+                $message = $this->notificationManager->returnNotification("warning", "Une erreur a été rencontrée avec un ou plusieurs champs du formulaire.");
+            }
         }
 
-        return $this->render('Admin/Education/edit.html.twig', [
-            "form_edit_education" => $form->createView(),
+        return $this->render('Admin/Education/form.html.twig', [
+            "form" => $form->createView(),
             "education_id" => $education->getId(),
-            "title" => "Edit Education",
             "message" => !empty($message) ? $message : null
         ]);
     }
@@ -358,70 +370,6 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/portfolio/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminSingleProject")
-     */
-    public function admin_single_project(int $id)
-    {
-        $project = $this->em->getRepository(Project::class)->find($id);
-        if(empty($project)) {
-            return $this->redirectToRoute("adminProject");
-        }
-
-        return $this->render("Admin/Portfolio/single.html.twig", [
-            "project" => $project
-        ]);
-    }
-
-    /**
-     * @Route("/admin/portfolio/{id}/edit", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditProject")
-     */
-    public function admin_edit_project(Project $project, Request $request)
-    {
-        $form = $this->createForm(ProjectAdminType::class, $project);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form['imgPath']->getData();
-            
-            if($imageFile) {
-                
-                // this is needed to safely include the file name as part of the URL
-                $newFilename = 'portFolio-'.str_replace(" ", "_", $project->getName()) . "-" . $project->getVersion() .'.'.$imageFile->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    if(!array_search('./content/portfolio/'.$newFilename, glob("./content/portfolio/*.".$imageFile->guessExtension()))) {
-                        $imageFile->move(
-                            $this->getParameter('project_img_dir'),
-                            $newFilename
-                        );
-                    } else {
-                        unlink('./content/portfolio/'.$newFilename);
-                        $imageFile->move(
-                            $this->getParameter('project_img_dir'),
-                            $newFilename
-                        );
-                    }
-                } catch (FileException $e) {
-                    dd($e->getMessage());
-                }
-
-                $project->setImgPath($newFilename);
-                $this->em->persist($project);
-                $this->em->flush();
-
-                return $this->redirectToRoute('adminProject');
-            }
-        }
-
-        return $this->render('Admin/Portfolio/form.html.twig', [
-            "projectId" => $project->getId(),
-            "projectForm" => $form->createView(),
-            "response" => []
-        ]);
-    }
-
-    /**
      * @Route("/admin/portfolio/add", name="adminAddProject")
      */
     public function admin_add_project(Request $request)
@@ -436,45 +384,35 @@ class AdminController extends AbstractController
 
             // Check if a project with the same name and version to avoid double
             if( empty($this->em->getRepository(Project::class)->getProjectByNameAndVersion($project->getName(), $project->getVersion())) ) {
+                
                 $imageFile = $form['imgPath']->getData();
                 if(!empty($imageFile)) {
-                    try {
-                        // this is needed to safely include the file name as part of the URL
-                        $newFilename = 'portFolio-'.str_replace(" ", "_", $project->getName()) . "-" . $project->getVersion() .'.'.$imageFile->guessExtension();
-                        
-                        // Move the file to the directory where brochures are stored
-                        if(!array_search('./content/portfolio/'.$newFilename, glob("./content/portfolio/*.".$imageFile->guessExtension()))) {
-                            $imageFile->move(
-                                $this->getParameter('project_img_dir'),
-                                $newFilename
-                            );
-                        }
+                    $responseTreatImg = $this->fileManager->moveFileToDestinationRepository(
+                        $imageFile,
+                        "portFolio-" . str_replace(" ", "_", $project->getName()) . "-{$project->getVersion()}.{$imageFile->guessExtension()}",
+                        $this->getParameter('project_img_dir'),
+                        "./content/portfolio/"
+                    );
 
-                        $project->setImgPath("/content/portfolio/{$newFilename}");
-
-                        $project->setCreatedAt(new \Datetime());
-                        $this->em->persist($project);
-                        $this->em->flush();
-                        
-                        $response = [
-                            "class" => "success",
-                            "icon" => "/content/images/svg/checkmark-green.svg",
-                            "message" => "The project {$project->getName()} has been added to the realization."
-                        ];
-                    } catch (\Exception $e) {
-                        $response = [
-                            "class" => "danger",
-                            "icon" => "/content/images/svg/closemark-red.svg",
-                            "message" => "Une erreur a été rencontrée : {$e->getMessage()}"
-                        ];
-                    } finally {}
+                    if($responseTreatImg["response"]) {
+                        $project->setImgPath($responseTreatImg["path"]);
+                    }
                 }
+
+                try {
+                    $project->setCreatedAt(new \Datetime());
+                    $this->em->persist($project);
+                    $this->em->flush();
+
+                    // Return an answer of the process to the user
+                    $response = $this->notificationManager->returnNotification("success", "The project {$project->getName()} has been added to the realization.");
+                } catch (\Exception $e) {
+                    // Return an answer if an error has been found during the process
+                    $response = $this->notificationManager->returnNotification("danger", "Une erreur a été rencontrée : {$e->getMessage()}");
+                } finally {}
             } else {
-                $response = [
-                    "classname" => "warning",
-                    "icon" => "/content/images/svg/questionmark-yellow.svg",
-                    "message" => "A project with the same name and version already exist."
-                ];
+                // Return a response to the user if a project with the exact same name and version already exist
+                $response = $this->notificationManager->returnNotification("warning", "A project with the same name and version already exist.");
             }
         }
 
@@ -485,17 +423,71 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/portfolio/search", name="adminSearchProject", methods="POST")
+     * @Route("/admin/portfolio/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminSingleProject")
      */
-    public function admin_search_project(Request $request)
+    public function admin_single_project(int $id)
     {
-        $offset = $request->get("offset");
-        $limit = $request->get("limit");
+        $project = $this->em->getRepository(Project::class)->find($id);
+        if(empty($project)) {
+            return $this->redirectToRoute("adminProject");
+        }
 
-        return $this->render("Admin/Portfolio/index.html.twig", [
-            "offset" => $offset,
-            "limit" => $limit,
-            "portfolio" => []
+        return $this->render("Admin/Portfolio/single.html.twig", [
+            "project" => $project,
+            "skills" => array_map(function($item) {
+                return $item->getSkill();
+            }, $project->getSkills()->toArray())
+        ]);
+    }
+
+    /**
+     * @Route("/admin/portfolio/{id}/edit", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditProject")
+     */
+    public function admin_edit_project(Project $project, Request $request)
+    {
+        $response = [];
+        $form = $this->createForm(ProjectAdminType::class, $project);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $imageFile = $form['imgPath']->getData();
+            
+                if($imageFile) {
+                    $imageFile = $form['imgPath']->getData();
+                    if(!empty($imageFile)) {
+                        $responseTreatImg = $this->fileManager->moveFileToDestinationRepository(
+                            $imageFile,
+                            "portFolio-" . str_replace(" ", "_", $project->getName()) . "-{$project->getVersion()}.{$imageFile->guessExtension()}",
+                            $this->getParameter('project_img_dir'),
+                            "./content/portfolio/"
+                        );
+
+                        if($responseTreatImg["response"]) {
+                            $project->setImgPath($responseTreatImg["path"]);
+                        }
+                    }
+                }
+
+                
+                try {
+                    $this->em->persist($project);
+                    $this->em->flush();
+
+                    // Return a success response to the user
+                    $response = $this->notificationManager->returnNotification("success", "La mise à jour du projet a bien été prise en compte.");
+                } catch(\Exeption $e) {
+                    $response = $this->notificationManager->returnNotification("danger", "Une erreur a été rencontrée, voici le message rencontré : {$e->getMessage()}");
+                } finally {}
+            } else {
+                $response = $this->notificationManager->returnNotification("warning", "Une erreur a été rencontrée avec l'un des champs renseignés.");
+            }
+        }
+
+        return $this->render('Admin/Portfolio/form.html.twig', [
+            "projectId" => $project->getId(),
+            "projectForm" => $form->createView(),
+            "response" => $response
         ]);
     }
 

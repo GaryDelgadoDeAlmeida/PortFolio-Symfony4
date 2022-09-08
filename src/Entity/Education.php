@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,6 +18,16 @@ class Education
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @Assert\Choice(
+     *     choices = { "experience", "formation" },
+     *     message = "Please, choose a valid category type."
+     * )
+     */
+    private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -65,18 +77,35 @@ class Education
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull
-     * @Assert\Choice(
-     *     choices = { "experience", "formation" },
-     *     message = "Please, choose a valid category type."
-     * )
+     * @ORM\Column(type="json", nullable=true)
      */
-    private $category;
+    private $participateProjects = [];
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Skills::class, mappedBy="educations")
+     */
+    private $skills;
+
+    public function __construct()
+    {
+        $this->skills = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -151,14 +180,41 @@ class Education
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getParticipateProjects(): ?array
     {
-        return $this->category;
+        return $this->participateProjects;
     }
 
-    public function setCategory(string $category): self
+    public function setParticipateProjects(array $participateProjects): self
     {
-        $this->category = $category;
+        $this->participateProjects = $participateProjects;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Skills>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skills $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills[] = $skill;
+            $skill->addEducation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skills $skill): self
+    {
+        if ($this->skills->removeElement($skill)) {
+            $skill->removeEducation($this);
+        }
 
         return $this;
     }

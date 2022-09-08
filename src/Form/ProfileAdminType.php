@@ -30,16 +30,14 @@ class ProfileAdminType extends AbstractType
                     "hidden" => true,
                 ],
                 'constraints' => [
-                    new Count(['max' => 5]),
-                    new All([
-                        new File([
-                            'maxSize' => '5Mi',
-                            'mimeTypes' => [
-                                'image/jpg',
-                                'image/jpeg',
-                                'image/png',
-                            ],
-                        ])
+                    new File([
+                        'maxSize' => '5Mi',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid file image.',
                     ])
                 ],
                 'mapped' => false,

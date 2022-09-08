@@ -3,7 +3,7 @@
 \* ----------------------------------------------- */
 .aboutMe-intro {
     background-color: #567787;
-    color: #ffffff;
+    color: var(--c-white);
     padding-top: 4%;
     padding-bottom: 4%;
 
@@ -20,14 +20,13 @@
             
             img {
                 max-width: 240px;
-                box-shadow: 2px 2px 2px 2px;
                 border-radius: 50%;
             }
         }
     
         .aboutMe-intro-intro {
-            font-size: 20px;
             grid-row: 1;
+            font-size: 20px;
             grid-column: 2 / 4;
             
             h2 {

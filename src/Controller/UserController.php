@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\{Contact, Project, Skills, User};
+use App\Entity\{Contact, Education, Project, Skills, User};
 use App\Form\{ContactUserType, LoginAdminType};
 use App\Manager\ContactManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,7 +41,7 @@ class UserController extends AbstractController
             "backend" => $skillRepo->getSkillsByCategory("backend"),
             "tools" => $skillRepo->getSkillsByCategory("tools"),
             "lastestProject" => $this->em->getRepository(Project::class)->getLastestProject(),
-            "latestExperience" => []
+            "latestExperience" => $this->em->getRepository(Education::class)->getLatestEducationFromCategory("experience", 4)
         ]);
     }
 
@@ -49,7 +49,7 @@ class UserController extends AbstractController
      * @Route("/portfolio", name="portfolio")
      * @Route("/portfolio/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="portfolioPage")
      */
-    public function portfolio($page = 1)
+    public function portfolio(int $page = 1)
     {
         $limit = 15;
         $page = ($page >= 1 ? $page : 1);

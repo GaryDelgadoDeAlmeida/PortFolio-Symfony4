@@ -50,6 +50,7 @@ class ProjectAdminType extends AbstractType
                         'mimeTypes' => [
                             'image/jpg',
                             'image/jpeg',
+                            'image/png',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid image document',
                     ])

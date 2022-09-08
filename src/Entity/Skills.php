@@ -39,9 +39,15 @@ class Skills
      */
     private $projects;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Education::class, inversedBy="skills")
+     */
+    private $educations;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->educations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,6 +114,30 @@ class Skills
         if ($this->projects->removeElement($project)) {
             $project->removeSkill($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Education>
+     */
+    public function getEducations(): Collection
+    {
+        return $this->educations;
+    }
+
+    public function addEducation(Education $education): self
+    {
+        if (!$this->educations->contains($education)) {
+            $this->educations[] = $education;
+        }
+
+        return $this;
+    }
+
+    public function removeEducation(Education $education): self
+    {
+        $this->educations->removeElement($education);
 
         return $this;
     }

@@ -2,20 +2,33 @@
 
 namespace App\Form;
 
+use App\Entity\Skills;
 use App\Entity\Education;
+use App\Form\ParticipateProjectType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class EducationAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('category', ChoiceType::class, [
+                "label" => "Category",
+                "choices" => [
+                    'Make your choice, please' => null,
+                    "Formation" => "formation",
+                    "Experience" => "experience"
+                ],
+                "required" => true
+            ])
             ->add('name', null, [
                 'label' => 'Job Name',
                 "required" => true
@@ -42,14 +55,21 @@ class EducationAdminType extends AbstractType
                 "required" => false,
                 'label' => "Description"
             ])
-            ->add('category', ChoiceType::class, [
-                "label" => "Category",
-                "choices" => [
-                    'Make your choice, please' => null,
-                    "Formation" => "formation",
-                    "Experience" => "experience"
+            ->add("skills", EntityType::class, [
+                "label" => "Skills",
+                "class" => Skills::class,
+                "choice_label" => "skill",
+                "multiple" => true,
+                "required" => true,
+            ])
+            ->add("participateProjects", CollectionType::class, [
+                "entry_type" => ParticipateProjectType::class,
+                "entry_options" => [
+                    "label" => false
                 ],
-                "required" => true
+                'allow_add' => true,
+                'allow_delete' => true,
+                'required' => false
             ])
             ->add('submit', SubmitType::class)
         ;
