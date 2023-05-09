@@ -81,17 +81,17 @@ class ContactManager {
             }
         }
 
-        $response = [];
-        if ($error == false) {
-            $response = [
-                "answer" => true,
-                "response" => [
-                    "class" => "success",
-                    "icon" => "/content/images/svg/checkmark-green.svg",
-                    "content" => "Votre message a été envoyé."
-                ]
-            ];
-        } else {
+        $response = [
+            "answer" => true,
+            "response" => [
+                "class" => "success",
+                "icon" => "/content/images/svg/checkmark-green.svg",
+                "content" => "Votre message a été envoyé."
+            ]
+        ];
+        
+        // if an error has been found
+        if( $error ) {
             $response = [
                 "answer" => false,
                 "response" => [

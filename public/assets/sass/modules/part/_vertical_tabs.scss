@@ -1,0 +1,102 @@
+.vertical-tabs {
+    width: 100%;
+    min-height: 250px;
+
+    .-header {
+        height: 50px;
+        display: flex;
+
+        @include tinyMobile {
+            height: auto;
+            flex-direction: column;
+        }
+
+        .tab {
+            border: none;
+            padding: 0 10px;
+            min-width: 100px;
+            font-weight: normal;
+            letter-spacing: 1px;
+            background-color: var(--c-white);
+
+            @include tinyMobile {
+                height: 35px;
+            }
+
+            &:hover {
+                background-color: var(--c-grey);
+            }
+
+            &.active {
+                position: relative;
+                color: var(--c-white);
+                background-color: var(--c-black);
+
+                .icon {
+                    left: 45%;
+                    width: 17px;
+                    height: 17px;
+                    bottom: -8.5px;
+                    position: absolute;
+                    background: var(--c-red);
+                    -o-transform: rotate(45deg); /* Opera */
+                    -ms-transform: rotate(45deg); /* Internet Explorer */
+                    -moz-transform: rotate(45deg); /* Firefox */
+                    -webkit-transform: rotate(45deg); /* Safari et Chrome */
+
+                    @include tinyMobile {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .-content {
+        margin: 0;
+        padding: 25px 15px;
+        background-color: var(--c-white);
+
+        .-tab-content {
+            display: none;
+
+            &.show {
+                display: initial;
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+
+                &:not(:last-child) {
+                    margin-bottom: 15px;
+                }
+
+                li {
+                    display: flex;
+                    padding: 0 25px;
+                    min-height: 35px;
+                    position: relative;
+
+                    &::before {
+                        top: 17.5%;
+                        left: 10px;
+                        content: "+";
+                        color: red;
+                        position: absolute;
+                    }
+
+                    &:hover {
+                        background-color: var(--c-lightGray);
+                    }
+
+                    span {
+                        width: 100%;
+                        margin: auto 0;
+                    }
+                }
+            }
+        }
+    }
+}

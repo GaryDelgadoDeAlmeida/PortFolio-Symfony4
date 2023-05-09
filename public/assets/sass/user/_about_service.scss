@@ -1,0 +1,38 @@
+.services {
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    // Tablet
+    @media screen and (max-width: 991px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    // Mobile
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .service {
+        height: auto;
+        padding: 25px;
+        text-align: center;
+
+        .logo {
+            width: 35px;
+            padding: 15px;
+            margin: 0 auto;
+
+            img {
+                height: 30px;
+                width: 30px;
+            }
+        }
+
+        .title {
+            margin-top: 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+    }
+}

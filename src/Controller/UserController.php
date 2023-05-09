@@ -23,9 +23,21 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(Request $request)
     {
-        return $this->render("User/home.html.twig");
+        $formContact = $this->createForm(ContactUserType::class, $contact = new Contact());
+        $formContact->handleRequest($request);
+        $captchat = [
+            "question" => "Combien fait 3 x 1.5 ?",
+            "answer" => 4.5
+        ];
+
+        return $this->render("User/home.html.twig", [
+            "portfolios" => [],
+            "contactForm" => $formContact->createView(),
+            "response" => [],
+            "captchat" => $captchat
+        ]);
     }
 
     /**
@@ -47,7 +59,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/portfolio", name="portfolio")
-     * @Route("/portfolio/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="portfolioPage")
+     * @Route("/portfolio/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="portfolioPage")
      */
     public function portfolio(int $page = 1)
     {
@@ -59,6 +71,21 @@ class UserController extends AbstractController
             "offset" => $page,
             "portfolio" => $projectRepo->getProject($page - 1, $limit),
             "total_page" => ceil($projectRepo->countProject() / $limit)
+        ]);
+    }
+
+    /**
+     * @Route("/portfolio/{portfolioID}", requirements={"portfolioID" = "^\d+(?:\d+)?$"}, name="single_portfolio")
+     */
+    public function single_portfolio(int $portfolioID)
+    {
+        $portfolio = $this->em->getRepository(Project::class)->find($portfolioID);
+        if(empty($portfolio)) {
+            return $this->redirectToRoute("portfolio");
+        }
+
+        return $this->render("User/portfolioDetail.html.twig", [
+            "portfolio" => []
         ]);
     }
 

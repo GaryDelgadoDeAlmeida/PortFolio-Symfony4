@@ -1,14 +1,17 @@
+/* ----------------------------------------------- *\
+    Pagination
+\* ----------------------------------------------- */
 .pagination {
-    display: flex;
-    flex-direction: row;
     flex: 1;
-    margin-top: 25px;
-    padding: 10px 0;
     width: 100%;
     height: auto;
+    display: flex;
+    padding: 10px 0;
+    margin-top: 25px;
+    flex-direction: row;
     justify-content: center;
-    border: 1px solid var(--c-silver);
     background-color: var(--c-white);
+    border: 1px solid var(--c-silver);
 
     div {
         width: 20px;
@@ -20,13 +23,13 @@
         }
 
         &.current-page {
-            border-bottom: 1px solid var(--c-dimmGray);
             color: var(--c-dimmGray);
+            border-bottom: 1px solid var(--c-dimmGray);
         }
 
         a {
-            text-decoration: none;
             color: var(--c-black);
+            text-decoration: none;
         }
     }
 }

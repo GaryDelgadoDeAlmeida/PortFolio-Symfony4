@@ -21,6 +21,7 @@ class UpdatePasswordType extends AbstractType
                 "required" => true
             ])
             ->add("newPassword", PasswordType::class, [
+                "label" => "New password",
                 "attr" => [
                     "maxLength" => 255
                 ],
@@ -33,7 +34,11 @@ class UpdatePasswordType extends AbstractType
                 ],
                 "required" => true
             ])
-            ->add("submit", SubmitType::class)
+            ->add("submit", SubmitType::class, [
+                "attr" => [
+                    "class" => "btn btn-primary"
+                ]
+            ])
         ;
     }
 

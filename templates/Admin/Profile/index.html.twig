@@ -1,122 +1,117 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block body %}
-<div class="admin-profile">
-    <h1>Profile</h1>
+{% block page_content %}
+    <div class="admin-profile">
+        <div class="profile">
+            <div class="profile-image">
+                <div class="profile-item">
+                    <label for="profile_admin_imgPath">
+                        <img src="{{ asset(file_exist(user.imgPath, "/content/profile/avatar.png")) }}" alt="" />
+                    </label>
+                    <p>
+                        <span class="firstname">{{ user.firstname }}</span>
+                        <span class="lastname">{{ user.lastname }}</span>
+                    </p>
+                </div>
 
-    <div class="profile">
-        <div class="profile-image">
-            <div class="profile-item">
-                <label for="profile_admin_imgPath">
-                    <img src="{{ asset(file_exist(user.imgPath, "/content/profile/avatar.png")) }}" alt="" />
-                </label>
-                <p>
-                    <span class="firstname">{{ user.firstname }}</span>
-                    <span class="lastname">{{ user.lastname }}</span>
-                </p>
+                <div class="profile-item">
+                    <div class="update-password-form">
+                        {% if updatePwdMessage != null %}
+                            <div class="notification {{ updatePwdMessage.class }}">
+                                <div class="icon">
+                                    <img src="{{ asset(updatePwdMessage.icon) }}" alt="icon" />
+                                </div>
+                                
+                                <div class="message">
+                                    <span>{{ updatePwdMessage.content }}</span>
+                                </div>
+                            </div>
+                            <div>&nbsp;</div>
+                        {% endif %}
+
+                        {{ form_start(pwdForm, {"attr": {"class": "update-password-form"}, "method": "POST"}) }}
+                            <div class="form-field">
+                                {{ form_label(pwdForm.oldPassword) }}
+                                {{ form_widget(pwdForm.oldPassword) }}
+                            </div>
+                            <div class="form-field">
+                                {{ form_label(pwdForm.newPassword) }}
+                                {{ form_widget(pwdForm.newPassword) }}
+                            </div>
+                            <div class="form-field">
+                                {{ form_label(pwdForm.confirmNewPassword) }}
+                                {{ form_widget(pwdForm.confirmNewPassword) }}
+                            </div>
+                            <div class="form-button">
+                                {{ form_widget(pwdForm.submit) }}
+                            </div>
+                        {{ form_end(pwdForm) }}
+                    </div>
+                </div>
             </div>
 
-            <div class="profile-item">
-                <div class="update-password-form">
-                    {% if updatePwdMessage != null %}
-                        <div class="notification {{ updatePwdMessage.class }}">
+            <div class="profile-infos">
+                <div class="profile-item">
+                    {% if message != null %}
+                        <div class="notification {{ message.class }}">
                             <div class="icon">
-                                <img src="{{ asset(updatePwdMessage.icon) }}" alt="icon" />
+                                <img src="{{ asset(message.icon) }}" alt="icon" />
                             </div>
                             
                             <div class="message">
-                                <span>{{ updatePwdMessage.content }}</span>
+                                <span>{{ message.content }}</span>
                             </div>
                         </div>
                         <div>&nbsp;</div>
                     {% endif %}
-
-                    {{ form_start(pwdForm, {"action": path("adminProfile"), "method": "POST"}) }}
+                    
+                    {{ form_start(form, {"attr": {"class": "profile-form"}, 'method': 'POST'}) }}
                         <div class="form-field">
-                            {{ form_label(pwdForm.oldPassword) }}
-                            {{ form_widget(pwdForm.oldPassword, {"attr": {"maxLength": 255}}) }}
-                        </div>
-                        <div class="form-field">
-                            {{ form_label(pwdForm.newPassword) }}
-                            {{ form_widget(pwdForm.newPassword, {"attr": {"maxLength": 255}}) }}
-                        </div>
-                        <div class="form-field">
-                            {{ form_label(pwdForm.confirmNewPassword) }}
-                            {{ form_widget(pwdForm.confirmNewPassword, {"attr": {"maxLength": 255}}) }}
-                        </div>
-                        <div class="form-button">
-                            {{ form_widget(pwdForm.submit, {"attr": {"class": "btn btn-primary"}}) }}
-                        </div>
-                    {{ form_end(pwdForm) }}
-                </div>
-            </div>
-        </div>
-
-        <div class="profile-infos">
-            <div class="profile-item">
-                {% if message != null %}
-                    <div class="notification {{ message.class }}">
-                        <div class="icon">
-                            <img src="{{ asset(message.icon) }}" alt="icon" />
-                        </div>
-                        
-                        <div class="message">
-                            <span>{{ message.content }}</span>
-                        </div>
-                    </div>
-                    <div>&nbsp;</div>
-                {% endif %}
-                
-                {{ form_start(form, {'action': path('adminProfile'), 'method': 'POST'}) }}
-                    <div class="profile-form">
-                        <div class="info-field">
                             {{ form_label(form.firstName) }}
-                            {{ form_widget(form.firstName, {"attr": {"maxLength": 100}}) }}
+                            {{ form_widget(form.firstName) }}
                         </div>
                         
-                        <div class="info-field">
+                        <div class="form-field">
                             {{ form_label(form.lastName) }}
-                            {{ form_widget(form.lastName, {"attr": {"maxLength": 100}}) }}
+                            {{ form_widget(form.lastName) }}
                         </div>
                         
-                        <div class="info-field">
+                        <div class="form-field">
                             {{ form_label(form.email) }}
-                            {{ form_widget(form.email, {"attr": {"maxLength": 255}}) }}
+                            {{ form_widget(form.email) }}
                         </div>
                         
-                        <div class="info-field">
+                        <div class="form-field">
                             {{ form_label(form.phoneNumber) }}
-                            {{ form_widget(form.phoneNumber, {"attr": {"maxLength": 10}}) }}
+                            {{ form_widget(form.phoneNumber) }}
                         </div>
                         
-                        <div class="info-field">
+                        <div class="form-field">
                             {{ form_label(form.address) }}
-                            {{ form_widget(form.address, {"attr": {"maxLength": 255}}) }}
+                            {{ form_widget(form.address) }}
                         </div>
                         
-                        <div class="info-field">
+                        <div class="form-field">
                             {{ form_label(form.city) }}
                             {{ form_widget(form.city) }}
                         </div>
                         
-                        <div class="info-field">
+                        <div class="form-field">
                             {{ form_label(form.postalCode) }}
                             {{ form_widget(form.postalCode) }}
                         </div>
                         
-                        <div class="info-field">
+                        <div class="form-field">
                             {{ form_label(form.description) }}
                             {{ form_widget(form.description) }}
                         </div>
 
-                        <div class="info-edit">
+                        <div class="form-button">
                             {{ form_widget(form.submit, {"attr": {"class": "btn btn-primary"}}) }}
                         </div>
-                    </div>
-                {{ form_end(form, {'action': path('adminProfile'), 'method': 'POST'}) }}
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>
-</div>
-    
 {% endblock %}

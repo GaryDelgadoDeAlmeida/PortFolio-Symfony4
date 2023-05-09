@@ -1,0 +1,116 @@
+/* ----------------------------------------------- *\
+    Site
+\* ----------------------------------------------- */
+.page-content {
+    width: 100%;
+    min-height: 100vh;
+
+    .page-wrapper {
+        margin: auto;
+        padding: 25px 0;
+        max-width: 1250px;
+        width: calc(100% - 60px);
+    
+        .page-header {
+            padding-bottom: 25px;
+        
+            h3 {
+                font-weight: 700;
+                font-size: 1.5rem;
+                position: relative;
+                text-align: center;
+                padding-bottom: 15px;
+        
+                &::before {
+                    content: '';
+                    height: 1px;
+                    bottom: 1px;
+                    width: 120px;
+                    display: block;
+                    position: absolute;
+                    background: #ddd;
+                    left: calc(50% - 60px);
+                }
+        
+                &::after {
+                    content: '';
+                    bottom: 0;
+                    height: 3px;
+                    width: 40px;
+                    display: block;
+                    position: absolute;
+                    left: calc(50% - 20px);
+                    background: var(--c-blueReact);
+                }
+            }
+        
+            p {
+                text-align: center;
+            }
+        }
+    
+        .page-section {
+            padding: 25px 0;
+        }
+
+        .page-button {
+            text-align: right;
+            padding-top: 15px;
+        }
+    }
+
+    .page-home {
+        height: 100vh;
+        position: relative;
+        background: top center;
+        background-size: cover;
+        background: url("/content/images/background.jpg") top center;
+
+        &:before {
+            content: "";
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            background: rgba(0, 0, 0, .5);
+        }
+
+        .home-content {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            gap: 20px;
+            display: flex;
+            position: absolute;
+            text-align: center;
+            align-items: center;
+            color: var(--c-white);
+            flex-direction: column;
+            justify-content: center;
+
+            .sup-title {
+                margin: 0;
+                padding: 0;
+                font-weight: 600;
+                font-size: 1.5rem;
+            }
+
+            .main-title {
+                margin: 0;
+                padding: 0;
+                font-weight: 700;
+                line-height: 56px;
+                font-size: 2.5rem;
+                color: var(--c-white);
+                
+                // Mobile
+                @media (max-width: 768px) {
+                    font-size: 30px;
+                    line-height: 38px;
+                }
+            }
+        }
+    }
+}

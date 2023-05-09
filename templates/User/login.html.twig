@@ -1,31 +1,29 @@
-{% extends 'baseUser.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <section class="login">
-        <div class="container">
-            <div class="card">
+    <div class="page-content">
+        <div class="page-wrapper" style="height: 100vh; display: flex; padding: 0">
+            <div class="card-login w-100">
                 <div class="card-header">
                     <h2 class="card-title">Login</h2>
                 </div>
 
                 <div class="card-content">
-                    {{ form_start(formLogin, {'action' : path('login'), 'method': 'POST', "attr": {"class": "login-form"}})}}
+                    {{ form_start(formLogin, {"attr": {"class": "login-form"}}) }}
                         <div class="form-field">
                             {{ form_label(formLogin.email) }}
-                            {{ form_widget(formLogin.email, {"attr": {"maxLenght": 255}}) }}
+                            {{ form_widget(formLogin.email) }}
                         </div>
-                        
                         <div class="form-field">
                             {{ form_label(formLogin.password) }}
-                            {{ form_widget(formLogin.password, {"attr": {"maxLenght": 255}}) }}
+                            {{ form_widget(formLogin.password) }}
                         </div>
-
                         <div class="form-button">
-                            {{ form_widget(formLogin.submit, {'attr': {'class': 'btn btn-outline-green'}}) }}
+                            {{ form_widget(formLogin) }}
                         </div>
-                    {{ form_end(formLogin, {'action' : path('login'), 'method': 'POST'})}}
+                    {{ form_end(formLogin) }}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

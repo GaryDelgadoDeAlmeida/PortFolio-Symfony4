@@ -1,6 +1,6 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block body %}
+{% block page_content %}
     <div class="admin-experience">
         <a href="{{ path("adminEducationAdd") }}">
             <button class="btn btn-primary">Add an experience</button>
@@ -21,7 +21,6 @@
                 {% if educations != [] %}
                     {% for education in educations %}
                         {% set status = (education.inProgress == true) ? "En Cours" : education.endDate|date("Y/m") %}
-                        {# {{ education.name }} #}
                         <tr>
                             <td>{{ education.startDate|date("Y/m") }} - {{ status }}</td>
                             <td>{{ education.category|capitalize }}</td>
@@ -31,9 +30,9 @@
                                     <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="" />
                                 </a>
 
-                                <button>
+                                <a href="{{ path("adminDeleteEducation", {"id": education.id}) }}">
                                     <img src="{{ asset("/content/images/svg/close-red.svg") }}" alt="" />
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}

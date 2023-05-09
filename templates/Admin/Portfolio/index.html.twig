@@ -1,12 +1,10 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block body %}
+{% block page_content %}
     <div class="admin-portfolio">
         <a href="{{ path("adminAddProject") }}">
             <button class="btn btn-green">Add a work</button>
         </a>
-
-        <h1>Portfolio</h1>
         
         <div class="portfolio-wrapper">
             {% if projects != [] %}

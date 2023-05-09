@@ -18,19 +18,22 @@ class ContactUserType extends AbstractType
             ->add("senderFullName", null, [
                 "required" => true,
                 "attr" => [
-                    "placeholder" => "Votre Nom"
+                    "placeholder" => "Votre Nom",
+                    "maxLength" => 100
                 ]
             ])
             ->add("senderEmail", EmailType::class, [
                 "required" => true,
                 "attr" => [
-                    "placeholder" => "Votre Email"
+                    "placeholder" => "Votre Email",
+                    "maxLength" => 255
                 ]
             ])
             ->add("emailSubject", null, [
                 "required" => true,
                 "attr" => [
-                    "placeholder" => "Sujet"
+                    "placeholder" => "Sujet",
+                    "maxLength" => 100
                 ]
             ])
             ->add("emailContent", TextareaType::class, [
@@ -38,10 +41,14 @@ class ContactUserType extends AbstractType
                 "attr" => [
                     "placeholder" => "Message",
                     "class" => "h-180px",
+                    "maxLength" => 1000
                 ]
             ])
             ->add("submit", SubmitType::class, [
-                "label" => "Envoyer"
+                "label" => "Envoyer",
+                "attr" => [
+                    "class" => "btn btn-green"
+                ]
             ])
         ;
     }

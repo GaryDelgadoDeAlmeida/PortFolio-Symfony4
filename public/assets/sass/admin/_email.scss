@@ -1,0 +1,87 @@
+.admin-email .emails {
+    // 
+
+    .email-card {
+        
+        &:hover {
+            box-shadow: 1px 1px 3px var(--c-black);
+        }
+
+        &.unread {
+            background-color: #E2FCFE;
+        }
+
+        td {
+            // Mobile
+            @media (max-width: 768px) {
+                &:nth-child(1)::before {
+                    content: "Object";
+                }
+                
+                &:nth-child(2)::before {
+                    content: "Content";
+                }
+                
+                &:nth-child(3)::before {
+                    content: "Date";
+                }
+                
+                &:nth-child(4)::before {
+                    content: "Action";
+                }
+            }
+        }
+    }
+}
+
+.admin-email-single {
+    padding: 25px 0;
+
+    .email-single {
+        padding: 25px;
+        margin-top: 25px;
+        border-radius: 25px;
+        background-color: var(--c-white);
+        border: 1px solid var(--c-silver);
+        box-shadow: 3px 3px 4px var(--c-lightGray);
+
+        .sender {
+            gap: 15px;
+            display: flex;
+
+            .avatar {
+                width: 50px;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .info {
+                display: grid;
+                width: 100%;
+            }
+
+            .actions {
+                justify-content: end;
+
+                a {
+                    width: 30px;
+                    display: block;
+                }
+
+                button {
+                    width: 40px;
+                    border: none;
+                    background: none;
+                }
+                
+                a, button {
+                    img {
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

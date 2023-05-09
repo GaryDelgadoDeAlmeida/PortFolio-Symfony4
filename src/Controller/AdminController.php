@@ -290,9 +290,9 @@ class AdminController extends AbstractController
                 } finally {}
             } else {
                 $message = [
-                    "class" => "warning",
-                    "icon" => "/content/images/svg/questionmark-yellow.svg",
-                    "content" => "Une erreur a été rencontrée avec un ou plusieurs renseignés."
+                    "class" => "danger",
+                    "icon" => "/content/images/svg/closemark-red.svg",
+                    "content" => "Une erreur a été rencontrée avec un ou plusieurs champs."
                 ];
             }
         }
@@ -350,7 +350,7 @@ class AdminController extends AbstractController
             die($e->getMessage());
         }
 
-        return $this->redirectToRoute("adminProject");
+        return $this->redirectToRoute("adminEducation");
     }
 
     /**
@@ -468,7 +468,6 @@ class AdminController extends AbstractController
                         }
                     }
                 }
-
                 
                 try {
                     $this->em->persist($project);
@@ -594,7 +593,7 @@ class AdminController extends AbstractController
      * @Route("/admin/witnesses", name="adminWitnesses")
      * @Route("/admin/witnesses/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminWitnessesByPage")
      */
-    public function admin_witnesses(int $page)
+    public function admin_witnesses(int $page = 1)
     {
         $limit = 10;
         $page = $page < 1 ? 1 : $page;
@@ -613,6 +612,16 @@ class AdminController extends AbstractController
     {
         return $this->render("Admin/Witness/form.html.twig", [
             "addWitnessForm" => []
+        ]);
+    }
+
+    /**
+     * @Route("/admin/prices", name="adminServicePrice")
+     */
+    public function admin_service_price(Request $request)
+    {
+        return $this->render("Admin/Service/list-prices.html.twig", [
+            "prices" => []
         ]);
     }
 

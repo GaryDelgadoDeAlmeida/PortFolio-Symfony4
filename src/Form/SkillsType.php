@@ -32,7 +32,10 @@ class SkillsType extends AbstractType
                 "required" => true
             ])
             ->add("submit", SubmitType::class, [
-                "label" => "Valider"
+                "label" => "Valider",
+                "attr" => [
+                    "class" => "btn btn-primary"
+                ]
             ])
         ;
     }

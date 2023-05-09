@@ -1,0 +1,22 @@
+/* ----------------------------------------------- *\
+    Card login
+\* ----------------------------------------------- */
+.card-login {
+    margin: auto;
+    max-width: 500px;
+    box-shadow: 3px 3px 7px var(--c-black);
+
+    .card-header {
+        padding: 10px 25px;
+        border-bottom: 1px solid var(--c-black);
+
+        .card-title {
+            margin: 0;
+            font-size: 1rem;
+        }
+    }
+
+    .card-content {
+        padding: 25px;
+    }
+}

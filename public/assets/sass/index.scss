@@ -2,10 +2,10 @@
 
 body {
   margin: 0;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   background-color: var(--c-lightWhite);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
@@ -40,7 +40,9 @@ a, a:hover {
   --c-skyBlue: #60d9fa;
   --c-skyBlueReact: #61dafb;
   --c-blue: #2962ff;
+  --c-blueReact: #2b81e0;
   --c-primaryBlue: #0366d6;
+  --c-shadeCyan: #567787;
   --c-shadeCyanBlue: #1b6ec2;
   --c-mediumDarkShadeCyanBlue: #1861ac;
   --c-sadBlue: #3f569b;
@@ -49,50 +51,44 @@ a, a:hover {
   --c-black: #000000;
 }
 
+@mixin tablet {
+  @media screen and (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tinyMobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+
 // Modules styles
 @import "./modules/common";
 
 /* ------------------------------------------------------ *\
                   User styles
 \* ------------------------------------------------------ */
-@import "./user/desktop/home";
-@import "./user/desktop/about";
-@import "./user/desktop/about_skills";
-@import "./user/desktop/about_service";
-@import "./user/desktop/about_experience";
-@import "./user/desktop/portfolio";
-@import "./user/desktop/news";
-@import "./user/desktop/contact";
-@import "./user/desktop/not_found";
-@import "./user/desktop/header";
-@import "./user/desktop/footer";
-
-// Tablet styles
-@import "./user/tablet/about";
-@import "./user/tablet/about_service";
-
-// Mobile styles
-@import "./user/mobile/about";
-@import "./user/mobile/about_service";
-@import "./user/mobile/contact";
-@import "./user/mobile/header";
+@import "./user/about";
+@import "./user/about_skills";
+@import "./user/about_service";
+@import "./user/contact";
+@import "./user/not_found";
+@import "./user/footer";
 
 /* ------------------------------------------------------ *\
                   Admin styles
 \* ------------------------------------------------------ */
-@import "./admin/desktop/experience";
-@import "./admin/desktop/home";
-@import "./admin/desktop/profile";
-@import "./admin/desktop/portfolio";
-@import "./admin/desktop/email";
-@import "./admin/desktop/skill";
-@import "./admin/desktop/witnesses";
-
-// Tablet styles
-@import "./admin/tablet/home";
-@import "./admin/tablet/profile";
-@import "./admin/tablet/portfolio";
-
-// Mobile styles
-@import "./admin/mobile/home";
-@import "./admin/mobile/portfolio";
+@import "./admin/experience";
+@import "./admin/home";
+@import "./admin/profile";
+@import "./admin/portfolio";
+@import "./admin/email";
+@import "./admin/skill";
+@import "./admin/witnesses";

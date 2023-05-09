@@ -1,9 +1,7 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block body %}
+{% block page_content %}
     <div class="admin-skills">
-        <h1>Skill</h1>
-
         {% if response != [] %}
             <div class="notification {{ response.class }}">
                 <div class="icon">

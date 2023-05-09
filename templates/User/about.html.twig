@@ -1,6 +1,6 @@
 {% extends 'baseUser.html.twig' %}
 
-{% block body %}
+{% block page_content %}
 
 <section class="about">
 
@@ -118,38 +118,53 @@
                                 <p>{{ experience.description }}</p>
                             </div>
                             
-                            <div class="tools">
-                                <h3>Outils utilisés :</h3>
-                                
-                                <div>
-                                    {% set skillsCounter = 1 %}
-                                    {% for item in experience.skills %}
-                                        <span>{{ item.skill }}</span>
+                            {% if experience.skills|length > 0 %}
+                                <div class="tools">
+                                    <h3>Outils utilisés :</h3>
+                                    
+                                    <div>
+                                        {% set skillsCounter = 1 %}
+                                        {% for item in experience.skills %}
+                                            <span>{{ item.skill }}</span>
 
-                                        {% if skillsCounter < experience.skills|length %}
-                                            &nbsp;|&nbsp;
-                                        {% endif %}
-                                        
-                                        {% set skillsCounter = skillsCounter + 1 %}
-                                    {% endfor %}
+                                            {% if skillsCounter < experience.skills|length %}
+                                                &nbsp;|&nbsp;
+                                            {% endif %}
+                                            
+                                            {% set skillsCounter = skillsCounter + 1 %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="projects">
-                                <h3>Projets participés :</h3>
-                                
-                                <div>
-                                    {% set experienceCounter = 1 %}
-                                    {% for i, item in experience.participateProjects %}
-                                        <a href="{{ item.link != null ? item.link : "#" }}" target="_blank" rel="noreferrer">{{ item.title }}</a>
-                                        
-                                        {% if experienceCounter < experience.participateProjects|length %}
-                                            &nbsp;|&nbsp;
-                                        {% endif %}
-                                        
-                                        {% set experienceCounter = experienceCounter + 1 %}
-                                    {% endfor %}
+                            {% endif %}
+
+                            {% if experience.participateProjects|length > 0 %}
+                                <div class="projects">
+                                    <h3>Projets participés :</h3>
+                                    
+                                    <div>
+                                        {% set experienceCounter = 1 %}
+                                        {% for i, item in experience.participateProjects %}
+                                            <a href="{{ item.link != null ? item.link : "#" }}" target="_blank" rel="noreferrer">{{ item.title }}</a>
+                                            
+                                            {% if experienceCounter < experience.participateProjects|length %}
+                                                &nbsp;|&nbsp;
+                                            {% endif %}
+                                            
+                                            {% set experienceCounter = experienceCounter + 1 %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="notification information">
+                        <div class="icon">
+                            <img src="{{ asset("/content/images/svg/informationmark-gray.svg") }}" alt="icon" />
+                        </div>
+                        
+                        <div class="message">
+                            <span>Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a></span>
                         </div>
                     </div>
                 {% endfor %}

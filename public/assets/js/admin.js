@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".add_tag_link").forEach((el) => {
         el.addEventListener("click", function(element) {
             let newElement = document.createElement("li")
+            newElement.className = "item"
             let prototype = findSpecificParent(element.target, "participateProjects-tags").getAttribute("data-prototype")
             newElement.innerHTML = prototype.replace(/__name__/g, $collectionParticipateProjectsHolder.children.length - 1)
             $collectionParticipateProjectsHolder.insertBefore(newElement, addParticipateProjectButton)

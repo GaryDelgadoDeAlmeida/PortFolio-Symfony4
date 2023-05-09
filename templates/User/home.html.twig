@@ -1,10 +1,642 @@
+{% import "./module/notification.html.twig" as module %}
 {% extends 'baseUser.html.twig' %}
 
-{% block body %}
-<section class="home">
-    <div class="home-info">
-        <h1>Garry Almeida &minus; Développeur Web FullStack</h1>
-        <a href="{{ path('aboutme') }}"><button class="btn btn-outline-white btn-rounded">Commencer</button></a>
+{% block page_content %}
+    
+    {# Home #}
+    <div class="page-home">
+        <div class="home-content">
+            <h2 class="sup-title">Garry ALMEIDA</h2>
+            <h1 class="main-title txt-uppercase">Développeur web indépendant<br/>PHP / Symfony</h1>
+        </div>
     </div>
-</section>
+
+    {# Introduction #}
+    <div class="aboutMe-intro">
+        <div class="page-wrapper">
+            <div class="intro">
+                <div class="aboutMe-intro-img txt-center">
+                    <img src="{{ asset("/content/images/me.jpg") }}" alt="" />
+                </div>
+                <div class="aboutMe-intro-intro">
+                    <span>Bonjour ! Je m'appelle</span>
+                    <h2>Garry ALMEIDA</h2>
+                    <p>Je suis un freelance spécialisé dans Symfony depuis maintenant 2 ans, geek, passionné par la nature et le ciel. Suite à mon expérience professionnelle, j'ai participé dans de nombreux projets web pour le compte de gros client (Enedis, Thello) comme pour des plus petites (Marcel, Clarins, DrTrader). Vous pouvez compter sur moi sur vos exigences de qualité de code et le travail en autonomie comme en équipe.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Service #}
+    <div id="services" class="page-wrapper">
+        <div class="page-header">
+            <h3>Mes Services</h3>
+        </div>
+
+        <div class="services">
+            <div class="service">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/desktop-mobile.svg") }}" alt="Gestion de projet" />
+                </div>
+                <h3 class="title">Gestion de projet</h3>
+                <p>Site vitrine, plateforme e-commerce, application mobile</p>
+            </div>
+            
+            <div class="service">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/code.svg") }}" alt="Intégration web" />
+                </div>
+                <h3 class="title">Intégration web</h3>
+                <p>Intégration HTML / CSS respectueuses des standards du web pour un référencement naturel</p>
+            </div>
+            
+            <div class="service">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/code.svg") }}" alt="Développements spécifiques" />
+                </div>
+                <h3 class="title">Développements spécifiques</h3>
+                <p>Des outils adaptés à vos besoins et à votre coeur de métier</p>
+            </div>
+
+            <div class="service">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/desktop-mobile.svg") }}" alt="Interface d'administration" />
+                </div>
+                <h3 class="title">Interface d'administration</h3>
+                <p>Système de gestion de contenu personnalisé</p>
+            </div>
+
+            <div class="service">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/desktop-mobile.svg") }}" alt="Responsive Design" />
+                </div>
+                <h3 class="title">Responsive Design</h3>
+                <p>Site web compatible tous supports (desktop, tablette et mobile)</p>
+            </div>
+
+            <div class="service">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/desktop-mobile.svg") }}" alt="Référencement naturel" />
+                </div>
+                <h3 class="title">Référencement naturel</h3>
+                <p>Affichage sémantique des informations, des pages propres pour un référencement optimal</p>
+            </div>
+        </div>
+    </div>
+
+    {# Skills #}
+    <div id="skills" class="page-wrapper">
+        <div class="page-header">
+            <h3>Compétences</h3>
+        </div>
+
+        <div class="skills-content">
+            
+            {# FrontEnd Skills #}
+            <div class="skills-card bg-white">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/code-white.svg") }}" alt="" />
+                </div>
+
+                <div class="skills">
+                    <h5 class="title txt-center">Frontend</h5>
+                    <ul>
+                        <li><i class="fas fa-check"></i><span>HTML / CSS</span></li>
+                        <li><i class="fas fa-check"></i><span>JavaScript</span></li>
+                        <li><i class="fas fa-check"></i><span>C# WinForm</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            {# BackEnd Skills #}
+            <div class="skills-card bg-white">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/database.svg") }}" alt="" />
+                </div>
+
+                <div class="skills">
+                    <h5 class="title txt-center">Backend</h5>
+                    <ul>
+                        <li><i class="fas fa-check"></i><span>C#</span></li>
+                        <li><i class="fas fa-check"></i><span>Java</span></li>
+                        <li><i class="fas fa-check"></i><span>PHP7</span></li>
+                        <li><i class="fas fa-check"></i><span>SQL / MySQL</span></li>
+                        <li><i class="fas fa-check"></i><span>Python</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            {# Other Skills #}
+            <div class="skills-card bg-white">
+                <div class="logo">
+                    <img src="{{ asset("/content/images/svg/tools.svg") }}" alt="" />
+                </div>
+
+                <div class="skills">
+                    <h5 class="title txt-center">Other</h5>
+                    <ul>
+                        <li><i class="fas fa-check"></i><span>Symfony 3/4</span></li>
+                        <li><i class="fas fa-check"></i><span>React / React Native</span></li>
+                        <li><i class="fas fa-check"></i><span>Wordpress</span></li>
+                        <li><i class="fas fa-check"></i><span>.Net Framework</span></li>
+                        <li><i class="fas fa-check"></i><span>Entity Framework</span></li>
+                        <li><i class="fas fa-check"></i><span>Bunifu Framework</span></li>
+                        <li><i class="fas fa-check"></i><span>MongoDB / Redis</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Experience => Should I conserve this part ? #}
+    <div id="formation" class="page-wrapper">
+        <div class="page-header">
+            <h3>Expériences</h3>
+        </div>
+
+        {# Experience Pro #}
+        <div class="experiences">
+
+            {# Experience 1 #}
+            <div class="experience-card">
+                <div class="card-body">
+                    <span class="icon"></span>
+                    
+                    <div class="job">
+                        Web Developer &minus; <a class="organisation" href="#freelance" target="_blank" rel="noreferrer">Freelance</a>
+                    </div>
+                    <div class="date">
+                        June 2022 to today
+                    </div>
+                    
+                    <div class="desc"></div>
+                    
+                    <div class="tools">
+                        <h3>Outils utilisés :</h3>
+                    </div>
+                    <div class="projects">
+                        <h3>Projets participés :</h3>
+                        
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+
+            {# Experience 2 #}
+            <div class="experience-card">
+                <div class="card-body">
+                    <span class="icon"></span>
+
+                    <div class="job">
+                        Web Developer &minus; <a class="organisation" href="https://creano.paris/" target="_blank" rel="noreferrer">Creano</a>
+                    </div>
+                    <div class="date">
+                        July 2021 to today &minus; <span class="contract-type">CDD</span>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>Développement d'un script Bash de sauvegarde du répertoire du projet et de sa base de données</li>
+                            <li>Développement front end en SASS</li>
+                            <li>Blocage Htaccess par adresse IP et redirection forcé vers la page de maintenance (nginx, apache)</li>
+                        </ul>
+                    </div>
+                    <div class="tools">
+                        <h3>Outils utilisés :</h3>
+                        
+                        <div>
+                            <span>HTML / CSS / SASS / JS</span>
+                            &nbsp;|&nbsp;
+                            <span>JQuery</span>
+                            &nbsp;|&nbsp;
+                            <span>PHP 7 / MYSQL</span>
+                            &nbsp;|&nbsp;
+                            <span>Wordpress</span>
+                            &nbsp;|&nbsp;
+                            <span>Bash Linux</span>
+                            &nbsp;|&nbsp;
+                            <span>Apache Htaccess</span>
+                        </div>
+                    </div>
+                    <div class="projects">
+                        <h3>Projets participés :</h3>
+                        
+                        <div>
+                            <a href="#" target="_blank" rel="noreferrer">Plugin WP de gestion des entités (Enedis)</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://datahub-enedis.fr/" target="_blank" rel="noreferrer">Datahub (Enedis)</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://notreaccord.com/" target="_blank" rel="noreferrer">Notre Accord</a>
+                            &nbsp;|&nbsp;
+                            <a href="http://hauteecoledejoaillerie.com/" target="_blank" rel="noreferrer">Haute Ecole de Joaillerie</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://www.diptyqueparis.com/en_eu/c/impossible-bouquets.html" target="_blank" rel="noreferrer">Impossible bouquet (Diptyque)</a>
+                            &nbsp;|&nbsp;
+                            <a href="#" target="_blank" rel="noreferrer">Vizio Group</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://client.creano.paris/marcel" target="_blank" rel="noreferrer">Marcel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Experience 3 #}
+            <div class="experience-card">
+                <div class="card-body">
+                    <span class="icon"></span>
+
+                    <div class="job">
+                        App Developer &minus; <a class="organisation" href="https://creano.paris/" target="_blank" rel="noreferrer">Creano</a>
+                    </div>
+                    <div class="date">
+                        September 2019 to June 2021 &minus; <span class="contract-type">Contrat alternance de professionnalisation</span>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li>Installation et mise en place du CMS Wordpress</li>
+                            <li>Installation et mise en place de projets Symfony</li>
+                            <li>Conception d'un plugin Wordpress exclusive pour le backoffice</li>
+                            <li>Conception du modèle de données</li>
+                            <li>Mise en place du modèle relationnel</li>
+                        </ul>
+                    </div>
+                    <div class="tools">
+                        <h3>Outils utilisés :</h3>
+                        
+                        <div>
+                            <span>Apache Htaccess</span>
+                            &nbsp;|&nbsp;
+                            <span>HTML / CSS / SASS / JS</span>
+                            &nbsp;|&nbsp;
+                            <span>JQuery</span>
+                            &nbsp;|&nbsp;
+                            <span>PHP 7 / MYSQL</span>
+                            &nbsp;|&nbsp;
+                            <span>Symfony</span>
+                            &nbsp;|&nbsp;
+                            <span>Wordpress</span>
+                        </div>
+                    </div>
+                    <div class="projects">
+                        <h3>Projets participés :</h3>
+                        
+                        <div>
+                            <a href="#" target="_blank" rel="noreferrer">Plugin WP de gestion des entités (Enedis)</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://datahub-enedis.fr/" target="_blank" rel="noreferrer">Datahub (Enedis)</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://datahub-enedis.fr/lieux-de-service/" target="_blank" rel="noreferrer">Lieux de service (Enedis)</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://www.thello.com/" target="_blank" rel="noreferrer">Thello</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://hoteldigitallab.com/" target="_blank" rel="noreferrer">Hotel Digital Lab</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://app.manzagol.fr/" target="_blank" rel="noreferrer">Manzagol App</a>
+                            &nbsp;|&nbsp;
+                            <a href="http://hauteecoledejoaillerie.com/" target="_blank" rel="noreferrer">Haute Ecole de Joaillerie</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://www.envol-immo.com/" target="_blank" rel="noreferrer">Envol Immobilier</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://www.atome.fr/" target="_blank" rel="noreferrer">Atome</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://www.diptyqueparis.com/en_eu/c/impossible-bouquets.html" target="_blank" rel="noreferrer">Impossible bouquet (Diptyque)</a>
+                            &nbsp;|&nbsp;
+                            <a href="http://www.coditrans.ci/" target="_blank" rel="noreferrer">Coditrans</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Experience 4 #}
+            <div class="experience-card">
+                <div class="card-body">
+                    <span class="icon"></span>
+                    <div class="job">
+                        Web Developer &minus; <a class="organisation" href="https://www.ffgolf.org/" target="_blank" rel="noreferrer">Fédération Française de Golf (FFGolf)</a>
+                    </div>
+                    <div class="date">
+                        January 2019 to March 2019 &minus; <span class="contract-type">Stage</span>
+                    </div>
+                    <div class="description">
+                        <span>Développement d'une API JSON sous le framework Symfony 3.4. L'API avait pour but une utilisation interne aux applications de l'entreprise et à terme, une disponibilisation aux clients de l'entreprise</span>
+                        <ul>
+                            <li>Conception et mise en place du modèle relationnel de la base de données</li>
+                            <li>Développement de l'API REST</li>
+                            <li>Scrapping d'une API international de golf</li>
+                        </ul>
+                    </div>
+                    <div class="tools">
+                        <h3>Outils utilisés :</h3>
+                        
+                        <div>
+                            <span>JSON</span>
+                            &nbsp;|&nbsp;
+                            <span>PHP 7 / MYSQL</span>
+                            &nbsp;|&nbsp;
+                            <span>Symfony</span>
+                            &nbsp;|&nbsp;
+                            <span>Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Experience 5 #}
+            <div class="experience-card">
+                <div class="card-body">
+                    <span class="icon"></span>
+                    <div class="job">
+                        Web Developer &minus; <a class="organisation" href="https://www.ffgolf.org/" target="_blank" rel="noreferrer">Fédération Française de Golf (FFGolf)</a>
+                    </div>
+                    <div class="date">
+                        June 2018 to June 2018 &minus; <span class="contract-type">Stage</span>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li>Installation de l'OS Linux Mint sur son poste de travail</li>
+                            <li>Mise en place du poste de travail</li>
+                            <li>Installation et configuration des différents outils nécessaires pour dévelepper</li>
+                            <li>Installation et configuration du projet Symfony</li>
+                            <li>Installation de Docker</li>
+                            <li>Développement front et back de fonctionnalités</li>
+                        </ul>
+                    </div>
+                    <div class="tools">
+                        <h3>Outils utilisés :</h3>
+                        
+                        <div>
+                            <span>HTML / CSS / JS</span>
+                            &nbsp;|&nbsp;
+                            <span>PHP 7 / MYSQL</span>
+                            &nbsp;|&nbsp;
+                            <span>JQuery</span>
+                            &nbsp;|&nbsp;
+                            <span>Bootstrap</span>
+                            &nbsp;|&nbsp;
+                            <span>Symfony</span>
+                            &nbsp;|&nbsp;
+                            <span>Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Latest Project #}
+    <div id="portfolio" class="page-wrapper">
+        <div class="page-header">
+            <h3>Mes projets</h3>
+        </div>
+
+        {% if portfolios is not same as([]) %}
+            <div class="overlay-row">
+                {% for portfolio in portfolios %}
+                    <div class="overlay-card">
+                        <div class="overlay-image">
+                            <a href="{{ portfolio.link }}" target="_blank" rel="noreferrer">
+                                <img class="image" src="{{ asset(portfolio.image) }}" alt="{{ portfolio.title }}"/>
+                                <div class="hover">
+                                    <div class="text">
+                                        <h3 class="project-title">{{ portfolio.title }}</h3>
+                                        <span class="project-small-text">{{ portfolio.type }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="page-button">
+                <a class="btn -inline-flex btn-primary" href="{{ path("portfolio") }}">
+                    <span>Tout voir</span>
+                    <img src="{{ asset("/content/images/svg/arrow-right-white.svg") }}" alt="" />
+                </a>
+            </div>
+        {% else %}
+            {{ module.notitication("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace GitHub") }}
+        {% endif %}
+    </div>
+
+    {# Services Price #}
+    <div id="price" class="page-wrapper">
+        <div class="page-header">
+            <h3>Tarifs</h3>
+        </div>
+
+        <div class="card-list">
+            
+            <div class="card-price">
+                <div class="-type">
+                    <span class="-title txt-uppercase">Site vitrine personnalisé</span>
+                </div>
+                <div class="-price">
+                    <span class="-small-title">A partir de</span>
+                    <span><em class="-title">4000</em> € (HT)</span>
+                </div>
+                <div class="-description">
+                    <ul class="list">
+                        <li>
+                            Développements sur-mesure
+                            <span class="small-text">(entièrement fait à la main)</span>
+                        </li>
+                        <li>
+                            Charte graphique à partir d'une maquette
+                            <span class="small-text">(Outils : <a href="https://www.figma.com/" target="_blank">Figma</a>)</span>
+                        </li>
+                        <li>Palette de couleur</li>
+                        <li>Interface administrateur</li>
+                        <li>Site responsive</li>
+                        <li>Mise en place du contenu</li>
+                        <li>Formulaire de contact</li>
+                        <li>Mise en ligne du site</li>
+                    </ul>
+
+                    <div class="links">
+                        <a href="#contactme" class="btn btn-primary">Demander un devis</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-price">
+                <div class="-type">
+                    <span class="-title txt-uppercase">Site ecommerce personnalisé</span>
+                </div>
+                <div class="-price">
+                    <span class="-small-title">A partir de</span>
+                    <span><em class="-title">5000</em> € (HT)</span>
+                </div>
+                <div class="-description">
+                    <ul class="list">
+                        <li>
+                            Développements sur-mesure
+                            <span class="small-text">(entièrement fait à la main)</span>
+                        </li>
+                        <li>
+                            Symfony
+                            <span class="small-text">(outil de développement)</span>
+                        </li>
+                        <li>
+                            Charte graphique à partir d'une maquette
+                            <span class="small-text">(Outils : <a href="https://www.figma.com/" target="_blank">Figma</a>)</span>
+                        </li>
+                        <li>Palette de couleur</li>
+                        <li>Interface administrateur</li>
+                        <li>Site responsive</li>
+                        <li>Mise en place du contenu</li>
+                        <li>Formulaire de contact</li>
+                        <li>Mise en ligne du site</li>
+                        <li>
+                            Statistiques
+                            <span class="small-text">(visites, produits les plus achetés, etc ...)</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="links">
+                        <a href="#contactme" class="btn btn-primary">Demander un devis</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex-col">
+                <div class="card-price w-100 h-100">
+                    <div class="-type">
+                        <span class="-title txt-uppercase">Développements spécifiques</span>
+                    </div>
+                    <div class="-price">
+                        <span class="-small-title txt-uppercase">Tarif moyen journalier</span>
+                        <span><em class="-title">350</em> € (HT)</span>
+                    </div>
+                    <div class="-description">
+                        <div class="links">
+                            <a href="#contactme" class="btn btn-primary">Me contacter</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-price w-100 h-100">
+                    <div class="-type">
+                        <span class="-title txt-uppercase">Maintenance applicative</span>
+                    </div>
+                    <div class="-price">
+                        <span class="-small-title txt-uppercase">Tarif à l'année</span>
+                        <span><em class="-title">500</em> € (HT)</span>
+                    </div>
+                    <div class="-description">
+                        <ul class="list">
+                            <li>
+                                Mise à jour de sécurité
+                                <span class="small-text">(mise à jours des dépendances techniques)</span>
+                            </li>
+                            <li>Modification du contenu textuel</li>
+                            <li>Modification graphique légère</li>
+                            <li>Correction de bugs</li>
+                        </ul>
+                        <div class="links">
+                            <a href="#contactme" class="btn btn-primary">Me contacter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Contact me #}
+    <div id="contactme" class="page-wrapper">
+        <div class="contact">
+            
+            <div class="page-header">
+                <h3>Contactez-moi !</h3>
+            </div>
+
+            <div class="contact-info">
+
+                <div class="contact-card">
+                    <div class="contact-info-email">
+                        <img src="{{ asset("/content/images/svg/enveloppe.svg") }}" alt="" />
+                        <h3>Email</h3>
+                        <p>gary.almeida.work@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-info-phone">
+                        <img src="{{ asset("/content/images/svg/phone.svg") }}" alt="" />
+                        <h3>Télephone</h3>
+                        <p>+33 6 52 07 39 97</p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-info-addr">
+                        <img src="{{ asset("/content/images/svg/map-marker.svg") }}" alt="" />
+                        <h3>Adresse</h3>
+                        <address>189 rue vercingétorix, Paris 75014</address>
+                    </div>
+                </div>
+            </div>                    
+
+            <div class="contact-info-social-link">
+                <div class="social-link">
+                    <li class="linkedIn">
+                        <a href="https://www.linkedin.com/in/garry-almeida-7538b3175/" target="_blank" rel="noreferrer">
+                            <img src="{{ asset("/content/images/svg/linkedin.svg") }}" alt="" />
+                        </a>
+                    </li>
+                    <li class="whatsApp">
+                        <a href="whatsapp://+33678895032">
+                            <img src="{{ asset("/content/images/svg/whatsapp.svg") }}" alt="" />
+                        </a>
+                    </li>
+                    <li class="gmail">
+                        <a href="mailto:gary.almeida.work@gmail.com">
+                            <img src="{{ asset("/content/images/svg/google-plus.svg") }}" alt="" />
+                        </a>
+                    </li>
+                    <li class="skype">
+                        <a href="skype://gary.almeida.sio@gmail.com">
+                            <img src="{{ asset("/content/images/svg/skype.svg") }}" alt="" />
+                        </a>
+                    </li>
+                    <li class="github">
+                        <a href="https://github.com/GaryDelgadoDeAlmeida" target="_blank" rel="noreferrer">
+                            <img src="{{ asset("/content/images/svg/github.svg") }}" alt="" />
+                        </a>
+                    </li>
+                </div>	
+            </div>
+
+            {# Contact Form to send me emails #}
+            {{ form_start(contactForm, {"attr": {"class": "form contact-form"}, "autoComplete": "off", "method": "POST"}) }}
+                <div class="form-text">
+                    {{ form_widget(contactForm.senderFullName) }}
+                </div>
+                
+                <div class="form-text">
+                    {{ form_widget(contactForm.senderEmail) }}
+                </div>
+                
+                <div class="form-text">
+                    {{ form_widget(contactForm.emailSubject) }}
+                </div>
+                
+                <div class="form-text">
+                    {{ form_widget(contactForm.emailContent) }}
+                </div>
+
+                <div class="form-field">
+                    <label for="captchat">{{ captchat.question }}</label>
+                    <input 
+                        id="captchat"
+                        type="text" 
+                        required
+                    />
+                </div>
+                
+                <div class="form-button txt-center">
+                    {{ form_widget(contactForm.submit) }}
+                </div>
+            {{ form_end(contactForm) }}
+        </div>
+    </div>
 {% endblock %}

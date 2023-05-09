@@ -1,0 +1,110 @@
+/* ----------------------------------------------- *\
+    Card prices
+\* ----------------------------------------------- */
+.card-list {
+    gap: 15px;
+    display: flex;
+
+    @include tablet {
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        .card-price {
+            width: 100%;
+        }
+    }
+}
+
+.card-price {
+    padding: 10px 0;
+    width: calc(100% / 3);
+    border-radius: 10px;
+    background-color: var(--c-white);
+    box-shadow: 3px 3px 4px var(--c-lightGray);
+
+    .-type, .-price {
+        padding: 15px 0;
+        position: relative;
+        text-align: center;
+
+        &::before {
+            content: '';
+            height: 1px;
+            bottom: 1px;
+            width: 120px;
+            display: block;
+            position: absolute;
+            background: #ddd;
+            left: calc(50% - 60px);
+        }
+
+        &::after {
+            content: '';
+            bottom: 0;
+            height: 3px;
+            width: 40px;
+            display: block;
+            position: absolute;
+            left: calc(50% - 20px);
+            background: var(--c-blueReact);
+        }
+    }
+
+    .-type {
+        width: 200px;
+        margin: 0 auto;
+        font-weight: 700;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .-price {
+        display: flex;
+        flex-direction: column;
+
+        .-small-title {
+            font-size: .8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .-title {
+            font-size: 2rem;
+            font-weight: 600;
+            font-style: normal;
+            letter-spacing: 1px;
+        }
+    }
+
+    .-description {
+        text-align: center;
+
+        .list {
+            margin: 0;
+            padding: 10px 0 0 0;
+
+            li {
+                display: flex;
+                padding: 7px 25px;
+                position: relative;
+                letter-spacing: .5px;
+                flex-direction: column;
+
+                &::before {
+                    content: "+";
+                    position: absolute;
+                    color: var(--c-red);
+                }
+
+                .small-text {
+                    color: var(--c-dimmGray);
+                }
+            }
+        }
+
+        .links {
+            padding: 10px;
+            text-align: center;
+        }
+    }
+}

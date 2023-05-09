@@ -1,12 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{# CSS File #}
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/build/css/index.css') }}">
-{% endblock %}
-
-
-{% block header %}
+{% block body %}
     <section class="admin-section">
         <div class="sidebar">
             <div class="sidebar-header">
@@ -33,6 +27,12 @@
                         <span><a href="{{ path("adminEducation") }}">Experiences</a></span>
                     </li>
                     <li class="sidebar-menu-link">
+                        <span><a href="{{ path("adminWitnesses") }}">Witnesses</a></span>
+                    </li>
+                    <li class="sidebar-menu-link">
+                        <span><a href="{{ path("adminServicePrice") }}">Prices</a></span>
+                    </li>
+                    <li class="sidebar-menu-link">
                         <span><a href="{{ path("adminContact") }}">Inbox</a></span>
                     </li>
                     <li class="sidebar-menu-link">
@@ -43,24 +43,52 @@
         </div>
 
         <div class="admin-content">
-            <div class="admin-header"></div>
+            <div class="admin-header">
+                <div class="admin-horizontal-header">
+                    <input id="dropdown-menu-input" type="checkbox" hidden />
+
+                    <label class="burger-menu-btn" for="dropdown-menu-input">
+                        <img src="{{ asset("/content/images/svg/bars.svg") }}" alt="" />
+                    </label>
+                    
+                    <div class="horizontal-header-dropdown">
+                        <label class="close-menu-btn" for="dropdown-menu-input">
+                            <img src="{{ asset("/content/images/svg/close.svg") }}" alt="" />
+                        </label>
+
+                        <ul class="-items">
+                            <li class="-item"><a href="{{ path("adminHome") }}">Home</a></li>
+                            <li class="-item"><a href="{{ path("adminProfile") }}">Profile</a></li>
+                            <li class="-item"><a href="{{ path("adminSkills") }}">Skills</a></li>
+                            <li class="-item"><a href="{{ path("adminProject") }}">Portfolio</a></li>
+                            <li class="-item"><a href="{{ path("adminEducation") }}">Experiences</a></li>
+                            <li class="-item"><a href="{{ path("adminWitnesses") }}">Witnesses</a></li>
+                            <li class="-item"><a href="{{ path("adminServicePrice") }}">Prices</a></li>
+                            <li class="-item"><a href="{{ path("adminContact") }}">Inbox</a></li>
+                            <li class="-item">
+                                <a class="btn btn-red" href="{{ path("adminLogout") }}">
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             
             <div class="admin-wrapper">
                 <div class="admin-body">
-{% endblock %}
-
-{% block footer %}
+                    {% block page_content %}{% endblock %}
+                </div>
             </div>
-        </div>
         
-        <div class="admin-footer">
-            <div class="footer-copyright">
-                <p>
-                    Copyright &copy; 2019-{{ "now"|date("Y") }} &minus; <a class="bold-green" href="{{ path("home") }}">Garry ALMEIDA</a><br/>
-                    All Rights Reserved / Tous Droits Réservés
-                </p>
+            <div class="admin-footer">
+                <div class="footer-copyright">
+                    <p>
+                        Copyright &copy; 2019-{{ "now"|date("Y") }} &minus; <a class="bold-green" href="{{ path("home") }}">Garry ALMEIDA</a><br/>
+                        All Rights Reserved / Tous Droits Réservés
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

@@ -1,26 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{# CSS File #}
-{% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/build/css/index.css') }}">
-{% endblock %}
-
-
-{% block header %}
+{% block body %}
     <header class="header-navigation bg-black">
         <nav class="header-menu">
             <div class="header-menu-brand">
-                <a href="{{ path('home') }}">Garry ALMEIDA</a>
+                <a href="{{ path("home") }}">Garry ALMEIDA</a>
             </div>
             <div class="header-menu-links">
                 <ul>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('adminHome') }}">Dashboard</a>
-                    {% endif %}
-                    <a href="{{ path('home') }}">Accueil</a>
-                    <a href="{{ path('aboutme') }}">A Propos</a>
-                    <a href="{{ path('portfolio') }}">PortFolio</a>
-                    <a href="{{ path('contactme') }}">Contact</a>
+                    <a href="{{ path("home") }}">Accueil</a>
+                    <a href="{{ path("home") }}#services">Services</a>
+                    <a href="{{ path("home") }}#skills">Compétences</a>
+                    <a href="{{ path("home") }}#formation">Expériences</a>
+                    <a href="{{ path("home") }}#portfolio">PortFolio</a>
+                    <a href="{{ path("home") }}#price">Tarifs</a>
+                    <a href="{{ path("home") }}#contactme">Contact</a>
                 </ul>
             </div>
 
@@ -29,30 +23,33 @@
                     <img src="{{ asset("/content/images/svg/bars.svg") }}" alt="" />
                 </label>
                 
-                <input type="checkbox" name="burger-menu" class="burger-menu" id="burger-menu" />
+                <input id="burger-menu" class="burger-menu" type="checkbox" name="burger-menu" />
                 
                 <div class="header-menu-links-mobile">
-
                     <label for="burger-menu" class="hide-menu-btn">
                         <img src="{{ asset("/content/images/svg/close.svg") }}" alt="" />
                     </label>
-
+                    
                     <div class="links-mobile-items">
                         <ul>
-                            <li><a href="{{ path('home') }}">Accueil</a></li>
-                            <li><a href="{{ path('aboutme') }}">A Propos</a></li>
-                            <li><a href="{{ path('portfolio') }}">PortFolio</a></li>
-                            <li><a href="{{ path('contactme') }}">Contact</a></li>
+                            <li><a href="{{ path("home") }}">Accueil</a></li>
+                            <li><a href="{{ path("home") }}#services">Services</a></li>
+                            <li><a href="{{ path("home") }}#skills">Compétences</a></li>
+                            <li><a href="{{ path("home") }}#formation">Expériences</a></li>
+                            <li><a href="{{ path("home") }}#portfolio">PortFolio</a></li>
+                            <li><a href="{{ path("home") }}#price">Tarifs</a></li>
+                            <li><a href="{{ path("home") }}#contactme">Contact</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-{% endblock %}
 
-
-{% block footer %}
+    <div class="page-content">
+        {% block page_content %}{% endblock %}
+    </div>
+    
     <footer class="footer bg-black">
         <div class="copyright">
             <p>

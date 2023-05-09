@@ -1,0 +1,71 @@
+/* ----------------------------------------------- *\
+                    Introduction
+\* ----------------------------------------------- */
+.aboutMe-intro {
+    margin: auto;
+    display: flex;
+    min-height: 400px;
+    color: var(--c-white);
+    background-color: var(--c-blueReact);
+
+    // Tablet
+    @media screen and (max-width: 991px) {
+        padding: 50px 0;
+    }
+
+    .intro {
+        display: grid;
+        grid-gap: 15px;
+        grid-auto-rows: minmax(100px, auto);
+        grid-template-columns: repeat(3, 1fr);
+
+        // Tablet
+        @media screen and (max-width: 991px) {
+            display: block;
+        }
+
+        .aboutMe-intro-img {
+            grid-row: 1;
+            grid-column: 1;
+            box-shadow: none !important;
+            
+            img {
+                max-width: 240px;
+                border-radius: 50%;
+                
+                // Mobile
+                @media screen and (max-width: 375px) {
+                    max-width: none;
+                    width: 100%;
+                }
+            }
+        }
+    
+        .aboutMe-intro-intro {
+            grid-row: 1;
+            font-size: 20px;
+            grid-column: 2 / 4;
+
+            // Tablet
+            @media screen and (max-width: 991px) {
+                margin-top: 20px;
+            }
+            
+            h2 {
+                font-size: 2rem;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        
+            p {
+                font-size: 15px;
+                font-weight: 350;
+            }
+        
+            span {
+                font-weight: 300;
+                font-size: 1.25rem;
+            }
+        }
+    }
+}

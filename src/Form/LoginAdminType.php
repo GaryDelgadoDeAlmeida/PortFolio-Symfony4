@@ -17,7 +17,11 @@ class LoginAdminType extends AbstractType
         $builder
             ->add('email', EmailType::class, ["label" => "Identifiant"])
             ->add('password', PasswordType::class, ["label" => "Password"])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                "attr" => [
+                    "class" => "btn btn-outline-green"
+                ]
+            ])
         ;
     }
 

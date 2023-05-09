@@ -1,28 +1,28 @@
 /* ---------------------------------------- *\
-                    Alert
+    Alert
 \* ---------------------------------------- */
 .alert {
-    padding: 10px 0;
     width: 100%;
+    padding: 10px 0;
     text-align: center;
     border-radius: 10px;
 
     &.alert-information {
+        color: var(--c-white);
         border: 1px solid var(--c-gray);
         background-color: var(--c-gray);
-        color: var(--c-white);
     }
 
     &.alert-danger {
+        color: var(--c-white);
         border: 1px solid var(--c-red);
         background-color: var(--c-red);
-        color: var(--c-white);
     }
 
     &.alert-success {
+        color: var(--c-white);
         border: 1px solid var(--c-green);
         background-color: var(--c-green);
-        color: var(--c-white);
     }
 
     &.alert-warning {

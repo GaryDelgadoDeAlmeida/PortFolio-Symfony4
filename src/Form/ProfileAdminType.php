@@ -44,14 +44,14 @@ class ProfileAdminType extends AbstractType
                 'required' => false,
             ])
             ->add("lastName", null, [
-                "label" => "LastName",
+                "label" => "Lastname",
                 "attr" => [
                     "maxLength" => 100
                 ],
                 "required" => true,
             ])
             ->add("firstName", null, [
-                "label" => "FirstName",
+                "label" => "Firstname",
                 "attr" => [
                     "maxLength" => 100
                 ],

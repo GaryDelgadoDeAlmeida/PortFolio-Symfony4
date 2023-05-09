@@ -1,0 +1,23 @@
+{% macro notitication(classname, message) %}
+    {% set icon = "" %}
+    
+    {% if classname == "success" %}
+        {% set icon = "/content/images/svg/checkmark-green.svg" %}
+    {% elseif classname == "information" %}
+        {% set icon = "/content/images/svg/informationmark-gray.svg" %}
+    {% elseif classname == "warning" %}
+        {% set icon = "/content/images/svg/questionmark-yellow.svg" %}
+    {% elseif classname == "success" %}
+        {% set icon = "/content/images/svg/closemark-red.svg" %}
+    {% endif %}
+
+    <div class="notification {{ classname }}">
+        <div class="icon">
+            <img src="{{ asset(icon) }}" alt="icon" />
+        </div>
+        
+        <div class="message">
+            <span>{{ message }}</span>
+        </div>
+    </div>
+{% endmacro %}

@@ -1,0 +1,61 @@
+.admin-profile .profile {
+    gap: 20px;
+    width: 100%;
+    display: flex;
+
+    // Tablet
+    @media screen and (max-width: 991px) {
+        flex: 1;
+        flex-direction: column;
+    }
+
+    .profile-item {
+        padding: 20px;
+        border-radius: 10px;
+        background-color: var(--c-white);
+        border: 1px solid var(--c-lightWhite);
+        box-shadow: 1px 1px 3px var(--c-gray);
+
+        &:not(:first-child) {
+            margin-top: 20px;
+        }
+    }
+    
+    .profile-image {
+        width: 350px;
+        text-align: center;
+
+        label {
+            cursor: pointer;
+            display: inline-block;
+
+            img {
+                width: 200px;
+                border-radius: 50%;
+            }
+        }
+
+        p {
+            font-size: 1.1rem;
+
+            .lastname {
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .profile-infos {
+        width: calc(100% - 350px);
+    }
+
+    .profile-image, .profile-infos {
+        height: 100%;
+
+        // Tablet
+        @media screen and (max-width: 991px) {
+            width: 100%;
+            margin: 0 0 20px 0;
+        }
+    }
+}
