@@ -6,7 +6,7 @@
     {# Home #}
     <div class="page-home">
         <div class="home-content">
-            <h2 class="sup-title">Garry ALMEIDA</h2>
+            <h2 class="sup-title">{{ user.getFullname() }}</h2>
             <h1 class="main-title txt-uppercase">Développeur web indépendant<br/>PHP / Symfony</h1>
         </div>
     </div>
@@ -16,12 +16,12 @@
         <div class="page-wrapper">
             <div class="intro">
                 <div class="aboutMe-intro-img txt-center">
-                    <img src="{{ asset("/content/images/me.jpg") }}" alt="" />
+                    <img src="{{ asset(user.imgPath) }}" alt="" />
                 </div>
                 <div class="aboutMe-intro-intro">
                     <span>Bonjour ! Je m'appelle</span>
-                    <h2>Garry ALMEIDA</h2>
-                    <p>Je suis un freelance spécialisé dans Symfony depuis maintenant 2 ans, geek, passionné par la nature et le ciel. Suite à mon expérience professionnelle, j'ai participé dans de nombreux projets web pour le compte de gros client (Enedis, Thello) comme pour des plus petites (Marcel, Clarins, DrTrader). Vous pouvez compter sur moi sur vos exigences de qualité de code et le travail en autonomie comme en équipe.</p>
+                    <h2>{{ user.getFullname() }}</h2>
+                    <p>{{ user.description }}</p>
                 </div>
             </div>
         </div>
@@ -91,60 +91,36 @@
         </div>
 
         <div class="skills-content">
-            
-            {# FrontEnd Skills #}
-            <div class="skills-card bg-white">
-                <div class="logo">
-                    <img src="{{ asset("/content/images/svg/code-white.svg") }}" alt="" />
-                </div>
 
-                <div class="skills">
-                    <h5 class="title txt-center">Frontend</h5>
-                    <ul>
-                        <li><i class="fas fa-check"></i><span>HTML / CSS</span></li>
-                        <li><i class="fas fa-check"></i><span>JavaScript</span></li>
-                        <li><i class="fas fa-check"></i><span>C# WinForm</span></li>
-                    </ul>
-                </div>
-            </div>
+            {% for categery, skills in skillCategories %}
+                {% set icon = "" %}
 
-            {# BackEnd Skills #}
-            <div class="skills-card bg-white">
-                <div class="logo">
-                    <img src="{{ asset("/content/images/svg/database.svg") }}" alt="" />
-                </div>
+                {% if categery is same as("frontend") %}
+                    {% set icon = "/content/images/svg/code-white.svg" %}
+                {% elseif categery is same as("backend") %}
+                    {% set icon = "/content/images/svg/database.svg" %}
+                {% elseif categery is same as("tools") %}
+                    {% set icon = "/content/images/svg/tools.svg" %}
+                {% endif %}
 
-                <div class="skills">
-                    <h5 class="title txt-center">Backend</h5>
-                    <ul>
-                        <li><i class="fas fa-check"></i><span>C#</span></li>
-                        <li><i class="fas fa-check"></i><span>Java</span></li>
-                        <li><i class="fas fa-check"></i><span>PHP7</span></li>
-                        <li><i class="fas fa-check"></i><span>SQL / MySQL</span></li>
-                        <li><i class="fas fa-check"></i><span>Python</span></li>
-                    </ul>
-                </div>
-            </div>
+                <div class="skills-card bg-white">
+                    <div class="logo">
+                        <img src="{{ asset(icon) }}" alt="" />
+                    </div>
 
-            {# Other Skills #}
-            <div class="skills-card bg-white">
-                <div class="logo">
-                    <img src="{{ asset("/content/images/svg/tools.svg") }}" alt="" />
-                </div>
+                    <div class="skills">
+                        <h5 class="title txt-center">{{ categery|capitalize }}</h5>
 
-                <div class="skills">
-                    <h5 class="title txt-center">Other</h5>
-                    <ul>
-                        <li><i class="fas fa-check"></i><span>Symfony 3/4</span></li>
-                        <li><i class="fas fa-check"></i><span>React / React Native</span></li>
-                        <li><i class="fas fa-check"></i><span>Wordpress</span></li>
-                        <li><i class="fas fa-check"></i><span>.Net Framework</span></li>
-                        <li><i class="fas fa-check"></i><span>Entity Framework</span></li>
-                        <li><i class="fas fa-check"></i><span>Bunifu Framework</span></li>
-                        <li><i class="fas fa-check"></i><span>MongoDB / Redis</span></li>
-                    </ul>
+                        {% if skills is not same as([]) %}
+                            <ul>
+                                {% for skill in skills %}
+                                    <li><i class="fas fa-check"></i><span>{{ skill.skill }}</span></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -155,231 +131,64 @@
         </div>
 
         {# Experience Pro #}
-        <div class="experiences">
+        {% if educations is not same as([]) %}
+            {# https://creano.paris/ #}
+            {# https://www.ffgolf.org/ #}
 
-            {# Experience 1 #}
-            <div class="experience-card">
-                <div class="card-body">
-                    <span class="icon"></span>
-                    
-                    <div class="job">
-                        Web Developer &minus; <a class="organisation" href="#freelance" target="_blank" rel="noreferrer">Freelance</a>
+            <div class="experiences">
+                {% for education in educations %}
+                    <div class="experience-card">
+                        <div class="card-body">
+                            <span class="icon"></span>
+
+                            <div class="job">
+                                {{ education.name }} &minus; <a class="organisation" href="{{ education.corporationSite }}" target="_blank" rel="noreferrer">{{ education.corporationName }}</a>
+                            </div>
+                            <div class="date">
+                                {{ education.startDate|date("M Y", "Europe/Paris") }} à {% if education.inProgress %} En cours {% else %} {{ education.endDate|date("M Y", "Europe/Paris") }} {% endif %} &minus; <span class="contract-type">{{ education.contractType|trans }}</span>
+                            </div>
+                            <div>
+                                {% if education.description is not same as("") %}
+                                    <ul>
+                                        {% for description in education.description|split("\r\n") %}
+                                            <li>{{ description }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                            <div class="tools">
+                                <h3>Outils utilisés :</h3>
+                                
+                                {% if education.skills is not same as([]) %}
+                                    <div class="badge-list mt-10px">
+                                        {% for index, skill in education.skills %}
+                                            <span class="badge badge-primary">{{ skill.skill }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="projects">
+                                <h3>Projets participés :</h3>
+                                
+                                {% if education.participateProjects is not same as([]) %}
+                                    <div>
+                                        {% for index, project in education.participateProjects %}
+                                            <a href="{{ project.link }}" target="_blank" rel="noreferrer">{{ project.title }}</a>
+                                            
+                                            {% if education.participateProjects|length > index + 1 %}
+                                                &nbsp;|&nbsp;
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
-                    <div class="date">
-                        June 2022 to today
-                    </div>
-                    
-                    <div class="desc"></div>
-                    
-                    <div class="tools">
-                        <h3>Outils utilisés :</h3>
-                    </div>
-                    <div class="projects">
-                        <h3>Projets participés :</h3>
-                        
-                        <div></div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
-
-            {# Experience 2 #}
-            <div class="experience-card">
-                <div class="card-body">
-                    <span class="icon"></span>
-
-                    <div class="job">
-                        Web Developer &minus; <a class="organisation" href="https://creano.paris/" target="_blank" rel="noreferrer">Creano</a>
-                    </div>
-                    <div class="date">
-                        July 2021 to today &minus; <span class="contract-type">CDD</span>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>Développement d'un script Bash de sauvegarde du répertoire du projet et de sa base de données</li>
-                            <li>Développement front end en SASS</li>
-                            <li>Blocage Htaccess par adresse IP et redirection forcé vers la page de maintenance (nginx, apache)</li>
-                        </ul>
-                    </div>
-                    <div class="tools">
-                        <h3>Outils utilisés :</h3>
-                        
-                        <div>
-                            <span>HTML / CSS / SASS / JS</span>
-                            &nbsp;|&nbsp;
-                            <span>JQuery</span>
-                            &nbsp;|&nbsp;
-                            <span>PHP 7 / MYSQL</span>
-                            &nbsp;|&nbsp;
-                            <span>Wordpress</span>
-                            &nbsp;|&nbsp;
-                            <span>Bash Linux</span>
-                            &nbsp;|&nbsp;
-                            <span>Apache Htaccess</span>
-                        </div>
-                    </div>
-                    <div class="projects">
-                        <h3>Projets participés :</h3>
-                        
-                        <div>
-                            <a href="#" target="_blank" rel="noreferrer">Plugin WP de gestion des entités (Enedis)</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://datahub-enedis.fr/" target="_blank" rel="noreferrer">Datahub (Enedis)</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://notreaccord.com/" target="_blank" rel="noreferrer">Notre Accord</a>
-                            &nbsp;|&nbsp;
-                            <a href="http://hauteecoledejoaillerie.com/" target="_blank" rel="noreferrer">Haute Ecole de Joaillerie</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://www.diptyqueparis.com/en_eu/c/impossible-bouquets.html" target="_blank" rel="noreferrer">Impossible bouquet (Diptyque)</a>
-                            &nbsp;|&nbsp;
-                            <a href="#" target="_blank" rel="noreferrer">Vizio Group</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://client.creano.paris/marcel" target="_blank" rel="noreferrer">Marcel</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {# Experience 3 #}
-            <div class="experience-card">
-                <div class="card-body">
-                    <span class="icon"></span>
-
-                    <div class="job">
-                        App Developer &minus; <a class="organisation" href="https://creano.paris/" target="_blank" rel="noreferrer">Creano</a>
-                    </div>
-                    <div class="date">
-                        September 2019 to June 2021 &minus; <span class="contract-type">Contrat alternance de professionnalisation</span>
-                    </div>
-                    <div class="description">
-                        <ul>
-                            <li>Installation et mise en place du CMS Wordpress</li>
-                            <li>Installation et mise en place de projets Symfony</li>
-                            <li>Conception d'un plugin Wordpress exclusive pour le backoffice</li>
-                            <li>Conception du modèle de données</li>
-                            <li>Mise en place du modèle relationnel</li>
-                        </ul>
-                    </div>
-                    <div class="tools">
-                        <h3>Outils utilisés :</h3>
-                        
-                        <div>
-                            <span>Apache Htaccess</span>
-                            &nbsp;|&nbsp;
-                            <span>HTML / CSS / SASS / JS</span>
-                            &nbsp;|&nbsp;
-                            <span>JQuery</span>
-                            &nbsp;|&nbsp;
-                            <span>PHP 7 / MYSQL</span>
-                            &nbsp;|&nbsp;
-                            <span>Symfony</span>
-                            &nbsp;|&nbsp;
-                            <span>Wordpress</span>
-                        </div>
-                    </div>
-                    <div class="projects">
-                        <h3>Projets participés :</h3>
-                        
-                        <div>
-                            <a href="#" target="_blank" rel="noreferrer">Plugin WP de gestion des entités (Enedis)</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://datahub-enedis.fr/" target="_blank" rel="noreferrer">Datahub (Enedis)</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://datahub-enedis.fr/lieux-de-service/" target="_blank" rel="noreferrer">Lieux de service (Enedis)</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://www.thello.com/" target="_blank" rel="noreferrer">Thello</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://hoteldigitallab.com/" target="_blank" rel="noreferrer">Hotel Digital Lab</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://app.manzagol.fr/" target="_blank" rel="noreferrer">Manzagol App</a>
-                            &nbsp;|&nbsp;
-                            <a href="http://hauteecoledejoaillerie.com/" target="_blank" rel="noreferrer">Haute Ecole de Joaillerie</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://www.envol-immo.com/" target="_blank" rel="noreferrer">Envol Immobilier</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://www.atome.fr/" target="_blank" rel="noreferrer">Atome</a>
-                            &nbsp;|&nbsp;
-                            <a href="https://www.diptyqueparis.com/en_eu/c/impossible-bouquets.html" target="_blank" rel="noreferrer">Impossible bouquet (Diptyque)</a>
-                            &nbsp;|&nbsp;
-                            <a href="http://www.coditrans.ci/" target="_blank" rel="noreferrer">Coditrans</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {# Experience 4 #}
-            <div class="experience-card">
-                <div class="card-body">
-                    <span class="icon"></span>
-                    <div class="job">
-                        Web Developer &minus; <a class="organisation" href="https://www.ffgolf.org/" target="_blank" rel="noreferrer">Fédération Française de Golf (FFGolf)</a>
-                    </div>
-                    <div class="date">
-                        January 2019 to March 2019 &minus; <span class="contract-type">Stage</span>
-                    </div>
-                    <div class="description">
-                        <span>Développement d'une API JSON sous le framework Symfony 3.4. L'API avait pour but une utilisation interne aux applications de l'entreprise et à terme, une disponibilisation aux clients de l'entreprise</span>
-                        <ul>
-                            <li>Conception et mise en place du modèle relationnel de la base de données</li>
-                            <li>Développement de l'API REST</li>
-                            <li>Scrapping d'une API international de golf</li>
-                        </ul>
-                    </div>
-                    <div class="tools">
-                        <h3>Outils utilisés :</h3>
-                        
-                        <div>
-                            <span>JSON</span>
-                            &nbsp;|&nbsp;
-                            <span>PHP 7 / MYSQL</span>
-                            &nbsp;|&nbsp;
-                            <span>Symfony</span>
-                            &nbsp;|&nbsp;
-                            <span>Docker</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {# Experience 5 #}
-            <div class="experience-card">
-                <div class="card-body">
-                    <span class="icon"></span>
-                    <div class="job">
-                        Web Developer &minus; <a class="organisation" href="https://www.ffgolf.org/" target="_blank" rel="noreferrer">Fédération Française de Golf (FFGolf)</a>
-                    </div>
-                    <div class="date">
-                        June 2018 to June 2018 &minus; <span class="contract-type">Stage</span>
-                    </div>
-                    <div class="description">
-                        <ul>
-                            <li>Installation de l'OS Linux Mint sur son poste de travail</li>
-                            <li>Mise en place du poste de travail</li>
-                            <li>Installation et configuration des différents outils nécessaires pour dévelepper</li>
-                            <li>Installation et configuration du projet Symfony</li>
-                            <li>Installation de Docker</li>
-                            <li>Développement front et back de fonctionnalités</li>
-                        </ul>
-                    </div>
-                    <div class="tools">
-                        <h3>Outils utilisés :</h3>
-                        
-                        <div>
-                            <span>HTML / CSS / JS</span>
-                            &nbsp;|&nbsp;
-                            <span>PHP 7 / MYSQL</span>
-                            &nbsp;|&nbsp;
-                            <span>JQuery</span>
-                            &nbsp;|&nbsp;
-                            <span>Bootstrap</span>
-                            &nbsp;|&nbsp;
-                            <span>Symfony</span>
-                            &nbsp;|&nbsp;
-                            <span>Docker</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% else %}
+            {{ module.notitication("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace GitHub") }}
+        {% endif %}
     </div>
 
     {# Latest Project #}
@@ -555,7 +364,7 @@
                     <div class="contact-info-email">
                         <img src="{{ asset("/content/images/svg/enveloppe.svg") }}" alt="" />
                         <h3>Email</h3>
-                        <p>gary.almeida.work@gmail.com</p>
+                        <p>{{ user.email }}</p>
                     </div>
                 </div>
 
@@ -563,7 +372,8 @@
                     <div class="contact-info-phone">
                         <img src="{{ asset("/content/images/svg/phone.svg") }}" alt="" />
                         <h3>Télephone</h3>
-                        <p>+33 6 52 07 39 97</p>
+                        {# <p>+33 6 52 07 39 97</p> #}
+                        <p>{{ user.phoneNumber|split("", 2)|join(' ') }}</p>
                     </div>
                 </div>
 
@@ -571,7 +381,7 @@
                     <div class="contact-info-addr">
                         <img src="{{ asset("/content/images/svg/map-marker.svg") }}" alt="" />
                         <h3>Adresse</h3>
-                        <address>189 rue vercingétorix, Paris 75014</address>
+                        <address>{{ user.address ~ ", " ~ user.city ~ " " ~ user.postalCode }}</address>
                     </div>
                 </div>
             </div>                    

@@ -32,28 +32,32 @@ class UserController extends AbstractController
             "answer" => 4.5
         ];
 
+        $skills = $this->em->getRepository(Skills::class)->getSkillsOrderedByCategory();
+        $orderedSkills = [];
+        foreach($skills as $skill) {
+            $orderedSkills[$skill->getType()][] = $skill;
+        }
+
+        if($formContact->isSubmitted() && $formContact->isValid()) {
+            ["answer" => $answer, "response" => $response] = $this->contactManager->sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
+            
+            if($answer) {
+                $newSend->setEmailContent(json_encode($newSend->getEmailContent()));
+                $newSend->setIsRead(false);
+                $newSend->setCreatedAt(new \DateTimeImmutable());
+                $this->em->persist($newSend);
+                $this->em->flush();
+            }
+        }
+
         return $this->render("User/home.html.twig", [
-            "portfolios" => [],
-            "contactForm" => $formContact->createView(),
-            "response" => [],
-            "captchat" => $captchat
-        ]);
-    }
-
-    /**
-     * @Route("/about", name="aboutme")
-     */
-    public function about_me()
-    {
-        $skillRepo = $this->em->getRepository(Skills::class);
-
-        return $this->render("User/about.html.twig", [
             "user" => $this->em->getRepository(User::class)->getUserByID(),
-            "frontend" => $skillRepo->getSkillsByCategory("frontend"),
-            "backend" => $skillRepo->getSkillsByCategory("backend"),
-            "tools" => $skillRepo->getSkillsByCategory("tools"),
-            "lastestProject" => $this->em->getRepository(Project::class)->getLastestProject(),
-            "latestExperience" => $this->em->getRepository(Education::class)->getLatestEducationFromCategory("experience", 4)
+            "skillCategories" => $orderedSkills,
+            "portfolios" => $this->em->getRepository(Project::class)->getLastestProject(6),
+            "educations" => $this->em->getRepository(Education::class)->getLatestEducationFromCategory("experience", 5),
+            "contactForm" => $formContact->createView(),
+            "response" => !empty($response) ? $response : [],
+            "captchat" => $captchat
         ]);
     }
 
@@ -86,34 +90,6 @@ class UserController extends AbstractController
 
         return $this->render("User/portfolioDetail.html.twig", [
             "portfolio" => []
-        ]);
-    }
-
-    /**
-     * @Route("/contact", name="contactme")
-     */
-    public function contact_me(Request $request)
-    {
-        $newSend = new Contact();
-        $formContact = $this->createForm(ContactUserType::class, $newSend);
-        $formContact->handleRequest($request);
-        $response = [];
-
-        if($formContact->isSubmitted() && $formContact->isValid()) {
-            ["answer" => $answer, "response" => $response] = $this->contactManager->sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
-            
-            if($answer) {
-                $newSend->setEmailContent(json_encode($newSend->getEmailContent()));
-                $newSend->setIsRead(false);
-                $newSend->setCreatedAt(new \DateTimeImmutable());
-                $this->em->persist($newSend);
-                $this->em->flush();
-            }
-        }
-
-        return $this->render("User/contact.html.twig", [
-            "contactForm" => $formContact->createView(),
-            "response" => !empty($response) ? $response : []
         ]);
     }
 

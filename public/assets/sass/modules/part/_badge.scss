@@ -12,6 +12,11 @@
     padding: 5px 15px;
     border-radius: 25px;
 
+    &.badge-primary {
+        color: var(--c-white);
+        background-color: var(--c-blueReact);
+    }
+
     &.badge-information {
         color: var(--c-black);
         background-color: var(--c-lightGray);

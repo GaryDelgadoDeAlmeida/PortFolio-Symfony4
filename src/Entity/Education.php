@@ -72,6 +72,16 @@ class Education
     private $corporationName;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $corporationSite;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $contractType;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -188,6 +198,30 @@ class Education
     public function setParticipateProjects(array $participateProjects): self
     {
         $this->participateProjects = $participateProjects;
+
+        return $this;
+    }
+
+    public function getCorporationSite(): ?string
+    {
+        return $this->corporationSite;
+    }
+
+    public function setCorporationSite(string $corporationSite): self
+    {
+        $this->corporationSite = $corporationSite;
+
+        return $this;
+    }
+
+    public function getContractType(): ?string
+    {
+        return $this->contractType;
+    }
+
+    public function setContractType(string $contractType): self
+    {
+        $this->contractType = $contractType;
 
         return $this;
     }

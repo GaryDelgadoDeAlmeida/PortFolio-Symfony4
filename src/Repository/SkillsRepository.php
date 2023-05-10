@@ -48,6 +48,21 @@ class SkillsRepository extends ServiceEntityRepository
     }
 
     /**
+     * Get all skills grouped by the category
+     * 
+     * @return Skills[]|[]
+     */
+    public function getSkillsOrderedByCategory()
+    {
+        return $this->createQueryBuilder("skill")
+            ->groupBy("skill.id, skill.type")
+            ->orderBy("skill.id", "ASC")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
      * Get all skills of a category
      * 
      * @param string category

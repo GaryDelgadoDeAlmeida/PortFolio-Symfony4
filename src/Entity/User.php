@@ -167,6 +167,11 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getFullname(): ?string
+    {
+        return $this->firstName . " " . strtoupper($this->lastName);
+    }
+
     public function getAddress(): ?string
     {
         return $this->address;

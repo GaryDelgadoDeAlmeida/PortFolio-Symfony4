@@ -28,26 +28,42 @@
                         {{ form_label(form.category) }}
                         {{ form_widget(form.category) }}
                     </div>
+
                     <div class="form-field">
                         {{ form_label(form.corporationName) }}
                         {{ form_widget(form.corporationName) }}
                     </div>
+
+                    <div class="form-field">
+                        {{ form_label(form.corporationSite) }}
+                        {{ form_widget(form.corporationSite) }}
+                    </div>
+
+                    <div class="form-field">
+                        {{ form_label(form.contractType) }}
+                        {{ form_widget(form.contractType) }}
+                    </div>
+
                     <div class="form-field">
                         {{ form_label(form.name) }}
                         {{ form_widget(form.name) }}
                     </div>
+
                     <div class="form-field">
                         {{ form_label(form.startDate) }}
                         {{ form_widget(form.startDate) }}
                     </div>
+
                     <div class="form-field">
                         {{ form_label(form.endDate) }}
                         {{ form_widget(form.endDate) }}
                     </div>
+
                     <div class="form-radio">
                         {{ form_widget(form.inProgress) }}
                         {{ form_label(form.inProgress) }}
                     </div>
+
                     <div class="form-field">
                         {{ form_label(form.description) }}
                         {{ form_widget(form.description) }}
@@ -77,6 +93,8 @@
                     <div class="form-button">
                         {{ form_widget(form.submit, {"attr": {"class": "btn btn-primary"}}) }}
                     </div>
+
+                    {{ form_rest(form) }}
                 {{ form_end(form, {"method":"POST"}) }}
             </div>
         </div>

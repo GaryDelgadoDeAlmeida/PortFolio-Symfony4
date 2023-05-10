@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -48,7 +49,23 @@ class EducationAdminType extends AbstractType
                 "required" => false
             ])
             ->add('corporationName', null, [
-                'label' => 'Corporation Name',
+                'label' => 'Corporation name',
+                "required" => true
+            ])
+            ->add('corporationSite', UrlType::class, [
+                "label" => "Corporation site",
+                "required" => true
+            ])
+            ->add("contractType", ChoiceType::class, [
+                'label' => 'Contract type',
+                'choices' => [
+                    'Make your choice, please' => null,
+                    'CDD' => 'cdd',
+                    'CDI' => 'cdi',
+                    'Freelance' => 'freelance',
+                    'Stage' => 'internship',
+                    'Alternance' => 'study_contract',
+                ],
                 "required" => true
             ])
             ->add('description', TextareaType::class, [

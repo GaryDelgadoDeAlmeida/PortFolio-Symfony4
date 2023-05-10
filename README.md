@@ -16,19 +16,19 @@ composer install
 
 Créer la database :
 ```bash
-php bin/console doctrine:database:create
+symfony console doctrine:database:create
 ```
 
 
 Générer les tables (pour la database) :
 ```bash
-php bin/console make:migration
+symfony console make:migration
 ```
 
 
 Sauvegarder les modifications dans la database :
 ```bash
-php bin/console doctrine:migrations:migrate
+symfony console doctrine:migrations:migrate
 ```
 
 
