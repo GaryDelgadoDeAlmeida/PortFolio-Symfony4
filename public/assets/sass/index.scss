@@ -21,25 +21,28 @@ a, a:hover {
 }
 
 :root {
-  /* Color */
+  /* Basic Corlor */
   --c-white: #ffffff;
+  --c-gray: #a9a9a9;
+  --c-red: #c00000;
+  --c-green: #188038;
+  --c-orange: #ffa500;
+  --c-blue: #2962ff;
+  --c-black: #000000;
+
+  /* Specific Color */
   --c-lightWhite: #f7f8fa;
   --c-lightGray: #e8e8e8;
-  --c-gray: #a9a9a9;
   --c-metalGray: #999999;
   --c-dimmGray: #696969;
   --c-silver: #c8c8c8;
   --c-lightRed: #ffe0e3;
-  --c-red: #c00000;
   --c-darkRed: #8B0000;
   --c-lightGreen: #a8f1c6;
   --c-greenLime: #198344;
-  --c-green: #188038;
   --c-lightOrange: #fff9f0;
-  --c-orange: #ffa500;
   --c-skyBlue: #60d9fa;
   --c-skyBlueReact: #61dafb;
-  --c-blue: #2962ff;
   --c-blueReact: #2b81e0;
   --c-primaryBlue: #0366d6;
   --c-shadeCyan: #567787;
@@ -48,7 +51,6 @@ a, a:hover {
   --c-sadBlue: #3f569b;
   --c-falseOnyx: #36304a;
   --c-approxNero: #262626;
-  --c-black: #000000;
 }
 
 @mixin tablet {

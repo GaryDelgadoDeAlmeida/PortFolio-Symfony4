@@ -1,4 +1,4 @@
-{% macro notitication(classname, message) %}
+{% macro notification(classname, message) %}
     {% set icon = "" %}
     
     {% if classname == "success" %}
@@ -17,7 +17,7 @@
         </div>
         
         <div class="message">
-            <span>{{ message }}</span>
+            <span>{{ message|raw }}</span>
         </div>
     </div>
 {% endmacro %}

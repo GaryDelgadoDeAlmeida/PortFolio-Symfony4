@@ -1,62 +1,54 @@
 {% extends 'baseUser.html.twig' %}
+{% import "./module/notification.html.twig" as macros %}
 
 {% block page_content %}
-<section class="portfolio">
-    <div class="wrapper">
-        <div class="section-header">
-            <h3>Mon PortFolio</h3>
-        </div>
+    <div class="portfolio">
+        <div class="page-wrapper">
+            <div class="section-header">
+                <h3>Mon PortFolio</h3>
+            </div>
 
-        {% if portfolio != [] %}
-            <div class="overlay-row">
-                {% for item in portfolio %}
-                    <div class="overlay-card" >
-                        <div class="overlay-image">
-                            <a href="{{ item.githubLink }}" target="_blank" rel="noreferrer">
-                                <img class="image"} src="{{ asset(item.imgPath) }}" alt="{{ item.name }}"/>
-                                <div class="hover">
-                                    <div class="text">
-                                        <h3 class="project-title">{{ item.name }}</h3>
-                                        <span class="project-small-text">{{ item.type }}</span>
+            {% if portfolio != [] %}
+                <div class="overlay-row">
+                    {% for item in portfolio %}
+                        <div class="overlay-card" >
+                            <div class="overlay-image">
+                                <a href="{{ item.githubLink }}" target="_blank" rel="noreferrer">
+                                    <img class="image"} src="{{ asset(item.imgPath) }}" alt="{{ item.name }}"/>
+                                    <div class="hover">
+                                        <div class="text">
+                                            <h3 class="project-title">{{ item.name }}</h3>
+                                            <span class="project-small-text">{{ item.type }}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% if offset > 1 and offset <= total_page %}
+                    <div class="pagination">
+                        <div>
+                            <a href="{{ path("portfolio") }}"><<</a>
+                        </div>
+                        <div>
+                            <a href="{{ path("portfolioPage", {"page": offset - 1}) }}">1</a>
+                        </div>
+                        <div class="current-page">
+                            <span>2</span>
+                        </div>
+                        <div>
+                            <a href="{{ path("portfolioPage", {"page": offset + 1}) }}">3</a>
+                        </div>
+                        <div>
+                            <a href="{{ path("portfolioPage", {"page": total_page}) }}">>></a>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-
-            {% if offset > 1 and offset <= total_page %}
-                <div class="pagination">
-                    <div>
-                        <a href="{{ path("portfolio") }}"><<</a>
-                    </div>
-                    <div>
-                        <a href="{{ path("portfolioPage", {"page": offset - 1}) }}">1</a>
-                    </div>
-                    <div class="current-page">
-                        <span>2</span>
-                    </div>
-                    <div>
-                        <a href="{{ path("portfolioPage", {"page": offset + 1}) }}">3</a>
-                    </div>
-                    <div>
-                        <a href="{{ path("portfolioPage", {"page": total_page}) }}">>></a>
-                    </div>
-                </div>
+                {% endif %}
+            {% else %}
+                {{ macros.notification("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class=\"bold-green\" href=\"https://github.com/GaryDelgadoDeAlmeida\" target=\"__blank\">GitHub<a>") }}
             {% endif %}
-        {% else %}
-            <div class="notification information">
-                <div class="icon">
-                    <img src="{{ asset("/content/images/svg/informationmark-gray.svg") }}" alt="icon" />
-                </div>
-                
-                <div class="message">
-                    <span>Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class="bold-green" href="https://github.com/GaryDelgadoDeAlmeida" target="__blank">GitHub<a></span>
-                </div>
-            </div>
-        {% endif %}
+        </div>
     </div>
-</section>
-
 {% endblock %}

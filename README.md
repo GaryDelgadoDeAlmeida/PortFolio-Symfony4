@@ -50,5 +50,5 @@ composer update
 
 ## Compression du style SASS en CSS
 ```bash
-sass --style compressed index.scss:index.css
+    sass --style compressed public/assets/sass/index.scss:public/assets/build/index.css
 ```

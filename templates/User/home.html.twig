@@ -1,5 +1,6 @@
-{% import "./module/notification.html.twig" as module %}
+{% trans_default_domain 'user' %}
 {% extends 'baseUser.html.twig' %}
+{% import "./module/notification.html.twig" as module %}
 
 {% block page_content %}
     
@@ -187,7 +188,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            {{ module.notitication("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace GitHub") }}
+            {{ module.notification("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class=\"bold-green\" href=\"https://github.com/GaryDelgadoDeAlmeida\" target=\"__blank\">GitHub<a>") }}
         {% endif %}
     </div>
 
@@ -223,7 +224,7 @@
                 </a>
             </div>
         {% else %}
-            {{ module.notitication("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace GitHub") }}
+            {{ module.notification("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class=\"bold-green\" href=\"https://github.com/GaryDelgadoDeAlmeida\" target=\"__blank\">GitHub<a>") }}
         {% endif %}
     </div>
 

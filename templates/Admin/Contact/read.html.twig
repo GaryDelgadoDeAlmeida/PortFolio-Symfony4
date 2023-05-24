@@ -27,11 +27,11 @@
             </div>
 
             <div class="object">
-                <h3>Object : {{ mail.emailSubject}}</h3>
+                <h3>Object : {{ mail.emailSubject }}</h3>
             </div>
             
             <div class="content">
-                <p>{{ mail.emailContent }}</p>
+                <p>{{ mail.emailContent|raw }}</p>
             </div>
         </div>
     </div>
