@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="page-content">
-        <div class="page-wrapper" style="height: 100vh; display: flex; padding: 0">
-            <div class="card-login w-100">
-                <div class="card-header">
-                    <h2 class="card-title">Login</h2>
-                </div>
-
-                <div class="card-content">
+    <div class="page-content -login">
+        <div class="page-wrapper -login">
+            <div class="card-login">
+                <div class="-left"></div>
+                
+                <div class="-right">
+                    <h2 class="title">Sign in</h2>
+                    
                     {{ form_start(formLogin, {"attr": {"class": "login-form"}}) }}
                         <div class="form-field">
                             {{ form_label(formLogin.email) }}

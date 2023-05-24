@@ -5,6 +5,11 @@
     width: 100%;
     min-height: 100vh;
 
+    &.-login {
+        display: flex;
+        background-color: var(--c-lightGray);
+    }
+
     .page-wrapper {
         margin: auto;
         padding: 25px 0;
