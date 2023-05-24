@@ -41,13 +41,11 @@
                             {% endfor %}
                         </div>
 
-                        <div class="form">
-                            {{ form_start(formSkills) }}
-                                {{ form_widget(formSkills.type) }}
-                                {{ form_widget(formSkills.skill) }}
-                                {{ form_widget(formSkills.submit) }}
-                            {{ form_end(formSkills) }}
-                        </div>
+                        {{ form_start(formSkills, {"attr": {"class": "form -inline-form"}}) }}
+                            {{ form_widget(formSkills.type) }}
+                            {{ form_widget(formSkills.skill) }}
+                            {{ form_widget(formSkills.submit) }}
+                        {{ form_end(formSkills) }}
                     </div>
                 {% endif %}
                 
@@ -67,13 +65,11 @@
                             {% endfor %}
                         </div>
 
-                        <div class="form">
-                            {{ form_start(formSkills) }}
-                                {{ form_widget(formSkills.type) }}
-                                {{ form_widget(formSkills.skill) }}
-                                {{ form_widget(formSkills.submit) }}
-                            {{ form_end(formSkills) }}
-                        </div>
+                        {{ form_start(formSkills, {"attr": {"class": "form -inline-form"}}) }}
+                            {{ form_widget(formSkills.type) }}
+                            {{ form_widget(formSkills.skill) }}
+                            {{ form_widget(formSkills.submit) }}
+                        {{ form_end(formSkills) }}
                     </div>
                 {% endif %}
                 
@@ -93,13 +89,11 @@
                             {% endfor %}
                         </div>
 
-                        <div class="form">
-                            {{ form_start(formSkills) }}
-                                {{ form_widget(formSkills.type) }}
-                                {{ form_widget(formSkills.skill) }}
-                                {{ form_widget(formSkills.submit) }}
-                            {{ form_end(formSkills) }}
-                        </div>
+                        {{ form_start(formSkills, {"attr": {"class": "form -inline-form"}}) }}
+                            {{ form_widget(formSkills.type) }}
+                            {{ form_widget(formSkills.skill) }}
+                            {{ form_widget(formSkills.submit) }}
+                        {{ form_end(formSkills) }}
                     </div>
                 {% endif %}
             </div>

@@ -436,7 +436,7 @@ class AdminController extends AbstractController
             "project" => $project,
             "skills" => array_map(function($item) {
                 return $item->getSkill();
-            }, $project->getSkills()->toArray())
+            }, $project ? $project->getSkills()->toArray() : [])
         ]);
     }
 
