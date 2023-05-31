@@ -2,22 +2,39 @@
 
 namespace App\Controller;
 
-use App\Entity\{Contact, Education, Project, Skills, User};
-use App\Form\{ContactUserType, LoginAdminType};
 use App\Manager\ContactManager;
+use App\Repository\SkillsRepository;
+use App\Repository\ProjectRepository;
+use App\Repository\EducationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+use App\Form\{ContactUserType, LoginAdminType};
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\{Contact, Education, Project, Skills, User};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
-    private $em;
-    private $contactManager;
+    private ContactManager $contactManager;
 
-    function __construct(EntityManagerInterface $manager) {
-        $this->em = $manager;
-        $this->contactManager = new ContactManager();
+    private EntityManagerInterface $em;
+    private SkillsRepository $skillsRepository;
+    private ProjectRepository $projectRepository;
+    private EducationRepository $educationRepository;
+
+    function __construct(
+        EntityManagerInterface $em, 
+        ContactManager $contactManager,
+        ProjectRepository $projectRepository,
+        SkillsRepository $skillsRepository,
+        EducationRepository $educationRepository
+    ) {
+        $this->em = $em;
+        $this->contactManager = $contactManager;
+        $this->skillsRepository = $skillsRepository;
+        $this->projectRepository = $projectRepository;
+        $this->educationRepository = $educationRepository;
     }
 
     /**
@@ -28,21 +45,28 @@ class UserController extends AbstractController
         $formContact = $this->createForm(ContactUserType::class, $contact = new Contact());
         $formContact->handleRequest($request);
         $captchat = [
-            "question" => "Combien fait 3 x 1.5 ?",
-            "answer" => 4.5
+            "question" => "Combien fait 2 x 2 ?",
+            "answer" => 4
         ];
 
-        $skills = $this->em->getRepository(Skills::class)->getSkillsOrderedByCategory();
+        $skills = $this->skillsRepository->getSkillsOrderedByCategory();
         $orderedSkills = [];
         foreach($skills as $skill) {
             $orderedSkills[$skill->getType()][] = $skill;
         }
 
         if($formContact->isSubmitted() && $formContact->isValid()) {
+            dd(
+                $request,
+                $request->request,
+                $request->get("captcha"),
+                $formContact,
+                $captchat
+            );
             ["answer" => $answer, "response" => $response] = $this->contactManager->sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
             
             if($answer) {
-                $newSend->setEmailContent(json_encode($newSend->getEmailContent()));
+                $newSend->setEmailContent($newSend->getEmailContent());
                 $newSend->setIsRead(false);
                 $newSend->setCreatedAt(new \DateTimeImmutable());
                 $this->em->persist($newSend);
@@ -53,8 +77,8 @@ class UserController extends AbstractController
         return $this->render("User/home.html.twig", [
             "user" => $this->em->getRepository(User::class)->getUserByID(),
             "skillCategories" => $orderedSkills,
-            "portfolios" => $this->em->getRepository(Project::class)->getLastestProject(6),
-            "educations" => $this->em->getRepository(Education::class)->getLatestEducationFromCategory("experience", 5),
+            "portfolios" => $this->projectRepository->getLastestProject(6),
+            "educations" => $this->educationRepository->getLatestEducationFromCategory("experience", 5),
             "contactForm" => $formContact->createView(),
             "response" => !empty($response) ? $response : [],
             "captchat" => $captchat
@@ -69,12 +93,11 @@ class UserController extends AbstractController
     {
         $limit = 15;
         $page = ($page >= 1 ? $page : 1);
-        $projectRepo = $this->em->getRepository(Project::class);
 
         return $this->render("User/portFolio.html.twig", [
             "offset" => $page,
-            "portfolio" => $projectRepo->getProject($page - 1, $limit),
-            "total_page" => ceil($projectRepo->countProject() / $limit)
+            "portfolio" => $this->projectRepository->getProject($page - 1, $limit),
+            "total_page" => ceil($this->projectRepository->countProject() / $limit)
         ]);
     }
 
@@ -83,21 +106,25 @@ class UserController extends AbstractController
      */
     public function single_portfolio(int $portfolioID)
     {
-        $portfolio = $this->em->getRepository(Project::class)->find($portfolioID);
+        $portfolio = $this->projectRepository->find($portfolioID);
         if(empty($portfolio)) {
             return $this->redirectToRoute("portfolio");
         }
 
         return $this->render("User/portfolioDetail.html.twig", [
-            "portfolio" => []
+            "portfolio" => $portfolio
         ]);
     }
 
     /**
      * @Route("/login", name="login")
      */
-    public function login()
+    public function login(Security $security)
     {
+        if($security->getUser()) {
+            return $this->redirectToRoute("adminHome");
+        }
+
         return $this->render("User/login.html.twig", [
             "formLogin" => $this->createForm(LoginAdminType::class)->createView()
         ]);

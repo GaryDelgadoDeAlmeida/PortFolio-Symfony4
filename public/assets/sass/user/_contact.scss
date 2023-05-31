@@ -5,9 +5,9 @@
     // 
 
     .contact-info {
-        text-align: center;
         display: grid;
         grid-gap: 15px;
+        text-align: center;
         grid-auto-rows: minmax(100px, auto);
         grid-template-columns: repeat(3, 1fr);
 
@@ -19,6 +19,7 @@
         .contact-card {
             padding: 0;
             font-size: 0.85em;
+            word-break: break-word;
             border-right: 2px solid rgba(0, 0, 0, 0.2);
 
             // Mobile
@@ -44,32 +45,31 @@
 
     /* Social Links */
     .contact-info-social-link {
-        max-width: 400px;
-        padding: 2% 0 2%;
-        text-align: center;
         margin: auto;
+        padding: 25px 0;
+        max-width: 400px;
 
         .social-link {
+            gap: 10px;
+            display: flex;
+            flex-wrap: wrap;
             text-align: center;
-            display: grid;
-            grid-auto-rows: minmax(100px, auto);
-            grid-template-columns: repeat(5, 1fr);
         
             li {
+                margin: auto;
                 display: inline-block;
                 text-decoration: none;
-                margin: auto;
         
                 a {
-                    display: flex;
                     width: 50px;
                     height: 50px;
-                    text-align: center;
-                    line-height: 50px;
+                    display: flex;
                     font-size: 25px;
-                    color: #fff;
-                    background: #222222;
+                    line-height: 50px;
+                    text-align: center;
                     border-radius: 50%;
+                    color: var(--c-white);
+                    background: #222222;
                     transition: all 0.3s ease-in-out;
 
                     img {

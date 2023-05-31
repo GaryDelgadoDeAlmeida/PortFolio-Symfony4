@@ -37,7 +37,7 @@
         <div class="services">
             <div class="service">
                 <div class="logo">
-                    <img src="{{ asset("/content/images/svg/desktop-mobile.svg") }}" alt="Gestion de projet" />
+                    <img src="{{ asset("/content/images/svg/lightbulb.svg") }}" alt="Gestion de projet" />
                 </div>
                 <h3 class="title">Gestion de projet</h3>
                 <p>Site vitrine, plateforme e-commerce, application mobile</p>
@@ -53,7 +53,7 @@
             
             <div class="service">
                 <div class="logo">
-                    <img src="{{ asset("/content/images/svg/code.svg") }}" alt="Développements spécifiques" />
+                    <img src="{{ asset("/content/images/svg/wrench.svg") }}" alt="Développements spécifiques" />
                 </div>
                 <h3 class="title">Développements spécifiques</h3>
                 <p>Des outils adaptés à vos besoins et à votre coeur de métier</p>
@@ -61,7 +61,7 @@
 
             <div class="service">
                 <div class="logo">
-                    <img src="{{ asset("/content/images/svg/desktop-mobile.svg") }}" alt="Interface d'administration" />
+                    <img src="{{ asset("/content/images/svg/gear.svg") }}" alt="Interface d'administration" />
                 </div>
                 <h3 class="title">Interface d'administration</h3>
                 <p>Système de gestion de contenu personnalisé</p>
@@ -77,7 +77,7 @@
 
             <div class="service">
                 <div class="logo">
-                    <img src="{{ asset("/content/images/svg/desktop-mobile.svg") }}" alt="Référencement naturel" />
+                    <img src="{{ asset("/content/images/svg/square-check.svg") }}" alt="Référencement naturel" />
                 </div>
                 <h3 class="title">Référencement naturel</h3>
                 <p>Affichage sémantique des informations, des pages propres pour un référencement optimal</p>
@@ -224,7 +224,7 @@
                 </a>
             </div>
         {% else %}
-            {{ module.notification("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class=\"bold-green\" href=\"https://github.com/GaryDelgadoDeAlmeida\" target=\"__blank\">GitHub<a>") }}
+            {{ module.notification("information", "Cette section est pour le moment vide. Je vous invite vivement à vous dirigez vers mon espace <a class=\"bold-green\" href=\"https://github.com/GaryDelgadoDeAlmeida\" target=\"__blank\">GitHub</a>") }}
         {% endif %}
     </div>
 
@@ -247,23 +247,53 @@
                 <div class="-description">
                     <ul class="list">
                         <li>
-                            Développements sur-mesure
-                            <span class="small-text">(entièrement fait à la main)</span>
+                            <span class="item-content">
+                                Développements sur-mesure
+                                <span class="small-text">(entièrement fait à la main)</span>
+                            </span>
                         </li>
                         <li>
-                            Charte graphique à partir d'une maquette
-                            <span class="small-text">(Outils : <a href="https://www.figma.com/" target="_blank">Figma</a>)</span>
+                            <span class="item-content">
+                                Charte graphique à partir d'une maquette
+                                <span class="small-text">
+                                    (Outils : <a href="https://www.figma.com/" target="_blank">Figma</a>)
+                                </span>
+                            </span>
                         </li>
-                        <li>Palette de couleur</li>
-                        <li>Interface administrateur</li>
-                        <li>Site responsive</li>
-                        <li>Mise en place du contenu</li>
-                        <li>Formulaire de contact</li>
-                        <li>Mise en ligne du site</li>
+                        <li>
+                            <span class="item-content">
+                                Palette de couleur
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Interface administrateur
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Site responsive
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Mise en place du contenu
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Formulaire de contact
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Mise en ligne du site
+                            </span>
+                        </li>
                     </ul>
 
                     <div class="links">
-                        <a href="#contactme" class="btn btn-primary">Demander un devis</a>
+                        <a class="btn btn-primary" href="#contactme">Demander un devis</a>
                     </div>
                 </div>
             </div>
@@ -279,26 +309,62 @@
                 <div class="-description">
                     <ul class="list">
                         <li>
-                            Développements sur-mesure
-                            <span class="small-text">(entièrement fait à la main)</span>
+                            <span class="item-content">
+                                Développements sur-mesure
+                                <span class="small-text">(entièrement fait à la main)</span>
+                            </span>
                         </li>
                         <li>
-                            Symfony
-                            <span class="small-text">(outil de développement)</span>
+                            <span class="item-content">
+                                Symfony
+                                <span class="small-text">(outil de développement)</span>
+                            </span>
                         </li>
                         <li>
-                            Charte graphique à partir d'une maquette
-                            <span class="small-text">(Outils : <a href="https://www.figma.com/" target="_blank">Figma</a>)</span>
+                            <span class="item-content">
+                                Charte graphique à partir d'une maquette
+                                <span class="small-text">
+                                    (Outils : <a href="https://www.figma.com/" target="_blank">Figma</a>)
+                                </span>
+                            </span>
                         </li>
-                        <li>Palette de couleur</li>
-                        <li>Interface administrateur</li>
-                        <li>Site responsive</li>
-                        <li>Mise en place du contenu</li>
-                        <li>Formulaire de contact</li>
-                        <li>Mise en ligne du site</li>
                         <li>
-                            Statistiques
-                            <span class="small-text">(visites, produits les plus achetés, etc ...)</span>
+                            <span class="item-content">
+                                Palette de couleur
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Interface administrateur
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Site responsive
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Mise en place du contenu
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Formulaire de contact
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Mise en ligne du site
+                            </span>
+                        </li>
+                        <li>
+                            <span class="item-content">
+                                Statistiques
+                                <span class="small-text">
+                                    (visites, produits les plus achetés, etc ...)
+                                </span>
+                            </span>
                         </li>
                     </ul>
                     
@@ -335,12 +401,26 @@
                     <div class="-description">
                         <ul class="list">
                             <li>
-                                Mise à jour de sécurité
-                                <span class="small-text">(mise à jours des dépendances techniques)</span>
+                                <span class="item-content">
+                                    Mise à jour de sécurité
+                                    <span class="small-text">(mise à jours des dépendances techniques)</span>
+                                </span>
                             </li>
-                            <li>Modification du contenu textuel</li>
-                            <li>Modification graphique légère</li>
-                            <li>Correction de bugs</li>
+                            <li>
+                                <span class="item-content">
+                                    Modification du contenu textuel
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item-content">
+                                    Modification graphique légère
+                                </span>
+                            </li>
+                            <li>
+                                <span class="item-content">
+                                    Correction de bugs
+                                </span>
+                            </li>
                         </ul>
                         <div class="links">
                             <a href="#contactme" class="btn btn-primary">Me contacter</a>
