@@ -181,6 +181,7 @@ form {
         textarea {
             height: 80px;
             padding: 20px;
+            resize: vertical;
             border-radius: 25px;
             border: 1px solid var(--c-silver);
         }
@@ -203,14 +204,21 @@ form {
     }
 
     .form-field-inline {
+        gap: 10px;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
 
+        @include tinyMobile {
+            gap: 0;
+            margin-bottom: 10px;
+            flex-direction: column;
+        }
+
         .field {
             flex: 1;
-            border: 1px solid var(--c-silver);
             border-radius: 0% !important;
+            border: 1px solid var(--c-silver);
         }
     }
 

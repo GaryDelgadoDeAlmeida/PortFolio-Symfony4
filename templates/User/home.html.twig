@@ -146,7 +146,7 @@
                                 {{ education.name }} &minus; <a class="organisation" href="{{ education.corporationSite }}" target="_blank" rel="noreferrer">{{ education.corporationName }}</a>
                             </div>
                             <div class="date">
-                                {{ education.startDate|date("M Y", "Europe/Paris") }} à {% if education.inProgress %} En cours {% else %} {{ education.endDate|date("M Y", "Europe/Paris") }} {% endif %} &minus; <span class="contract-type">{{ education.contractType|trans }}</span>
+                                {{ education.startDate|date("M Y", "Europe/Paris") }} à {% if education.inProgress %} En cours {% else %} {{ education.endDate|date("M Y", "Europe/Paris") }} {% endif %} &minus; <span class="contract-type">{{ ("contract." ~ education.contractType)|trans }}</span>
                             </div>
                             <div>
                                 {% if education.description is not same as("") %}

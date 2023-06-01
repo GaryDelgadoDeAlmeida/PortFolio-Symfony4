@@ -1,5 +1,11 @@
-cdd: CDD
-cdi: CDI
-freelance: Freelance
-internship: Stage
-study_contract: Alternance
+# Contract
+contract.cdd: CDD
+contract.cdi: CDI
+contract.freelance: Freelance
+contract.internship: Stage
+contract.study_contract: Alternance
+
+# Message
+witness.no_witness: "Il n'y a aucune témoignage disponible"
+project.no_project: "Il n'y a aucun projet"
+education.no_education: "Il n'y a aucune éducation enregistrer"

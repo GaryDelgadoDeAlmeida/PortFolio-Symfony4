@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
+use App\Form\WitnessType;
 use App\Service\RegexService;
-use App\Manager\{ExperienceManager, FileManager, NotificationManager};
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security as Secu;
-use App\Entity\{About, Contact, Education, Project, Skills};
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use App\Entity\{About, Contact, Education, Project, Skills, Witness};
+use App\Manager\{ExperienceManager, FileManager, NotificationManager};
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Form\{ProfileAdminType, ProjectAdminType, EducationAdminType, SkillsType, UpdatePasswordType};
 
@@ -20,6 +22,7 @@ use App\Form\{ProfileAdminType, ProjectAdminType, EducationAdminType, SkillsType
  * 
  * @IsGranted("ROLE_ADMIN")
  * @Security("is_granted('ROLE_ADMIN')")
+ * @Route("/admin", name="admin")
  */
 class AdminController extends AbstractController
 {
@@ -36,7 +39,7 @@ class AdminController extends AbstractController
         $this->notificationManager = new NotificationManager();
     }
     /**
-     * @Route("/admin", name="adminHome")
+     * @Route("/", name="Home")
      */
     public function admin()
     {
@@ -56,7 +59,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/profile", name="adminProfile")
+     * @Route("/profile", name="Profile")
      */
     public function admin_profile(Request $request)
     {
@@ -140,7 +143,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/skills", name="adminSkills")
+     * @Route("/skills", name="Skills")
      */
     public function admin_skills(Request $request)
     {
@@ -182,7 +185,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/skills/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminRemoveSkill")
+     * @Route("/skills/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="RemoveSkill", methods={"DELETE"})
      */
     public function admin_delete_skill(int $id)
     {
@@ -238,8 +241,8 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/education", name="adminEducation")
-     * @Route("/admin/education/page/{offset}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEducationByPage")
+     * @Route("/education", name="Education")
+     * @Route("/education/page/{offset}", requirements={"id" = "^\d+(?:\d+)?$"}, name="EducationByPage")
      */
     public function admin_education(int $offset = 1)
     {
@@ -255,7 +258,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/education/add", name="adminEducationAdd")
+     * @Route("/education/add", name="EducationAdd")
      */
     public function admin_education_add(Request $request)
     {
@@ -304,7 +307,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/education/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditEducation")
+     * @Route("/education/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="EditEducation")
      */
     public function admin_edit_education(Education $education, Request $request)
     {
@@ -339,7 +342,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/education/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteEducation")
+     * @Route("/education/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="DeleteEducation", methods={"DELETE"})
      */
     public function admin_delete_education(Education $education)
     {
@@ -354,8 +357,8 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/portfolio", name="adminProject")
-     * @Route("/admin/portfolio/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminProjectPage")
+     * @Route("/portfolio", name="Project")
+     * @Route("/portfolio/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="ProjectPage")
      */
     public function admin_project(int $page = 1)
     {
@@ -370,7 +373,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/portfolio/add", name="adminAddProject")
+     * @Route("/portfolio/add", name="AddProject")
      */
     public function admin_add_project(Request $request)
     {
@@ -423,7 +426,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/portfolio/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminSingleProject")
+     * @Route("/portfolio/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="SingleProject")
      */
     public function admin_single_project(int $id)
     {
@@ -441,7 +444,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/portfolio/{id}/edit", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminEditProject")
+     * @Route("/portfolio/{id}/edit", requirements={"id" = "^\d+(?:\d+)?$"}, name="EditProject")
      */
     public function admin_edit_project(Project $project, Request $request)
     {
@@ -491,7 +494,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/portfolio/{id}/delete", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminDeleteProject")
+     * @Route("/portfolio/{id}/delete", requirements={"id" = "^\d+(?:\d+)?$"}, name="DeleteProject", methods={"DELETE"})
      */
     public function admin_delete_project(Project $project)
     {
@@ -505,8 +508,8 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/contact", name="adminContact")
-     * @Route("/admin/contact/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminContactByPage")
+     * @Route("/contact", name="Contact")
+     * @Route("/contact/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="ContactByPage")
      */
     public function admin_contact(int $page = 1)
     {
@@ -521,7 +524,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/contact/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminReadMail")
+     * @Route("/contact/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="ReadMail")
      */
     public function admin_read_mail(Contact $contact)
     {
@@ -540,7 +543,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/contact/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminRemoveMail")
+     * @Route("/contact/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="RemoveMail", methods={"DELETE"})
      */
     public function admin_remove_mail(int $id)
     {
@@ -590,8 +593,8 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/witnesses", name="adminWitnesses")
-     * @Route("/admin/witnesses/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="adminWitnessesByPage")
+     * @Route("/witnesses", name="Witnesses")
+     * @Route("/witnesses/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="WitnessesByPage")
      */
     public function admin_witnesses(int $page = 1)
     {
@@ -599,24 +602,50 @@ class AdminController extends AbstractController
         $page = $page < 1 ? 1 : $page;
 
         return $this->render("Admin/Witness/list.html.twig", [
+            "title" => "Témoignage",
             "offset" => $page,
-            "nbrOffsets" => ceil( 0 / $limit),
-            "witnesses" => [],
+            "nbrOffsets" => ceil( $this->em->getRepository(Witness::class)->countWitness() / $limit),
+            "witnesses" => $this->em->getRepository(Witness::class)->findBy([], ["id" => "DESC"], $limit, ($page - 1) * $limit),
         ]);
     }
 
     /**
-     * @Route("/admin/witnesses/add", name="adminAddWitness")
+     * @Route("/witnesses/add", name="AddWitness")
+     * @Route("/witness/{id}/edit", requirements={"id" = "^\d+(?:\d+)?$"}, name="EditWitness")
      */
-    public function admin_add_witness(Request $request)
+    public function admin_form_witness(Request $request, Witness $witness = null)
     {
+        $form = $this->createForm(WitnessType::class, $witness ?? (new Witness())
+            ->setCreatedAt(new \DateTimeImmutable())
+        );
+        $form->handleRequest($request);
+        $response = [];
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $this->em->getRepository(Witness::class)->add($witness, true);
+
+            $response = [
+                "class" => "success",
+                "message" => "Le témoignage a bien été enregistrer"
+            ];
+        }
+
         return $this->render("Admin/Witness/form.html.twig", [
-            "addWitnessForm" => []
+            "witnessForm" => $form->createView(),
+            "response" => $response
         ]);
     }
 
     /**
-     * @Route("/admin/prices", name="adminServicePrice")
+     * @Route("/witness/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="RemoveWitness", methods={"DELETE"})
+     */
+    public function admin_remove_witness(Request $request, int $id)
+    {
+        return $this->json(["Test"], Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @Route("/prices", name="ServicePrice")
      */
     public function admin_service_price(Request $request)
     {
@@ -626,7 +655,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/logout", name="adminLogout")
+     * @Route("/logout", name="Logout")
      */
     public function admin_logout()
     {

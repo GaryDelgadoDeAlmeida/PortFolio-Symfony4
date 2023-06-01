@@ -12,22 +12,22 @@
                     td {
 
                         &:nth-child(1):before {
-                            content: "Date";
+                            text-align: left;
+                            content: "Société";
                         }
 
                         &:nth-child(2)::before {
-                            content: "Client :";
+                            text-align: left;
+                            content: "Contact :";
                         }
 
                         &:nth-child(3)::before {
-                            content: "Email :";
+                            text-align: left;
+                            content: "Commentaire :";
                         }
 
                         &:nth-child(4)::before {
-                            content: "Witness :";
-                        }
-
-                        &:nth-child(5)::before {
+                            text-align: left;
                             content: "Action :";
                         }
                     }

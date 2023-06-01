@@ -1,5 +1,9 @@
-cdd: CDD
-cdi: CDI
-freelance: Freelance
-internship: Internship
-study_contract: Study contract
+# Contract
+contract.cdd: CDD
+contract.cdi: CDI
+contract.freelance: Freelance
+contract.internship: Internship
+contract.study_contract: Study contract
+
+# Message
+witness.no_witness: There is no witness

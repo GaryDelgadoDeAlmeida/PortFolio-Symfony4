@@ -1,63 +1,47 @@
+import { findSpecificParent } from "./module/function.js";
+
 document.addEventListener("DOMContentLoaded", function() {
-    var $collectionParticipateProjectsHolder, $newLinkLi;
-    $collectionParticipateProjectsHolder = document.querySelector("ul.participateProjects-tags");
+    const removeWitness = document.getElementById("removeWitness")
+    console.log(removeWitness)
+    if(removeWitness) {
+        removeWitness.addEventListener("click", async (e) => {
+            const witnessRemoveURL = e.target.getAttribute("data-url")
 
-    // Remove Button
-    $collectionParticipateProjectsHolder.querySelectorAll("li").forEach((element) => {
-        let removeButton = document.createElement("button")
-        removeButton.className = "btn btn-red"
-        removeButton.innerText = "Delete this tag"
-        element.appendChild(removeButton)
+            // const parent = findSpecificParent(e.target, "witness-item");
+            // const tBody = parent.parentNode
+            // parent.remove()
 
-        removeButton.addEventListener("click", (event) => {
-            element.remove(event);
-        })
-    })
+            // if(tBody.children.length === 0) {
+            //     tBody.innerHTML = `
+            //         <tr>
+            //             <td class="txt-center" colspan="5">No results</td>
+            //         </tr>
+            //     `
+            // }
 
-    // Add Button
-    let addParticipateProjectButton = document.createElement("li");
-    addParticipateProjectButton.innerHTML = '<button type="button" class="add_tag_link btn btn-primary">Add a tag</button>'
-    $collectionParticipateProjectsHolder.appendChild(addParticipateProjectButton)
-
-    document.querySelectorAll(".add_tag_link").forEach((el) => {
-        el.addEventListener("click", function(element) {
-            let newElement = document.createElement("li")
-            newElement.className = "item"
-            let prototype = findSpecificParent(element.target, "participateProjects-tags").getAttribute("data-prototype")
-            newElement.innerHTML = prototype.replace(/__name__/g, $collectionParticipateProjectsHolder.children.length - 1)
-            $collectionParticipateProjectsHolder.insertBefore(newElement, addParticipateProjectButton)
-
-            // Remove Button
-            let removeButton = document.createElement("button")
-            removeButton.className = "btn btn-red"
-            removeButton.innerText = "Delete this tag"
-            newElement.appendChild(removeButton)
-            removeButton.addEventListener("click", (e) => {
-                newElement.remove()
+            console.log([
+                window.location,
+                witnessRemoveURL,
+                typeof witnessRemoveURL,
+                `${window.location.origin}${witnessRemoveURL}`,
+                typeof `${window.location.origin}${witnessRemoveURL}`
+            ])
+            const response = await fetch({
+                url: `${window.location.origin}${witnessRemoveURL}`,
+                method: "DELETE",
+                headers: {
+                    // "Accept": "application/ld+json",
+                    "Content-Type": "application/json"
+                }
             })
-        })
-    })
-});
-
-/**
- * Get all parents by the element
- * 
- * @param {*} element
- * @returns 
- */
-function findSpecificParent(element, target) {
-    var els = "";
-    
-    while (element) {
-        if( [null, undefined].indexOf(element.className) === -1 ) {
-            if(element.className === target) {
-                els = element;
-                break;
+            
+            if(response.status === 404) {
+                alert("Error")
+            } else if(response.status === 200) {
+                alert("OK")
             }
-        }
-
-        element = element.parentNode;
+            console.log(response)
+            // const responseData = await response.json()
+        })
     }
-
-    return els;
-}
+})
