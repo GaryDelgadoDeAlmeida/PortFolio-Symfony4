@@ -2,7 +2,25 @@
     Card
 \* ----------------------------------------------- */
 .card {
-    // width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 15px;
+    background-color: var(--c-white);
+    box-shadow: 3px 3px 4px var(--c-lightGray);
+
+    &.-column {
+        gap: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .-header {
+        font-weight: 700;
+    }
+
+    .-content {
+        // 
+    }
+
+    .-footer {
+        // 
+    }
 }

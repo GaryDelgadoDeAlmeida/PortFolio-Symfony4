@@ -1,0 +1,21 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block page_content %}
+    <a class="btn btn-green" href="{{ path("adminAddService") }}">Add a service</a>
+
+    <div class="mt-25px">
+        <div class="d-flex-col">
+            {% for service in services %}
+                <div class="card -column">
+                    <div class="-header">{{ service.title }}</div>
+                    <div class="-content">{{ service.description }}</div>
+                    <div class="-footer">
+                        <a class="btn btn-primary -inline-flex" href="{{ path("adminEditService", {"serviceID": service.id}) }}">
+                            <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="" />
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

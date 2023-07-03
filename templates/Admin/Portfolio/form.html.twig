@@ -1,23 +1,14 @@
 {% extends 'baseAdmin.html.twig' %}
+{% import "./module/notification.html.twig" as moduleNotif %}
 
 {% block page_content %}
     <div class="admin-portfolio">
-        <a href="{{ path("adminProject") }}">
-            <button class="btn btn-primary">Return</button>
-        </a>
+        <a class="btn btn-primary" href="{{ path("adminProject") }}">Return</a>
         
         <div class="portfolio-wrapper portfolio-add">
             {# Notification #}
             {% if response != [] %}
-                <div class="notification {{ response.class }}">
-                    <div class="icon">
-                        <img src="{{ asset(response.icon) }}" alt="icon" />
-                    </div>
-                    
-                    <div class="message">
-                        <span>{{ response.content }}</span>
-                    </div>
-                </div>
+                {{ moduleNotif.notification(response.class, response.content) }}
                 <div>&nbsp;</div>
             {% endif %}
 

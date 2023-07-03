@@ -1,0 +1,37 @@
+{% extends 'baseAdmin.html.twig' %}
+{% import "./module/notification.html.twig" as moduleNotif %}
+
+{% block page_content %}
+    <a class="btn btn-primary" href="{{ path("adminService") }}">Return</a>
+
+    <div class="mt-25px">
+        {% if response != [] %}
+            {{ moduleNotif.notification(response.class, response.message) }}
+        {% endif %}
+
+        <div class="card">
+            <div class="-content">
+                {{ form_start(formService, {"attr": {"class": "form"}}) }}
+                    <div class="form-field">
+                        {{ form_label(formService.title) }}
+                        {{ form_widget(formService.title) }}
+                    </div>
+                    
+                    <div class="form-field">
+                        {{ form_label(formService.icon) }}
+                        {{ form_widget(formService.icon) }}
+                    </div>
+                    
+                    <div class="form-field">
+                        {{ form_label(formService.description) }}
+                        {{ form_widget(formService.description) }}
+                    </div>
+                    
+                    <div class="form-button">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                {{ form_end(formService) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

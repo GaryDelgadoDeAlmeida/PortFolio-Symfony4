@@ -1,4 +1,5 @@
 {% extends 'baseAdmin.html.twig' %}
+{% import "./module/notification.html.twig" as moduleNotif %}
 
 {% block page_content %}
     <div class="admin-experience">
@@ -8,22 +9,14 @@
             </a>
 
             <div class="experience-add">
-                {% if message != null %}
-                    <div class="notification {{ message.class }}">
-                        <div class="icon">
-                            <img src="{{ asset(message.icon) }}" alt="icon" />
-                        </div>
-                        
-                        <div class="message">
-                            <span>{{ message.content }}</span>
-                        </div>
-                    </div>
+                {% if response != null %}
+                    {{ moduleNotif.notification(response.class, response.content) }}
                     <div>&nbsp;</div>
                 {% endif %}
 
                 {{ form_errors(form) }}
 
-                {{ form_start(form, {"method":"POST", "attr": {"class": "experience-form"}}) }}
+                {{ form_start(form, {"method": "POST", "attr": {"class": "experience-form"}}) }}
                     <div class="form-field">
                         {{ form_label(form.category) }}
                         {{ form_widget(form.category) }}
@@ -75,7 +68,6 @@
                     </div>
 
                     <div class="form-field">
-                        {{ form_label(form.participateProjects) }}
                         <ul class="participateProjects-tags" data-prototype="{{ form_widget(form.participateProjects.vars.prototype)|e }}">
                             {% for participateProjects in form.participateProjects %}
                                 <li class="item">
@@ -102,5 +94,6 @@
 {% endblock %}
 
 {% block javascript %}
+    {{ parent() }}
     <script src="{{ asset("assets/js/admin/project.js") }}"></script>
 {% endblock %}

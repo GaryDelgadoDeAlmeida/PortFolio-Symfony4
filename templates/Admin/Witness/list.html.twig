@@ -39,7 +39,7 @@
             </tbody>
         </table>
 
-        {% if offset >= 1 and offset <= nbrOffsets %}
+        {% if offset >= 1 and offset < nbrOffsets %}
             <div class="pagination">
                 {% if offset - 1 >= 1 %}
                     <div class="first-page">

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Manager\ContactManager;
 use App\Repository\SkillsRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\ServiceRepository;
 use App\Repository\EducationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,24 +17,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
-    private ContactManager $contactManager;
-
     private EntityManagerInterface $em;
+    private ContactManager $contactManager;
     private SkillsRepository $skillsRepository;
     private ProjectRepository $projectRepository;
+    private ServiceRepository $serviceRepository;
     private EducationRepository $educationRepository;
 
     function __construct(
         EntityManagerInterface $em, 
         ContactManager $contactManager,
-        ProjectRepository $projectRepository,
         SkillsRepository $skillsRepository,
+        ProjectRepository $projectRepository,
+        ServiceRepository $serviceRepository,
         EducationRepository $educationRepository
     ) {
         $this->em = $em;
         $this->contactManager = $contactManager;
         $this->skillsRepository = $skillsRepository;
         $this->projectRepository = $projectRepository;
+        $this->serviceRepository = $serviceRepository;
         $this->educationRepository = $educationRepository;
     }
 
@@ -44,6 +47,7 @@ class UserController extends AbstractController
     {
         $formContact = $this->createForm(ContactUserType::class, $contact = new Contact());
         $formContact->handleRequest($request);
+        $response = [];
         $captchat = [
             "question" => "Combien fait 2 x 2 ?",
             "answer" => 4
@@ -55,32 +59,54 @@ class UserController extends AbstractController
             $orderedSkills[$skill->getType()][] = $skill;
         }
 
-        if($formContact->isSubmitted() && $formContact->isValid()) {
-            dd(
-                $request,
-                $request->request,
-                $request->get("captcha"),
-                $formContact,
-                $captchat
-            );
-            ["answer" => $answer, "response" => $response] = $this->contactManager->sendMail($newSend->getSenderFullName(), $newSend->getSenderEmail(), $newSend->getEmailSubject(), $newSend->getEmailContent());
-            
-            if($answer) {
-                $newSend->setEmailContent($newSend->getEmailContent());
-                $newSend->setIsRead(false);
-                $newSend->setCreatedAt(new \DateTimeImmutable());
-                $this->em->persist($newSend);
-                $this->em->flush();
+        // If form is submitted
+        if($formContact->isSubmitted()) {
+
+            // If all field is valid
+            if($formContact->isValid()) {
+                
+                // If captchat has been filled and the answer if correct => Prevent mail spamming
+                if($request->request->get("captchat") == $captchat["answer"]) {
+                    
+                    // Send an email to the admin
+                    ["answer" => $answer, "response" => $response] = $this->contactManager->sendMail(
+                        $contact->getSenderEmail(), // Sender fullname
+                        $contact->getSenderEmail(), // Sender email
+                        $contact->getEmailSubject(), // Email subject
+                        $contact->getEmailContent() // Email content
+                    );
+                    
+                    // If the email has been send then, save the data into database
+                    if($answer) {
+                        $contact->setSenderFullName($contact->getEmailContent());
+                        $contact->setEmailContent($contact->getEmailContent());
+                        $contact->setIsRead(false);
+                        $contact->setCreatedAt(new \DateTimeImmutable());
+                        $this->em->persist($contact);
+                        $this->em->flush();
+                    }
+                } else {
+                    $response = [
+                        "class" => "danger",
+                        "message" => "Le captchat est incorrect."
+                    ];
+                }
+            } else {
+                $response = [
+                    "class" => "danger",
+                    "message" => "Une erreur a été rencontré avec l'un des champs"
+                ];
             }
         }
 
         return $this->render("User/home.html.twig", [
+            "response" => $response,
             "user" => $this->em->getRepository(User::class)->getUserByID(),
+            "services" => $this->serviceRepository->findAll(),
             "skillCategories" => $orderedSkills,
             "portfolios" => $this->projectRepository->getLastestProject(6),
             "educations" => $this->educationRepository->getLatestEducationFromCategory("experience", 5),
             "contactForm" => $formContact->createView(),
-            "response" => !empty($response) ? $response : [],
             "captchat" => $captchat
         ]);
     }

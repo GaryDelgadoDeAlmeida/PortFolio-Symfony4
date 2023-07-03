@@ -19,13 +19,6 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "The name of the project must be at least {{ limit }} characters long",
-     *      maxMessage = "The name of the project cannot be longer than {{ limit }} character"
-     * )
      */
     private $senderFullName;
 

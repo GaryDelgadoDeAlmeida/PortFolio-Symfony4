@@ -2,9 +2,18 @@
 
 namespace App\Manager;
 
+use App\Entity\Contact;
+use App\Repository\ContactRepository;
+
 class ContactManager {
+
+    private ContactRepository $contactRepository;
+
+    function __construct(ContactRepository $contactRepository) {
+        $this->contactRepository = $contactRepository;
+    }
     
-    function sendMail($senderFullName, $senderEmail, $senderSubject, $senderMessage)
+    public function sendMail($senderFullName, $senderEmail, $senderSubject, $senderMessage)
     {
         header("Content-type:aplication/json;charset=utf8");
 
@@ -74,8 +83,7 @@ class ContactManager {
                     "answer" => false,
                     "response" => [
                         "class" => "danger",
-                        "icon" => "/content/images/svg/closemark-red.svg",
-                        "content" => "Une erreur interne a été rencontrée, veuillez réessayer ultérieurement."
+                        "message" => "Une erreur interne a été rencontrée, veuillez réessayer ultérieurement."
                     ]
                 ];
             }
@@ -85,8 +93,7 @@ class ContactManager {
             "answer" => true,
             "response" => [
                 "class" => "success",
-                "icon" => "/content/images/svg/checkmark-green.svg",
-                "content" => "Votre message a été envoyé."
+                "message" => "Votre message a été envoyé."
             ]
         ];
         
@@ -96,12 +103,25 @@ class ContactManager {
                 "answer" => false,
                 "response" => [
                     "class" => "danger",
-                    "icon" => "/content/images/svg/closemark-red.svg",
-                    "content" => "Votre message n'a pu être envoyé, veuillez remplir tous les champs."
+                    "message" => "Votre message n'a pu être envoyé, veuillez remplir tous les champs."
                 ]
             ];
         }
 
         return $response;
+    }
+
+    /**
+     * @param Contact contact
+     * @return Contact
+     */
+    public function setEmailToRead(Contact $contact) 
+    {
+        if(!$contact->getIsRead()) {
+            $contact->setIsRead(true);
+            $this->contactRepository->add($contact, true);
+        }
+
+        return $contact;
     }
 }

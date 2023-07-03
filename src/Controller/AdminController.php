@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Service;
+use App\Form\ServiceType;
 use App\Form\WitnessType;
 use App\Service\RegexService;
+use App\Manager\ContactManager;
+use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,18 +31,29 @@ use App\Form\{ProfileAdminType, ProjectAdminType, EducationAdminType, SkillsType
  */
 class AdminController extends AbstractController
 {
-    private $em;
-    private $user;
-    private $notificationManager;
-    private $fileManager;
+    private User $user;
+    private EntityManagerInterface $em;
+    private FileManager $fileManager;
+    private ContactManager $contactManager;
+    private NotificationManager $notificationManager;
+    private ServiceRepository $serviceRepository;
 
-    function __construct(Secu $security, EntityManagerInterface $manager) 
-    {
-        $this->em = $manager;
+    function __construct(
+        Secu $security, 
+        EntityManagerInterface $em,
+        FileManager $fileManager, 
+        ContactManager $contactManager,
+        NotificationManager $notificationManager,
+        ServiceRepository $serviceRepository
+    ) {
+        $this->em = $em;
         $this->user = $security->getUser();
-        $this->fileManager = new FileManager();
-        $this->notificationManager = new NotificationManager();
+        $this->fileManager = $fileManager;
+        $this->notificationManager = $notificationManager;
+        $this->contactManager = $contactManager;
+        $this->serviceRepository = $serviceRepository;
     }
+    
     /**
      * @Route("/", name="Home")
      */
@@ -139,6 +155,88 @@ class AdminController extends AbstractController
             "pwdForm" => $formUpdatePwd->createView(),
             "message" => isset($message) ? $message : null,
             "updatePwdMessage" => isset($updatePwdMessage) ? $updatePwdMessage : null,
+        ]);
+    }
+
+    /**
+     * @Route("/service", name="Service")
+     */
+    function admin_service(Request $request)
+    {
+        return $this->render("admin/service/list.html.twig", [
+            "services" => $this->serviceRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/service/add", name="AddService")
+     */
+    function admin_add_service(Request $request)
+    {
+        $formService = $this->createForm(ServiceType::class, $service = new Service());
+        $formService->handleRequest($request);
+        $response = [];
+
+        if($formService->isSubmitted() && $formService->isValid()) {
+            try {
+                $service->setCreatedAt(new \DateTimeImmutable());
+                
+                // Save into database the new Service object
+                $this->serviceRepository->add($service, true);
+
+                $response = [
+                    "class" => "success",
+                    "message" => "Le nouveau service a bien été ajouté"
+                ];
+            } catch(\Exception $e) {
+                $response = [
+                    "class" => "danger",
+                    "message" => $e->getMessage()
+                ];
+            } finally {}
+        }
+
+        return $this->render("admin/service/form.html.twig", [
+            "formService" => $formService->createView(),
+            "response" => $response
+        ]);
+    }
+
+    /**
+     * @Route("/service/{serviceID}/edit", requirements={"serviceID" = "^\d+(?:\d+)?$"}, name="EditService")
+     */
+    public function admin_edit_service(Request $request, int $serviceID) 
+    {
+        $service = $this->serviceRepository->find($serviceID);
+        if(!$service) {
+            return $this->redirectToRoute("adminService");
+        }
+
+        $formService = $this->createForm(ServiceType::class, $service);
+        $formService->handleRequest($request);
+        $response = [];
+
+        if($formService->isSubmitted() && $formService->isValid()) {
+            try {
+                // Save all changes into bdd
+                $this->serviceRepository->add($service, true);
+
+                // Return a response to the user
+                $response = [
+                    "class" => "success",
+                    "message" => "Le service a bien été mise à jour"
+                ];
+            } catch(\Exception $e) {
+                $response = [
+                    "class" => "danger",
+                    "message" => $e->getMessage()
+                ];
+            } finally {}
+        }
+
+        return $this->render("admin/service/form.html.twig", [
+            "formService" => $formService->createView(),
+            "response" => $response
         ]);
     }
 
@@ -265,9 +363,11 @@ class AdminController extends AbstractController
         $education = new Education();
         $form = $this->createForm(EducationAdminType::class, $education);
         $form->handleRequest($request);
-        $message = [];
+        $response = [];
 
+        // If form is submitted
         if($form->isSubmitted()) {
+            // If all fields is valid
             if($form->isValid()) {
                 try {
                     if(!is_null($education->getEndDate()) && $education->getInProgress()) {
@@ -279,22 +379,19 @@ class AdminController extends AbstractController
                     $this->em->persist($education);
                     $this->em->flush();
         
-                    $message = [
+                    $response = [
                         "class" => "success",
-                        "icon" => "/content/images/svg/checkmark-green.svg",
                         "content" => "L'ajout a été faite."
                     ];
                 } catch(\Exception $e) {
-                    $message = [
+                    $response = [
                         "class" => "danger",
-                        "icon" => "/content/images/svg/closemark-red.svg",
                         "content" => "Une erreur a été rencontrée : {$e->getMessage()}"
                     ];
                 } finally {}
             } else {
-                $message = [
+                $response = [
                     "class" => "danger",
-                    "icon" => "/content/images/svg/closemark-red.svg",
                     "content" => "Une erreur a été rencontrée avec un ou plusieurs champs."
                 ];
             }
@@ -302,7 +399,7 @@ class AdminController extends AbstractController
 
         return $this->render('Admin/Education/form.html.twig', [
             'form' => $form->createView(),
-            'message' => !empty($message) ? $message : null
+            'response' => $response
         ]);
     }
 
@@ -313,9 +410,12 @@ class AdminController extends AbstractController
     {
         $form = $this->createForm(EducationAdminType::class, $education);
         $form->handleRequest($request);
-        $message = [];
+        $response = [];
 
+        // If form is submitted
         if($form->isSubmitted()) {
+
+            // If all fields is valid
             if($form->isValid()) {
                 try {
                     foreach($form["skills"]->getData() as $skill) {
@@ -325,19 +425,28 @@ class AdminController extends AbstractController
                     $this->em->persist($education);
                     $this->em->flush();
                     
-                    $message = $this->notificationManager->returnNotification("success", "La mise à jout s'est correctement effectuée");
+                    $response = [
+                        "class" => "success", 
+                        "message" => "La mise à jout s'est correctement effectuée"
+                    ];
                 } catch(\Exception $e) {
-                    $message = $this->notificationManager->returnNotification("danger", $e->getMessage());
+                    $response = [
+                        "class" => "danger",
+                        "message" => $e->getMessage()
+                    ];
                 } finally {}
             } else {
-                $message = $this->notificationManager->returnNotification("warning", "Une erreur a été rencontrée avec un ou plusieurs champs du formulaire.");
+                $response = [
+                    "class" => "warning", 
+                    "message" => "Une erreur a été rencontrée avec un ou plusieurs champs du formulaire."
+                ];
             }
         }
 
         return $this->render('Admin/Education/form.html.twig', [
             "form" => $form->createView(),
             "education_id" => $education->getId(),
-            "message" => !empty($message) ? $message : null
+            "response" => $response
         ]);
     }
 
@@ -528,17 +637,9 @@ class AdminController extends AbstractController
      */
     public function admin_read_mail(Contact $contact)
     {
-        if(!$contact->getIsRead()) {
-            $contact->setIsRead(true);
-            $this->em->persist($contact);
-            $this->em->flush();
-        }
-
-        $contact->setEmailContent(json_decode($contact->getEmailContent()));
-
         return $this->render("Admin/Contact/read.html.twig", [
             "title" => "Contact",
-            "mail" => $contact
+            "mail" => $this->contactManager->setEmailToRead($contact)
         ]);
     }
 
@@ -568,14 +669,14 @@ class AdminController extends AbstractController
                 $this->em->flush();
 
                 // Return a response to the user
-                return $this->redirectToRoute("adminContact", [
+                return $this->json([
                     "response" => [
                         "class" => "success",
                         "message" => "The email sended by {$email->getSenderEmail()} has been successfully removed."
                     ]
                 ]);
             } catch(Exception $e) {
-                return $this->redirectToRoute("adminContact", [
+                return $this->json([
                     "response" => [
                         "class" => "danger",
                         "message" => "An error has been found with the email id. The removal process has been cancelled."
@@ -584,7 +685,7 @@ class AdminController extends AbstractController
             }
         }
 
-        return $this->redirectToRoute("adminContact", [
+        return $this->json([
             "response" => [
                 "class" => "danger",
                 "message" => "An error has been found with the email id. The removal process has been cancelled."
@@ -645,11 +746,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/prices", name="ServicePrice")
+     * @Route("/prices", name="Price")
      */
-    public function admin_service_price(Request $request)
+    public function admin_price(Request $request)
     {
-        return $this->render("Admin/Service/list-prices.html.twig", [
+        return $this->render("admin/price/list.html.twig", [
             "prices" => []
         ]);
     }

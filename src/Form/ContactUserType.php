@@ -15,13 +15,6 @@ class ContactUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("senderFullName", null, [
-                "required" => true,
-                "attr" => [
-                    "placeholder" => "Votre Nom",
-                    "maxLength" => 100
-                ]
-            ])
             ->add("senderEmail", EmailType::class, [
                 "required" => true,
                 "attr" => [
