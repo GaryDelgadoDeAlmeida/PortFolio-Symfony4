@@ -1,4 +1,5 @@
 {% extends 'baseAdmin.html.twig' %}
+{% import "./module/notification.html.twig" as module %}
 
 {% block page_content %}
     <div class="admin-profile">
@@ -17,16 +18,7 @@
                 <div class="profile-item">
                     <div class="update-password-form">
                         {% if updatePwdMessage != null %}
-                            <div class="notification {{ updatePwdMessage.class }}">
-                                <div class="icon">
-                                    <img src="{{ asset(updatePwdMessage.icon) }}" alt="icon" />
-                                </div>
-                                
-                                <div class="message">
-                                    <span>{{ updatePwdMessage.content }}</span>
-                                </div>
-                            </div>
-                            <div>&nbsp;</div>
+                            {{ module.notification(updatePwdMessage.class, updatePwdMessage.message) }}
                         {% endif %}
 
                         {{ form_start(pwdForm, {"attr": {"class": "update-password-form"}, "method": "POST"}) }}
@@ -52,17 +44,8 @@
 
             <div class="profile-infos">
                 <div class="profile-item">
-                    {% if message != null %}
-                        <div class="notification {{ message.class }}">
-                            <div class="icon">
-                                <img src="{{ asset(message.icon) }}" alt="icon" />
-                            </div>
-                            
-                            <div class="message">
-                                <span>{{ message.content }}</span>
-                            </div>
-                        </div>
-                        <div>&nbsp;</div>
+                    {% if response != [] %}
+                        {{ module.notification(response.class, response.message) }}
                     {% endif %}
                     
                     {{ form_start(form, {"attr": {"class": "profile-form"}, 'method': 'POST'}) }}

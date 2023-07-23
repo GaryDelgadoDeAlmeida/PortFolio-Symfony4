@@ -1,25 +1,18 @@
 {% extends 'baseAdmin.html.twig' %}
+{% import "./module/notification.html.twig" as module %}
 
 {% block page_content %}
     <div class="admin-skills">
         {% if response != [] %}
-            <div class="notification {{ response.class }}">
-                <div class="icon">
-                    <img src="{{ asset(response.icon) }}" alt="icon" />
-                </div>
-                <div class="message">
-                    <span>{{ response.content }}</span>
-                </div>
-            </div>
-            <div>&nbsp;</div>
+            {{ module.notification(response.class, response.content) }}
         {% endif %}
 
         <div class="skills">
             <div class="skills-onglet">
                 <ul>
-                    <a href="{{ path("adminSkills", {"print": "frontend"}) }}"><li class="{{ print == "frontend" ? "active" : "" }}">Frontend</li></a>
-                    <a href="{{ path("adminSkills", {"print": "backend"}) }}"><li class="{{ print == "backend" ? "active" : "" }}">Backend</li></a>
-                    <a href="{{ path("adminSkills", {"print": "tools"}) }}"><li class="{{ print == "tools" ? "active" : "" }}">Tools</li></a>
+                    <a href="{{ path("admin_skill_index", {"print": "frontend"}) }}"><li class="{{ print == "frontend" ? "active" : "" }}">Frontend</li></a>
+                    <a href="{{ path("admin_skill_index", {"print": "backend"}) }}"><li class="{{ print == "backend" ? "active" : "" }}">Backend</li></a>
+                    <a href="{{ path("admin_skill_index", {"print": "tools"}) }}"><li class="{{ print == "tools" ? "active" : "" }}">Tools</li></a>
                 </ul>
             </div>
             
@@ -34,7 +27,7 @@
                                     <div class="item">
                                         <span>{{ item.skill }}</span>
                                     </div>
-                                    <a class="item-action" href="{{ path("adminRemoveSkill", {"id": item.id}) }}">
+                                    <a class="item-action" href="{{ path("admin_skill_remove", {"id": item.id}) }}">
                                         <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
                                     </a>
                                 </div>
@@ -58,7 +51,7 @@
                                     <div class="item">
                                         <span>{{ item.skill }}</span>
                                     </div>
-                                    <a class="item-action" href="{{ path("adminRemoveSkill", {"id": item.id}) }}">
+                                    <a class="item-action" href="{{ path("admin_skill_remove", {"id": item.id}) }}">
                                         <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
                                     </a>
                                 </div>
@@ -82,7 +75,7 @@
                                     <div class="item">
                                         <span>{{ item.skill }}</span>
                                     </div>
-                                    <a class="item-action" href="{{ path("adminRemoveSkill", {"id": item.id}) }}">
+                                    <a class="item-action" href="{{ path("admin_skill_remove", {"id": item.id}) }}">
                                         <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
                                     </a>
                                 </div>

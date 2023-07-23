@@ -1,9 +1,12 @@
+{% trans_default_domain 'user' %}
 {% extends 'baseAdmin.html.twig' %}
 
 {% block page_content %}
-    <div class="admin-email">
+    <a class="btn btn-red" href="{{ path("admin_contact_remove_all") }}">Remove all contact</a>
+
+    <div class="admin-email mt-15px">
         <div class="emails">
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Object</th>
@@ -20,15 +23,18 @@
                                 <td>{{ mail.emailContent|slice(0, 100) }}</td>
                                 <td>{{ mail.createdAt|date("d/m/Y") }}</td>
                                 <td>
-                                    <a href="{{ path('adminReadMail', {'id': mail.id}) }}">
+                                    <a href="{{ path('admin_contact_show', {'id': mail.id}) }}">
                                         <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="See more" />
                                     </a>
+                                    <button class="removeMail" data-url="{{ path("admin_contact_remove", {'id': mail.id}) }}">
+                                        <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="Delete" />
+                                    </button>
                                 </td>
                             </tr>
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td colspan="4" class="text-center">Il n'y a aucun mail envoyé depuis le portfolio</td>
+                            <td colspan="4" class="text-center">{{ "contact.no_contact"|trans }}</td>
                         </tr>
                     {% endif %}
                 </tbody>
@@ -38,12 +44,12 @@
         {% if offset < total_page  %}
             <div class="pagination">
                 <div class="first-page">
-                    <a href="{{ path("adminContact") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt={"double-angle-left"} /></a>
+                    <a href="{{ path("admin_contact_index") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt={"double-angle-left"} /></a>
                 </div>
                 
                 {% if offset - 1 >= 1  %}
                     <div class="previous-page">
-                        <a href="{{ path("adminContactByPage", {'page': (offset - 1)}) }}">{{ offset - 1 }}</a>
+                        <a href="{{ path("admin_contact_by_page", {'page': (offset - 1)}) }}">{{ offset - 1 }}</a>
                     </div>
                 {% endif %}
 
@@ -53,12 +59,12 @@
                 
                 {% if offset + 1 <= total_page  %}
                     <div class="next-page">
-                        <a href="{{ path("adminContactByPage", {'page': (offset + 1)}) }}">{{ offset + 1 }}</a>
+                        <a href="{{ path("admin_contact_by_page", {'page': (offset + 1)}) }}">{{ offset + 1 }}</a>
                     </div>
                 {% endif %}
                 
                 <div class="last-page">
-                    <a href="{{ path("adminContactByPage", {'page': (total_page)}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt={"double-angle-right"} /></a>
+                    <a href="{{ path("admin_contact_by_page", {'page': (total_page)}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt={"double-angle-right"} /></a>
                 </div>
             </div>
         {% endif %}

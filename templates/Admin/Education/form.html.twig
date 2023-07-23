@@ -10,7 +10,7 @@
 
             <div class="experience-add">
                 {% if response != null %}
-                    {{ moduleNotif.notification(response.class, response.content) }}
+                    {{ moduleNotif.notification(response.class, response.message) }}
                     <div>&nbsp;</div>
                 {% endif %}
 
@@ -95,5 +95,5 @@
 
 {% block javascript %}
     {{ parent() }}
-    <script src="{{ asset("assets/js/admin/project.js") }}"></script>
+    <script type="module" src="{{ asset("assets/js/admin/project.js") }}"></script>
 {% endblock %}

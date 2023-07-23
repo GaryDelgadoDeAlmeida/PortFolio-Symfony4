@@ -2,7 +2,6 @@ import { findSpecificParent } from "./module/function.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     const removeWitness = document.getElementById("removeWitness")
-    console.log(removeWitness)
     if(removeWitness) {
         removeWitness.addEventListener("click", async (e) => {
             const witnessRemoveURL = e.target.getAttribute("data-url")
@@ -43,5 +42,32 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log(response)
             // const responseData = await response.json()
         })
+    }
+
+    const removeContacts = document.getElementsByClassName("removeMail")
+    if(removeContacts.length > 0) {
+        for(let $i = 0; $i < removeContacts.length; $i++) {
+            removeContacts[$i].addEventListener("click", async function(e) {
+                const url = e.target.getAttribute("data-url")
+
+                // API Call
+                const [status, response] = await fetch(url, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(res => [res.status, res.json()]).catch(err => console.error(err))
+
+                response.then(res => alert(res.response.message))
+
+                if(status === 403) {
+                // if(status === 200) {
+                    let parent = findSpecificParent(e.target, "email-card")
+                    if(parent !== "") {
+                        parent.remove()
+                    }
+                }
+            })
+        }
     }
 })

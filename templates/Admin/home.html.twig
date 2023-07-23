@@ -15,7 +15,7 @@
 
             <div class="admin-card">
                 <h4 class="admin-card-suptitle">Professional experience</h4>
-                <span>{{ workExp }} years</span>
+                <span>{{ workExp|number_format(2, ",", " ") }} years</span>
             </div>
         </div>
 
@@ -93,8 +93,8 @@
                             {% for item in latestExp %}
                                 <tr>
                                     <td>
-                                        <div class="f-left">Creano</div>
-                                        <div class="f-right">today</div>
+                                        <div class="f-left">{{ item.corporationName }}</div>
+                                        <div class="f-right">{{ item.startDate|date("d/m/Y") }} &minus; {{ item.inProgress ? "En cours" : item.endDate|date("d/m/Y") }}</div>
                                     </td>
                                 </tr>
                             {% else %}

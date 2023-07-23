@@ -47,6 +47,11 @@ class WitnessRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Count all witness inside the database
+     * 
+     * @return int Return the number of witness
+     */
     public function countWitness()
     {
         return $this->createQueryBuilder("witness")

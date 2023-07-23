@@ -9,7 +9,7 @@ export function findSpecificParent(element, target) {
     
     while (element) {
         if( [null, undefined].indexOf(element.className) === -1 ) {
-            if(element.className === target) {
+            if(element.className.includes(target)) {
                 els = element;
                 break;
             }

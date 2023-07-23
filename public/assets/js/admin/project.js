@@ -1,3 +1,5 @@
+import { findSpecificParent } from "../module/function.js";
+
 document.addEventListener("DOMContentLoaded", function() {
     var $collectionParticipateProjectsHolder, $newLinkLi;
     $collectionParticipateProjectsHolder = document.querySelector("ul.participateProjects-tags");

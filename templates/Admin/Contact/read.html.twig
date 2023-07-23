@@ -2,7 +2,7 @@
 
 {% block page_content %}
     <div class="admin-email-single">
-        <a href="{{ path('adminContact') }}">
+        <a href="{{ path('admin_contact_index') }}">
             <button class="btn btn-primary">
                 <span>Return</span>
             </button>
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="actions">
-                    <a href="{{ path("adminRemoveMail", {"id": mail.id}) }}">
+                    <a href="{{ path("admin_contact_remove", {"id": mail.id}) }}">
                         <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="trash" />
                     </a>
                 </div>

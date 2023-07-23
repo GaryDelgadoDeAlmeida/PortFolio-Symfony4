@@ -4,35 +4,39 @@
 {% block page_content %}
     <a class="btn btn-primary" href="{{ path("adminWitnesses") }}">Retour</a>
 
-    {{ form_start(witnessForm, {"attr": {"class": "form"}}) }}
-        {% if response is not same as ([]) %}
-            {{ macros.notification(response.class, response.message) }}
-        {% endif %}
+    <div class="card mt-25px">
+        <div class="-content">
+            {{ form_start(witnessForm, {"attr": {"class": "form"}}) }}
+                {% if response is not same as ([]) %}
+                    {{ macros.notification(response.class, response.message) }}
+                {% endif %}
 
-        <div class="form-field-inline">
-            <div class="form-field">
-                {{ form_label(witnessForm.firstname) }}
-                {{ form_widget(witnessForm.firstname) }}
-            </div>
-            
-            <div class="form-field">
-                {{ form_label(witnessForm.lastname) }}
-                {{ form_widget(witnessForm.lastname) }}
-            </div>
+                <div class="form-field-inline">
+                    <div class="form-field">
+                        {{ form_label(witnessForm.firstname) }}
+                        {{ form_widget(witnessForm.firstname) }}
+                    </div>
+                    
+                    <div class="form-field">
+                        {{ form_label(witnessForm.lastname) }}
+                        {{ form_widget(witnessForm.lastname) }}
+                    </div>
+                </div>
+                
+                <div class="form-field">
+                    {{ form_label(witnessForm.company) }}
+                    {{ form_widget(witnessForm.company) }}
+                </div>
+                
+                <div class="form-field">
+                    {{ form_label(witnessForm.comment) }}
+                    {{ form_widget(witnessForm.comment) }}
+                </div>
+                
+                <div class="form-button">
+                    {{ form_widget(witnessForm.submit, {"attr": {"class": "btn btn-primary"}}) }}
+                </div>
+            {{ form_end(witnessForm) }}
         </div>
-        
-        <div class="form-field">
-            {{ form_label(witnessForm.company) }}
-            {{ form_widget(witnessForm.company) }}
-        </div>
-        
-        <div class="form-field">
-            {{ form_label(witnessForm.comment) }}
-            {{ form_widget(witnessForm.comment) }}
-        </div>
-        
-        <div class="form-button">
-            {{ form_widget(witnessForm.submit, {"attr": {"class": "btn btn-primary"}}) }}
-        </div>
-    {{ form_end(witnessForm) }}
+    </div>
 {% endblock %}

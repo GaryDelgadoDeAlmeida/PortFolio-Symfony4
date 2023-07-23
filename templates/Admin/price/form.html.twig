@@ -1,0 +1,41 @@
+{% trans_default_domain 'user' %}
+{% extends "baseAdmin.html.twig" %}
+{% import "./module/notification.html.twig" as module %}
+
+{% block page_content %}
+    <div class="admin-section">
+        <div class="admin-content">
+            <div class="admin-wrapper">
+                <div class="admin-body">
+                    <a class="btn btn-primary" href="{{ path("admin_price_index") }}">Return</a>
+
+                    <div class="card">
+                        <div class="-content">
+                            {% if response != [] %}
+                                {{ module.notification(response.class, response.message) }}
+                            {% endif %}
+
+                            {{ form_start(priceForm, {"attr": {"class": "form"}}) }}
+                                <div class="form-field">
+                                    {{ form_widget(priceForm.title) }}
+                                </div>
+                                
+                                <div class="form-field">
+                                    {{ form_widget(priceForm.subTitle) }}
+                                </div>
+                                
+                                <div class="form-field">
+                                    {{ form_widget(priceForm.price) }}
+                                </div>
+                                
+                                <div class="form-button">
+                                    <button class="btn btn-primary" type="submit">{{ "submit"|trans }}</submit>
+                                </div>
+                            {{ form_end(priceForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

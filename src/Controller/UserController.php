@@ -3,40 +3,58 @@
 namespace App\Controller;
 
 use App\Manager\ContactManager;
-use App\Repository\SkillsRepository;
-use App\Repository\ProjectRepository;
-use App\Repository\ServiceRepository;
-use App\Repository\EducationRepository;
+use App\Form\{
+    ContactUserType, 
+    LoginAdminType
+};
+use App\Entity\{
+    Contact, 
+    Education, 
+    Project, 
+    Skills
+};
+use App\Repository\{
+    ContactRepository, 
+    UserRepository, 
+    SkillsRepository, 
+    ProjectRepository, 
+    ServiceRepository, 
+    EducationRepository
+};
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
-use App\Form\{ContactUserType, LoginAdminType};
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\{Contact, Education, Project, Skills, User};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
     private EntityManagerInterface $em;
     private ContactManager $contactManager;
+    private UserRepository $userRepository;
     private SkillsRepository $skillsRepository;
     private ProjectRepository $projectRepository;
     private ServiceRepository $serviceRepository;
+    private ContactRepository $contactRepository;
     private EducationRepository $educationRepository;
 
     function __construct(
         EntityManagerInterface $em, 
         ContactManager $contactManager,
+        UserRepository $userRepository,
         SkillsRepository $skillsRepository,
         ProjectRepository $projectRepository,
         ServiceRepository $serviceRepository,
+        ContactRepository $contactRepository,
         EducationRepository $educationRepository
     ) {
         $this->em = $em;
         $this->contactManager = $contactManager;
         $this->skillsRepository = $skillsRepository;
+        $this->userRepository = $userRepository;
         $this->projectRepository = $projectRepository;
         $this->serviceRepository = $serviceRepository;
+        $this->contactRepository = $contactRepository;
         $this->educationRepository = $educationRepository;
     }
 
@@ -45,16 +63,15 @@ class UserController extends AbstractController
      */
     public function home(Request $request)
     {
+        $response = $orderedSkills = [];
         $formContact = $this->createForm(ContactUserType::class, $contact = new Contact());
         $formContact->handleRequest($request);
-        $response = [];
         $captchat = [
             "question" => "Combien fait 2 x 2 ?",
             "answer" => 4
         ];
 
         $skills = $this->skillsRepository->getSkillsOrderedByCategory();
-        $orderedSkills = [];
         foreach($skills as $skill) {
             $orderedSkills[$skill->getType()][] = $skill;
         }
@@ -78,12 +95,15 @@ class UserController extends AbstractController
                     
                     // If the email has been send then, save the data into database
                     if($answer) {
-                        $contact->setSenderFullName($contact->getEmailContent());
-                        $contact->setEmailContent($contact->getEmailContent());
-                        $contact->setIsRead(false);
-                        $contact->setCreatedAt(new \DateTimeImmutable());
-                        $this->em->persist($contact);
-                        $this->em->flush();
+                        $contact
+                            ->setSenderFullName($contact->getEmailContent())
+                            ->setEmailContent($contact->getEmailContent())
+                            ->setIsRead(false)
+                            ->setCreatedAt(new \DateTimeImmutable())
+                        ;
+                        
+                        // Save into database
+                        $this->contactRepository->persist($contact, true);
                     }
                 } else {
                     $response = [
@@ -94,14 +114,14 @@ class UserController extends AbstractController
             } else {
                 $response = [
                     "class" => "danger",
-                    "message" => "Une erreur a été rencontré avec l'un des champs"
+                    "message" => "Une erreur a été rencontrée avec l'un des champs. Veuillez vérifier que tous les champs soit bien rempli."
                 ];
             }
         }
 
         return $this->render("User/home.html.twig", [
             "response" => $response,
-            "user" => $this->em->getRepository(User::class)->getUserByID(),
+            "user" => $this->userRepository->getUserByID(),
             "services" => $this->serviceRepository->findAll(),
             "skillCategories" => $orderedSkills,
             "portfolios" => $this->projectRepository->getLastestProject(6),
@@ -112,43 +132,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/portfolio", name="portfolio")
-     * @Route("/portfolio/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="portfolioPage")
-     */
-    public function portfolio(int $page = 1)
-    {
-        $limit = 15;
-        $page = ($page >= 1 ? $page : 1);
-
-        return $this->render("User/portFolio.html.twig", [
-            "offset" => $page,
-            "portfolio" => $this->projectRepository->getProject($page - 1, $limit),
-            "total_page" => ceil($this->projectRepository->countProject() / $limit)
-        ]);
-    }
-
-    /**
-     * @Route("/portfolio/{portfolioID}", requirements={"portfolioID" = "^\d+(?:\d+)?$"}, name="single_portfolio")
-     */
-    public function single_portfolio(int $portfolioID)
-    {
-        $portfolio = $this->projectRepository->find($portfolioID);
-        if(empty($portfolio)) {
-            return $this->redirectToRoute("portfolio");
-        }
-
-        return $this->render("User/portfolioDetail.html.twig", [
-            "portfolio" => $portfolio
-        ]);
-    }
-
-    /**
      * @Route("/login", name="login")
      */
     public function login(Security $security)
     {
         if($security->getUser()) {
-            return $this->redirectToRoute("adminHome");
+            return $this->redirectToRoute("admin_home");
         }
 
         return $this->render("User/login.html.twig", [

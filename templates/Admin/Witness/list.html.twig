@@ -21,7 +21,7 @@
                     <tr class="witness-item">
                         <td class="-company txt-center">{{ witness.company }}</td>
                         <td class="-contact txt-center">{{ witness.getFullName() }}</td>
-                        <td class="-comment">{{ witness.comment|slice(0, 99) }} ...</td>
+                        <td class="-comment">{{ witness.comment|slice(0, 80) }} ...</td>
                         <td class="-action">
                             <a href="{{ path("adminEditWitness", {"id": witness.id}) }}">
                                 <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="pencil" />

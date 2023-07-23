@@ -3,12 +3,12 @@
 
 {% block page_content %}
     <div class="admin-portfolio">
-        <a class="btn btn-primary" href="{{ path("adminProject") }}">Return</a>
+        <a class="btn btn-primary" href="{{ path("admin_project_index") }}">Return</a>
         
         <div class="portfolio-wrapper portfolio-add">
             {# Notification #}
             {% if response != [] %}
-                {{ moduleNotif.notification(response.class, response.content) }}
+                {{ moduleNotif.notification(response.class, response.message) }}
                 <div>&nbsp;</div>
             {% endif %}
 
@@ -73,7 +73,7 @@
                 <div class="form-button">
                     {{ form_widget(projectForm.submit, {"attr": {"class": "btn btn-primary"}}) }}
                 </div>
-            {{ form_end(projectForm, {'action': path('adminAddProject'), 'method': 'POST', "attr": {"class": "portfolio-form"}}) }}
+            {{ form_end(projectForm) }}
         </div>
     </div>
 {% endblock %}
