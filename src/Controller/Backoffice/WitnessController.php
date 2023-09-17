@@ -21,17 +21,16 @@ class WitnessController extends AbstractController
     function __construct(
         WitnessRepository $witnessRepository
     ) {
-        $this->witnessManager = $witnessManager;
         $this->witnessRepository = $witnessRepository;
     }
     /**
      * @Route("/", name="index")
-     * @Route("/page/{page}", requirements={"id" = "^\d+(?:\d+)?$"}, name="index_by_page")
+     * @Route("/page/{page}", requirements={"page" = "^\d+(?:\d+)?$"}, name="index_by_page")
      */
-    public function index(Request $request, int $page): Response
+    public function index(Request $request, int $page = 0): Response
     {
         $limit = 10;
-        $page = $page >= 1 ? $page : 1;
+        $page = is_numeric($page) && $page >= 1 ? $page : 1;
 
         return $this->render("admin/witness/list.html.twig", [
             "title" => "Témoignage",
@@ -73,7 +72,7 @@ class WitnessController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="RemoveWitness", methods={"DELETE"})
+     * @Route("/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="remove", methods={"DELETE"})
      */
     public function remove_witness(Request $request, int $id): JsonResponse
     {

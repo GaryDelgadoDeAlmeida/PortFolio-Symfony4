@@ -70,4 +70,33 @@ document.addEventListener("DOMContentLoaded", function() {
             })
         }
     }
+
+    const removePrices = document.getElementsByClassName("removePrice")
+    if(removePrices.length > 0) {
+        for(let $i = 0; $i < removePrices.length; $i++) {
+            removePrices[$i].addEventListener("click", async function(e) {
+                const url = e.target.getAttribute("data-url")
+
+                console.log(url)
+
+                // API Call
+                const [status, response] = await fetch(url, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(res => [res.status, res.json()]).catch(err => console.error(err))
+
+                response.then(res => alert(res.response.message))
+
+                if(status === 403) {
+                // if(status === 200) {
+                    let parent = findSpecificParent(e.target, "card")
+                    if(parent !== "") {
+                        parent.remove()
+                    }
+                }
+            })
+        }
+    }
 })

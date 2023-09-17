@@ -3,39 +3,65 @@
 {% import "./module/notification.html.twig" as module %}
 
 {% block page_content %}
-    <div class="admin-section">
-        <div class="admin-content">
-            <div class="admin-wrapper">
-                <div class="admin-body">
-                    <a class="btn btn-primary" href="{{ path("admin_price_index") }}">Return</a>
+    <a class="btn btn-primary" href="{{ path("admin_price_index") }}">Return</a>
 
-                    <div class="card">
-                        <div class="-content">
-                            {% if response != [] %}
-                                {{ module.notification(response.class, response.message) }}
-                            {% endif %}
+    <div class="card mt-25px">
+        <div class="-content">
+            {% if response != [] %}
+                {{ module.notification(response.class, response.message) }}
+            {% endif %}
 
-                            {{ form_start(priceForm, {"attr": {"class": "form"}}) }}
-                                <div class="form-field">
-                                    {{ form_widget(priceForm.title) }}
-                                </div>
-                                
-                                <div class="form-field">
-                                    {{ form_widget(priceForm.subTitle) }}
-                                </div>
-                                
-                                <div class="form-field">
-                                    {{ form_widget(priceForm.price) }}
-                                </div>
-                                
-                                <div class="form-button">
-                                    <button class="btn btn-primary" type="submit">{{ "submit"|trans }}</submit>
-                                </div>
-                            {{ form_end(priceForm) }}
-                        </div>
-                    </div>
+            {{ form_errors(priceForm) }}
+
+            {{ form_start(priceForm, {"attr": {"class": "form"}}) }}
+                <div class="form-field">
+                    {{ form_label(priceForm.title) }}
+                    {{ form_widget(priceForm.title) }}
                 </div>
-            </div>
+                
+                <div class="form-field">
+                    {{ form_label(priceForm.subTitle) }}
+                    {{ form_widget(priceForm.subTitle) }}
+                </div>
+
+                <div class="form-field">
+                    {{ form_label(priceForm.frequency) }}
+                    {{ form_widget(priceForm.frequency) }}
+                </div>
+                
+                <div class="form-field">
+                    {{ form_label(priceForm.price) }}
+                    {{ form_widget(priceForm.price) }}
+                </div>
+
+                <div class="form-field">
+                    <label for="#">Details</label>
+                    
+                    <ul class="price-details-tag form_tag" data-prototype="{{ form_widget(priceForm.priceDetails.vars.prototype)|e }}">
+                        {% for priceDetail in priceForm.priceDetails %}
+                            <li class="item">
+                                <div class="form-field">
+                                    {{ form_widget(priceDetail.label) }}
+                                </div>
+                                <div class="form-field">
+                                    {{ form_widget(priceDetail.description) }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div class="form-button">
+                    <button class="btn btn-primary" type="submit">{{ "submit"|trans }}</submit>
+                </div>
+
+                {{ form_rest(priceForm) }}
+            {{ form_end(priceForm) }}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset("/assets/js/admin/price.js") }}"></script>
 {% endblock %}

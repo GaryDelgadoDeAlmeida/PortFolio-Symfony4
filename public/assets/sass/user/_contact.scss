@@ -82,40 +82,4 @@
             }
         }
     }
-
-    .contact-form {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 10px 20px;
-        row-gap: 10px;
-        column-gap: 20px;
-        
-        .form-text {
-            margin: 0;
-
-            input {
-                height: 35px;
-            }
-
-            textarea, input {
-                border: 1px solid var(--c-black);
-                background-color: var(--c-lightWhite);
-                color: var(--c-black);
-                padding: 15px;
-                border-radius: 15px;
-                box-sizing: border-box;
-                width: 100%;
-
-                &::placeholder {
-                    color: var(--c-black);
-                }
-
-                &:focus {
-                    outline-style: none;
-                    box-shadow: 1px 1px 5px #222222;
-                }
-            }
-        }
-    }
 }

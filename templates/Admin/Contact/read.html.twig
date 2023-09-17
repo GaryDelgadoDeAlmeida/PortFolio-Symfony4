@@ -1,13 +1,11 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block page_content %}
-    <div class="admin-email-single">
-        <a href="{{ path('admin_contact_index') }}">
-            <button class="btn btn-primary">
-                <span>Return</span>
-            </button>
-        </a>
-        
+    <a class="btn btn-primary" href="{{ path('admin_contact_index') }}">
+        <span>Return</span>
+    </a>
+
+    <div class="admin-email-single"> 
         <div class="email-single">
             <div class="sender">
                 <div class="avatar">

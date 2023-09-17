@@ -1,3 +1,9 @@
+# Witness
+firstname: Prénom
+lastname: Nom de famille
+society: Société
+comment: Commentaire
+
 # Contract
 contract.cdd: CDD
 contract.cdi: CDI
@@ -13,3 +19,4 @@ contact.no_contact: "Il n'y a aucun contact envoyé depuis le portfolio"
 
 # Common
 submit: "Submit"
+send_devis: "Envoyer un devis"

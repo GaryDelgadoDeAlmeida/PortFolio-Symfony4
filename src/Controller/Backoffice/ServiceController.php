@@ -101,4 +101,22 @@ class ServiceController extends AbstractController
             "response" => $response
         ]);
     }
+
+    /**
+     * @Route("/{serviceID}/remove", requirements={"serviceID" = "^\d+(?:\d+)?$"}, name="remove")
+     */
+    public function remove_service(Request $request, int $serviceID) {
+        $service = $this->serviceRepository->find($serviceID);
+        if(!$service) {
+            return $this->redirectToRoute("admin_service_index");
+        }
+
+        try {
+            $this->serviceRepository->remove($service, true);
+        } catch(\Exception $e) {
+            return $this->json($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return $this->json(null, Response::HTTP_OK);
+    }
 }

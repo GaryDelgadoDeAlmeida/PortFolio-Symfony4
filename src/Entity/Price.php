@@ -35,12 +35,17 @@ class Price
     private $price;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $frequency;
+
+    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=PriceDetail::class, mappedBy="price")
+     * @ORM\OneToMany(targetEntity=PriceDetail::class, mappedBy="price", cascade={"persist"})
      */
     private $priceDetails;
 
@@ -128,6 +133,18 @@ class Price
                 $priceDetail->setPrice(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFrequency(): ?string
+    {
+        return $this->frequency;
+    }
+
+    public function setFrequency(string $frequency): self
+    {
+        $this->frequency = $frequency;
 
         return $this;
     }

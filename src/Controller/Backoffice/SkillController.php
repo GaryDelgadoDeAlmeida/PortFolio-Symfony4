@@ -88,8 +88,7 @@ class SkillController extends AbstractController
             }
             
             // Remove the skill from the database
-            $this->em->remove($skill);
-            $this->em->flush();
+            $this->skillRepository->remove($skill, true);
 
             // Return a message to the user
             return $this->redirectToRoute("adminSkills", [

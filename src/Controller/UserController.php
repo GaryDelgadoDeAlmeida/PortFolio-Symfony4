@@ -16,6 +16,7 @@ use App\Entity\{
 use App\Repository\{
     ContactRepository, 
     UserRepository, 
+    PriceRepository,
     SkillsRepository, 
     ProjectRepository, 
     ServiceRepository, 
@@ -32,6 +33,7 @@ class UserController extends AbstractController
     private EntityManagerInterface $em;
     private ContactManager $contactManager;
     private UserRepository $userRepository;
+    private PriceRepository $priceRepository;
     private SkillsRepository $skillsRepository;
     private ProjectRepository $projectRepository;
     private ServiceRepository $serviceRepository;
@@ -42,6 +44,7 @@ class UserController extends AbstractController
         EntityManagerInterface $em, 
         ContactManager $contactManager,
         UserRepository $userRepository,
+        PriceRepository $priceRepository,
         SkillsRepository $skillsRepository,
         ProjectRepository $projectRepository,
         ServiceRepository $serviceRepository,
@@ -50,8 +53,9 @@ class UserController extends AbstractController
     ) {
         $this->em = $em;
         $this->contactManager = $contactManager;
-        $this->skillsRepository = $skillsRepository;
         $this->userRepository = $userRepository;
+        $this->priceRepository = $priceRepository;
+        $this->skillsRepository = $skillsRepository;
         $this->projectRepository = $projectRepository;
         $this->serviceRepository = $serviceRepository;
         $this->contactRepository = $contactRepository;
@@ -119,13 +123,14 @@ class UserController extends AbstractController
             }
         }
 
-        return $this->render("User/home.html.twig", [
+        return $this->render("user/home.html.twig", [
             "response" => $response,
             "user" => $this->userRepository->getUserByID(),
             "services" => $this->serviceRepository->findAll(),
             "skillCategories" => $orderedSkills,
             "portfolios" => $this->projectRepository->getLastestProject(6),
             "educations" => $this->educationRepository->getLatestEducationFromCategory("experience", 5),
+            "priceServices" => $this->priceRepository->findAll(),
             "contactForm" => $formContact->createView(),
             "captchat" => $captchat
         ]);

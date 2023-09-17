@@ -1,17 +1,32 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block page_content %}
-    <a class="btn btn-primary" href="{{ path("admin_price_new") }}">Ajouter un prix</a>
 
-    <div class="mt-25px">
-        {% for price in prices %}
+    {# {% if prices|length < 4 %} #}
+        <a class="btn btn-primary" href="{{ path("admin_price_new") }}">Ajouter un prix</a>
+    {# {% endif %} #}
+
+    <div class="card-list mt-25px">
+        {% for item in prices %}
             <div class="card">
-                <div class="-header"></div>
+                <div class="-header">
+                    <label class="-title">{{ item.title }}</label>
+                    <small>{{ item.price }}</small>
+                </div>
+                
                 <div class="-content"></div>
+                
                 <div class="-footer">
-                    <a class="btn btn-primary -inline-flex" href="{{ path("adminEditPrice") }}">
+                    <a class="btn btn-primary -inline-flex" href="{{ path("admin_price_edit", {"id": item.id}) }}">
                         <img src="{{ asset("/content/images/svg/pencil.svg") }}" alt="" />
                     </a>
+                    
+                    <button 
+                        class="btn btn-red -inline-flex removePrice" 
+                        data-url="{{ path("admin_price_remove", {"id": item.id}) }}"
+                    >
+                        <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
+                    </button>
                 </div>
             </div>
         {% endfor %}

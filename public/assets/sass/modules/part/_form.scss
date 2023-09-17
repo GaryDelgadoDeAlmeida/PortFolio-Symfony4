@@ -5,20 +5,39 @@ form {
     // 
 
     &.contact-form {
-        width: 100%;
-    
+        display: flex;
+        gap: 10px 20px;
+        flex-wrap: wrap;
+        column-gap: 20px;
+        flex-direction: column;
+        
         .form-text {
-            width: 100%;
-    
-            input, textarea {
-                width: 100%;
-            }
-    
+            margin: 0;
+
             input {
                 height: 25px;
             }
+
+            textarea, input {
+                border: 1px solid var(--c-silver);
+                background-color: var(--c-lightWhite);
+                color: var(--c-black);
+                padding: 15px;
+                border-radius: 15px;
+                box-sizing: border-box;
+                width: 100%;
+
+                &::placeholder {
+                    color: var(--c-metalGray);
+                }
+
+                &:focus {
+                    outline-style: none;
+                    box-shadow: 1px 1px 5px #222222;
+                }
+            }
         }
-    
+
         .form-button {
             width: 100%;
         }
@@ -219,6 +238,23 @@ form {
             flex: 1;
             border-radius: 0% !important;
             border: 1px solid var(--c-silver);
+        }
+    }
+
+    .form_tag {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        .item {
+            padding: 15px;
+            border-radius: 15px;
+            background-color: var(--c-white);
+            border: 1px solid var(--c-silver);
+
+            &:not(:last-child) {
+                margin-bottom: 10px;
+            }
         }
     }
 

@@ -3,7 +3,7 @@
 
 {% block page_content %}
     <div class="admin-witnesses">
-        <a href="{{ path("adminAddWitness") }}">
+        <a href="{{ path("admin_witness_new") }}">
             <button class="btn btn-green">Add a witness</button>
         </a>
 
@@ -23,10 +23,10 @@
                         <td class="-contact txt-center">{{ witness.getFullName() }}</td>
                         <td class="-comment">{{ witness.comment|slice(0, 80) }} ...</td>
                         <td class="-action">
-                            <a href="{{ path("adminEditWitness", {"id": witness.id}) }}">
+                            <a href="{{ path("admin_witness_edit", {"id": witness.id}) }}">
                                 <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="pencil" />
                             </a>
-                            <button id="removeWitness" data-url="{{ path("adminRemoveWitness", {"id": witness.id}) }}">
+                            <button id="removeWitness" data-url="{{ path("admin_witness_remove", {"id": witness.id}) }}">
                                 <img src="{{ asset("/content/images/svg/close-red.svg") }}" alt="close-icon" />
                             </button>
                         </td>
@@ -43,15 +43,15 @@
             <div class="pagination">
                 {% if offset - 1 >= 1 %}
                     <div class="first-page">
-                        <a href="{{ path("adminWitnesses") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt="double-angle-left" /></a>
+                        <a href="{{ path("admin_witness_index") }}"><img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt="double-angle-left" /></a>
                     </div>
                     
                     <div class="previous-page">
-                        <a href="{{ path("adminWitnessesByPage", {offset: offset - 1}) }}"><img src="{{ asset("/content/images/svg/angle-left.svg") }}" alt="angle-left" /></a>
+                        <a href="{{ path("admin_witness_index_by_page", {'page': offset - 1}) }}"><img src="{{ asset("/content/images/svg/angle-left.svg") }}" alt="angle-left" /></a>
                     </div>
                 
                     <div class="previous-page">
-                        <a href="{{ path("adminWitnessesByPage", {offset: offset - 1}) }}">{{ offset - 1 }}</a>
+                        <a href="{{ path("admin_witness_index_by_page", {'page': offset - 1}) }}">{{ offset - 1 }}</a>
                     </div>
                 {% endif %}
 
@@ -61,15 +61,15 @@
                 
                 {% if offset + 1 <= nbrOffsets %}
                     <div class="next-page">
-                        <a href="{{ path("adminWitnessesByPage", {offset: offset + 1}) }}">{{ offset + 1 }}</a>
+                        <a href="{{ path("admin_witness_index_by_page", {'page': offset + 1}) }}">{{ offset + 1 }}</a>
                     </div>
                     
                     <div class="next-page">
-                        <a href="{{ path("adminWitnessesByPage", {offset: offset + 1}) }}"><img src="{{ asset("/content/images/svg/angle-right.svg") }}" alt="angle-right" /></a>
+                        <a href="{{ path("admin_witness_index_by_page", {'page': offset + 1}) }}"><img src="{{ asset("/content/images/svg/angle-right.svg") }}" alt="angle-right" /></a>
                     </div>
                     
                     <div class="last-page">
-                        <a href="{{ path("adminWitnessesByPage", {offset: nbrOffsets}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt="double-angle-right" /></a>
+                        <a href="{{ path("admin_witness_index_by_page", {'page': nbrOffsets}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt="double-angle-right" /></a>
                     </div>
                 {% endif %}
             </div>

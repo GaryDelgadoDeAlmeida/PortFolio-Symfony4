@@ -4,6 +4,7 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\Education;
 use App\Form\EducationAdminType;
+use App\Repository\SkillsRepository;
 use App\Repository\EducationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class EducationController extends AbstractController
 {
+    private SkillsRepository $skillsRepository;
     private EducationRepository $educationRepository;
 
-    function __construct(EducationRepository $educationRepository) {
+    function __construct(EducationRepository $educationRepository, SkillsRepository $skillsRepository) {
+        $this->skillsRepository = $skillsRepository;
         $this->educationRepository = $educationRepository;
     }
     /**
@@ -100,7 +103,7 @@ class EducationController extends AbstractController
                 try {
                     foreach($form["skills"]->getData() as $skill) {
                         $skill->addEducation($education);
-                        $this->em->persist($skill);
+                        $this->skillsRepository->add($skill, true);
                     }
                     $this->educationRepository->add($education, true);
                     
@@ -140,6 +143,6 @@ class EducationController extends AbstractController
             die($e->getMessage());
         }
 
-        return $this->redirectToRoute("adminEducation");
+        return $this->redirectToRoute("admin_education_index");
     }
 }

@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    {# Experience => Should I conserve this part ? #}
+    {# Experience #}
     <div id="formation" class="page-wrapper">
         <div class="page-header">
             <h3>Expériences</h3>
@@ -95,9 +95,6 @@
 
         {# Experience Pro #}
         {% if educations is not same as([]) %}
-            {# https://creano.paris/ #}
-            {# https://www.ffgolf.org/ #}
-
             <div class="experiences">
                 {% for education in educations %}
                     <div class="experience-card">
@@ -111,7 +108,7 @@
                                 {{ education.startDate|date("M Y", "Europe/Paris") }} à {% if education.inProgress %} En cours {% else %} {{ education.endDate|date("M Y", "Europe/Paris") }} {% endif %} &minus; <span class="contract-type">{{ ("contract." ~ education.contractType)|trans }}</span>
                             </div>
                             <div>
-                                {% if education.description is not same as("") %}
+                                {% if education.description != "" and education.description != null %}
                                     <ul>
                                         {% for description in education.description|split("\r\n") %}
                                             <li>{{ description }}</li>
@@ -390,6 +387,45 @@
                     </div>
                 </div>
             </div>
+
+            {# {% for index, priceService in priceServices %}
+                {% if index < 2 %}
+                    <div class="d-flex-col">
+                {% endif %}
+
+                <div class="card-price {{ index < 2 ? "w-100 h-100" : null }}">
+                    <div class="-type">
+                        <span class="-title txt-uppercase">{{ priceService.title }}</span>
+                    </div>
+                    <div class="-price">
+                        <span class="-small-title">{{ priceService.sub_title }}</span>
+                        <span><em class="-title">{{ priceService.price }}</em> € (HT)</span>
+                    </div>
+                    <div class="-description">
+                        <ul class="list">
+                        {% for detail in priceService.priceDetails %}
+                            <li>
+                                <span class="item-content">
+                                    {{ detail.label }}
+                                    
+                                    {% if detail.description %}
+                                        <span class="small-text">{{ detail.description }}</span>
+                                    {% endif %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                        </ul>
+
+                        <div class="links">
+                            <a class="btn btn-primary" href="#contactme">{{ "send_devis"|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                {% if index < 2 %}
+                    </div>
+                {% endif %}
+            {% endfor %} #}
         </div>
     </div>
 

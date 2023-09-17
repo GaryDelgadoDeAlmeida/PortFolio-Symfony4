@@ -103,7 +103,7 @@ class PortfolioController extends AbstractController
     {
         $project = $this->projectRepository->find($id);
         if(empty($project)) {
-            return $this->redirectToRoute("adminProject");
+            return $this->redirectToRoute("admin_project_index");
         }
 
         return $this->render("admin/portfolio/single.html.twig", [
@@ -182,6 +182,6 @@ class PortfolioController extends AbstractController
             $this->projectRepository->remove($project, true);
         }
 
-        return $this->redirectToRoute("adminProject");
+        return $this->redirectToRoute("admin_project_index");
     }
 }

@@ -2,7 +2,7 @@
 
 {% block page_content %}
     <div class="admin-experience">
-        <a href="{{ path("adminEducationAdd") }}">
+        <a href="{{ path("admin_education_new") }}">
             <button class="btn btn-primary">Add an experience</button>
         </a>
 
@@ -26,11 +26,11 @@
                             <td>{{ education.category|capitalize }}</td>
                             <td>{{ education.corporationName }}</td>
                             <td>
-                                <a href="{{ path("adminEditEducation", {"id": education.id}) }}">
+                                <a href="{{ path("admin_education_edit", {"id": education.id}) }}">
                                     <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="" />
                                 </a>
 
-                                <a href="{{ path("adminDeleteEducation", {"id": education.id}) }}">
+                                <a href="{{ path("admin_education_remove", {"id": education.id}) }}">
                                     <img src="{{ asset("/content/images/svg/close-red.svg") }}" alt="" />
                                 </a>
                             </td>
@@ -51,19 +51,19 @@
             <div class="pagination">
                 {% if offset - 1 >= 1 %}
                     <div class="first-page">
-                        <a href="{{ path("adminEducation") }}">
+                        <a href="{{ path("admin_education_index") }}">
                             <img src="{{ asset("/content/images/svg/double-angle-left.svg") }}" alt="double-angle-left" />
                         </a>
                     </div>
 
                     <div class="previous-page">
-                        <a href="{{ path("adminEducationByPage", {"offset": offset - 1}) }}">
+                        <a href="{{ path("admin_education_index_by_page", {"offset": offset - 1}) }}">
                             <img src="{{ asset("/content/images/svg/angle-left.svg") }}" alt="angle-left" />
                         </a>
                     </div>
 
                     <div class="previous-page">
-                        <a href="{{ path("adminEducationByPage", {"offset": offset - 1}) }}">{{ offset - 1 }}</a>
+                        <a href="{{ path("admin_education_index_by_page", {"offset": offset - 1}) }}">{{ offset - 1 }}</a>
                     </div>
                 {% endif %}
 
@@ -73,17 +73,17 @@
                 
                 {% if offset + 1 <= nbrOffsets %}
                     <div class="next-page">
-                        <a href="{{ path("adminEducationByPage", {"offset": offset + 1}) }}">{{ offset + 1 }}</a>
+                        <a href="{{ path("admin_education_index_by_page", {"offset": offset + 1}) }}">{{ offset + 1 }}</a>
                     </div>
 
                     <div class="next-page">
-                        <a href="{{ path("adminEducationByPage", {"offset": offset + 1}) }}">
+                        <a href="{{ path("admin_education_index_by_page", {"offset": offset + 1}) }}">
                             <img src="/content/images/svg/angle-right.svg" alt="angle-right" />
                         </a>
                     </div>
                     
                     <div class="last-page">
-                        <a href="{{ path("adminEducationByPage", {"offset": nbrOffsets}) }}">
+                        <a href="{{ path("admin_education_index_by_page", {"offset": nbrOffsets}) }}">
                             <img src="/content/images/svg/double-angle-right.svg" alt="double-angle-right" />
                         </a>
                     </div>

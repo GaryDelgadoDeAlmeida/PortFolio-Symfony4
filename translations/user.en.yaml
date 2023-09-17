@@ -1,3 +1,9 @@
+# Witness
+firstname: Firstname
+lastname: Lastname
+society: Society
+comment: Comment
+
 # Contract
 contract.cdd: CDD
 contract.cdi: CDI
@@ -7,3 +13,10 @@ contract.study_contract: Study contract
 
 # Message
 witness.no_witness: There is no witness
+project.no_project: There is no project registered
+education.no_education: There is no education registered
+contact.no_contact: There is no sended email
+
+# Common
+submit: Submit
+send_devis: Ask an estimate
