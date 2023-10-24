@@ -4,15 +4,15 @@
 {% block page_content %}
     <div class="admin-witnesses">
         <a href="{{ path("admin_witness_new") }}">
-            <button class="btn btn-green">Add a witness</button>
+            <button class="btn btn-green">{{ "witness.add_witness"|trans }}</button>
         </a>
 
         <table class="witnesses-table">
             <thead>
                 <tr>
-                    <th class="column-company">Company</th>
-                    <th class="column-contact">Contact</th>
-                    <th class="column-comment">Comment</th>
+                    <th class="column-company">{{ "witness.society"|trans }}</th>
+                    <th class="column-contact">{{ "witness.fullname"|trans }}</th>
+                    <th class="column-comment">{{ "witness.comment"|trans }}</th>
                     <th class="column-action"></th>
                 </tr>
             </thead>

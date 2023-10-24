@@ -1,22 +1,61 @@
+# Profile
+profile.firstname: Prénom
+profile.lastname: Nom
+profile.email: Email
+profile.phone: Téléphone
+profile.address: Adresse
+profile.city: Ville
+profile.zip_code: Code postal
+profile.country: Pays
+profile.introduction: Présentation
+profile.password: Mot de passe
+profile.new_password: Nouveau mot de passe
+profile.password_confirmation: Confirmation du nouveau mot de passe
+
+# Service
+service.title: Titre
+service.icon: Icône
+service.description: Description
+service.add_service: Ajouter un service
+
 # Witness
-firstname: Prénom
-lastname: Nom de famille
-society: Société
-comment: Commentaire
+witness.fullname: Contact
+witness.firstname: Prénom
+witness.lastname: Nom de famille
+witness.society: Société
+witness.comment: Commentaire
+witness.add_witness: Ajouter un témoignage
 
 # Contract
-contract.cdd: CDD
-contract.cdi: CDI
-contract.freelance: Freelance
-contract.internship: Stage
-contract.study_contract: Alternance
+contract.cdd: "CDD"
+contract.cdi: "CDI"
+contract.freelance: "Freelance"
+contract.internship: "Stage"
+contract.study_contract: "Alternance"
+
+# Education
+education.date: "Date"
+education.contract_type: "Type de contrat"
+education.type: "Type"
+education.structure: "Société"
+education.structure_address: "Adresse de la société"
+education.category: "Catégorie"
+education.skills: "Compétences"
+education.job_name: "Poste occupé"
+education.description: "Description"
+education.start_date: "Date de début"
+education.end_date: "Date de fin"
+education.in_progress: "En cours"
+education.participate_project: "Projets participés"
+education.add_experience: "Ajouter une expérience"
 
 # Message
 witness.no_witness: "Il n'y a aucune témoignage disponible"
 project.no_project: "Il n'y a aucun projet"
-education.no_education: "Il n'y a aucune éducation enregistrer"
+education.no_education: "Il n'y a aucunes formations ou expériences professionnelles enregistrées."
 contact.no_contact: "Il n'y a aucun contact envoyé depuis le portfolio"
 
 # Common
-submit: "Submit"
-send_devis: "Envoyer un devis"
+submit: Submit
+return: Retour
+send_devis: Envoyer un devis

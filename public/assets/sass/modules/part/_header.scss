@@ -45,14 +45,14 @@
                 a {
                     padding: 10px 15px;
                     color: var(--c-white);
-                    border-bottom: 2px solid var(--c-approxNero);
+                    border-bottom: 2px solid transparent;
 
-                    &:hover {
-                        border-bottom: 2px solid var(--c-white);
+                    &:not(.login):hover {
+                        transition: 0.3s;
+                        -o-transition: 0.3s;
                         -moz-transition: 0.3s;
                         -webkit-transition: 0.3s;
-                        -o-transition: 0.3s;
-                        transition: 0.3s;
+                        border-bottom: 2px solid var(--c-white);
                     }
                 }
             }

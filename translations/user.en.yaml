@@ -1,8 +1,30 @@
+# Profile
+profile.firstname: Firstname
+profile.lastname: Lastname
+profile.email: Email
+profile.phone: Mobile phone
+profile.address: Address
+profile.city: City
+profile.zip_code: ZipCode
+profile.country: Country
+profile.introduction: Introduction
+profile.password: Password
+profile.new_password: New password
+profile.password_confirmation: New password confirmation
+
+# Service
+service.title: Title
+service.icon: Icon
+service.description: Description
+service.add_service: Add a service
+
 # Witness
-firstname: Firstname
-lastname: Lastname
-society: Society
-comment: Comment
+witness.fullname: Fullname
+witness.firstname: Firstname
+witness.lastname: Lastname
+witness.society: Society
+witness.comment: Comment
+witness.add_witness: Add a witness
 
 # Contract
 contract.cdd: CDD
@@ -11,12 +33,29 @@ contract.freelance: Freelance
 contract.internship: Internship
 contract.study_contract: Study contract
 
+# Education
+education.date: "Date"
+education.contract_type: "Contract"
+education.type: "Type"
+education.structure: "Structure"
+education.structure_address: "Structure address"
+education.category: "Category"
+education.skills: "Skills"
+education.job_name: "Job name"
+education.description: "Description"
+education.start_date: "Start date"
+education.end_date: "End date"
+education.in_progress: "In progress"
+education.participate_project: "Participate projects"
+education.add_experience: "Add an education"
+
 # Message
-witness.no_witness: There is no witness
-project.no_project: There is no project registered
-education.no_education: There is no education registered
-contact.no_contact: There is no sended email
+witness.no_witness: "There is no witness"
+project.no_project: "There is no project registered"
+education.no_education: "There is no education or profesionnal experience registered"
+contact.no_contact: "There is no sended email"
 
 # Common
-submit: Submit
-send_devis: Ask an estimate
+return: "Return"
+submit: "Submit"
+send_devis: "Ask an estimate"

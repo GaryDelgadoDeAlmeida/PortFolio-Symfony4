@@ -1,4 +1,5 @@
 {% extends 'baseAdmin.html.twig' %}
+{% trans_default_domain 'user' %}
 {% import "./module/notification.html.twig" as module %}
 
 {% block page_content %}
@@ -23,15 +24,15 @@
 
                         {{ form_start(pwdForm, {"attr": {"class": "update-password-form"}, "method": "POST"}) }}
                             <div class="form-field">
-                                {{ form_label(pwdForm.oldPassword) }}
+                                {{ form_label(pwdForm.oldPassword, "profile.password"|trans) }}
                                 {{ form_widget(pwdForm.oldPassword) }}
                             </div>
                             <div class="form-field">
-                                {{ form_label(pwdForm.newPassword) }}
+                                {{ form_label(pwdForm.newPassword, "profile.new_password"|trans) }}
                                 {{ form_widget(pwdForm.newPassword) }}
                             </div>
                             <div class="form-field">
-                                {{ form_label(pwdForm.confirmNewPassword) }}
+                                {{ form_label(pwdForm.confirmNewPassword, "profile.password_confirmation"|trans) }}
                                 {{ form_widget(pwdForm.confirmNewPassword) }}
                             </div>
                             <div class="form-button">
@@ -50,42 +51,42 @@
                     
                     {{ form_start(form, {"attr": {"class": "profile-form"}, 'method': 'POST'}) }}
                         <div class="form-field">
-                            {{ form_label(form.firstName) }}
+                            {{ form_label(form.firstName, "profile.firstname"|trans) }}
                             {{ form_widget(form.firstName) }}
                         </div>
                         
                         <div class="form-field">
-                            {{ form_label(form.lastName) }}
+                            {{ form_label(form.lastName, "profile.lastname"|trans) }}
                             {{ form_widget(form.lastName) }}
                         </div>
                         
                         <div class="form-field">
-                            {{ form_label(form.email) }}
+                            {{ form_label(form.email, "profile.email"|trans) }}
                             {{ form_widget(form.email) }}
                         </div>
                         
                         <div class="form-field">
-                            {{ form_label(form.phoneNumber) }}
+                            {{ form_label(form.phoneNumber, "profile.phone"|trans) }}
                             {{ form_widget(form.phoneNumber) }}
                         </div>
                         
                         <div class="form-field">
-                            {{ form_label(form.address) }}
+                            {{ form_label(form.address, "profile.address"|trans) }}
                             {{ form_widget(form.address) }}
                         </div>
                         
                         <div class="form-field">
-                            {{ form_label(form.city) }}
+                            {{ form_label(form.city, "profile.city"|trans) }}
                             {{ form_widget(form.city) }}
                         </div>
                         
                         <div class="form-field">
-                            {{ form_label(form.postalCode) }}
+                            {{ form_label(form.postalCode, "profile.zip_code"|trans) }}
                             {{ form_widget(form.postalCode) }}
                         </div>
                         
                         <div class="form-field">
-                            {{ form_label(form.description) }}
+                            {{ form_label(form.description, "profile.introduction"|trans) }}
                             {{ form_widget(form.description) }}
                         </div>
 

@@ -1,11 +1,12 @@
 {% extends 'baseAdmin.html.twig' %}
+{% trans_default_domain 'user' %}
 {% import "./module/notification.html.twig" as moduleNotif %}
 
 {% block page_content %}
     <div class="admin-experience">
         <div class="experience-wrapper">
             <a href="{{ path("admin_education_index") }}">
-                <button class="btn btn-primary">Return</button>
+                <button class="btn btn-primary">{{ "return"|trans }}</button>
             </a>
 
             <div class="experience-add card">
@@ -19,52 +20,52 @@
 
                     {{ form_start(form, {"method": "POST", "attr": {"class": "experience-form"}}) }}
                         <div class="form-field">
-                            {{ form_label(form.category) }}
+                            {{ form_label(form.category, "education.category"|trans) }}
                             {{ form_widget(form.category) }}
                         </div>
 
                         <div class="form-field">
-                            {{ form_label(form.corporationName) }}
+                            {{ form_label(form.corporationName, "education.structure"|trans) }}
                             {{ form_widget(form.corporationName) }}
                         </div>
 
                         <div class="form-field">
-                            {{ form_label(form.corporationSite) }}
+                            {{ form_label(form.corporationSite, "education.structure_address"|trans) }}
                             {{ form_widget(form.corporationSite) }}
                         </div>
 
                         <div class="form-field">
-                            {{ form_label(form.contractType) }}
+                            {{ form_label(form.contractType, "education.contract_type"|trans) }}
                             {{ form_widget(form.contractType) }}
                         </div>
 
                         <div class="form-field">
-                            {{ form_label(form.name) }}
+                            {{ form_label(form.name, "education.job_name"|trans) }}
                             {{ form_widget(form.name) }}
                         </div>
 
                         <div class="form-field">
-                            {{ form_label(form.startDate) }}
+                            {{ form_label(form.startDate, "education.start_date"|trans) }}
                             {{ form_widget(form.startDate) }}
                         </div>
 
                         <div class="form-field">
-                            {{ form_label(form.endDate) }}
+                            {{ form_label(form.endDate, "education.end_date"|trans) }}
                             {{ form_widget(form.endDate) }}
                         </div>
 
                         <div class="form-radio">
                             {{ form_widget(form.inProgress) }}
-                            {{ form_label(form.inProgress) }}
+                            {{ form_label(form.inProgress, "education.in_progress"|trans) }}
                         </div>
 
                         <div class="form-field">
-                            {{ form_label(form.description) }}
+                            {{ form_label(form.description, "education.description"|trans) }}
                             {{ form_widget(form.description) }}
                         </div>
 
                         <div class="form-field">
-                            {{ form_label(form.skills) }}
+                            {{ form_label(form.skills, "education.skills"|trans) }}
                             {{ form_widget(form.skills) }}
                         </div>
 

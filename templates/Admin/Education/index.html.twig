@@ -1,18 +1,20 @@
 {% extends 'baseAdmin.html.twig' %}
+{% trans_default_domain 'user' %}
 
 {% block page_content %}
     <div class="admin-experience">
         <a href="{{ path("admin_education_new") }}">
-            <button class="btn btn-primary">Add an experience</button>
+            <button class="btn btn-primary">{{ "education.add_experience"|trans }}</button>
         </a>
 
         {# Formation / Experience #}
         <table class="experience-table">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Structure</th>
+                    <th>{{ "education.date"|trans }}</th>
+                    <th>{{ "education.contract_type"|trans }}</th>
+                    <th>{{ "education.type"|trans }}</th>
+                    <th>{{ "education.structure"|trans }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -23,6 +25,7 @@
                         {% set status = (education.inProgress == true) ? "En Cours" : education.endDate|date("Y/m") %}
                         <tr>
                             <td>{{ education.startDate|date("Y/m") }} - {{ status }}</td>
+                            <td>{{ ("contract." ~ education.contractType)|trans }}</td>
                             <td>{{ education.category|capitalize }}</td>
                             <td>{{ education.corporationName }}</td>
                             <td>
@@ -39,7 +42,7 @@
                 {% else %}
                     <tr>
                         <td colspan="5">
-                            <span>Il n'y a aucunes formations ou expériences professionnelles enregistré dans la database.</span>
+                            <span>{{ "education.no_education"|trans }}</span>
                         </td>
                     </tr>
                 {% endif %}

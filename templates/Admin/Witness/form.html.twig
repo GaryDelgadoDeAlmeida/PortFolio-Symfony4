@@ -1,8 +1,9 @@
 {% extends 'baseAdmin.html.twig' %}
+{% trans_default_domain 'user' %}
 {% import "./module/notification.html.twig" as macros %}
 
 {% block page_content %}
-    <a class="btn btn-primary" href="{{ path("admin_witness_index") }}">Retour</a>
+    <a class="btn btn-primary" href="{{ path("admin_witness_index") }}">{{ "return"|trans }}</a>
 
     <div class="card mt-25px">
         <div class="-content">
@@ -13,23 +14,23 @@
 
                 <div class="form-field-inline">
                     <div class="form-field">
-                        {{ form_label(witnessForm.firstname) }}
+                        {{ form_label(witnessForm.firstname, "witness.firstname"|trans) }}
                         {{ form_widget(witnessForm.firstname) }}
                     </div>
                     
                     <div class="form-field">
-                        {{ form_label(witnessForm.lastname) }}
+                        {{ form_label(witnessForm.lastname, "witness.lastname"|trans) }}
                         {{ form_widget(witnessForm.lastname) }}
                     </div>
                 </div>
                 
                 <div class="form-field">
-                    {{ form_label(witnessForm.company) }}
+                    {{ form_label(witnessForm.company, "witness.society"|trans) }}
                     {{ form_widget(witnessForm.company) }}
                 </div>
                 
                 <div class="form-field">
-                    {{ form_label(witnessForm.comment) }}
+                    {{ form_label(witnessForm.comment, "witness.comment"|trans) }}
                     {{ form_widget(witnessForm.comment) }}
                 </div>
                 
