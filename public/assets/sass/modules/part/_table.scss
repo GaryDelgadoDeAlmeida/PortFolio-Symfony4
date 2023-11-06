@@ -38,8 +38,10 @@ table {
 
                 @include mobile {
                     padding-left: 40%;
+                    // padding-left: 120px;
                     position: relative;
                     margin-bottom: 20px;
+                    word-break: break-all;
 
                     &::before {
                         top: 0;

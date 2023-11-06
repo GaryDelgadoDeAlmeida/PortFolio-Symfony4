@@ -1,7 +1,9 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block page_content %}
-    <a class="btn btn-green" href="{{ path("admin_service_new") }}">Add a service</a>
+    {% if nbrServices < 6 %}
+        <a class="btn btn-green" href="{{ path("admin_service_new") }}">Add a service</a>
+    {% endif %}
 
     <div class="mt-25px">
         <div class="d-flex-col">
@@ -10,8 +12,11 @@
                     <div class="-header">{{ service.title }}</div>
                     <div class="-content">{{ service.description }}</div>
                     <div class="-footer">
-                        <a class="btn btn-primary -inline-flex" href="{{ path("admin_service_edit", {"serviceID": service.id}) }}">
-                            <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="" />
+                        <a class="btn btn-orange -inline-flex" href="{{ path("admin_service_edit", {"serviceID": service.id}) }}">
+                            <img src="{{ asset("/content/images/svg/pencil.svg") }}" alt="" />
+                        </a>
+                        <a class="btn btn-red -inline-flex" href="{{ path("admin_service_remove", {"serviceID": service.id}) }}">
+                            <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
                         </a>
                     </div>
                 </div>

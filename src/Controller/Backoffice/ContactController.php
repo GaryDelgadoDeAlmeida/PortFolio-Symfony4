@@ -29,7 +29,7 @@ class ContactController extends AbstractController
      */
     public function index(Request $request, int $page = 1)
     {
-        $limit = 10;
+        $limit = 20;
         $page = $page >= 1 ? $page : 1;
 
         return $this->render("Admin/Contact/index.html.twig", [
@@ -54,14 +54,19 @@ class ContactController extends AbstractController
         }
 
         // Redirect the user the specified route (but the button linked to the route is on the redirect route => recharge / reload the page)
-        return $this->redirectToRoute("adminContact");
+        return $this->redirectToRoute("admin_contact_index");
     }
 
     /**
      * @Route("/{id}", requirements={"id" = "^\d+(?:\d+)?$"}, name="show")
      */
-    public function show_mail(Contact $contact)
+    public function show_mail(int $id)
     {
+        $contact = $this->contactRepository->find($id);
+        if(empty($contact)) {
+            return $this->redirectToRoute("admin_contact_index");
+        }
+        
         return $this->render("Admin/Contact/read.html.twig", [
             "title" => "Contact",
             "mail" => $this->contactManager->setEmailToRead($contact)

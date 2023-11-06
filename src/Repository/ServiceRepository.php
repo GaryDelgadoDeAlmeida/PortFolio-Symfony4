@@ -47,32 +47,14 @@ class ServiceRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Service[] Returns an array of Service objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+    /**
+     * @return int Return the number of registered service
+     */
+    public function countServices() : int {
+        return $this->createQueryBuilder("service")
+            ->select("COUNT(service.id) as nbrServices")
             ->getQuery()
-            ->getResult()
+            ->getSingleResult()["nbrServices"]
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Service
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

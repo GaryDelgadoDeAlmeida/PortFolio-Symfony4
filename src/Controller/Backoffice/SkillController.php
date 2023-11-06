@@ -4,6 +4,7 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\Skills;
 use App\Form\SkillsType;
+use App\Manager\NotificationManager;
 use App\Repository\SkillsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class SkillController extends AbstractController
 {
+    private NotificationManager $notificationManager;
     private SkillsRepository $skillsRepository;
     
-    function __construct(SkillsRepository $skillsRepository) {
+    function __construct(NotificationManager $notificationManager, SkillsRepository $skillsRepository) {
+        $this->notificationManager = $notificationManager;
         $this->skillsRepository = $skillsRepository;
     }
     /**
@@ -61,14 +64,14 @@ class SkillController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="remove", methods={"DELETE"})
+     * @Route("/{id}/remove", requirements={"id" = "^\d+(?:\d+)?$"}, name="remove", methods={"GET", "DELETE"})
      */
     public function delete_skill(int $id)
     {
         // Search the skill
         $skill = $this->skillsRepository->find($id);
         if(empty($skill)) {
-            return $this->redirectToRoute("adminSkills", [
+            return $this->redirectToRoute("admin_skill_index", [
                 "response" => urlencode(
                     json_encode(
                         $this->notificationManager->returnNotification(
@@ -88,10 +91,10 @@ class SkillController extends AbstractController
             }
             
             // Remove the skill from the database
-            $this->skillRepository->remove($skill, true);
+            $this->skillsRepository->remove($skill, true);
 
             // Return a message to the user
-            return $this->redirectToRoute("adminSkills", [
+            return $this->redirectToRoute("admin_skill_index", [
                 "response" => urlencode(
                     json_encode(
                         $this->notificationManager->returnNotification(
@@ -102,7 +105,7 @@ class SkillController extends AbstractController
                 )
             ]);
         } catch(Exception $e) {
-            return $this->redirectToRoute("adminSkills", [
+            return $this->redirectToRoute("admin_skill_index", [
                 "response" => urlencode(
                     json_encode(
                         $this->notificationManager->returnNotification(

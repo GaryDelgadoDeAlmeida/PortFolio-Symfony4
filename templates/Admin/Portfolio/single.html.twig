@@ -38,12 +38,12 @@
                             </div>
 
                             <div class="actions">
-                                <a href="{{ path("adminEditProject", {"id": project.id}) }}">
+                                <a href="{{ path("admin_project_edit", {"id": project.id}) }}">
                                     <button class="btn btn-primary">
                                         <img src="{{ asset("/content/images/svg/pencil-white.svg") }}" alt="" />
                                     </button>
                                 </a>
-                                <a href="{{ path("adminDeleteProject", {"id": project.id}) }}">
+                                <a href="{{ path("admin_project_remove", {"id": project.id}) }}">
                                     <button class="btn btn-red">
                                         <img src="{{ asset("/content/images/svg/trash-white.svg") }}" alt="" />
                                     </button>

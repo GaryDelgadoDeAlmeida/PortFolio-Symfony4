@@ -26,6 +26,7 @@ class ServiceController extends AbstractController
     public function index(Request $request): Response
     {
         return $this->render("admin/service/list.html.twig", [
+            "nbrServices" => $this->serviceRepository->countServices(),
             "services" => $this->serviceRepository->findAll()
         ]);
     }

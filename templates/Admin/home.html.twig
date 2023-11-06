@@ -2,6 +2,8 @@
 
 {% block page_content %}
     <div class="admin-home">
+
+        {# Resume #}
         <div class="admin-cards">
             <div class="admin-card">
                 <h4 class="admin-card-suptitle">Visitors</h4>
@@ -19,6 +21,7 @@
             </div>
         </div>
 
+        {# Lasted activity #}
         <div class="admin-lasted">
             <h2 class="admin-lasted-title">Lasted activity</h2>
 
@@ -76,6 +79,7 @@
             </div>
         </div>
 
+        {# Lasted work experience #}
         <div class="admin-lasted">
             <h2 class="admin-lasted-title">Lasted work experience</h2>
 
@@ -94,7 +98,7 @@
                                 <tr>
                                     <td>
                                         <div class="f-left">{{ item.corporationName }}</div>
-                                        <div class="f-right">{{ item.startDate|date("d/m/Y") }} &minus; {{ item.inProgress ? "En cours" : item.endDate|date("d/m/Y") }}</div>
+                                        <div class="f-right">{{ item.startDate|date("M Y") }} &minus; {{ item.inProgress ? "En cours" : item.endDate|date("M Y") }}</div>
                                     </td>
                                 </tr>
                             {% else %}
