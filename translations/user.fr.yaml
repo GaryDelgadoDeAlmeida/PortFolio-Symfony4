@@ -1,7 +1,7 @@
 # Profile
 profile.firstname: Prénom
 profile.lastname: Nom
-profile.email: Email
+profile.email: Adresse e-mail
 profile.phone: Téléphone
 profile.address: Adresse
 profile.city: Ville
@@ -11,6 +11,15 @@ profile.introduction: Présentation
 profile.password: Mot de passe
 profile.new_password: Nouveau mot de passe
 profile.password_confirmation: Confirmation du nouveau mot de passe
+
+# Project
+project.client: Client
+project.created_at: Date du projet
+project.production_link: Lien de production
+project.github_link: Lien Github
+project.type: Type de projet
+project.tools: Outils
+project.details: Description
 
 # Service
 service.title: Titre

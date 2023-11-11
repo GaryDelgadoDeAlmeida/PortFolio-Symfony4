@@ -1,0 +1,33 @@
+.article {
+    gap: 15px;
+    display: flex;
+
+    @include mobile {
+        flex-direction: column;
+    }
+
+    .-preview {
+        width: calc(100% - 350px);
+
+        @include mobile {
+            width: 100%;
+        }
+    }
+
+    .-infos {
+        max-width: 350px;
+
+        @include mobile {
+            max-width: 100%;
+        }
+
+        .-infos-list {
+            margin: 0;
+            padding: 0;
+
+            .-infos-item:not(:first-child) {
+                margin-top: 5px;
+            }
+        }
+    }
+}

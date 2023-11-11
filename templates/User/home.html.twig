@@ -109,7 +109,7 @@
                             </div>
                             <div>
                                 {% if education.description != "" and education.description != null %}
-                                    <ul>
+                                    <ul class="no-list-style">
                                         {% for description in education.description|split("\r\n") %}
                                             <li>{{ description }}</li>
                                         {% endfor %}
@@ -162,11 +162,12 @@
                 {% for portfolio in portfolios %}
                     <div class="overlay-card">
                         <div class="overlay-image">
-                            <a href="{{ portfolio.link }}" target="_blank" rel="noreferrer">
-                                <img class="image" src="{{ asset(portfolio.image) }}" alt="{{ portfolio.title }}"/>
+                            {# <a href="{{ portfolio.siteLink }}" rel="noreferrer"> #}
+                            <a href="{{ path("single_portfolio", {portfolioID: portfolio.id}) }}" rel="noreferrer">
+                                <img class="image" src="{{ asset(portfolio.imgPath) }}" alt="{{ portfolio.name }}"/>
                                 <div class="hover">
                                     <div class="text">
-                                        <h3 class="project-title">{{ portfolio.title }}</h3>
+                                        <h3 class="project-title">{{ portfolio.name }}</h3>
                                         <span class="project-small-text">{{ portfolio.type }}</span>
                                     </div>
                                 </div>
@@ -195,7 +196,7 @@
 
         <div class="card-list">
             
-            <div class="card-price">
+            {# <div class="card-price">
                 <div class="-type">
                     <span class="-title txt-uppercase">Site vitrine personnalisé</span>
                 </div>
@@ -333,7 +334,7 @@
                 </div>
             </div>
 
-            <div class="d-flex-col">
+            <div class="d-flex-col -reverse">
                 <div class="card-price w-100 h-100">
                     <div class="-type">
                         <span class="-title txt-uppercase">Développements spécifiques</span>
@@ -386,19 +387,19 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> #}
 
-            {# {% for index, priceService in priceServices %}
-                {% if index < 2 %}
-                    <div class="d-flex-col">
+            {% for index, priceService in priceServices %}
+                {% if index == 2 %}
+                    <div class="d-flex-col -mobile-column">
                 {% endif %}
 
-                <div class="card-price {{ index < 2 ? "w-100 h-100" : null }}">
+                <div class="card-price {{ index >= 2 ? "w-100 h-100" : null }}">
                     <div class="-type">
                         <span class="-title txt-uppercase">{{ priceService.title }}</span>
                     </div>
                     <div class="-price">
-                        <span class="-small-title">{{ priceService.sub_title }}</span>
+                        <span class="-small-title">{{ priceService.subTitle }}</span>
                         <span><em class="-title">{{ priceService.price }}</em> € (HT)</span>
                     </div>
                     <div class="-description">
@@ -422,10 +423,10 @@
                     </div>
                 </div>
 
-                {% if index < 2 %}
+                {% if index == priceServices|length %}
                     </div>
                 {% endif %}
-            {% endfor %} #}
+            {% endfor %}
         </div>
     </div>
 
@@ -472,19 +473,14 @@
                             <img src="{{ asset("/content/images/svg/linkedin.svg") }}" alt="" />
                         </a>
                     </li>
-                    <li class="whatsApp">
-                        <a href="whatsapp://+33678895032">
-                            <img src="{{ asset("/content/images/svg/whatsapp.svg") }}" alt="" />
+                    <li class="maltIn">
+                        <a href="https://www.malt.fr/profile/garryalmeida" target="_blank">
+                            <img src="{{ asset("/content/images/svg/malt.svg") }}" alt="" />
                         </a>
                     </li>
-                    <li class="gmail">
-                        <a href="mailto:gary.almeida.work@gmail.com">
-                            <img src="{{ asset("/content/images/svg/google-plus.svg") }}" alt="" />
-                        </a>
-                    </li>
-                    <li class="skype">
-                        <a href="skype://gary.almeida.sio@gmail.com">
-                            <img src="{{ asset("/content/images/svg/skype.svg") }}" alt="" />
+                    <li class="comet">
+                        <a href="https://app.comet.co/freelancer/profile/QBeXlKveyK?params=eyJhbm9ueW1pemUiOmZhbHNlLCJkZXNpZ25Nb2RlIjpmYWxzZSwicmVhZE9ubHkiOnRydWV9" target="_blank">
+                            <img src="{{ asset("/content/images/svg/comet.svg") }}" alt="" />
                         </a>
                     </li>
                     <li class="github">

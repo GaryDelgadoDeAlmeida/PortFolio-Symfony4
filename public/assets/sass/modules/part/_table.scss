@@ -46,13 +46,17 @@ table {
                     &::before {
                         top: 0;
                         left: 30px;
-                        width: 30%;
+                        // width: 30%;
                         padding: 10px;
                         font-size: 14px;
                         line-height: 1.2;
                         position: absolute;
                         font-weight: unset;
                         color: var(--c-metalGray);
+                    }
+
+                    &.-message::before {
+                        content: "Message";
                     }
                 }
 

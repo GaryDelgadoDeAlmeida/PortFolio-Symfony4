@@ -4,8 +4,8 @@
 {% block page_content %}
     <div class="portfolio">
         <div class="page-wrapper">
-            <div class="section-header">
-                <h3>Mon PortFolio</h3>
+            <div class="page-header">
+                <h3>Mes projets</h3>
             </div>
 
             {% if portfolio != [] %}
@@ -13,8 +13,9 @@
                     {% for item in portfolio %}
                         <div class="overlay-card" >
                             <div class="overlay-image">
-                                <a href="{{ item.githubLink }}" target="_blank" rel="noreferrer">
-                                    <img class="image"} src="{{ asset(item.imgPath) }}" alt="{{ item.name }}"/>
+                                {# <a href="{{ item.siteLink }}" target="_blank" rel="noreferrer"> #}
+                                <a href="{{ path("single_portfolio", {portfolioID: item.id}) }}">
+                                    <img class="image" src="{{ asset(item.imgPath) }}" alt="{{ item.name }}"/>
                                     <div class="hover">
                                         <div class="text">
                                             <h3 class="project-title">{{ item.name }}</h3>

@@ -12,6 +12,15 @@ profile.password: Password
 profile.new_password: New password
 profile.password_confirmation: New password confirmation
 
+# Project
+project.client: Client
+project.created_at: Project date
+project.production_link: Production link
+project.github_link: Github link
+project.type: Project type
+project.tools: Tools
+project.details: Description
+
 # Service
 service.title: Title
 service.icon: Icon

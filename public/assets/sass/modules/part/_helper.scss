@@ -116,6 +116,14 @@
     color: var(--c-green);
 }
 
+
+/* ---------------------------------------- *\
+    List
+\* ---------------------------------------- */
+.no-list-style {
+    list-style: none;
+}
+
 /* ---------------------------------------- *\
     Display
 \* ---------------------------------------- */
@@ -127,12 +135,43 @@
     @include tablet {
         flex-direction: row;
 
+        &.-column {
+            flex-direction: column;
+        }
+
         div {
             height: auto;
         }
     }
 
     @include mobile {
-        flex-direction: column-reverse;
+        flex-direction: row;
+
+        &.-mobile-column {
+            flex-direction: column;
+        }
     }
+
+    &.-reverse {
+        @include mobile {
+            flex-direction: column-reverse;
+        }
+    }
+}
+
+.d-flex {
+    gap: 15px;
+    display: flex;
+
+    @include tablet {
+        flex-direction: row;
+
+        div {
+            height: auto;
+        }
+    }
+}
+
+.g-5px {
+    gap: 5px !important;
 }

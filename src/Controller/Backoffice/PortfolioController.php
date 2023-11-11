@@ -3,6 +3,7 @@
 namespace App\Controller\Backoffice;
 
 use App\Entity\Project;
+use App\Manager\FileManager;
 use App\Form\ProjectAdminType;
 use App\Repository\ProjectRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class PortfolioController extends AbstractController
 {
+    private FileManager $fileManager;
     private ProjectRepository $projectRepository;
     
-    function __construct(ProjectRepository $projectRepository) {
+    function __construct(
+        FileManager $fileManager,
+        ProjectRepository $projectRepository
+    ) {
+        $this->fileManager = $fileManager;
         $this->projectRepository = $projectRepository;
     }
 
@@ -67,7 +73,7 @@ class PortfolioController extends AbstractController
                 }
 
                 try {
-                    $this->projectRepository->persist($project, true);
+                    $this->projectRepository->save($project, true);
 
                     // Return an answer of the process to the user
                     $response = [

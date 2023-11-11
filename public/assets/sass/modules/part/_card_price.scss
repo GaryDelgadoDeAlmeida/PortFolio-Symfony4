@@ -4,6 +4,7 @@
 .card-list {
     gap: 15px;
     display: flex;
+    flex-direction: row;
 
     @include tablet {
         flex-wrap: wrap;
@@ -12,6 +13,10 @@
         .card-price {
             width: 100%;
         }
+    }
+
+    div {
+        flex: 1;
     }
 }
 

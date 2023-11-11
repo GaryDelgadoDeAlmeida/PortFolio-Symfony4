@@ -15,9 +15,15 @@
                     <a href="{{ path("home") }}#portfolio">PortFolio</a>
                     <a href="{{ path("home") }}#price">Tarifs</a>
                     <a href="{{ path("home") }}#contactme">Contact</a>
-                    <a class="login" href="{{ path("login") }}">
-                        <button class="btn btn-red">Login</button>
-                    </a>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a class="login" href="{{ path("admin_home") }}">
+                            <button class="btn btn-primary">Dashboard</button>
+                        </a>
+                    {% else %}
+                        <a class="login" href="{{ path("login") }}">
+                            <button class="btn btn-red">Login</button>
+                        </a>
+                    {% endif %}
                 </ul>
             </div>
 
@@ -42,9 +48,17 @@
                             <li><a href="{{ path("home") }}#portfolio">PortFolio</a></li>
                             <li><a href="{{ path("home") }}#price">Tarifs</a></li>
                             <li><a href="{{ path("home") }}#contactme">Contact</a></li>
-                            <li><a href="{{ path("login") }}">
-                                <button class="btn btn-red">Login</button>
-                            </a></li>
+                            <li>
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <a href="{{ path("admin_home") }}">
+                                        <button class="btn btn-primary">Dashboard</button>
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path("login") }}">
+                                        <button class="btn btn-red">Login</button>
+                                    </a>
+                                {% endif %}
+                            </li>
                         </ul>
                     </div>
                 </div>
