@@ -31,12 +31,13 @@ class ContactController extends AbstractController
     {
         $limit = 20;
         $page = $page >= 1 ? $page : 1;
+        $nbrContacts = $this->contactRepository->countContact();
 
         return $this->render("Admin/Contact/index.html.twig", [
-            "title" => "Contact",
             "offset" => $page,
-            "list_mail" => $this->contactRepository->getMails($page, $limit),
-            "total_page" => ceil($this->contactRepository->countContact() / $limit)
+            "nbr_messages" => $nbrContacts,
+            "total_page" => ceil($nbrContacts / $limit),
+            "list_mail" => $this->contactRepository->getMails($page, $limit)
         ]);
     }
 
@@ -68,7 +69,6 @@ class ContactController extends AbstractController
         }
         
         return $this->render("Admin/Contact/read.html.twig", [
-            "title" => "Contact",
             "mail" => $this->contactManager->setEmailToRead($contact)
         ]);
     }

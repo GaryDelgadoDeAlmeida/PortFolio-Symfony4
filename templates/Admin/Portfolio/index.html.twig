@@ -1,9 +1,10 @@
 {% extends 'baseAdmin.html.twig' %}
+{% trans_default_domain 'user' %}
 
 {% block page_content %}
     <div class="admin-portfolio">
         <a href="{{ path("admin_project_new") }}">
-            <button class="btn btn-green">Add a work</button>
+            <button class="btn btn-green">{{ "project.new"|trans }}</button>
         </a>
         
         <div class="portfolio-wrapper">
@@ -37,7 +38,7 @@
                     </div>
                     
                     <div class="message">
-                        <span>Il n'y a aucun projet enregistré dans la database.</span>
+                        <span>{{ "project.no_project"|trans }}</span>
                     </div>
                 </div>
                 <div>&nbsp;</div>

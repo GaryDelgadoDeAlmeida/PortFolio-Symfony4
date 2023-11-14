@@ -1,11 +1,10 @@
 {% extends 'baseAdmin.html.twig' %}
+{% trans_default_domain 'user' %}
 
 {% block page_content %}
     <div class="admin-portfolio">
-        <a href="{{ path("admin_project_index") }}">
-            <button class="btn btn-primary">
-                <span>Return</span>
-            </button>
+        <a class="btn btn-primary" href="{{ path("admin_project_index") }}">
+            <span>{{ "return"|trans }}</span>
         </a>
 
         <div class="portfolio-wrapper portfolio-single">
@@ -22,18 +21,18 @@
 
                             <div class="infos">
                                 <ul>
-                                    <li><span>Client :</span> {% if project.clientName != "" %}{{ project.clientName }}{% else %}N/A{% endif %}</li>
-                                    <li><span>Project date :</span> {{ project.createdAt|date("d M Y") }}</li>
-                                    <li><span>Project url :</span> 
+                                    <li><span>{{ "project.client"|trans }} :</span> {% if project.clientName != "" %}{{ project.clientName }}{% else %}N/A{% endif %}</li>
+                                    <li><span>{{ "project.created_at"|trans }} :</span> {{ project.createdAt|date("d M Y") }}</li>
+                                    <li><span>{{ "project.production_link"|trans }} :</span> 
                                         {% if project.siteLink != "" %}
                                             <a href="{{ project.siteLink }}" target="_blank">{{ project.name }}</a>
                                         {% else %}
                                             N/A
                                         {% endif %}
                                     </li>
-                                    <li><span>GitHub url :</span> <a href="{{ project.gitHubLink }}" target="_blank">{{ project.name }}</a></li>
-                                    <li><span>Type :</span> {{ project.type }}</li>
-                                    <li><span>Outils :</span> {{ skills|join(", ") }}</li>
+                                    <li><span>{{ "project.github_link"|trans }} :</span> <a href="{{ project.gitHubLink }}" target="_blank">{{ project.name }}</a></li>
+                                    <li><span>{{ "project.type"|trans }} :</span> {{ project.type }}</li>
+                                    <li><span>{{ "project.tools"|trans }} :</span> {{ skills|join(", ") }}</li>
                                 </ul>
                             </div>
 
@@ -54,7 +53,7 @@
                 </div>
                 
                 <div class="details">
-                    <h2>Details</h2>
+                    <h2>{{ "project.description"|trans }}</h2>
                     <p>{{ project.description }}</p>
                 </div>
             </div>

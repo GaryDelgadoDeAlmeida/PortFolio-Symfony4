@@ -2,7 +2,9 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block page_content %}
-    <a class="btn btn-red" href="{{ path("admin_contact_remove_all") }}">Remove all contact</a>
+    {% if nbr_messages > 0 %}
+        <a class="btn btn-red" href="{{ path("admin_contact_remove_all") }}">Remove all contact</a>
+    {% endif %}
 
     <div class="admin-email mt-25px">
         <div class="emails">

@@ -172,7 +172,7 @@ class PortfolioController extends AbstractController
         }
 
         return $this->render('admin/portfolio/form.html.twig', [
-            "projectId" => $project->getId(),
+            "projectID" => $project->getId(),
             "projectForm" => $form->createView(),
             "response" => $response
         ]);

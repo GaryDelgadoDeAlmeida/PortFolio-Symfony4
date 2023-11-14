@@ -69,8 +69,11 @@ class EducationAdminType extends AbstractType
                 "required" => true
             ])
             ->add('description', TextareaType::class, [
+                "label" => "Description",
+                "attr" => [
+                    "class" => "h-200px"
+                ],
                 "required" => false,
-                'label' => "Description"
             ])
             ->add("skills", EntityType::class, [
                 "label" => "Skills",

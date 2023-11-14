@@ -44,19 +44,21 @@
                             {{ form_widget(form.name) }}
                         </div>
 
-                        <div class="form-field">
-                            {{ form_label(form.startDate, "education.start_date"|trans) }}
-                            {{ form_widget(form.startDate) }}
-                        </div>
+                        <div class="form-field-inline">
+                            <div class="form-field w-33">
+                                {{ form_label(form.startDate, "education.start_date"|trans) }}
+                                {{ form_widget(form.startDate) }}
+                            </div>
 
-                        <div class="form-field">
-                            {{ form_label(form.endDate, "education.end_date"|trans) }}
-                            {{ form_widget(form.endDate) }}
-                        </div>
+                            <div class="form-field w-33">
+                                {{ form_label(form.endDate, "education.end_date"|trans) }}
+                                {{ form_widget(form.endDate) }}
+                            </div>
 
-                        <div class="form-radio">
-                            {{ form_widget(form.inProgress) }}
-                            {{ form_label(form.inProgress, "education.in_progress"|trans) }}
+                            <div class="form-radio w-33">
+                                {{ form_widget(form.inProgress) }}
+                                {{ form_label(form.inProgress, "education.in_progress"|trans, {"attr": {"class": "txt-bold"}}) }}
+                            </div>
                         </div>
 
                         <div class="form-field">

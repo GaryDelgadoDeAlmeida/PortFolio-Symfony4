@@ -13,13 +13,17 @@ profile.new_password: New password
 profile.password_confirmation: New password confirmation
 
 # Project
+project.new: Add a project
+project.name: Project name
+project.description: Description
+project.image: Project preview
 project.client: Client
 project.created_at: Project date
 project.production_link: Production link
 project.github_link: Github link
 project.type: Project type
 project.tools: Tools
-project.details: Description
+project.version: Version
 
 # Service
 service.title: Title

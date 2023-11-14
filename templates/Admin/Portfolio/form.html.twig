@@ -1,9 +1,17 @@
 {% extends 'baseAdmin.html.twig' %}
+{% trans_default_domain 'user' %}
 {% import "./module/notification.html.twig" as moduleNotif %}
 
 {% block page_content %}
     <div class="admin-portfolio">
-        <a class="btn btn-primary" href="{{ path("admin_project_index") }}">Return</a>
+        {% set url = path("admin_project_index") %}
+        {% if projectID is defined %}
+            {% set url = path("admin_project_show", {"id": projectID}) %}
+        {% endif %}
+
+        <a class="btn btn-primary" href="{{ url }}">
+            {{ "return"|trans }}
+        </a>
         
         <div class="portfolio-wrapper portfolio-add">
             {# Notification #}
@@ -17,55 +25,55 @@
 
                 {# Title #}
                 <div class="form-field">
-                    {{ form_label(projectForm.name) }}
+                    {{ form_label(projectForm.name, "project.name"|trans) }}
                     {{ form_widget(projectForm.name) }}
                 </div>
                 
                 {# Description #}
                 <div class="form-field">
-                    {{ form_label(projectForm.description) }}
+                    {{ form_label(projectForm.description, "project.description"|trans) }}
                     {{ form_widget(projectForm.description) }}
                 </div>
 
                 {# Img #}
                 <div class="form-field">
-                    {{ form_label(projectForm.imgPath) }}
+                    {{ form_label(projectForm.imgPath, "project.image"|trans) }}
                     {{ form_widget(projectForm.imgPath) }}
                 </div>
 
                 {# Github URL #}
                 <div class="form-field">
-                    {{ form_label(projectForm.githubLink) }}
+                    {{ form_label(projectForm.githubLink, "project.github_link"|trans) }}
                     {{ form_widget(projectForm.githubLink) }}
                 </div>
 
                 {# Prod URL #}
                 <div class="form-field">
-                    {{ form_label(projectForm.siteLink) }}
+                    {{ form_label(projectForm.siteLink, "project.production_link"|trans) }}
                     {{ form_widget(projectForm.siteLink) }}
                 </div>
 
                 {# Client name #}
                 <div class="form-field">
-                    {{ form_label(projectForm.clientName) }}
+                    {{ form_label(projectForm.clientName, "project.client"|trans) }}
                     {{ form_widget(projectForm.clientName) }}
                 </div>
 
                 {# Type #}
                 <div class="form-field">
-                    {{ form_label(projectForm.type) }}
+                    {{ form_label(projectForm.type, "project.type"|trans) }}
                     {{ form_widget(projectForm.type) }}
                 </div>
 
                 {# Tools #}
                 <div class="form-field">
-                    {{ form_label(projectForm.skills) }}
+                    {{ form_label(projectForm.skills, "project.tools"|trans) }}
                     {{ form_widget(projectForm.skills) }}
                 </div>
                 
                 {# Version #}
                 <div class="form-field">
-                    {{ form_label(projectForm.version) }}
+                    {{ form_label(projectForm.version, "project.version"|trans) }}
                     {{ form_widget(projectForm.version) }}
                 </div>
 

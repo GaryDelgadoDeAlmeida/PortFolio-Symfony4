@@ -2,9 +2,9 @@
 
 {% block page_content %}
 
-    {# {% if prices|length < 4 %} #}
+    {% if prices|length < 4 %}
         <a class="btn btn-primary" href="{{ path("admin_price_new") }}">Ajouter un prix</a>
-    {# {% endif %} #}
+    {% endif %}
 
     <div class="card-list mt-25px">
         {% for item in prices %}

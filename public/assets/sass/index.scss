@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   -moz-osx-font-smoothing: grayscale;

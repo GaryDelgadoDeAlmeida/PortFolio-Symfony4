@@ -88,6 +88,7 @@ class ProjectAdminType extends AbstractType
                 "class" => Skills::class,
                 "choice_label" => "skill",
                 "multiple" => true,
+                // "expanded" => true,
                 "required" => true,
             ])
             ->add("version", NumberType::class, [
