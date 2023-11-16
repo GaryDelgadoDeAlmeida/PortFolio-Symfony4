@@ -172,7 +172,7 @@ form {
         flex-wrap: wrap;
         flex-direction: row;
 
-        @include tinyMobile {
+        @include tiny_mobile {
             gap: 0;
             margin-bottom: 10px;
             flex-direction: column;

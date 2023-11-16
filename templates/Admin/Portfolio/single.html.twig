@@ -32,7 +32,14 @@
                                     </li>
                                     <li><span>{{ "project.github_link"|trans }} :</span> <a href="{{ project.gitHubLink }}" target="_blank">{{ project.name }}</a></li>
                                     <li><span>{{ "project.type"|trans }} :</span> {{ project.type }}</li>
-                                    <li><span>{{ "project.tools"|trans }} :</span> {{ skills|join(", ") }}</li>
+                                    <li>
+                                        <span>{{ "project.tools"|trans }} :</span>
+                                        <ul class="badge-list g-5px">
+                                            {% for skill in skills %}
+                                                <li class="badge badge-primary">{{ skill }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
 

@@ -6,7 +6,7 @@
         height: 50px;
         display: flex;
 
-        @include tinyMobile {
+        @include tiny_mobile {
             height: auto;
             flex-direction: column;
         }
@@ -19,7 +19,7 @@
             letter-spacing: 1px;
             background-color: var(--c-white);
 
-            @include tinyMobile {
+            @include tiny_mobile {
                 height: 35px;
             }
 
@@ -44,7 +44,7 @@
                     -moz-transform: rotate(45deg); /* Firefox */
                     -webkit-transform: rotate(45deg); /* Safari et Chrome */
 
-                    @include tinyMobile {
+                    @include tiny_mobile {
                         display: none;
                     }
                 }
