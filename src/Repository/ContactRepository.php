@@ -23,7 +23,7 @@ class ContactRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Contact $entity, bool $flush = true): void
+    public function save(Contact $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {

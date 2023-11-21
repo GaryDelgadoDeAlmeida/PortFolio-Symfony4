@@ -16,6 +16,8 @@ profile.password_confirmation: New password confirmation
 project.new: Add a project
 project.name: Project name
 project.description: Description
+project.starting_date: Project starting date
+project.go_live_date: Go live date
 project.image: Project preview
 project.client: Client
 project.created_at: Project date

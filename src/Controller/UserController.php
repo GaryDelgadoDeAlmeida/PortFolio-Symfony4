@@ -107,7 +107,10 @@ class UserController extends AbstractController
                         ;
                         
                         // Save into database
-                        $this->contactRepository->persist($contact, true);
+                        $this->contactRepository->save($contact, true);
+
+                        // Reset form
+                        $formContact = $this->createForm(ContactUserType::class, $contact = new Contact());
                     }
                 } else {
                     $response = [

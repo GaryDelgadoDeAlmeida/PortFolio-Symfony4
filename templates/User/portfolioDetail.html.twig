@@ -27,9 +27,9 @@
                             {% endif %}
                             <li class="-infos-item"><span><b>{{ "project.github_link"|trans }} :</b> <a href="{{ portfolio.githubLink }}" target="_blank" rel="noreferrer">{{ portfolio.name }}</a></span></li>
                             <li class="-infos-item"><span><b>{{ "project.type"|trans }} :</b> {{ portfolio.type }}<span></li>
-                            <li class="d-flex-col -column g-5px -infos-item">
+                            <li class="-infos-item">
                                 <span><b>{{ "project.tools"|trans }} :</b></span>
-                                <ul class="badge-list mt-15px g-5px">
+                                <ul class="badge-list mt-10px g-5px">
                                     {% for item in portfolio.skills %}
                                         <li class="badge badge-primary">{{ item.skill }}</li>
                                     {% endfor %}

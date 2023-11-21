@@ -13,7 +13,6 @@
                 <div class="-content">
                     {% if response != null %}
                         {{ moduleNotif.notification(response.class, response.message) }}
-                        <div>&nbsp;</div>
                     {% endif %}
 
                     {{ form_errors(form) }}

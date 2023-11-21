@@ -3,12 +3,10 @@
 
 {% block page_content %}
     <div class="admin-experience">
-        <a href="{{ path("admin_education_new") }}">
-            <button class="btn btn-primary">{{ "education.add_experience"|trans }}</button>
-        </a>
+        <a class="btn btn-primary" href="{{ path("admin_education_new") }}">{{ "education.add_experience"|trans }}</a>
 
         {# Formation / Experience #}
-        <table class="experience-table">
+        <table class="mt-25px">
             <thead>
                 <tr>
                     <th>{{ "education.date"|trans }}</th>
@@ -24,11 +22,11 @@
                     {% for education in educations %}
                         {% set status = (education.inProgress == true) ? "En Cours" : education.endDate|date("Y/m") %}
                         <tr>
-                            <td>{{ education.startDate|date("Y/m") }} - {{ status }}</td>
-                            <td>{{ ("contract." ~ education.contractType)|trans }}</td>
-                            <td>{{ education.category|capitalize }}</td>
-                            <td>{{ education.corporationName }}</td>
-                            <td>
+                            <td class="-date">{{ education.startDate|date("Y/m") }} - {{ status }}</td>
+                            <td class="-contract-type">{{ ("contract." ~ education.contractType)|trans }}</td>
+                            <td class="-category">{{ education.category|capitalize }}</td>
+                            <td class="-structure">{{ education.corporationName }}</td>
+                            <td class="-action">
                                 <a href="{{ path("admin_education_edit", {"id": education.id}) }}">
                                     <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="" />
                                 </a>

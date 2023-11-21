@@ -1,11 +1,10 @@
 {% extends 'baseAdmin.html.twig' %}
 {% trans_default_domain 'user' %}
+{% import "./module/notification.html.twig" as module %}
 
 {% block page_content %}
     <div class="admin-portfolio">
-        <a href="{{ path("admin_project_new") }}">
-            <button class="btn btn-green">{{ "project.new"|trans }}</button>
-        </a>
+        <a class="btn btn-green" href="{{ path("admin_project_new") }}">{{ "project.new"|trans }}</a>
         
         <div class="portfolio-wrapper">
             {% if projects != [] %}
@@ -20,11 +19,6 @@
                                             <h3 class="project-title">{{ project.name }}</h3>
                                             <span class="project-small-text">{{ project.type }}</span>
                                         </div>
-                                        {# <div class="tools">
-                                            {% for tech in project.skills %}
-                                                <span>{{ tech.skill }}</span>
-                                            {% endfor %}
-                                        </div> #}
                                     </div>
                                 </a>
                             </div>
@@ -32,16 +26,7 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <div class="notification information">
-                    <div class="icon">
-                        <img src="{{ asset("/content/images/svg/informationmark-gray.svg") }}" alt="icon" />
-                    </div>
-                    
-                    <div class="message">
-                        <span>{{ "project.no_project"|trans }}</span>
-                    </div>
-                </div>
-                <div>&nbsp;</div>
+                {{ module.notification("information", "project.no_project"|trans) }}
             {% endif %}
 
             {# Pagination #}

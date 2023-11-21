@@ -18,27 +18,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% if list_mail != null %}
-                        {% for mail in list_mail %}
-                            <tr class="email-card {{ mail.isRead == false ? "unread" : "" }}">
-                                <td>{{ mail.emailSubject }}</td>
-                                <td>{{ mail.emailContent|slice(0, 100) }}</td>
-                                <td>{{ mail.createdAt|date("d/m/Y") }}</td>
-                                <td>
-                                    <a href="{{ path('admin_contact_show', {'id': mail.id}) }}">
-                                        <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="See more" />
-                                    </a>
-                                    <button class="removeMail" data-url="{{ path("admin_contact_remove", {'id': mail.id}) }}">
-                                        <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="Delete" />
-                                    </button>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                    {% for mail in list_mail %}
+                        <tr class="email-card {{ mail.isRead == false ? "unread" : "" }}">
+                            <td class="-subject">{{ mail.emailSubject }}</td>
+                            <td class="-content">{{ mail.emailContent|slice(0, 100) }}</td>
+                            <td class="-sended-date">{{ mail.createdAt|date("d/m/Y") }}</td>
+                            <td class="-action">
+                                <a href="{{ path('admin_contact_show', {'id': mail.id}) }}">
+                                    <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="See more" />
+                                </a>
+                                <button class="removeMail" data-url="{{ path("admin_contact_remove", {'id': mail.id}) }}">
+                                    <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="Delete" />
+                                </button>
+                            </td>
+                        </tr>
                     {% else %}
                         <tr>
-                            <td colspan="4" class="-message txt-center">{{ "contact.no_contact"|trans }}</td>
+                            <td class="-message" colspan="4">{{ "contact.no_contact"|trans }}</td>
                         </tr>
-                    {% endif %}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

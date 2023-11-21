@@ -9,36 +9,37 @@
             {% set url = path("admin_project_show", {"id": projectID}) %}
         {% endif %}
 
-        <a class="btn btn-primary" href="{{ url }}">
-            {{ "return"|trans }}
-        </a>
+        <a class="btn btn-primary" href="{{ url }}">{{ "return"|trans }}</a>
         
         <div class="portfolio-wrapper portfolio-add">
-            {# Notification #}
             {% if response != [] %}
                 {{ moduleNotif.notification(response.class, response.message) }}
-                <div>&nbsp;</div>
             {% endif %}
 
-            {# Add Folio Form #}
             {{ form_start(projectForm, {'method': 'POST', "attr": {"class": "portfolio-form"}}) }}
+
+                {# Img #}
+                <div class="form-field">
+                    {{ form_label(projectForm.imgPath, "project.image"|trans) }}
+                    {{ form_widget(projectForm.imgPath) }}
+                </div>
 
                 {# Title #}
                 <div class="form-field">
                     {{ form_label(projectForm.name, "project.name"|trans) }}
                     {{ form_widget(projectForm.name) }}
                 </div>
-                
-                {# Description #}
+
+                {# Client name #}
                 <div class="form-field">
-                    {{ form_label(projectForm.description, "project.description"|trans) }}
-                    {{ form_widget(projectForm.description) }}
+                    {{ form_label(projectForm.clientName, "project.client"|trans) }}
+                    {{ form_widget(projectForm.clientName) }}
                 </div>
 
-                {# Img #}
+                {# Project start date #}
                 <div class="form-field">
-                    {{ form_label(projectForm.imgPath, "project.image"|trans) }}
-                    {{ form_widget(projectForm.imgPath) }}
+                    {{ form_label(projectForm.date, "project.starting_date"|trans) }}
+                    {{ form_widget(projectForm.date) }}
                 </div>
 
                 {# Github URL #}
@@ -47,16 +48,16 @@
                     {{ form_widget(projectForm.githubLink) }}
                 </div>
 
+                {# Go Live date #}
+                <div class="form-field">
+                    {{ form_label(projectForm.goLiveDate, "project.go_live_date"|trans) }}
+                    {{ form_widget(projectForm.goLiveDate) }}
+                </div>
+
                 {# Prod URL #}
                 <div class="form-field">
                     {{ form_label(projectForm.siteLink, "project.production_link"|trans) }}
                     {{ form_widget(projectForm.siteLink) }}
-                </div>
-
-                {# Client name #}
-                <div class="form-field">
-                    {{ form_label(projectForm.clientName, "project.client"|trans) }}
-                    {{ form_widget(projectForm.clientName) }}
                 </div>
 
                 {# Type #}
@@ -75,6 +76,12 @@
                 <div class="form-field">
                     {{ form_label(projectForm.version, "project.version"|trans) }}
                     {{ form_widget(projectForm.version) }}
+                </div>
+                
+                {# Description #}
+                <div class="form-field">
+                    {{ form_label(projectForm.description, "project.description"|trans) }}
+                    {{ form_widget(projectForm.description) }}
                 </div>
 
                 {# Submit button #}

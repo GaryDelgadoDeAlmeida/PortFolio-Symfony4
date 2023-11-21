@@ -16,14 +16,16 @@ profile.password_confirmation: Confirmation du nouveau mot de passe
 project.new: Ajouter un projet
 project.name: Nom du projet
 project.description: Description
+project.starting_date: Date de commencement du projet
+project.go_live_date: Date de mise en production
 project.image: Preview du projet
 project.client: Client
-project.created_at: Date du projet
 project.production_link: Lien de production
 project.github_link: Lien Github
 project.type: Type de projet
 project.tools: Outils
 project.version: Version
+project.created_at: Date de création
 
 # Service
 service.title: Titre

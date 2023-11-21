@@ -2,14 +2,14 @@
     gap: 15px;
     display: flex;
 
-    @include mobile {
+    @include tablet {
         flex-direction: column;
     }
 
     .-preview {
         width: calc(100% - 350px);
 
-        @include mobile {
+        @include tablet {
             width: 100%;
         }
     }
@@ -17,7 +17,7 @@
     .-infos {
         max-width: 350px;
 
-        @include mobile {
+        @include tablet {
             max-width: 100%;
         }
 

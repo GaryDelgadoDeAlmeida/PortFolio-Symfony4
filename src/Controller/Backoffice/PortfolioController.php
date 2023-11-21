@@ -150,7 +150,7 @@ class PortfolioController extends AbstractController
                 }
                 
                 try {
-                    $this->projectRepository->add($project, true);
+                    $this->projectRepository->save($project, true);
 
                     // Return a success response to the user
                     $response = [

@@ -2,12 +2,10 @@
 {% trans_default_domain 'user' %}
 
 {% block page_content %}
-    <div class="admin-witnesses">
-        <a href="{{ path("admin_witness_new") }}">
-            <button class="btn btn-green">{{ "witness.add_witness"|trans }}</button>
-        </a>
+    <a class="btn btn-green" href="{{ path("admin_witness_new") }}">{{ "witness.add_witness"|trans }}</a>
 
-        <table class="witnesses-table">
+    <div class="mt-25px">
+        <table>
             <thead>
                 <tr>
                     <th class="column-company">{{ "witness.society"|trans }}</th>
@@ -19,8 +17,8 @@
             <tbody>
                 {% for witness in witnesses %}
                     <tr class="witness-item">
-                        <td class="-company txt-center">{{ witness.company }}</td>
-                        <td class="-contact txt-center">{{ witness.getFullName() }}</td>
+                        <td class="-company">{{ witness.company }}</td>
+                        <td class="-contact">{{ witness.getFullName() }}</td>
                         <td class="-comment">{{ witness.comment|slice(0, 80) }} ...</td>
                         <td class="-action">
                             <a href="{{ path("admin_witness_edit", {"id": witness.id}) }}">
@@ -33,7 +31,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td class="txt-center" colspan="5">{{ "witness.no_witness"|trans }}</td>
+                        <td colspan="5">{{ "witness.no_witness"|trans }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

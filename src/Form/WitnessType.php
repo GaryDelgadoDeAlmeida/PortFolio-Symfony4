@@ -37,7 +37,10 @@ class WitnessType extends AbstractType
             ])
             ->add('comment', TextareaType::class, [
                 "label" => "Commentaire",
-                "required" => true
+                "required" => true,
+                "attr" => [
+                    "class" => "h-150px"
+                ]
             ])
             ->add("submit", SubmitType::class, [
                 "attr" => [

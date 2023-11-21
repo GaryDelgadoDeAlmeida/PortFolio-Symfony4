@@ -50,7 +50,7 @@ class ContactManager {
             $boundary = "-----=".md5(rand());
             
             //=====Création du header de l'e-mail.
-            $header = "From: \"{$name}\"<{$yrEmail}>{$passage_ligne}";
+            $header = "From: \"{$name}\"<no-reply@garry-almeida.com>{$passage_ligne}";
             $header.= "Reply-to: \"Garry Almeida\" <{$rptEmail}>{$passage_ligne}";
             $header.= "MIME-Version: 1.0{$passage_ligne}";
             $header.= "Content-Type: multipart/alternative;{$passage_ligne} boundary=\"{$boundary}\"{$passage_ligne}";
@@ -75,7 +75,7 @@ class ContactManager {
             
             try {
                 //=====Envoi de l'e-mail.
-                if(mail($rptEmail, $subject, $message, $header) != true) {
+                if(mail($rptEmail, $subject, $message, $header)) {
                     $error = true;
                 }
             } catch(\Exception $e) {

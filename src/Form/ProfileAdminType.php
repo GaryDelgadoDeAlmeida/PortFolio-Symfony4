@@ -93,7 +93,10 @@ class ProfileAdminType extends AbstractType
             ])
             ->add("description", TextareaType::class, [
                 "label" => "Presentation",
-                "required" => true
+                "required" => true,
+                "attr" => [
+                    "class" => "h-150px"
+                ]
             ])
             ->add("submit", SubmitType::class)
         ;

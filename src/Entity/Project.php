@@ -38,7 +38,7 @@ class Project
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imgPath;
 
@@ -81,6 +81,16 @@ class Project
      * @Assert\NotNull
      */
     private $version;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $goLiveDate;
 
     /**
      * @ORM\Column(type="datetime")
@@ -213,6 +223,30 @@ class Project
     public function setVersion(int $version): self
     {
         $this->version = $version;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getGoLiveDate(): ?\DateTimeInterface
+    {
+        return $this->goLiveDate;
+    }
+
+    public function setGoLiveDate(?\DateTimeInterface $goLiveDate): self
+    {
+        $this->goLiveDate = $goLiveDate;
 
         return $this;
     }

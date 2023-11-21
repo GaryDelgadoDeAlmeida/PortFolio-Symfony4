@@ -2,14 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Project;
 use App\Entity\Skills;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Project;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -22,7 +23,6 @@ class ProjectAdminType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Title',
                 "required" => true,
                 "attr" => [
                     "minLenght" => 4,
@@ -30,20 +30,13 @@ class ProjectAdminType extends AbstractType
                 ]
             ])
             ->add("description", TextareaType::class, [
-                "label" => "Description"
+                "attr" => [
+                    "class" => "h-150px"
+                ]
             ])
             ->add('imgPath', FileType::class, [
-                'label' => 'Image',
-
-                // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
-
-                // make it optional so you don't have to re-upload the PDF file
-                // everytime you edit the Product details
-                'required' => true,
-
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '5M',
@@ -56,16 +49,20 @@ class ProjectAdminType extends AbstractType
                     ])
                 ]
             ])
+            ->add("date", DateType::class, [
+                'widget' => 'single_text'
+            ])
+            ->add("goLiveDate", DateType::class, [
+                'widget' => 'single_text',
+                "required" => false
+            ])
             ->add('githubLink', UrlType::class, [
-                'label' => "Link GitHub",
                 "required" => false
             ])
             ->add("siteLink", UrlType::class, [
-                "label" => "Production Link",
                 "required" => false
             ])
             ->add("clientName", null, [
-                "label" => "Client name",
                 "required" => false,
                 "attr" => [
                     "minLength" => 4,
@@ -73,7 +70,6 @@ class ProjectAdminType extends AbstractType
                 ],
             ])
             ->add('type', ChoiceType::class, [
-                'label' => 'Type',
                 'choices' => [
                     'Make your choice, please' => null,
                     'Website' => 'Website',
@@ -92,7 +88,6 @@ class ProjectAdminType extends AbstractType
                 "required" => true,
             ])
             ->add("version", NumberType::class, [
-                "label" => "Version",
                 "required" => true,
                 "html5" => true,
                 "attr" => [

@@ -19,6 +19,10 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    /**
+     * @param Project entity
+     * @param bool flush (save into database)
+     */
     public function save(Project $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -28,6 +32,10 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param Project entity
+     * @param bool flush (save into database)
+     */
     public function remove(Project $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
