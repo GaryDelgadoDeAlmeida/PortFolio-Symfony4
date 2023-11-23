@@ -1,9 +1,8 @@
 {% extends 'baseAdmin.html.twig' %}
+{% trans_default_domain 'user' %}
 
 {% block page_content %}
-    <a class="btn btn-primary" href="{{ path('admin_contact_index') }}">
-        <span>Return</span>
-    </a>
+    <a class="btn btn-primary" href="{{ path('admin_contact_index') }}">{{ "return"|trans }}</a>
 
     <div class="admin-email-single"> 
         <div class="email-single">
@@ -13,8 +12,8 @@
                 </div>
                 
                 <div class="info">
-                    <span><b>{{ mail.senderFullName }}</b> ({{ mail.senderEmail }})</span>
-                    <span>{{ mail.createdAt|date("d/m/Y") }}</span>
+                    <span class="txt-bold">{{ mail.senderEmail }}</span>
+                    <span>{{ mail.createdAt|date("d/m/Y à H:i") }}</span>
                 </div>
 
                 <div class="actions">
@@ -25,7 +24,7 @@
             </div>
 
             <div class="object">
-                <h3>Object : {{ mail.emailSubject }}</h3>
+                <h3>{{ "contact.object"|trans }} : {{ mail.emailSubject }}</h3>
             </div>
             
             <div class="content">

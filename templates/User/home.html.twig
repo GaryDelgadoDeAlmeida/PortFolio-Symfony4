@@ -491,12 +491,12 @@
                 </div>	
             </div>
 
-            {# Contact Form to send me emails #}
-            {{ form_start(contactForm, {"attr": {"class": "form contact-form"}, "autoComplete": "off", "method": "POST", "action": path("home") ~ "#contact"}) }}
-                {% if response != [] %}
-                    {{ module.notification(response.class, response.message) }}
-                {% endif %}
+            {% if response != [] %}
+                {{ module.notification(response.class, response.message) }}
+            {% endif %}
 
+            {# Contact Form to send me emails #}
+            {{ form_start(contactForm, {"attr": {"class": "form contact-form"}, "autoComplete": "off", "method": "POST", "action": path("home") ~ "#contactme"}) }}
                 <div class="form-text">
                     {{ form_widget(contactForm.senderEmail) }}
                     {{ form_errors(contactForm.senderEmail) }}

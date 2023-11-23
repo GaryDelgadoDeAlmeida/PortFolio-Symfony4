@@ -64,6 +64,21 @@ education.in_progress: "In progress"
 education.participate_project: "Participate projects"
 education.add_experience: "Add an education"
 
+# Price
+price.title: Titre
+price.sub_title: Sous titre
+price.frequence: Fréquence du service
+price.price: Prix
+price.detail.label: Label du détail
+price.detail.description: Description du détail
+
+# Contact
+contact.object: Object
+contact.sender: Sender
+contact.content: Content
+contact.date: Sended at
+contact.remove_all: Remove all contacts
+
 # Message
 witness.no_witness: "There is no witness"
 project.no_project: "There is no project registered"

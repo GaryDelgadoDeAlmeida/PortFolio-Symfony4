@@ -28,11 +28,11 @@
                             <td class="-structure">{{ education.corporationName }}</td>
                             <td class="-action">
                                 <a href="{{ path("admin_education_edit", {"id": education.id}) }}">
-                                    <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="" />
+                                    <img src="{{ asset("/content/images/svg/eye.svg") }}" alt="see more" />
                                 </a>
 
                                 <a href="{{ path("admin_education_remove", {"id": education.id}) }}">
-                                    <img src="{{ asset("/content/images/svg/close-red.svg") }}" alt="" />
+                                    <img src="{{ asset("/content/images/svg/close-red.svg") }}" alt="trash" />
                                 </a>
                             </td>
                         </tr>

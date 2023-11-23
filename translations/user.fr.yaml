@@ -64,6 +64,22 @@ education.in_progress: "En cours"
 education.participate_project: "Projets participés"
 education.add_experience: "Ajouter une expérience"
 
+# Price
+price.title: Titre
+price.sub_title: Sous titre
+price.frequence: Fréquence du service
+price.price: Prix
+price.detail.label: Label du détail
+price.detail.description: Description du détail
+
+
+# Contact
+contact.object: Objet
+contact.sender: Expéditeur
+contact.content: Contenu
+contact.date: Date d'envoi
+contact.remove_all: Supprimer tous les contacts
+
 # Message
 witness.no_witness: "Il n'y a aucune témoignage disponible"
 project.no_project: "Il n'y a aucun projet enregistré"

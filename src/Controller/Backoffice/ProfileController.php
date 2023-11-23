@@ -61,7 +61,7 @@ class ProfileController extends AbstractController
                     }
                     
                     // Persist & save all changes
-                    $this->userRepository->add($this->user, true);
+                    $this->userRepository->save($this->user, true);
     
                     // Return a message to the user
                     $response = [
@@ -102,7 +102,7 @@ class ProfileController extends AbstractController
                         ) {
                             try {
                                 // Persist & save all changes
-                                $this->userRepository->add($this->user, true);
+                                $this->userRepository->save($this->user, true);
                                 
                                 // Return a message to the user
                                 $updatePwdMessage = [

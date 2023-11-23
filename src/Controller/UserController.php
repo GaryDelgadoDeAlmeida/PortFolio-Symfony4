@@ -91,7 +91,6 @@ class UserController extends AbstractController
                     
                     // Send an email to the admin
                     ["answer" => $answer, "response" => $response] = $this->contactManager->sendMail(
-                        $contact->getSenderEmail(), // Sender fullname
                         $contact->getSenderEmail(), // Sender email
                         $contact->getEmailSubject(), // Email subject
                         $contact->getEmailContent() // Email content
@@ -100,7 +99,7 @@ class UserController extends AbstractController
                     // If the email has been send then, save the data into database
                     if($answer) {
                         $contact
-                            ->setSenderFullName($contact->getEmailContent())
+                            ->setSenderFullName($contact->getSenderEmail())
                             ->setEmailContent($contact->getEmailContent())
                             ->setIsRead(false)
                             ->setCreatedAt(new \DateTimeImmutable())

@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const url = e.target.getAttribute("data-url")
 
                 // API Call
-                const [status, response] = await fetch(url, {
+                const [status, response] = await fetch(`${window.location.origin}${url}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json"
@@ -60,8 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 response.then(res => alert(res.response.message))
 
-                if(status === 403) {
-                // if(status === 200) {
+                if(status === 200) {
                     let parent = findSpecificParent(e.target, "email-card")
                     if(parent !== "") {
                         parent.remove()

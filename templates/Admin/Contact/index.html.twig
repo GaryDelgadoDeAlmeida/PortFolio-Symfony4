@@ -2,8 +2,8 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block page_content %}
-    {% if nbr_messages > 0 %}
-        <a class="btn btn-red" href="{{ path("admin_contact_remove_all") }}">Remove all contact</a>
+    {% if list_mail|length > 0 %}
+        <a class="btn btn-red" href="{{ path("admin_contact_remove_all") }}">{{ "contact.remove_all"|trans }}</a>
     {% endif %}
 
     <div class="admin-email mt-25px">
@@ -11,9 +11,9 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Object</th>
-                        <th>Content</th>
-                        <th>Date</th>
+                        <th>{{ "contact.object"|trans }}</th>
+                        <th>{{ "contact.content"|trans }}</th>
+                        <th>{{ "contact.date"|trans }}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -21,7 +21,7 @@
                     {% for mail in list_mail %}
                         <tr class="email-card {{ mail.isRead == false ? "unread" : "" }}">
                             <td class="-subject">{{ mail.emailSubject }}</td>
-                            <td class="-content">{{ mail.emailContent|slice(0, 100) }}</td>
+                            <td class="-content txt-left">{{ mail.emailContent|slice(0, 100) }}</td>
                             <td class="-sended-date">{{ mail.createdAt|date("d/m/Y") }}</td>
                             <td class="-action">
                                 <a href="{{ path('admin_contact_show', {'id': mail.id}) }}">

@@ -6,29 +6,46 @@
         <a class="btn btn-primary" href="{{ path("admin_price_new") }}">Ajouter un prix</a>
     {% endif %}
 
-    <div class="card-list mt-25px">
-        {% for item in prices %}
-            <div class="card">
-                <div class="-header">
-                    <label class="-title">{{ item.title }}</label>
-                    <small>{{ item.price }}</small>
-                </div>
-                
-                <div class="-content"></div>
-                
-                <div class="-footer">
-                    <a class="btn btn-primary -inline-flex" href="{{ path("admin_price_edit", {"id": item.id}) }}">
-                        <img src="{{ asset("/content/images/svg/pencil.svg") }}" alt="" />
-                    </a>
-                    
-                    <button 
-                        class="btn btn-red -inline-flex removePrice" 
-                        data-url="{{ path("admin_price_remove", {"id": item.id}) }}"
-                    >
-                        <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
-                    </button>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+    <table class="table {{ prices|length < 4 ? "mt-25px" : ""}}">
+        <thead>
+            <tr>
+                {% for item in prices %}
+                    <th>{{ item.title }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for item in prices %}
+                    <td class="txt-left">
+                        <label><span class="txt-bold">Prix :</span> {{ item.price }} €</label>
+                        
+                        {% if item.priceDetails|length > 0 %}
+                            <div class="mt-15px">
+                                <span class="txt-bold">Détails :</span>
+                                <ul class="no-list-style p-0">
+                                    {% for itemDetail in item.priceDetails %}
+                                        <li>&minus; {{ itemDetail.label }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <div class="mt-15px">
+                            <a class="btn btn-primary -inline-flex" href="{{ path("admin_price_edit", {"id": item.id}) }}">
+                                <img src="{{ asset("/content/images/svg/pencil.svg") }}" alt="" />
+                            </a>
+                            
+                            <button 
+                                class="btn btn-red -inline-flex removePrice" 
+                                data-url="{{ path("admin_price_remove", {"id": item.id}) }}"
+                            >
+                                <img src="{{ asset("/content/images/svg/trash.svg") }}" alt="" />
+                            </button>
+                        </div>
+                    </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
 {% endblock %}

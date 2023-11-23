@@ -15,22 +15,22 @@
 
             {{ form_start(priceForm, {"attr": {"class": "form"}}) }}
                 <div class="form-field">
-                    {{ form_label(priceForm.title) }}
+                    {{ form_label(priceForm.title, "price.title"|trans) }}
                     {{ form_widget(priceForm.title) }}
                 </div>
                 
                 <div class="form-field">
-                    {{ form_label(priceForm.subTitle) }}
+                    {{ form_label(priceForm.subTitle, "price.sub_title"|trans) }}
                     {{ form_widget(priceForm.subTitle) }}
                 </div>
 
                 <div class="form-field">
-                    {{ form_label(priceForm.frequency) }}
+                    {{ form_label(priceForm.frequency, "price.frequence"|trans) }}
                     {{ form_widget(priceForm.frequency) }}
                 </div>
                 
                 <div class="form-field">
-                    {{ form_label(priceForm.price) }}
+                    {{ form_label(priceForm.price, "price.price"|trans) }}
                     {{ form_widget(priceForm.price) }}
                 </div>
 
@@ -41,10 +41,10 @@
                         {% for priceDetail in priceForm.priceDetails %}
                             <li class="item">
                                 <div class="form-field">
-                                    {{ form_widget(priceDetail.label) }}
+                                    {{ form_widget(priceDetail.label, {"attr": {"placeholder": "price.detail.label"|trans}}) }}
                                 </div>
                                 <div class="form-field">
-                                    {{ form_widget(priceDetail.description) }}
+                                    {{ form_widget(priceDetail.description, {"attr": {"placeholder": "price.detail.description"|trans}}) }}
                                 </div>
                             </li>
                         {% endfor %}

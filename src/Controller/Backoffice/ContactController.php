@@ -8,6 +8,7 @@ use App\Repository\ContactRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -78,19 +79,6 @@ class ContactController extends AbstractController
      */
     public function remove_mail(Request $request, int $id): JsonResponse
     {
-        // START TEMPOTAIRE : Check the email id is a positive integer
-        $id = 0;
-        if($id < 1) {
-            return $this->json([
-                "response" => [
-                    "class" => "danger",
-                    "message" => "An error has been found with the email id. The removal process has been cancelled."
-                ]
-            ], Response::HTTP_FORBIDDEN);
-        }
-        // END TEMPOTAIRE : Check the email id is a positive integer
-
-        // Get the mail in the database
         $email = $this->contactRepository->find($id);
         if(empty($email)) {
             return $this->json([
@@ -98,27 +86,37 @@ class ContactController extends AbstractController
                     "class" => "danger",
                     "message" => "An error has been found with the email id. The removal process has been cancelled."
                 ]
-            ]);
+            ], Response::HTTP_NOT_FOUND);
         }
 
         try {
             // Remove the email and save the changes in the database
             $this->contactRepository->remove($email, true);
-
-            // Return a response to the user
-            return $this->json([
-                "response" => [
-                    "class" => "success",
-                    "message" => "The email sended by {$email->getSenderEmail()} has been successfully removed."
-                ]
-            ]);
         } catch(Exception $e) {
             return $this->json([
                 "response" => [
                     "class" => "danger",
                     "message" => $e->getMesage()
                 ]
-            ]);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+
+        // Return a response to the user
+        return $this->json([
+            "response" => [
+                "class" => "success",
+                "message" => "The email sended by {$email->getSenderEmail()} has been successfully removed."
+            ]
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/pdf", requirements={"id" = "^\d+(?:\d+)?$"}, name="pdf", methods={"GET"})
+     */
+    public function send_mail(Request $request, Contact $contact) {
+        return $this->render("modele/mail.html.twig", [
+            "sender" => $contact->getSenderEmail(),
+            "content" => $contact->getEmailContent()
+        ]);
     }
 }
