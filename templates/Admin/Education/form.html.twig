@@ -15,8 +15,6 @@
                         {{ moduleNotif.notification(response.class, response.message) }}
                     {% endif %}
 
-                    {{ form_errors(form) }}
-
                     {{ form_start(form, {"method": "POST", "attr": {"class": "experience-form"}}) }}
                         <div class="form-field">
                             {{ form_label(form.category, "education.category"|trans) }}

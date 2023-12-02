@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\File;
@@ -15,7 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProfileAdminType extends AbstractType
 {
@@ -91,11 +91,11 @@ class ProfileAdminType extends AbstractType
                     "maxLength" => 255,
                 ]
             ])
-            ->add("description", TextareaType::class, [
+            ->add("description", TinymceType::class, [
                 "label" => "Presentation",
                 "required" => true,
                 "attr" => [
-                    "class" => "h-150px"
+                    "toolbar" => "bold italic underline | bullist numlist"
                 ]
             ])
             ->add("submit", SubmitType::class)

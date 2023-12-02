@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Skills;
 use App\Entity\Project;
 use Symfony\Component\Form\AbstractType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
@@ -15,7 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProjectAdminType extends AbstractType
 {
@@ -29,9 +29,9 @@ class ProjectAdminType extends AbstractType
                     "maxLenght" => 255,
                 ]
             ])
-            ->add("description", TextareaType::class, [
+            ->add("description", TinymceType::class, [
                 "attr" => [
-                    "class" => "h-150px"
+                    "toolbar" => "bold italic underline | bullist numlist"
                 ]
             ])
             ->add('imgPath', FileType::class, [

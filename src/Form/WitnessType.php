@@ -4,10 +4,10 @@ namespace App\Form;
 
 use App\Entity\Witness;
 use Symfony\Component\Form\AbstractType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class WitnessType extends AbstractType
 {
@@ -35,11 +35,11 @@ class WitnessType extends AbstractType
                 ],
                 "required" => true
             ])
-            ->add('comment', TextareaType::class, [
+            ->add('comment', TinymceType::class, [
                 "label" => "Commentaire",
                 "required" => true,
                 "attr" => [
-                    "class" => "h-150px"
+                    "toolbar" => "bold italic underline | bullist numlist"
                 ]
             ])
             ->add("submit", SubmitType::class, [

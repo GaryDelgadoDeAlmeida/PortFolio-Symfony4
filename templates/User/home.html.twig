@@ -22,7 +22,7 @@
                 <div class="aboutMe-intro-intro">
                     <span>Bonjour ! Je m'appelle</span>
                     <h2>{{ user.getFullname() }}</h2>
-                    <p>{{ user.description }}</p>
+                    <p>{{ user.description|raw }}</p>
                 </div>
             </div>
         </div>
@@ -109,11 +109,7 @@
                             </div>
                             <div>
                                 {% if education.description != "" and education.description != null %}
-                                    <ul class="no-list-style">
-                                        {% for description in education.description|split("\r\n") %}
-                                            <li>{{ description }}</li>
-                                        {% endfor %}
-                                    </ul>
+                                    {{ education.description|raw }}
                                 {% endif %}
                             </div>
                             <div class="tools">

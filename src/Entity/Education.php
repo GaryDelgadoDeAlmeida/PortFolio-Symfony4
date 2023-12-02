@@ -44,13 +44,13 @@ class Education
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotNull
-     * @Assert\Date
+     * @Assert\Type("\DateTimeInterface")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\Date
+     * @Assert\Type("\DateTimeInterface")
      */
     private $endDate;
 

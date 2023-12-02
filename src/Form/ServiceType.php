@@ -4,10 +4,10 @@ namespace App\Form;
 
 use App\Entity\Service;
 use Symfony\Component\Form\AbstractType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ServiceType extends AbstractType
 {
@@ -31,9 +31,10 @@ class ServiceType extends AbstractType
                     "Square check" => "square-check"
                 ]
             ])
-            ->add('description', TextareaType::class, [
+            ->add('description', TinymceType::class, [
                 "attr" => [
-                    "placeholder" => "Description of the service"
+                    "placeholder" => "Description of the service",
+                    "toolbar" => "bold italic underline | bullist numlist"
                 ]
             ])
         ;

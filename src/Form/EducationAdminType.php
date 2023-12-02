@@ -6,6 +6,7 @@ use App\Entity\Skills;
 use App\Entity\Education;
 use App\Form\ParticipateProjectType;
 use Symfony\Component\Form\AbstractType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class EducationAdminType extends AbstractType
@@ -68,12 +68,12 @@ class EducationAdminType extends AbstractType
                 ],
                 "required" => true
             ])
-            ->add('description', TextareaType::class, [
+            ->add("description", TinymceType::class, [
                 "label" => "Description",
                 "attr" => [
-                    "class" => "h-200px"
+                    "toolbar" => "bold italic underline | bullist numlist"
                 ],
-                "required" => false,
+                "required" => true,
             ])
             ->add("skills", EntityType::class, [
                 "label" => "Skills",

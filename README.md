@@ -52,3 +52,9 @@ composer update
 ```bash
     sass --style compressed ./public/assets/sass/index.scss ./public/assets/build/index.css
 ```
+
+
+### Migration de version Symfony
+```bash
+composer update "symfony/*" --with-all-dependencies
+```

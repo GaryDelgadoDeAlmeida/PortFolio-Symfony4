@@ -64,18 +64,19 @@ class EducationController extends AbstractController
         
                     $response = [
                         "class" => "success",
-                        "content" => "L'ajout a été faite."
+                        "message" => "L'ajout a été faite."
                     ];
                 } catch(\Exception $e) {
                     $response = [
                         "class" => "danger",
-                        "content" => "Une erreur a été rencontrée : {$e->getMessage()}"
+                        "message" => "Une erreur a été rencontrée : {$e->getMessage()}"
                     ];
                 } finally {}
             } else {
                 $response = [
                     "class" => "danger",
-                    "content" => "Une erreur a été rencontrée avec un ou plusieurs champs."
+                    "message" => $form->getErrors(true, false)
+                    // "message" => "Une erreur a été rencontrée avec un ou plusieurs champs."
                 ];
             }
         }
