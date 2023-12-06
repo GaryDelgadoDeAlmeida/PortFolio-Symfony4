@@ -166,7 +166,8 @@ class PortfolioController extends AbstractController
             } else {
                 $response = [
                     "class" => "danger",
-                    "message" => "Une erreur a été rencontrée avec l'un des champs renseignés."
+                    "message" => $form->getErrors(true)
+                    // "message" => "Une erreur a été rencontrée avec l'un des champs renseignés."
                 ];
             }
         }

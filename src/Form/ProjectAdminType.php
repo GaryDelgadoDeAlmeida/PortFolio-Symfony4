@@ -35,8 +35,6 @@ class ProjectAdminType extends AbstractType
                 ]
             ])
             ->add('imgPath', FileType::class, [
-                'mapped' => false,
-                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '5M',
@@ -47,7 +45,9 @@ class ProjectAdminType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Please upload a valid image document',
                     ])
-                ]
+                ],
+                'mapped' => false,
+                'required' => false,
             ])
             ->add("date", DateType::class, [
                 'widget' => 'single_text'
