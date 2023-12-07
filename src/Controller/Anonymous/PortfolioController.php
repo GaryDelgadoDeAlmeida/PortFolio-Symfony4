@@ -24,7 +24,7 @@ class PortfolioController extends AbstractController
         $limit = 15;
         $page = ($page > 0 ? $page : 1);
 
-        return $this->render("User/portFolio.html.twig", [
+        return $this->render("user/portFolio.html.twig", [
             "offset" => $page,
             "portfolio" => $this->projectRepository->getProject($page - 1, $limit),
             "total_page" => ceil($this->projectRepository->countProject() / $limit)
@@ -41,7 +41,7 @@ class PortfolioController extends AbstractController
             return $this->redirectToRoute("portfolio");
         }
 
-        return $this->render("User/portfolioDetail.html.twig", [
+        return $this->render("user/portfolioDetail.html.twig", [
             "portfolio" => $portfolio
         ]);
     }

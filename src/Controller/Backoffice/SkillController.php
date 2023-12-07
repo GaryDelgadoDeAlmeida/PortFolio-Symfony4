@@ -55,7 +55,7 @@ class SkillController extends AbstractController
             $formSkills = $this->createForm(SkillsType::class, (new Skills())->setType($print));
         }
 
-        return $this->render("Admin/Profile/skill.html.twig", [
+        return $this->render("admin/profile/skill.html.twig", [
             "print" => $print,
             "skills" => $this->skillsRepository->getSkillsByCategory($print),
             "formSkills" => $formSkills->createView(),

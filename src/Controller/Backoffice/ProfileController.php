@@ -126,7 +126,7 @@ class ProfileController extends AbstractController
             }
         }
 
-        return $this->render('Admin/Profile/index.html.twig', [
+        return $this->render('admin/profile/index.html.twig', [
             "user" => $this->user,
             "form" => $formProfile->createView(),
             "pwdForm" => $formUpdatePwd->createView(),

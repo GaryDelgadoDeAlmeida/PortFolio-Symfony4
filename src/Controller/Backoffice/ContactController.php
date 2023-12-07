@@ -34,7 +34,7 @@ class ContactController extends AbstractController
         $page = $page >= 1 ? $page : 1;
         $nbrContacts = $this->contactRepository->countContact();
 
-        return $this->render("Admin/Contact/index.html.twig", [
+        return $this->render("admin/contact/index.html.twig", [
             "offset" => $page,
             "nbr_messages" => $nbrContacts,
             "total_page" => ceil($nbrContacts / $limit),
@@ -69,7 +69,7 @@ class ContactController extends AbstractController
             return $this->redirectToRoute("admin_contact_index");
         }
         
-        return $this->render("Admin/Contact/read.html.twig", [
+        return $this->render("admin/contact/read.html.twig", [
             "mail" => $this->contactManager->setEmailToRead($contact)
         ]);
     }

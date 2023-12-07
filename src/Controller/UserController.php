@@ -147,7 +147,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute("admin_home");
         }
 
-        return $this->render("User/login.html.twig", [
+        return $this->render("user/login.html.twig", [
             "formLogin" => $this->createForm(LoginAdminType::class)->createView()
         ]);
     }

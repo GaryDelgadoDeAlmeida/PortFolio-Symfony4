@@ -32,7 +32,7 @@ class EducationController extends AbstractController
         $limit = 10;
         $offset = $offset > 0 ? (int)$offset : 1;
 
-        return $this->render('Admin/Education/index.html.twig', [
+        return $this->render('admin/education/index.html.twig', [
             "offset" => $offset,
             "educations" => $this->educationRepository->getEducations($offset, $limit),
             "nbrOffsets" => ceil($this->educationRepository->countEducations() / $limit)
@@ -81,7 +81,7 @@ class EducationController extends AbstractController
             }
         }
 
-        return $this->render('Admin/Education/form.html.twig', [
+        return $this->render('admin/education/form.html.twig', [
             'form' => $form->createView(),
             'response' => $response
         ]);
@@ -126,7 +126,7 @@ class EducationController extends AbstractController
             }
         }
 
-        return $this->render('Admin/Education/form.html.twig', [
+        return $this->render('admin/education/form.html.twig', [
             "form" => $form->createView(),
             "education_id" => $education->getId(),
             "response" => $response
