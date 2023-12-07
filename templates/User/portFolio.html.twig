@@ -28,23 +28,29 @@
                     {% endfor %}
                 </div>
 
-                {% if offset > 1 and offset <= total_page %}
+                {% if offset >= 1 and offset <= total_page %}
                     <div class="pagination">
-                        <div>
-                            <a href="{{ path("portfolio") }}"><<</a>
-                        </div>
-                        <div>
-                            <a href="{{ path("portfolioPage", {"page": offset - 1}) }}">1</a>
-                        </div>
+                        {% if offset - 1 >= 1 %}
+                            <div>
+                                <a href="{{ path("portfolio") }}"><<</a>
+                            </div>
+                            <div>
+                                <a href="{{ path("portfolioPage", {"page": offset - 1}) }}">{{offset - 1}}</a>
+                            </div>
+                        {% endif %}
+
                         <div class="current-page">
-                            <span>2</span>
+                            <span>{{ offset }}</span>
                         </div>
-                        <div>
-                            <a href="{{ path("portfolioPage", {"page": offset + 1}) }}">3</a>
-                        </div>
-                        <div>
-                            <a href="{{ path("portfolioPage", {"page": total_page}) }}">>></a>
-                        </div>
+
+                        {% if offset + 1 <= total_page %}
+                            <div>
+                                <a href="{{ path("portfolioPage", {"page": offset + 1}) }}">{{offset + 1}}</a>
+                            </div>
+                            <div>
+                                <a href="{{ path("portfolioPage", {"page": total_page}) }}">>></a>
+                            </div>
+                        {% endif %}
                     </div>
                 {% endif %}
             {% else %}
