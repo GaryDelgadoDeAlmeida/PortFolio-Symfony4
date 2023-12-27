@@ -160,7 +160,7 @@
                         <div class="overlay-image">
                             {# <a href="{{ portfolio.siteLink }}" rel="noreferrer"> #}
                             <a href="{{ path("single_portfolio", {portfolioID: portfolio.id}) }}" rel="noreferrer">
-                                <img class="image" src="{{ asset(portfolio.imgPath) }}" alt="{{ portfolio.name }}"/>
+                                <img class="image" src="{{ asset(file_exist(portfolio.imgPath)) }}" alt="{{ portfolio.name }}"/>
                                 <div class="hover">
                                     <div class="text">
                                         <h3 class="project-title">{{ portfolio.name }}</h3>

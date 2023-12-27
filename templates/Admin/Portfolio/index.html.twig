@@ -13,7 +13,7 @@
                         <div class="overlay-card">
                             <div class="overlay-image">
                                 <a href="{{ path("admin_project_show", {"id": project.id}) }}">
-                                    <img class="image" src="{{ asset(project.imgPath) }}" alt="{{ project.name }}"/>
+                                    <img class="image" src="{{ asset(file_exist(project.imgPath)) }}" alt="{{ project.name }}"/>
                                     <div class="hover">
                                         <div class="text">
                                             <h3 class="project-title">{{ project.name }}</h3>

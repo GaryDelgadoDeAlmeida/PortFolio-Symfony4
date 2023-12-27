@@ -6,7 +6,7 @@
         <a class="btn btn-primary" href="{{ path("portfolio") }}">{{ "return"|trans }}</a>
         <div class="article mt-25px">
             <div class="-preview">
-                <img class="w-100" src="{{ asset(portfolio.imgPath) }}" alt="{{ portfolio.name }}" />
+                <img class="w-100" src="{{ asset(file_exist(portfolio.imgPath)) }}" alt="{{ portfolio.name }}" />
             </div>
 
             <div class="-infos">
@@ -20,7 +20,7 @@
                                 <li class="-infos-item"><span><b>{{ "project.client"|trans }} :</b> {{ portfolio.clientName }}</span></li>
                             {% endif %}
 
-                            <li class="-infos-item"><span><b>{{ "project.created_at"|trans }} :</b> {{ portfolio.createdAt|date("d/m/Y") }}</span></li>
+                            <li class="-infos-item"><span><b>{{ "project.starting_date"|trans }} :</b> {{ portfolio.date|date("d/m/Y") }}</span></li>
 
                             {% if portfolio.siteLink is not same as(null) %}
                                 <li class="-infos-item"><span><b>{{ "project.production_link"|trans }} :</b> <a href="{{ portfolio.siteLink }}" target="_blank" rel="noreferrer">{{ portfolio.name }}<a/></span></li>

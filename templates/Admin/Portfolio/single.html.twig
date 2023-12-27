@@ -6,7 +6,7 @@
 
     <div class="article mt-25px">
         <div class="-preview">
-            <img class="w-100" src="{{ asset(project.imgPath) }}" alt="{{ project.name }}" />
+            <img class="w-100" src="{{ asset(file_exist(project.imgPath)) }}" alt="{{ project.name }}" />
         </div>
         <div class="-infos">
             <div class="card">
