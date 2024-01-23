@@ -51,7 +51,7 @@ class ProjectRepository extends ServiceEntityRepository
     public function getLastestProject(int $maxResults = 3)
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.date', 'DESC')
             ->setMaxResults($maxResults)
             ->getQuery()
             ->getResult();
@@ -63,7 +63,7 @@ class ProjectRepository extends ServiceEntityRepository
     public function getProject(int $offset, int $limit)
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.date', 'DESC')
             ->setFirstResult($offset * $limit)
             ->setMaxResults($limit)
             ->getQuery()
@@ -77,7 +77,7 @@ class ProjectRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->where("p.name LIKE :projectName")
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.date', 'DESC')
             ->setParameter(':projectName', '%'.$projectName.'%')
             ->getQuery()
             ->getResult();
