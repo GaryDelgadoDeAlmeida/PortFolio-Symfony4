@@ -49,7 +49,7 @@
                 
                 {% if offset - 1 >= 1  %}
                     <div class="previous-page">
-                        <a href="{{ path("admin_contact_by_page", {'page': (offset - 1)}) }}">{{ offset - 1 }}</a>
+                        <a href="{{ path("admin_contact_index_by_page", {'page': (offset - 1)}) }}">{{ offset - 1 }}</a>
                     </div>
                 {% endif %}
 
@@ -59,12 +59,12 @@
                 
                 {% if offset + 1 <= total_page  %}
                     <div class="next-page">
-                        <a href="{{ path("admin_contact_by_page", {'page': (offset + 1)}) }}">{{ offset + 1 }}</a>
+                        <a href="{{ path("admin_contact_index_by_page", {'page': (offset + 1)}) }}">{{ offset + 1 }}</a>
                     </div>
                 {% endif %}
                 
                 <div class="last-page">
-                    <a href="{{ path("admin_contact_by_page", {'page': (total_page)}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt={"double-angle-right"} /></a>
+                    <a href="{{ path("admin_contact_index_by_page", {'page': (total_page)}) }}"><img src="{{ asset("/content/images/svg/double-angle-right.svg") }}" alt={"double-angle-right"} /></a>
                 </div>
             </div>
         {% endif %}

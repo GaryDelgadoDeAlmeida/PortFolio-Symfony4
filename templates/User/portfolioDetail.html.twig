@@ -2,49 +2,51 @@
 {% trans_default_domain 'user' %}
 
 {% block page_content %}
-    <div class="page-wrapper">
-        <a class="btn btn-primary" href="{{ path("portfolio") }}">{{ "return"|trans }}</a>
-        <div class="article mt-25px">
-            <div class="-preview">
-                <img class="w-100" src="{{ asset(file_exist(portfolio.imgPath)) }}" alt="{{ portfolio.name }}" />
-            </div>
+    <div class="pt-menu">
+        <div class="page-wrapper">
+            <a class="btn btn-primary" href="{{ path("portfolio") }}">{{ "return"|trans }}</a>
+            <div class="article mt-25px">
+                <div class="-preview">
+                    <img class="w-100" src="{{ asset(file_exist(portfolio.imgPath)) }}" alt="{{ portfolio.name }}" />
+                </div>
 
-            <div class="-infos">
-                <div class="card">
-                    <div class="-header">
-                        <h2 class="txt-center">{{ portfolio.name }}</h2>
-                    </div>
-                    <div class="-content">
-                        <ul class="-infos-list no-list-style">
-                            {% if portfolio.clientName is not same as(null) %}
-                                <li class="-infos-item"><span><b>{{ "project.client"|trans }} :</b> {{ portfolio.clientName }}</span></li>
-                            {% endif %}
+                <div class="-infos">
+                    <div class="card">
+                        <div class="-header">
+                            <h2 class="txt-center">{{ portfolio.name }}</h2>
+                        </div>
+                        <div class="-content">
+                            <ul class="-infos-list no-list-style">
+                                {% if portfolio.clientName is not same as(null) %}
+                                    <li class="-infos-item"><span><b>{{ "project.client"|trans }} :</b> {{ portfolio.clientName }}</span></li>
+                                {% endif %}
 
-                            <li class="-infos-item"><span><b>{{ "project.starting_date"|trans }} :</b> {{ portfolio.date|date("d/m/Y") }}</span></li>
+                                <li class="-infos-item"><span><b>{{ "project.starting_date"|trans }} :</b> {{ portfolio.date|date("d/m/Y") }}</span></li>
 
-                            {% if portfolio.siteLink is not same as(null) %}
-                                <li class="-infos-item"><span><b>{{ "project.production_link"|trans }} :</b> <a href="{{ portfolio.siteLink }}" target="_blank" rel="noreferrer">{{ portfolio.name }}<a/></span></li>
-                            {% endif %}
-                            <li class="-infos-item"><span><b>{{ "project.github_link"|trans }} :</b> <a href="{{ portfolio.githubLink }}" target="_blank" rel="noreferrer">{{ portfolio.name }}</a></span></li>
-                            <li class="-infos-item"><span><b>{{ "project.type"|trans }} :</b> {{ portfolio.type }}<span></li>
-                            <li class="-infos-item">
-                                <span><b>{{ "project.tools"|trans }} :</b></span>
-                                <ul class="badge-list mt-10px g-5px">
-                                    {% for item in portfolio.skills %}
-                                        <li class="badge badge-primary">{{ item.skill }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        </ul>
+                                {% if portfolio.siteLink is not same as(null) %}
+                                    <li class="-infos-item"><span><b>{{ "project.production_link"|trans }} :</b> <a href="{{ portfolio.siteLink }}" target="_blank" rel="noreferrer">{{ portfolio.name }}<a/></span></li>
+                                {% endif %}
+                                <li class="-infos-item"><span><b>{{ "project.github_link"|trans }} :</b> <a href="{{ portfolio.githubLink }}" target="_blank" rel="noreferrer">{{ portfolio.name }}</a></span></li>
+                                <li class="-infos-item"><span><b>{{ "project.type"|trans }} :</b> {{ portfolio.type }}<span></li>
+                                <li class="-infos-item">
+                                    <span><b>{{ "project.tools"|trans }} :</b></span>
+                                    <ul class="badge-list mt-10px g-5px">
+                                        {% for item in portfolio.skills %}
+                                            <li class="badge badge-primary">{{ item.skill }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="mt-15px">
-            <h3>{{ "project.description"|trans }}</h3>
-            <div class="m-0 p-0">
-                <p>{{ portfolio.description|raw }}</p>
+            <div class="mt-15px">
+                <h3>{{ "project.description"|trans }}</h3>
+                <div class="m-0 p-0">
+                    <p>{{ portfolio.description|raw }}</p>
+                </div>
             </div>
         </div>
     </div>

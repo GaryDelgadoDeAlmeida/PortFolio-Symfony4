@@ -71,6 +71,10 @@
     margin-top: 25px;
 }
 
+.mt-menu {
+    margin-top: var(--menu-height);
+}
+
 .mb-0 {
     margin-bottom: 0;
 }
@@ -93,6 +97,10 @@
 
 .p-5px {
     padding: 5px;
+}
+
+.pt-menu {
+    padding-top: var(--menu-height);
 }
 
 
